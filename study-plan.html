@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — תוכנית לימודים</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .page-header {
+      margin-bottom: 2rem;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+      margin: 0 0 0.25rem;
+    }
+    .page-header p {
+      color: var(--color-text-muted, #6b7280);
+      margin: 0;
+    }
+
+    /* Week tabs */
+    .week-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .week-tab-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      color: var(--color-text, #111827);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .week-tab-btn:hover {
+      background: #dbeafe;
+    }
+    .week-tab-btn.active {
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+      border-color: var(--color-primary, #2563eb);
+    }
+
+    /* Week detail panel */
+    #week-detail {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      min-height: 200px;
+    }
+    #week-detail h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.3rem;
+      color: var(--color-primary, #2563eb);
+    }
+    #week-detail .week-goal {
+      color: var(--color-text-muted, #6b7280);
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+
+    .days-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+    .days-table th {
+      background: #f3f4f6;
+      padding: 0.6rem 0.75rem;
+      text-align: right;
+      border-bottom: 2px solid var(--color-border, #e5e7eb);
+      color: var(--color-text-muted, #6b7280);
+      font-weight: 600;
+    }
+    .days-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--color-border, #e5e7eb);
+      vertical-align: top;
+    }
+    .days-table tr:last-child td { border-bottom: none; }
+    .days-table tr:nth-child(even) td { background: #fafafa; }
+
+    .detail-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .detail-actions a,
+    .detail-actions button {
+      padding: 0.6rem 1.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+      transition: opacity 0.15s;
+    }
+    .detail-actions a:hover,
+    .detail-actions button:hover { opacity: 0.85; }
+    .btn-topics-link {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .btn-quiz-link {
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+    }
+
+    /* Overview grid */
+    .section-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 1rem;
+    }
+    .weeks-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 900px) {
+      .weeks-overview-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .weeks-overview-grid { grid-template-columns: 1fr; }
+    }
+
+    .week-card {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .week-card:hover {
+      border-color: var(--color-primary, #2563eb);
+      box-shadow: 0 2px 8px rgba(37,99,235,0.1);
+    }
+    .week-card.active {
+      border-color: var(--color-primary, #2563eb);
+      background: #eff6ff;
+    }
+    .week-card .card-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-primary, #2563eb);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+    .week-card .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text, #111827);
+      margin-bottom: 0.3rem;
+    }
+    .week-card .card-goal {
+      font-size: 0.8rem;
+      color: var(--color-text-muted, #6b7280);
+      line-height: 1.4;
+    }
+    .week-card .card-progress {
+      margin-top: 0.6rem;
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 6px;
+      overflow: hidden;
+    }
+    .week-card .card-progress-fill {
+      height: 100%;
+      background: var(--color-primary, #2563eb);
+      border-radius: 999px;
+      transition: width 0.4s;
+    }
+  </style>
+</head>
+<body data-page="study-plan">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html" class="active">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <div class="page-header">
+      <h1>📅 תוכנית לימודים — 8 שבועות</h1>
+      <p>מסלול מסודר מהיום ועד הבגרות</p>
+    </div>
+
+    <!-- Week selector tabs -->
+    <div class="week-tabs" id="week-tabs" role="tablist" aria-label="בחירת שבוע">
+      <!-- Filled by JS -->
+      <button class="week-tab-btn" data-week="1">שבוע 1</button>
+      <button class="week-tab-btn" data-week="2">שבוע 2</button>
+      <button class="week-tab-btn" data-week="3">שבוע 3</button>
+      <button class="week-tab-btn" data-week="4">שבוע 4</button>
+      <button class="week-tab-btn" data-week="5">שבוע 5</button>
+      <button class="week-tab-btn" data-week="6">שבוע 6</button>
+      <button class="week-tab-btn" data-week="7">שבוע 7</button>
+      <button class="week-tab-btn" data-week="8">שבוע 8</button>
+    </div>
+
+    <!-- Week detail panel -->
+    <div id="week-detail" role="tabpanel">
+      <p style="color:var(--color-text-muted,#6b7280);">טוען תוכנית...</p>
+    </div>
+
+    <!-- Overview grid -->
+    <p class="section-label">סקירה כללית</p>
+    <div class="weeks-overview-grid" id="weeks-overview-grid">
+      <!-- Filled by JS -->
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function initStudyPlan() {
+      let planData = null;
+
+      try {
+        const res = await fetch('data/study-plan.json');
+        planData = await res.json();
+      } catch (e) {
+        document.getElementById('week-detail').innerHTML =
+          '<p style="color:#ef4444">לא ניתן לטעון את תוכנית הלימודים.</p>';
+        return;
+      }
+
+      const weeks = planData.weeks || planData || [];
+
+      // Render overview grid
+      const grid = document.getElementById('weeks-overview-grid');
+      if (grid) {
+        grid.innerHTML = weeks.map((w, i) => {
+          const num = w.week || (i + 1);
+          const pct = (typeof Storage !== 'undefined' && Storage.getWeekProgress)
+            ? Storage.getWeekProgress(num) : 0;
+          return `
+            <div class="week-card" data-week="${num}" onclick="showWeek(${num})">
+              <div class="card-num">שבוע ${num}</div>
+              <div class="card-title">${w.title || ''}</div>
+              <div class="card-goal">${w.goal || ''}</div>
+              <div class="card-progress">
+                <div class="card-progress-fill" style="width:${pct}%"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Tab click handlers
+      document.querySelectorAll('.week-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const num = parseInt(btn.dataset.week, 10);
+          showWeek(num);
+        });
+      });
+
+      window.showWeek = function(num) {
+        // Update tab active state
+        document.querySelectorAll('.week-tab-btn').forEach(b => {
+          b.classList.toggle('active', parseInt(b.dataset.week, 10) === num);
+        });
+        // Update card active state
+        document.querySelectorAll('.week-card').forEach(c => {
+          c.classList.toggle('active', parseInt(c.dataset.week, 10) === num);
+        });
+
+        const w = weeks.find(w2 => (w2.week || 0) === num) || weeks[num - 1];
+        const panel = document.getElementById('week-detail');
+        if (!panel) return;
+        if (!w) {
+          panel.innerHTML = '<p>אין מידע לשבוע זה.</p>';
+          return;
+        }
+
+        const days = w.days || [];
+        const daysHtml = days.length ? `
+          <table class="days-table">
+            <thead>
+              <tr>
+                <th>יום</th>
+                <th>פעילות</th>
+                <th>משך</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${days.map((d, i) => `
+                <tr>
+                  <td><strong>יום ${d.day || (i + 1)}</strong></td>
+                  <td>${d.activity || ''}</td>
+                  <td>${d.duration || ''}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        ` : '<p style="color:var(--color-text-muted,#6b7280)">אין פירוט יומי לשבוע זה.</p>';
+
+        const topicParam = (w.topicIds && w.topicIds.length) ? '?week=' + num : '';
+
+        panel.innerHTML = `
+          <h2>שבוע ${w.week || num} — ${w.title || ''}</h2>
+          <p class="week-goal">${w.goal || ''}</p>
+          ${daysHtml}
+          <div class="detail-actions">
+            <a href="topics.html${topicParam}" class="btn-topics-link">📚 לנושאים של השבוע</a>
+            <a href="quiz.html?week=${num}" class="btn-quiz-link">❓ בדוק את עצמך</a>
+          </div>
+        `;
+      };
+
+      // Activate week 1 on load
+      showWeek(1);
+    })();
+  </script>
+</body>
+</html>

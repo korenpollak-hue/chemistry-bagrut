@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — קוויז</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <style>
+    .page-header {
+      margin-bottom: 1.75rem;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+      margin: 0 0 0.25rem;
+    }
+    .page-header p {
+      color: var(--color-text-muted, #6b7280);
+      margin: 0;
+    }
+
+    /* Topic selector panel */
+    #topic-selector {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    #topic-selector h2 {
+      font-size: 1.2rem;
+      margin: 0 0 1rem;
+    }
+
+    .topic-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .topic-select-btn {
+      padding: 0.55rem 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      color: var(--color-text, #111827);
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: right;
+      transition: background 0.12s, border-color 0.12s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .topic-select-btn:hover { background: #f3f4f6; }
+    .topic-select-btn.selected {
+      background: #dbeafe;
+      border-color: var(--color-primary, #2563eb);
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+    .topic-select-btn.all-btn.selected {
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+    }
+
+    .week-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .week-filter-label {
+      font-size: 0.9rem;
+      color: var(--color-text-muted, #6b7280);
+      align-self: center;
+      margin-left: 0.25rem;
+    }
+    .week-filter-btn {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, color 0.12s;
+    }
+    .week-filter-btn:hover { background: #f3f4f6; }
+    .week-filter-btn.selected {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+      font-weight: 600;
+    }
+
+    .start-quiz-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--color-border, #e5e7eb);
+    }
+    .start-quiz-row .selected-info {
+      font-size: 0.9rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+    .btn-start-quiz {
+      padding: 0.65rem 1.75rem;
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .btn-start-quiz:hover { opacity: 0.88; }
+    .btn-start-quiz:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Quiz container (managed by QuizEngine) */
+    #quiz-container {
+      display: none;
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      min-height: 300px;
+    }
+    #quiz-container.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body data-page="quiz">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html" class="active">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <div class="page-header">
+      <h1>❓ קוויז תרגול</h1>
+      <p>בחר נושא ותרגל שאלות בגרות</p>
+    </div>
+
+    <!-- Topic Selector -->
+    <div id="topic-selector">
+      <h2>בחר נושא לתרגול</h2>
+
+      <div class="topic-buttons-grid" id="topic-buttons-grid">
+        <button class="topic-select-btn all-btn selected" data-topic="all">הכל</button>
+        <!-- More buttons filled by JS -->
+      </div>
+
+      <div class="week-filter-row" id="week-filter-row">
+        <span class="week-filter-label">סנן לפי שבוע:</span>
+        <button class="week-filter-btn" data-week="1">שבוע 1</button>
+        <button class="week-filter-btn" data-week="2">שבוע 2</button>
+        <button class="week-filter-btn" data-week="3">שבוע 3</button>
+        <button class="week-filter-btn" data-week="4">שבוע 4</button>
+        <button class="week-filter-btn" data-week="5">שבוע 5</button>
+        <button class="week-filter-btn" data-week="6">שבוע 6</button>
+        <button class="week-filter-btn" data-week="7">שבוע 7</button>
+        <button class="week-filter-btn" data-week="8">שבוע 8</button>
+      </div>
+
+      <div class="start-quiz-row">
+        <span class="selected-info" id="selected-info">נבחר: הכל</span>
+        <button class="btn-start-quiz" id="btn-start-quiz">התחל קוויז ←</button>
+      </div>
+    </div>
+
+    <!-- Quiz Area (QuizEngine renders here) -->
+    <div id="quiz-container" role="main" aria-live="polite"></div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function initQuiz() {
+      let allTopics = [];
+      let selectedTopic = 'all';
+      let selectedWeek = null;
+
+      // Load topics for buttons
+      try {
+        const res = await fetch('data/topics.json');
+        const data = await res.json();
+        allTopics = Array.isArray(data) ? data : (data.topics || []);
+      } catch (e) { /* leave empty */ }
+
+      const grid = document.getElementById('topic-buttons-grid');
+      if (grid && allTopics.length) {
+        const extraBtns = allTopics.map(t => `
+          <button class="topic-select-btn" data-topic="${t.id}" data-week="${t.week || ''}">
+            ${t.title || t.name || 'נושא'}
+          </button>
+        `).join('');
+        grid.innerHTML = `<button class="topic-select-btn all-btn selected" data-topic="all">הכל</button>${extraBtns}`;
+      }
+
+      function updateSelectedInfo() {
+        const infoEl = document.getElementById('selected-info');
+        if (!infoEl) return;
+        if (selectedTopic === 'all') {
+          infoEl.textContent = selectedWeek ? `נבחר: שבוע ${selectedWeek}` : 'נבחר: הכל';
+        } else {
+          const t = allTopics.find(t2 => String(t2.id) === String(selectedTopic));
+          infoEl.textContent = `נבחר: ${t ? (t.title || t.name) : selectedTopic}`;
+        }
+      }
+
+      // Topic button clicks
+      if (grid) {
+        grid.addEventListener('click', e => {
+          const btn = e.target.closest('.topic-select-btn');
+          if (!btn) return;
+          grid.querySelectorAll('.topic-select-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedTopic = btn.dataset.topic;
+          selectedWeek = null;
+          // Clear week filter selection
+          document.querySelectorAll('.week-filter-btn').forEach(b => b.classList.remove('selected'));
+          updateSelectedInfo();
+        });
+      }
+
+      // Week filter buttons
+      const weekFilterRow = document.getElementById('week-filter-row');
+      if (weekFilterRow) {
+        weekFilterRow.addEventListener('click', e => {
+          const btn = e.target.closest('.week-filter-btn');
+          if (!btn) return;
+          const wasSelected = btn.classList.contains('selected');
+          weekFilterRow.querySelectorAll('.week-filter-btn').forEach(b => b.classList.remove('selected'));
+          if (wasSelected) {
+            selectedWeek = null;
+          } else {
+            btn.classList.add('selected');
+            selectedWeek = btn.dataset.week;
+            // Reset topic to "all" when week is selected
+            selectedTopic = 'all';
+            if (grid) {
+              grid.querySelectorAll('.topic-select-btn').forEach(b => b.classList.remove('selected'));
+              const allBtn = grid.querySelector('[data-topic="all"]');
+              if (allBtn) allBtn.classList.add('selected');
+            }
+          }
+          updateSelectedInfo();
+        });
+      }
+
+      // Start quiz button
+      const startBtn = document.getElementById('btn-start-quiz');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          const selector = document.getElementById('topic-selector');
+          const container = document.getElementById('quiz-container');
+          if (selector) selector.style.display = 'none';
+          if (container) container.classList.add('visible');
+
+          // Build options for QuizEngine
+          const opts = {};
+          if (selectedTopic !== 'all') opts.topicId = selectedTopic;
+          if (selectedWeek) opts.week = selectedWeek;
+
+          if (typeof QuizEngine !== 'undefined' && QuizEngine.start) {
+            QuizEngine.start('quiz-container', opts);
+          } else if (typeof Quiz !== 'undefined' && Quiz.start) {
+            Quiz.start('quiz-container', opts);
+          } else {
+            if (container) {
+              container.innerHTML = '<p style="color:#ef4444;padding:1rem">מנוע הקוויז לא נטען. בדוק את js/quiz.js.</p>';
+            }
+          }
+        });
+      }
+
+      // Handle URL params: ?topic=X or ?week=X
+      const params = new URLSearchParams(window.location.search);
+      const topicParam = params.get('topic');
+      const weekParam  = params.get('week');
+
+      if (topicParam) {
+        selectedTopic = topicParam;
+        updateSelectedInfo();
+        // Auto-click start
+        if (startBtn) startBtn.click();
+      } else if (weekParam) {
+        selectedWeek = weekParam;
+        updateSelectedInfo();
+        if (startBtn) startBtn.click();
+      }
+    })();
+  </script>
+</body>
+</html>

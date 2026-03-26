@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — נושאים</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* Sidebar layout */
+    .sidebar-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .sidebar-layout {
+        grid-template-columns: 1fr;
+      }
+      .topics-sidebar {
+        display: none;
+      }
+    }
+
+    /* Sidebar */
+    .topics-sidebar {
+      position: sticky;
+      top: 5rem;
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1rem 0;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+    }
+    .topics-sidebar h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-text-muted, #6b7280);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0 1rem;
+      margin: 0 0 0.5rem;
+    }
+    .sidebar-link {
+      display: block;
+      padding: 0.45rem 1rem;
+      font-size: 0.88rem;
+      color: var(--color-text, #111827);
+      text-decoration: none;
+      border-right: 3px solid transparent;
+      transition: background 0.12s, border-color 0.12s;
+      line-height: 1.4;
+    }
+    .sidebar-link:hover {
+      background: #f3f4f6;
+    }
+    .sidebar-link.active {
+      border-right-color: var(--color-primary, #2563eb);
+      background: #eff6ff;
+      color: var(--color-primary, #2563eb);
+      font-weight: 600;
+    }
+
+    /* Filter tabs */
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .filter-btn {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, color 0.12s;
+    }
+    .filter-btn:hover { background: #f3f4f6; }
+    .filter-btn.active {
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+      border-color: var(--color-primary, #2563eb);
+    }
+
+    /* Topic section */
+    .topic-section {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      scroll-margin-top: 5rem;
+    }
+    .topic-section[data-hidden="true"] {
+      display: none;
+    }
+
+    .topic-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .topic-header h2 {
+      font-size: 1.15rem;
+      margin: 0;
+      color: var(--color-text, #111827);
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .diff-easy   { background: #d1fae5; color: #065f46; }
+    .diff-medium { background: #fef3c7; color: #92400e; }
+    .diff-hard   { background: #fee2e2; color: #991b1b; }
+
+    .topic-desc {
+      color: var(--color-text, #374151);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .formulas-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+    .formula {
+      display: inline-block;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.4rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      direction: ltr;
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .tag {
+      display: inline-block;
+      background: #f3f4f6;
+      color: var(--color-text-muted, #4b5563);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    .btn-practice {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.1rem;
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn-practice:hover { opacity: 0.88; }
+
+    .page-header {
+      margin-bottom: 1.5rem;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+      margin: 0 0 0.25rem;
+    }
+    .page-header p {
+      color: var(--color-text-muted, #6b7280);
+      margin: 0;
+    }
+  </style>
+</head>
+<body data-page="topics">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html" class="active">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <div class="page-header">
+      <h1>📚 כל הנושאים</h1>
+      <p>14 נושאי בגרות כימיה — הסברים, נוסחאות ומונחים מרכזיים</p>
+    </div>
+
+    <div class="sidebar-layout">
+
+      <!-- Sidebar -->
+      <aside class="topics-sidebar" id="topics-sidebar">
+        <h3>נושאים</h3>
+        <!-- Filled by JS -->
+      </aside>
+
+      <!-- Main content -->
+      <div class="topics-main">
+
+        <!-- Filter row -->
+        <div class="filter-row" id="filter-row">
+          <button class="filter-btn active" data-filter="all">הכל</button>
+          <button class="filter-btn" data-filter="1">שבוע 1</button>
+          <button class="filter-btn" data-filter="2">שבוע 2</button>
+          <button class="filter-btn" data-filter="3">שבוע 3</button>
+          <button class="filter-btn" data-filter="4">שבוע 4</button>
+          <button class="filter-btn" data-filter="5">שבוע 5</button>
+          <button class="filter-btn" data-filter="6">שבוע 6</button>
+          <button class="filter-btn" data-filter="7">שבוע 7</button>
+          <button class="filter-btn" data-filter="8">שבוע 8</button>
+        </div>
+
+        <!-- Topics list -->
+        <div id="topics-list">
+          <p style="color:var(--color-text-muted,#6b7280)">טוען נושאים...</p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function initTopics() {
+      let topics = [];
+
+      try {
+        const res = await fetch('data/topics.json');
+        const data = await res.json();
+        topics = Array.isArray(data) ? data : (data.topics || []);
+      } catch (e) {
+        document.getElementById('topics-list').innerHTML =
+          '<p style="color:#ef4444">לא ניתן לטעון את הנושאים.</p>';
+        return;
+      }
+
+      function diffClass(level) {
+        if (!level) return 'diff-medium';
+        const l = level.toLowerCase();
+        if (l === 'easy' || l === 'קל') return 'diff-easy';
+        if (l === 'hard' || l === 'קשה') return 'diff-hard';
+        return 'diff-medium';
+      }
+      function diffLabel(level) {
+        if (!level) return 'בינוני';
+        const l = level.toLowerCase();
+        if (l === 'easy' || l === 'קל') return 'קל';
+        if (l === 'hard' || l === 'קשה') return 'קשה';
+        return 'בינוני';
+      }
+
+      // Render sidebar
+      const sidebar = document.getElementById('topics-sidebar');
+      if (sidebar) {
+        sidebar.innerHTML = '<h3>נושאים</h3>' +
+          topics.map(t => `
+            <a href="#topic-${t.id}" class="sidebar-link">${t.title || t.name || 'נושא'}</a>
+          `).join('');
+      }
+
+      // Render topics list
+      const list = document.getElementById('topics-list');
+      if (list) {
+        list.innerHTML = topics.map(t => {
+          const formulas = (t.formulas || []).map(f =>
+            `<span class="formula">${f}</span>`
+          ).join('');
+          const tags = (t.keyTerms || t.terms || t.tags || []).map(tag =>
+            `<span class="tag">${tag}</span>`
+          ).join('');
+          const weekAttr = t.week ? ` data-week="${t.week}"` : '';
+          return `
+            <section class="topic-section" id="topic-${t.id}"${weekAttr}>
+              <div class="topic-header">
+                <h2>${t.title || t.name || 'נושא'}</h2>
+                <span class="difficulty-badge ${diffClass(t.difficulty)}">${diffLabel(t.difficulty)}</span>
+              </div>
+              <p class="topic-desc">${t.description || ''}</p>
+              ${formulas ? `<div class="formulas-row">${formulas}</div>` : ''}
+              ${tags ? `<div class="tags-row">${tags}</div>` : ''}
+              <a href="quiz.html?topic=${t.id}" class="btn-practice">תרגל עכשיו ←</a>
+            </section>
+          `;
+        }).join('');
+      }
+
+      // Sidebar active on scroll
+      const sections = document.querySelectorAll('.topic-section');
+      const sidebarLinks = document.querySelectorAll('.sidebar-link');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            sidebarLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      sections.forEach(s => observer.observe(s));
+
+      // Filter buttons
+      const filterRow = document.getElementById('filter-row');
+      if (filterRow) {
+        filterRow.addEventListener('click', e => {
+          const btn = e.target.closest('.filter-btn');
+          if (!btn) return;
+          filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          sections.forEach(sec => {
+            if (filter === 'all') {
+              sec.dataset.hidden = 'false';
+              sec.style.display = '';
+            } else {
+              const secWeek = sec.dataset.week;
+              const visible = secWeek == filter;
+              sec.style.display = visible ? '' : 'none';
+            }
+          });
+        });
+      }
+
+      // Handle ?week= URL param for filter
+      const urlParams = new URLSearchParams(window.location.search);
+      const weekParam = urlParams.get('week');
+      if (weekParam) {
+        const btn = filterRow ? filterRow.querySelector(`[data-filter="${weekParam}"]`) : null;
+        if (btn) btn.click();
+      }
+    })();
+  </script>
+</body>
+</html>

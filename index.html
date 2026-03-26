@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — בית</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .hero-banner {
+      background: linear-gradient(135deg, var(--color-primary, #2563eb), var(--color-secondary, #7c3aed));
+      color: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .hero-banner h1 {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+    .hero-banner p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .hero-banner h1 { font-size: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .stat-box {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .stat-box .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary, #2563eb);
+      display: block;
+    }
+    .stat-box .stat-label {
+      font-size: 0.85rem;
+      color: var(--color-text-muted, #6b7280);
+      margin-top: 0.25rem;
+    }
+
+    .today-card {
+      background: var(--color-surface, #fff);
+      border: 2px solid var(--color-primary, #2563eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .today-card h2 {
+      margin: 0 0 1rem;
+      font-size: 1.2rem;
+      color: var(--color-primary, #2563eb);
+    }
+    #today-task {
+      color: var(--color-text, #111827);
+      line-height: 1.7;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 600px) {
+      .quick-actions { grid-template-columns: 1fr; }
+    }
+
+    .quick-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .quick-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .quick-btn .btn-icon { font-size: 2rem; }
+    .quick-btn.btn-quiz { background: #dbeafe; color: #1d4ed8; }
+    .quick-btn.btn-flash { background: #fef3c7; color: #92400e; }
+    .quick-btn.btn-sim { background: #d1fae5; color: #065f46; }
+
+    .section-card {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .section-card h2 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+    }
+
+    #progress-chart {
+      width: 100%;
+      height: 120px;
+      overflow: hidden;
+    }
+
+    .topic-progress-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .topic-progress-item .topic-name {
+      min-width: 140px;
+      font-size: 0.9rem;
+      color: var(--color-text, #111827);
+    }
+    .topic-progress-item .progress-bar-wrap {
+      flex: 1;
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .topic-progress-item .progress-bar-fill {
+      height: 100%;
+      background: var(--color-primary, #2563eb);
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+    .topic-progress-item .progress-pct {
+      font-size: 0.8rem;
+      color: var(--color-text-muted, #6b7280);
+      min-width: 32px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body data-page="home">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <h1>ברוך הבא, עידו! 👋</h1>
+      <p>המבחן עוד ~8 שבועות — כל יום קדימה!</p>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-box" id="stat-streak">
+        <span class="stat-value">—</span>
+        <div class="stat-label">🔥 ימי רצף</div>
+      </div>
+      <div class="stat-box" id="stat-score">
+        <span class="stat-value">—</span>
+        <div class="stat-label">⭐ ממוצע</div>
+      </div>
+      <div class="stat-box" id="stat-topics">
+        <span class="stat-value">—</span>
+        <div class="stat-label">📚 נושאים</div>
+      </div>
+      <div class="stat-box" id="stat-cards">
+        <span class="stat-value">—</span>
+        <div class="stat-label">🃏 כרטיסיות להיום</div>
+      </div>
+    </div>
+
+    <!-- Today's Task -->
+    <div class="today-card">
+      <h2>מה ללמוד היום?</h2>
+      <div id="today-task">
+        <p>טוען תוכנית לימודים...</p>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <a href="quiz.html" class="quick-btn btn-quiz">
+        <span class="btn-icon">❓</span>
+        <span>התחל קוויז</span>
+      </a>
+      <a href="flashcards.html" class="quick-btn btn-flash">
+        <span class="btn-icon">🃏</span>
+        <span>כרטיסיות</span>
+      </a>
+      <a href="simulator.html" class="quick-btn btn-sim">
+        <span class="btn-icon">📝</span>
+        <span>מבחן מלא</span>
+      </a>
+    </div>
+
+    <!-- Progress Chart -->
+    <div class="section-card">
+      <h2>📈 התקדמות השבוע</h2>
+      <div id="progress-chart">
+        <svg id="progress-chart-svg" width="100%" height="120"></svg>
+      </div>
+    </div>
+
+    <!-- Topic Progress Grid -->
+    <div class="section-card">
+      <h2>📚 שליטה בנושאים</h2>
+      <div id="topic-progress-grid">
+        <p style="color: var(--color-text-muted, #6b7280);">טוען נושאים...</p>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Page init — populate stats and topic grid from storage/data
+    (async function initHome() {
+      // Stats
+      const stats = (typeof Storage !== 'undefined' && Storage.getStats) ? Storage.getStats() : null;
+      if (stats) {
+        const streakEl = document.querySelector('#stat-streak .stat-value');
+        const scoreEl  = document.querySelector('#stat-score .stat-value');
+        const topicsEl = document.querySelector('#stat-topics .stat-value');
+        const cardsEl  = document.querySelector('#stat-cards .stat-value');
+        if (streakEl) streakEl.textContent = (stats.streak ?? 0) + ' 🔥';
+        if (scoreEl)  scoreEl.textContent  = (stats.avgScore != null ? stats.avgScore + '%' : '—');
+        if (topicsEl) topicsEl.textContent = (stats.topicsCompleted ?? 0) + '/14';
+        if (cardsEl)  cardsEl.textContent  = (stats.cardsDueToday ?? 0);
+      }
+
+      // Today task from study-plan.json
+      try {
+        const res = await fetch('data/study-plan.json');
+        const plan = await res.json();
+        const todayEl = document.getElementById('today-task');
+        if (todayEl && plan) {
+          const week = plan.weeks ? plan.weeks[0] : null;
+          if (week) {
+            const day = week.days ? week.days[0] : null;
+            if (day) {
+              todayEl.innerHTML = `
+                <strong>שבוע ${week.week} — ${week.title}</strong><br>
+                <span>${day.activity}</span>
+                <span style="color:var(--color-text-muted,#6b7280); font-size:0.9rem;"> · ${day.duration}</span>
+              `;
+            } else {
+              todayEl.textContent = week.goal || 'אין משימה מוגדרת להיום.';
+            }
+          } else {
+            todayEl.textContent = 'לא נמצאה תוכנית לימודים.';
+          }
+        }
+      } catch (e) {
+        const todayEl = document.getElementById('today-task');
+        if (todayEl) todayEl.textContent = 'לא ניתן לטעון את תוכנית הלימודים.';
+      }
+
+      // Topic progress grid
+      try {
+        const res = await fetch('data/topics.json');
+        const data = await res.json();
+        const topics = Array.isArray(data) ? data : (data.topics || []);
+        const grid = document.getElementById('topic-progress-grid');
+        if (grid && topics.length) {
+          grid.innerHTML = topics.map(t => {
+            const pct = (typeof Storage !== 'undefined' && Storage.getTopicProgress)
+              ? Storage.getTopicProgress(t.id) : 0;
+            return `
+              <div class="topic-progress-item">
+                <span class="topic-name">${t.title || t.name || 'נושא'}</span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar-fill" style="width:${pct}%"></div>
+                </div>
+                <span class="progress-pct">${pct}%</span>
+              </div>
+            `;
+          }).join('');
+        }
+      } catch (e) {
+        // leave placeholder
+      }
+
+      // Progress chart
+      if (typeof Progress !== 'undefined' && Progress.renderLineChart) {
+        Progress.renderLineChart('progress-chart-svg');
+      }
+    })();
+  </script>
+</body>
+</html>

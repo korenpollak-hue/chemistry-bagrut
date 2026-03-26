@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — סימולטור מבחן</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <style>
+    /* Pre-exam screen */
+    #pre-exam-screen {
+      max-width: 520px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+    #pre-exam-screen h1 {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+    #pre-exam-screen .exam-subtitle {
+      color: var(--color-text-muted, #6b7280);
+      margin-bottom: 2rem;
+    }
+
+    .exam-info-card {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .exam-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 0;
+    }
+    @media (max-width: 480px) {
+      .exam-info-grid { grid-template-columns: 1fr; }
+    }
+    .exam-info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .exam-info-item .info-icon { font-size: 1.5rem; }
+    .exam-info-item .info-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text, #111827);
+    }
+    .exam-info-item .info-label {
+      font-size: 0.8rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+
+    .exam-warning {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 0.5rem;
+      padding: 0.85rem 1rem;
+      margin-bottom: 2rem;
+      text-align: right;
+      font-size: 0.9rem;
+      color: #9a3412;
+    }
+    .exam-warning .warn-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    .btn-start-exam {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2.5rem;
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-start-exam:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    }
+
+    /* Simulator area */
+    #simulator-area {
+      display: none;
+    }
+    #simulator-area.visible {
+      display: block;
+    }
+
+    /* Sticky exam header */
+    .sim-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-surface, #fff);
+      border-bottom: 1px solid var(--color-border, #e5e7eb);
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    #sim-timer {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text, #111827);
+      font-variant-numeric: tabular-nums;
+      direction: ltr;
+    }
+    #sim-timer.warning { color: #dc2626; }
+    #sim-timer.critical { color: #dc2626; animation: pulse 1s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .sim-header-info {
+      font-size: 0.9rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+
+    #sim-nav-toggle {
+      padding: 0.4rem 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: #f9fafb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #sim-nav-toggle:hover { background: #e5e7eb; }
+
+    /* Question navigation grid (collapsible) */
+    #sim-question-nav {
+      background: #f9fafb;
+      border-bottom: 1px solid var(--color-border, #e5e7eb);
+      padding: 0.75rem 1rem;
+    }
+    #sim-question-nav.collapsed { display: none; }
+
+    .sim-nav-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .sim-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 0.4rem;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, border-color 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sim-nav-btn:hover { background: #dbeafe; }
+    .sim-nav-btn.answered {
+      background: #d1fae5;
+      border-color: #34d399;
+      color: #065f46;
+    }
+    .sim-nav-btn.current {
+      background: var(--color-primary, #2563eb);
+      border-color: var(--color-primary, #2563eb);
+      color: #fff;
+    }
+
+    /* Question display area */
+    #sim-question {
+      padding: 1.75rem 1rem;
+      max-width: 720px;
+      margin: 0 auto;
+      min-height: 300px;
+    }
+    .sim-q-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .sim-q-number {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--color-text-muted, #6b7280);
+    }
+    .sim-q-nav-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .sim-q-nav-btns button {
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .sim-q-nav-btns button:hover { background: #f3f4f6; }
+
+    .sim-q-text {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--color-text, #111827);
+      margin-bottom: 1.25rem;
+    }
+
+    .sim-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .sim-option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border-radius: 0.5rem;
+      border: 2px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      text-align: right;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--color-text, #111827);
+      line-height: 1.5;
+      transition: background 0.12s, border-color 0.12s;
+      width: 100%;
+    }
+    .sim-option-btn:hover { background: #f0f9ff; border-color: #93c5fd; }
+    .sim-option-btn.selected {
+      background: #eff6ff;
+      border-color: var(--color-primary, #2563eb);
+    }
+    .sim-option-letter {
+      font-weight: 700;
+      color: var(--color-primary, #2563eb);
+      min-width: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Submit button */
+    .sim-submit-row {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .sim-submit-info {
+      font-size: 0.9rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+    .btn-submit-exam {
+      padding: 0.75rem 2rem;
+      background: #059669;
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .btn-submit-exam:hover { opacity: 0.88; }
+
+    /* Results panel */
+    #sim-results {
+      display: none;
+      max-width: 540px;
+      margin: 2rem auto;
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    #sim-results.visible { display: block; }
+    #sim-results h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+    .result-score {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-primary, #2563eb);
+      margin: 0.5rem 0;
+    }
+    .result-detail {
+      color: var(--color-text-muted, #6b7280);
+      margin-bottom: 1.5rem;
+    }
+    .btn-retry {
+      padding: 0.65rem 1.5rem;
+      background: var(--color-primary, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      margin: 0.25rem;
+    }
+    .btn-home-link {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      background: #f3f4f6;
+      color: var(--color-text, #111827);
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin: 0.25rem;
+    }
+  </style>
+</head>
+<body data-page="simulator">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html" class="active">📝 מבחן</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <div class="page-container">
+
+    <!-- Pre-exam screen -->
+    <div id="pre-exam-screen">
+      <h1>🎯 סימולטור מבחן בגרות</h1>
+      <p class="exam-subtitle">כימיה — תנאי מבחן אמיתיים</p>
+
+      <div class="exam-info-card">
+        <div class="exam-info-grid">
+          <div class="exam-info-item">
+            <span class="info-icon">📝</span>
+            <span class="info-value">50 שאלות</span>
+            <span class="info-label">בחירה מרובה</span>
+          </div>
+          <div class="exam-info-item">
+            <span class="info-icon">⏱️</span>
+            <span class="info-value">2 שעות</span>
+            <span class="info-label">זמן מבחן</span>
+          </div>
+          <div class="exam-info-item">
+            <span class="info-icon">🧭</span>
+            <span class="info-value">ניווט חופשי</span>
+            <span class="info-label">בין שאלות</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exam-warning">
+        <span class="warn-icon">⚠️</span>
+        <span>לאחר ההתחלה השעון לא עוצר — אפשר לנווט חופשי בין שאלות, אך הזמן ממשיך לרוץ.</span>
+      </div>
+
+      <button class="btn-start-exam" id="btn-start-exam">התחל מבחן ←</button>
+    </div>
+
+    <!-- Simulator area (hidden until exam starts) -->
+    <div id="simulator-area" role="main">
+
+      <!-- Sticky header -->
+      <div class="sim-header">
+        <div id="sim-timer">⏱️ 02:00:00</div>
+        <span class="sim-header-info" id="sim-answered-count">ענית על 0 מתוך 50</span>
+        <button id="sim-nav-toggle" onclick="toggleSimNav()">📋 שאלות</button>
+      </div>
+
+      <!-- Question navigation grid (collapsible) -->
+      <div id="sim-question-nav" class="collapsed">
+        <div class="sim-nav-grid" id="sim-nav-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- Question display -->
+      <div id="sim-question">
+        <p style="color:var(--color-text-muted,#6b7280);">טוען שאלות...</p>
+      </div>
+
+      <!-- Submit row -->
+      <div class="sim-submit-row">
+        <span class="sim-submit-info" id="sim-submit-info">השלם את כל השאלות לפני ההגשה</span>
+        <button class="btn-submit-exam" id="btn-submit-exam">הגש מבחן 📤</button>
+      </div>
+
+    </div>
+
+    <!-- Results panel -->
+    <div id="sim-results">
+      <h2>🏆 תוצאות המבחן</h2>
+      <div class="result-score" id="result-score">—</div>
+      <p class="result-detail" id="result-detail">—</p>
+      <div>
+        <button class="btn-retry" onclick="location.reload()">נסה שוב 🔄</button>
+        <a href="progress.html" class="btn-home-link">📊 ראה התקדמות</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // If BagrutSimulator is defined in simulator.js, delegate to it
+    if (typeof BagrutSimulator !== 'undefined' && BagrutSimulator.init) {
+      BagrutSimulator.init({
+        startBtnId:     'btn-start-exam',
+        preScreenId:    'pre-exam-screen',
+        simAreaId:      'simulator-area',
+        timerId:        'sim-timer',
+        navToggleId:    'sim-nav-toggle',
+        navGridId:      'sim-nav-grid',
+        questionId:     'sim-question',
+        submitBtnId:    'btn-submit-exam',
+        resultsId:      'sim-results'
+      });
+    } else {
+      // Fallback self-contained simulator
+      (async function initSim() {
+        let questions = [];
+        let answers = {};
+        let currentQ = 0;
+        let timerInterval = null;
+        let secondsLeft = 2 * 60 * 60; // 2 hours
+        let examStarted = false;
+
+        try {
+          const res = await fetch('data/questions.json');
+          const data = await res.json();
+          const allQ = Array.isArray(data) ? data : (data.questions || []);
+          // Pick up to 50 questions
+          const shuffled = allQ.sort(() => Math.random() - 0.5);
+          questions = shuffled.slice(0, Math.min(50, shuffled.length));
+        } catch (e) {
+          document.getElementById('sim-question').innerHTML =
+            '<p style="color:#ef4444">לא ניתן לטעון שאלות.</p>';
+        }
+
+        window.toggleSimNav = function() {
+          const nav = document.getElementById('sim-question-nav');
+          if (nav) nav.classList.toggle('collapsed');
+        };
+
+        document.getElementById('btn-start-exam').addEventListener('click', startExam);
+
+        function startExam() {
+          if (!questions.length) {
+            alert('לא נמצאו שאלות. בדוק את data/questions.json');
+            return;
+          }
+          document.getElementById('pre-exam-screen').style.display = 'none';
+          document.getElementById('simulator-area').classList.add('visible');
+          examStarted = true;
+          buildNavGrid();
+          showQuestion(0);
+          startTimer();
+        }
+
+        function buildNavGrid() {
+          const grid = document.getElementById('sim-nav-grid');
+          if (!grid) return;
+          grid.innerHTML = questions.map((q, i) => `
+            <button class="sim-nav-btn${i === 0 ? ' current' : ''}"
+                    data-q="${i}"
+                    onclick="goToQuestion(${i})">${i + 1}</button>
+          `).join('');
+        }
+
+        window.goToQuestion = function(idx) {
+          currentQ = idx;
+          showQuestion(idx);
+        };
+
+        function showQuestion(idx) {
+          const q = questions[idx];
+          if (!q) return;
+
+          // Update nav grid
+          document.querySelectorAll('.sim-nav-btn').forEach((btn, i) => {
+            btn.classList.toggle('current', i === idx);
+            btn.classList.toggle('answered', answers[i] !== undefined);
+          });
+
+          // Update answered count
+          const answeredCount = Object.keys(answers).length;
+          const countEl = document.getElementById('sim-answered-count');
+          if (countEl) countEl.textContent = `ענית על ${answeredCount} מתוך ${questions.length}`;
+
+          const letters = ['א', 'ב', 'ג', 'ד'];
+          const opts = q.options || q.choices || [];
+          const optionsHtml = opts.map((opt, i) => `
+            <button class="sim-option-btn${answers[idx] === i ? ' selected' : ''}"
+                    data-idx="${i}"
+                    onclick="selectAnswer(${idx}, ${i})">
+              <span class="sim-option-letter">${letters[i] || (i + 1)}.</span>
+              <span>${opt}</span>
+            </button>
+          `).join('');
+
+          const submitInfo = document.getElementById('sim-submit-info');
+          if (submitInfo) {
+            const unanswered = questions.length - Object.keys(answers).length;
+            submitInfo.textContent = unanswered > 0
+              ? `נשארו ${unanswered} שאלות ללא מענה`
+              : 'כל השאלות נענו — אפשר להגיש!';
+          }
+
+          document.getElementById('sim-question').innerHTML = `
+            <div class="sim-q-header">
+              <span class="sim-q-number">שאלה ${idx + 1} מתוך ${questions.length}</span>
+              <div class="sim-q-nav-btns">
+                ${idx > 0 ? `<button onclick="goToQuestion(${idx - 1})">← הקודמת</button>` : ''}
+                ${idx < questions.length - 1 ? `<button onclick="goToQuestion(${idx + 1})">הבאה →</button>` : ''}
+              </div>
+            </div>
+            <div class="sim-q-text">${q.question || q.text || ''}</div>
+            <div class="sim-options">${optionsHtml}</div>
+          `;
+        }
+
+        window.selectAnswer = function(qIdx, optIdx) {
+          answers[qIdx] = optIdx;
+          showQuestion(qIdx);
+        };
+
+        function startTimer() {
+          const timerEl = document.getElementById('sim-timer');
+          timerInterval = setInterval(() => {
+            secondsLeft--;
+            if (secondsLeft <= 0) {
+              clearInterval(timerInterval);
+              submitExam();
+              return;
+            }
+            const h = Math.floor(secondsLeft / 3600);
+            const m = Math.floor((secondsLeft % 3600) / 60);
+            const s = secondsLeft % 60;
+            const str = `⏱️ ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+            if (timerEl) {
+              timerEl.textContent = str;
+              timerEl.classList.toggle('warning', secondsLeft <= 600);
+              timerEl.classList.toggle('critical', secondsLeft <= 120);
+            }
+          }, 1000);
+        }
+
+        document.getElementById('btn-submit-exam').addEventListener('click', () => {
+          const unanswered = questions.length - Object.keys(answers).length;
+          if (unanswered > 0) {
+            if (!confirm(`נשארו ${unanswered} שאלות ללא מענה. האם להגיש בכל זאת?`)) return;
+          }
+          submitExam();
+        });
+
+        function submitExam() {
+          if (timerInterval) clearInterval(timerInterval);
+          let correct = 0;
+          questions.forEach((q, i) => {
+            const correctIdx = q.correctIndex ?? q.correct ?? q.answer;
+            if (answers[i] !== undefined && answers[i] === correctIdx) correct++;
+          });
+          const pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
+
+          document.getElementById('simulator-area').style.display = 'none';
+          const results = document.getElementById('sim-results');
+          results.classList.add('visible');
+          document.getElementById('result-score').textContent = pct + '%';
+          document.getElementById('result-detail').textContent =
+            `${correct} תשובות נכונות מתוך ${questions.length} שאלות`;
+
+          // Save to storage
+          if (typeof Storage !== 'undefined' && Storage.recordSimulator) {
+            Storage.recordSimulator({ score: pct, correct, total: questions.length, date: Date.now() });
+          }
+        }
+      })();
+    }
+  </script>
+</body>
+</html>

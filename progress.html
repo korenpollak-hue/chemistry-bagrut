@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — התקדמות</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .page-header {
+      margin-bottom: 2rem;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+      margin: 0 0 0.25rem;
+    }
+    .page-header p {
+      color: var(--color-text-muted, #6b7280);
+      margin: 0;
+    }
+
+    /* Stats row */
+    .progress-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 768px) {
+      .progress-stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .progress-stats-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .prog-stat-box {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .prog-stat-box .stat-icon { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+    .prog-stat-box .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-primary, #2563eb);
+      display: block;
+    }
+    .prog-stat-box .stat-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted, #6b7280);
+      margin-top: 0.2rem;
+    }
+
+    /* Chart sections */
+    .chart-section {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .chart-section h2 {
+      font-size: 1.1rem;
+      margin: 0 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Score history chart */
+    #score-history-chart {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+    }
+    #score-history-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+    .no-data-msg {
+      color: var(--color-text-muted, #9ca3af);
+      font-size: 0.9rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* Topic mastery bars */
+    #topic-mastery-chart .mastery-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+    #topic-mastery-chart .mastery-name {
+      min-width: 150px;
+      font-size: 0.88rem;
+      color: var(--color-text, #374151);
+    }
+    #topic-mastery-chart .mastery-bar-wrap {
+      flex: 1;
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+    #topic-mastery-chart .mastery-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .fill-low    { background: #ef4444; }
+    .fill-medium { background: #f59e0b; }
+    .fill-high   { background: #10b981; }
+    #topic-mastery-chart .mastery-pct {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted, #6b7280);
+      min-width: 36px;
+      text-align: left;
+    }
+
+    /* Streak calendar */
+    #streak-calendar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .cal-day {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      background: #e5e7eb;
+      cursor: default;
+      transition: transform 0.1s;
+    }
+    .cal-day:hover { transform: scale(1.3); }
+    .cal-day.active-0 { background: #e5e7eb; }
+    .cal-day.active-1 { background: #bbf7d0; }
+    .cal-day.active-2 { background: #4ade80; }
+    .cal-day.active-3 { background: #16a34a; }
+    @media (max-width: 500px) {
+      .cal-day { width: 12px; height: 12px; }
+    }
+
+    .cal-legend {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--color-text-muted, #9ca3af);
+    }
+    .cal-legend-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    /* Export/Import section */
+    .export-import-section {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .export-import-section h2 {
+      font-size: 1.1rem;
+      margin: 0 0 1rem;
+    }
+    .export-import-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn-export {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .btn-export:hover { opacity: 0.85; }
+
+    .import-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: #f3f4f6;
+      color: var(--color-text, #374151);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    .import-label:hover { background: #e5e7eb; }
+    #import-file { display: none; }
+
+    .import-status {
+      font-size: 0.85rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+    .import-status.success { color: #059669; }
+    .import-status.error   { color: #dc2626; }
+  </style>
+</head>
+<body data-page="progress">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="progress.html" class="active">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <div class="page-header">
+      <h1>📊 ההתקדמות שלי</h1>
+      <p>מעקב אחר הלמידה מאז תחילת הקורס</p>
+    </div>
+
+    <!-- Stats row -->
+    <div class="progress-stats-row">
+      <div class="prog-stat-box" id="prog-stat-streak">
+        <span class="stat-icon">🔥</span>
+        <span class="stat-value">—</span>
+        <div class="stat-label">ימי רצף</div>
+      </div>
+      <div class="prog-stat-box" id="prog-stat-avg">
+        <span class="stat-icon">⭐</span>
+        <span class="stat-value">—</span>
+        <div class="stat-label">ממוצע ציון</div>
+      </div>
+      <div class="prog-stat-box" id="prog-stat-questions">
+        <span class="stat-icon">❓</span>
+        <span class="stat-value">—</span>
+        <div class="stat-label">שאלות שנענו</div>
+      </div>
+      <div class="prog-stat-box" id="prog-stat-cards">
+        <span class="stat-icon">🃏</span>
+        <span class="stat-value">—</span>
+        <div class="stat-label">כרטיסיות שנחזרו</div>
+      </div>
+    </div>
+
+    <!-- Score history chart -->
+    <div class="chart-section">
+      <h2>📈 היסטוריית ציונים</h2>
+      <div id="score-history-chart">
+        <div class="no-data-msg" id="score-history-empty">אין נתונים עדיין — השלם קוויזים כדי לראות גרף.</div>
+        <svg id="score-history-svg" style="display:none"></svg>
+      </div>
+    </div>
+
+    <!-- Topic mastery bars -->
+    <div class="chart-section">
+      <h2>📚 שליטה בנושאים</h2>
+      <div id="topic-mastery-chart">
+        <p class="no-data-msg">טוען נושאים...</p>
+      </div>
+    </div>
+
+    <!-- Streak calendar -->
+    <div class="chart-section">
+      <h2>📅 לוח פעילות</h2>
+      <div id="streak-calendar"></div>
+      <div class="cal-legend">
+        <span>פחות</span>
+        <div class="cal-legend-box" style="background:#e5e7eb"></div>
+        <div class="cal-legend-box" style="background:#bbf7d0"></div>
+        <div class="cal-legend-box" style="background:#4ade80"></div>
+        <div class="cal-legend-box" style="background:#16a34a"></div>
+        <span>יותר</span>
+      </div>
+    </div>
+
+    <!-- Export / Import -->
+    <div class="export-import-section">
+      <h2>💾 ייצוא וייבוא נתונים</h2>
+      <div class="export-import-row">
+        <button class="btn-export" id="btn-export">📤 ייצא נתונים</button>
+        <label class="import-label" for="import-file">
+          📥 ייבא נתונים
+          <input type="file" id="import-file" accept=".json">
+        </label>
+        <span class="import-status" id="import-status"></span>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function initProgress() {
+
+      // If Progress module is defined, delegate to it
+      if (typeof Progress !== 'undefined') {
+        if (Progress.renderLineChart)      Progress.renderLineChart('score-history-svg');
+        if (Progress.renderTopicBars)      Progress.renderTopicBars('topic-mastery-chart');
+        if (Progress.renderStreakCalendar) Progress.renderStreakCalendar('streak-calendar');
+      }
+
+      // Populate stats from Storage
+      const stats = (typeof Storage !== 'undefined' && Storage.getStats) ? Storage.getStats() : null;
+
+      function setStatValue(boxId, value) {
+        const el = document.querySelector(`#${boxId} .stat-value`);
+        if (el) el.textContent = value !== undefined && value !== null ? value : '—';
+      }
+
+      if (stats) {
+        setStatValue('prog-stat-streak',    (stats.streak ?? 0) + ' 🔥');
+        setStatValue('prog-stat-avg',       stats.avgScore != null ? stats.avgScore + '%' : '—');
+        setStatValue('prog-stat-questions', stats.questionsAnswered ?? 0);
+        setStatValue('prog-stat-cards',     stats.cardsReviewed ?? 0);
+      }
+
+      // Topic mastery bars (fallback if Progress.renderTopicBars not available)
+      if (!(typeof Progress !== 'undefined' && Progress.renderTopicBars)) {
+        try {
+          const res = await fetch('data/topics.json');
+          const d = await res.json();
+          const topics = Array.isArray(d) ? d : (d.topics || []);
+          const container = document.getElementById('topic-mastery-chart');
+          if (container && topics.length) {
+            container.innerHTML = topics.map(t => {
+              const pct = (typeof Storage !== 'undefined' && Storage.getTopicProgress)
+                ? Storage.getTopicProgress(t.id) : 0;
+              const cls = pct >= 70 ? 'fill-high' : pct >= 40 ? 'fill-medium' : 'fill-low';
+              return `
+                <div class="mastery-item">
+                  <span class="mastery-name">${t.title || t.name || 'נושא'}</span>
+                  <div class="mastery-bar-wrap">
+                    <div class="mastery-fill ${cls}" style="width:${pct}%"></div>
+                  </div>
+                  <span class="mastery-pct">${pct}%</span>
+                </div>
+              `;
+            }).join('');
+          } else if (container) {
+            container.innerHTML = '<p class="no-data-msg">אין נתוני נושאים.</p>';
+          }
+        } catch (e) {
+          const container = document.getElementById('topic-mastery-chart');
+          if (container) container.innerHTML = '<p class="no-data-msg">לא ניתן לטעון נושאים.</p>';
+        }
+      }
+
+      // Streak calendar fallback
+      if (!(typeof Progress !== 'undefined' && Progress.renderStreakCalendar)) {
+        const cal = document.getElementById('streak-calendar');
+        if (cal) {
+          // Render last 84 days (12 weeks)
+          const activityData = (typeof Storage !== 'undefined' && Storage.getActivityLog)
+            ? Storage.getActivityLog() : {};
+          const days = [];
+          const now = new Date();
+          for (let i = 83; i >= 0; i--) {
+            const d = new Date(now);
+            d.setDate(d.getDate() - i);
+            const key = d.toISOString().split('T')[0];
+            const level = activityData[key] ? Math.min(3, activityData[key]) : 0;
+            const label = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'short' });
+            days.push(`<div class="cal-day active-${level}" title="${label}"></div>`);
+          }
+          cal.innerHTML = days.join('');
+        }
+      }
+
+      // Score history chart fallback
+      if (!(typeof Progress !== 'undefined' && Progress.renderLineChart)) {
+        const scores = (typeof Storage !== 'undefined' && Storage.getScoreHistory)
+          ? Storage.getScoreHistory() : [];
+        const emptyMsg = document.getElementById('score-history-empty');
+        const svg = document.getElementById('score-history-svg');
+        if (scores && scores.length >= 2 && svg) {
+          if (emptyMsg) emptyMsg.style.display = 'none';
+          svg.style.display = '';
+          const W = 600, H = 140;
+          const PAD = 16;
+          const max = 100, min = 0;
+          const xStep = (W - PAD * 2) / (scores.length - 1);
+          const toY = v => PAD + ((max - v) / (max - min)) * (H - PAD * 2);
+          const points = scores.map((s, i) => `${PAD + i * xStep},${toY(s.score ?? s)}`).join(' ');
+          svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+          svg.innerHTML = `
+            <!-- Grid lines -->
+            <line x1="${PAD}" y1="${toY(100)}" x2="${W - PAD}" y2="${toY(100)}" stroke="#e5e7eb" stroke-width="1"/>
+            <line x1="${PAD}" y1="${toY(50)}"  x2="${W - PAD}" y2="${toY(50)}"  stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+            <text x="${PAD - 4}" y="${toY(100) + 4}" text-anchor="end" font-size="10" fill="#9ca3af">100</text>
+            <text x="${PAD - 4}" y="${toY(50) + 4}"  text-anchor="end" font-size="10" fill="#9ca3af">50</text>
+            <!-- Line -->
+            <polyline points="${points}"
+              fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Dots -->
+            ${scores.map((s, i) => `
+              <circle cx="${PAD + i * xStep}" cy="${toY(s.score ?? s)}" r="4"
+                fill="#2563eb" stroke="#fff" stroke-width="1.5"/>
+            `).join('')}
+          `;
+        }
+      }
+
+      // Export button
+      document.getElementById('btn-export').addEventListener('click', () => {
+        const data = (typeof Storage !== 'undefined' && Storage.exportAll)
+          ? Storage.exportAll()
+          : (typeof Storage !== 'undefined' ? localStorage : null);
+
+        let exportData = {};
+        if (data && typeof data === 'object') {
+          exportData = data;
+        } else if (typeof Storage !== 'undefined' && window.localStorage) {
+          // Fallback: export all localStorage
+          for (let i = 0; i < localStorage.length; i++) {
+            const k = localStorage.key(i);
+            try { exportData[k] = JSON.parse(localStorage.getItem(k)); }
+            catch (e) { exportData[k] = localStorage.getItem(k); }
+          }
+        }
+
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'chemistry-progress-' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // Import file input
+      document.getElementById('import-file').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        const statusEl = document.getElementById('import-status');
+        if (!file) return;
+        try {
+          const text = await file.text();
+          const parsed = JSON.parse(text);
+          if (typeof Storage !== 'undefined' && Storage.importAll) {
+            Storage.importAll(parsed);
+          } else {
+            // Fallback: write to localStorage
+            Object.keys(parsed).forEach(k => {
+              try { localStorage.setItem(k, JSON.stringify(parsed[k])); }
+              catch (err) { /* skip */ }
+            });
+          }
+          if (statusEl) {
+            statusEl.textContent = 'הנתונים יובאו בהצלחה!';
+            statusEl.className = 'import-status success';
+          }
+          setTimeout(() => location.reload(), 1000);
+        } catch (err) {
+          if (statusEl) {
+            statusEl.textContent = 'שגיאה בייבוא — ודא שהקובץ תקין.';
+            statusEl.className = 'import-status error';
+          }
+        }
+        // Reset input
+        e.target.value = '';
+      });
+
+    })();
+  </script>
+</body>
+</html>

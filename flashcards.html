@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — כרטיסיות</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/flashcard.css">
+  <style>
+    .page-header {
+      margin-bottom: 1.75rem;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+      margin: 0 0 0.25rem;
+    }
+    .page-header p {
+      color: var(--color-text-muted, #6b7280);
+      margin: 0;
+    }
+
+    /* Due count badge */
+    .due-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    #due-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      color: #92400e;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    #due-count.no-cards {
+      background: #d1fae5;
+      border-color: #34d399;
+      color: #065f46;
+    }
+
+    /* Topic selector */
+    .fc-topic-selector {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .fc-topic-selector h3 {
+      font-size: 0.95rem;
+      margin: 0 0 0.75rem;
+      color: var(--color-text, #111827);
+    }
+    .fc-topic-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .fc-topic-btn {
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border, #e5e7eb);
+      background: var(--color-surface, #fff);
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .fc-topic-btn:hover { background: #f3f4f6; }
+    .fc-topic-btn.selected {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+      font-weight: 600;
+    }
+    .fc-topic-btn.all-btn.selected {
+      background: var(--color-primary, #2563eb);
+      border-color: var(--color-primary, #2563eb);
+      color: #fff;
+    }
+
+    .fc-study-all-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .fc-study-all-label {
+      font-size: 0.88rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #d1d5db;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-slider:before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      right: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--color-primary, #2563eb); }
+    .toggle-switch input:checked + .toggle-slider:before { transform: translateX(-18px); }
+
+    /* Flashcard area */
+    #flashcard-area {
+      margin-bottom: 1.5rem;
+    }
+    .flashcard-container {
+      perspective: 1000px;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .flashcard {
+      position: relative;
+      width: 100%;
+      min-height: 240px;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: var(--color-surface, #fff);
+      border: 2px solid var(--color-border, #e5e7eb);
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      min-height: 240px;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background: #eff6ff;
+      border-color: var(--color-primary, #2563eb);
+    }
+    .flashcard-front .card-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted, #9ca3af);
+      margin-bottom: 0.75rem;
+    }
+    .flashcard-back .card-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-primary, #2563eb);
+      margin-bottom: 0.75rem;
+    }
+    .flashcard-front .card-content {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-text, #111827);
+      line-height: 1.5;
+    }
+    .flashcard-back .card-content {
+      font-size: 1rem;
+      color: var(--color-text, #111827);
+      line-height: 1.7;
+    }
+    .flip-hint {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted, #9ca3af);
+    }
+
+    /* Answer buttons (shown after flip) */
+    .fc-answer-buttons {
+      display: none;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      max-width: 540px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .fc-answer-buttons.visible {
+      display: flex;
+    }
+    .fc-answer-buttons button {
+      flex: 1;
+      padding: 0.65rem 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .fc-answer-buttons button:hover { opacity: 0.85; }
+    .btn-again { background: #fee2e2; color: #991b1b; }
+    .btn-hard  { background: #fef3c7; color: #92400e; }
+    .btn-good  { background: #d1fae5; color: #065f46; }
+    .btn-easy  { background: #dbeafe; color: #1d4ed8; }
+
+    /* Progress strip */
+    #fc-progress {
+      max-width: 540px;
+      margin: 0 auto;
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    #fc-progress .fc-prog-label {
+      font-size: 0.85rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+    #fc-progress .fc-prog-bar-wrap {
+      flex: 1;
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 8px;
+      min-width: 80px;
+      overflow: hidden;
+    }
+    #fc-progress .fc-prog-fill {
+      height: 100%;
+      background: var(--color-primary, #2563eb);
+      border-radius: 999px;
+      transition: width 0.3s;
+    }
+    #fc-progress .fc-prog-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text, #111827);
+      white-space: nowrap;
+    }
+
+    /* Empty / done state */
+    .fc-empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--color-text-muted, #6b7280);
+    }
+    .fc-empty-state .empty-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+    .fc-empty-state h3 { font-size: 1.2rem; margin: 0 0 0.5rem; color: var(--color-text, #111827); }
+  </style>
+</head>
+<body data-page="flashcards">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html" class="active">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <div class="page-header">
+      <h1>🃏 כרטיסיות חזרה</h1>
+      <p>חזרה מרווחת — למד בחוכמה</p>
+    </div>
+
+    <!-- Due count header -->
+    <div class="due-header">
+      <span id="due-count">🃏 <span id="due-count-num">—</span> כרטיסיות לחזרה היום</span>
+    </div>
+
+    <!-- Topic selector -->
+    <div class="fc-topic-selector">
+      <h3>בחר נושא:</h3>
+      <div class="fc-topic-buttons" id="fc-topic-buttons">
+        <button class="fc-topic-btn all-btn selected" data-topic="all">הכל</button>
+        <!-- Filled by JS -->
+      </div>
+      <div class="fc-study-all-row">
+        <span class="fc-study-all-label">לימוד הכל בכל זאת (כולל כרטיסיות שעברו):</span>
+        <label class="toggle-switch" aria-label="לימוד הכל">
+          <input type="checkbox" id="study-all-toggle">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Flashcard area -->
+    <div id="flashcard-area">
+      <div class="flashcard-container" id="flashcard-container">
+        <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-label="הפוך כרטיסייה">
+          <div class="flashcard-front">
+            <div class="card-label">שאלה</div>
+            <div class="card-content" id="card-front-content">לחץ על כרטיסייה להפיכה</div>
+            <div class="flip-hint">לחץ להפוך ←→</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="card-label">תשובה</div>
+            <div class="card-content" id="card-back-content">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Answer rating buttons -->
+      <div class="fc-answer-buttons" id="fc-answer-buttons">
+        <button class="btn-again" data-rating="1">שוב 🔄</button>
+        <button class="btn-hard"  data-rating="2">קשה 😓</button>
+        <button class="btn-good"  data-rating="3">טוב 😊</button>
+        <button class="btn-easy"  data-rating="4">קל 😎</button>
+      </div>
+    </div>
+
+    <!-- Progress strip -->
+    <div id="fc-progress">
+      <span class="fc-prog-label">התקדמות:</span>
+      <div class="fc-prog-bar-wrap">
+        <div class="fc-prog-fill" id="fc-prog-fill" style="width:0%"></div>
+      </div>
+      <span class="fc-prog-text" id="fc-prog-text">0 / 0</span>
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/flashcard.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (async function initFlashcards() {
+      // If FlashcardEngine exists, delegate to it
+      if (typeof FlashcardEngine !== 'undefined' && FlashcardEngine.init) {
+        FlashcardEngine.init({
+          areaId:       'flashcard-area',
+          frontId:      'card-front-content',
+          backId:       'card-back-content',
+          cardEl:       'flashcard',
+          answersId:    'fc-answer-buttons',
+          progressId:   'fc-progress',
+          dueCountId:   'due-count-num',
+          topicBtnsId:  'fc-topic-buttons',
+          studyAllId:   'study-all-toggle'
+        });
+        return;
+      }
+
+      // Fallback: minimal self-contained implementation
+      let cards = [];
+      let currentIndex = 0;
+      let studyAll = false;
+      let selectedTopic = 'all';
+      let reviewed = 0;
+      let isFlipped = false;
+
+      // Load flashcards
+      try {
+        const res = await fetch('data/flashcards.json');
+        const data = await res.json();
+        cards = Array.isArray(data) ? data : (data.cards || data.flashcards || []);
+      } catch (e) {
+        document.getElementById('flashcard-area').innerHTML =
+          '<p style="color:#ef4444;padding:1rem">לא ניתן לטעון כרטיסיות.</p>';
+        return;
+      }
+
+      // Load topics for filter buttons
+      let topics = [];
+      try {
+        const res = await fetch('data/topics.json');
+        const d = await res.json();
+        topics = Array.isArray(d) ? d : (d.topics || []);
+      } catch (e) { /* */ }
+
+      const topicBtns = document.getElementById('fc-topic-buttons');
+      if (topicBtns && topics.length) {
+        topicBtns.innerHTML = `<button class="fc-topic-btn all-btn selected" data-topic="all">הכל</button>` +
+          topics.map(t => `<button class="fc-topic-btn" data-topic="${t.id}">${t.title || t.name}</button>`).join('');
+        topicBtns.addEventListener('click', e => {
+          const btn = e.target.closest('.fc-topic-btn');
+          if (!btn) return;
+          topicBtns.querySelectorAll('.fc-topic-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedTopic = btn.dataset.topic;
+          currentIndex = 0;
+          reviewed = 0;
+          isFlipped = false;
+          renderCard();
+        });
+      }
+
+      // Study-all toggle
+      const studyAllToggle = document.getElementById('study-all-toggle');
+      if (studyAllToggle) {
+        studyAllToggle.addEventListener('change', () => {
+          studyAll = studyAllToggle.checked;
+          currentIndex = 0;
+          reviewed = 0;
+          isFlipped = false;
+          renderCard();
+        });
+      }
+
+      function getFilteredCards() {
+        return cards.filter(c => {
+          if (selectedTopic !== 'all' && String(c.topicId) !== String(selectedTopic)) return false;
+          return true;
+        });
+      }
+
+      function renderCard() {
+        const filtered = getFilteredCards();
+        const dueEl = document.getElementById('due-count-num');
+        if (dueEl) dueEl.textContent = filtered.length;
+
+        const card = filtered[currentIndex];
+        const frontContent = document.getElementById('card-front-content');
+        const backContent  = document.getElementById('card-back-content');
+        const flashcardEl  = document.getElementById('flashcard');
+        const answerBtns   = document.getElementById('fc-answer-buttons');
+
+        if (!card) {
+          // Done state
+          const area = document.getElementById('flashcard-area');
+          if (area) {
+            area.innerHTML = `
+              <div class="fc-empty-state">
+                <div class="empty-icon">🎉</div>
+                <h3>כל הכבוד! סיימת את כל הכרטיסיות</h3>
+                <p>חזור מחר לסשן הבא</p>
+              </div>
+            `;
+          }
+          updateProgress(filtered.length, filtered.length);
+          return;
+        }
+
+        if (frontContent) frontContent.textContent = card.front || card.question || card.term || '';
+        if (backContent)  backContent.textContent  = card.back  || card.answer  || card.definition || '';
+        if (flashcardEl)  flashcardEl.classList.remove('flipped');
+        if (answerBtns)   answerBtns.classList.remove('visible');
+        isFlipped = false;
+        updateProgress(currentIndex, filtered.length);
+      }
+
+      function updateProgress(done, total) {
+        const fill = document.getElementById('fc-prog-fill');
+        const text = document.getElementById('fc-prog-text');
+        const pct  = total > 0 ? Math.round((done / total) * 100) : 0;
+        if (fill) fill.style.width = pct + '%';
+        if (text) text.textContent = done + ' / ' + total;
+      }
+
+      // Flip card
+      const flashcardEl = document.getElementById('flashcard');
+      if (flashcardEl) {
+        const doFlip = () => {
+          if (isFlipped) return;
+          flashcardEl.classList.add('flipped');
+          isFlipped = true;
+          const answerBtns = document.getElementById('fc-answer-buttons');
+          if (answerBtns) answerBtns.classList.add('visible');
+        };
+        flashcardEl.addEventListener('click', doFlip);
+        flashcardEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') doFlip(); });
+      }
+
+      // Answer buttons
+      const answerBtnsEl = document.getElementById('fc-answer-buttons');
+      if (answerBtnsEl) {
+        answerBtnsEl.addEventListener('click', e => {
+          const btn = e.target.closest('button[data-rating]');
+          if (!btn || !isFlipped) return;
+          const rating = parseInt(btn.dataset.rating, 10);
+          // Save result via Storage if available
+          const filtered = getFilteredCards();
+          const card = filtered[currentIndex];
+          if (card && typeof Storage !== 'undefined' && Storage.recordFlashcard) {
+            Storage.recordFlashcard(card.id, rating);
+          }
+          reviewed++;
+          currentIndex++;
+          isFlipped = false;
+          renderCard();
+        });
+      }
+
+      // Initial render
+      renderCard();
+    })();
+  </script>
+</body>
+</html>

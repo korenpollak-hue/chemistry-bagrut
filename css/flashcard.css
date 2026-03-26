@@ -1,0 +1,727 @@
+/* ============================================================
+   flashcard.css — Chemistry Bagrut Study Site
+   3D flip flashcards, spaced-repetition buttons, queue info
+   ============================================================ */
+
+/* ── Page-level flashcard layout ──────────────────────────── */
+.flashcard-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 48px;
+  min-height: 100%;
+}
+
+/* ── Session header ────────────────────────────────────────── */
+.fc-session-header {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+/* ── Queue info ────────────────────────────────────────────── */
+.fc-queue-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary-light);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: var(--radius-card);
+  padding: 12px 18px;
+  font-size: 0.875rem;
+  color: #1e3a8a;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.fc-queue-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.fc-queue-text {
+  flex: 1;
+  font-weight: 500;
+}
+
+.fc-queue-count {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Queue info variants */
+.fc-queue-info.done {
+  background: var(--success-light);
+  border-color: rgba(22, 163, 74, 0.25);
+  color: #14532d;
+}
+
+.fc-queue-info.done .fc-queue-count {
+  color: var(--success);
+}
+
+/* ── Counter ───────────────────────────────────────────────── */
+.fc-counter {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.fc-counter-current {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.fc-counter-sep {
+  color: var(--border-dark);
+}
+
+.fc-counter-total {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ── 3D Flip Scene ─────────────────────────────────────────── */
+.flashcard-container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  /* Perspective must be on the parent scene element */
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 24px;
+}
+
+/* Hint to tap */
+.fc-tap-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Flashcard (the flipping element) ─────────────────────── */
+.flashcard {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 480px) {
+  .flashcard {
+    min-height: 320px;
+  }
+}
+
+@media (min-width: 768px) {
+  .flashcard {
+    min-height: 360px;
+  }
+}
+
+/* ── Flipped state ─────────────────────────────────────────── */
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+/* ── Both faces ────────────────────────────────────────────── */
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Front face ─────────────────────────────────────────────── */
+.flashcard-front {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-md);
+  transform: rotateY(0deg);
+}
+
+.fc-front-header {
+  background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fc-front-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.fc-front-tag {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.fc-front-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 28px 20px;
+  text-align: center;
+  gap: 12px;
+}
+
+.fc-question {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+@media (min-width: 480px) {
+  .fc-question {
+    font-size: 1.3rem;
+  }
+}
+
+/* Formula inside card — always LTR */
+.fc-front-body .formula,
+.fc-back-body .formula {
+  font-size: 1.05rem;
+  padding: 4px 10px;
+}
+
+.fc-front-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* ── Back face ──────────────────────────────────────────────── */
+.flashcard-back {
+  /* Rotated 180deg so it shows when card is flipped */
+  transform: rotateY(180deg);
+  /* Dark gradient to distinguish from front */
+  background: linear-gradient(155deg, #1e293b 0%, #0f172a 60%, #1e1b4b 100%);
+  border: 2px solid #334155;
+  box-shadow: var(--shadow-md);
+  color: white;
+}
+
+.fc-back-header {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fc-back-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.fc-back-tag {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.fc-back-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 28px 20px;
+  text-align: center;
+  gap: 14px;
+}
+
+.fc-answer {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1.5;
+}
+
+@media (min-width: 480px) {
+  .fc-answer {
+    font-size: 1.4rem;
+  }
+}
+
+.fc-answer-detail {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
+  max-width: 480px;
+}
+
+/* Highlighted answer key */
+.fc-answer-highlight {
+  display: inline-block;
+  background: rgba(96, 165, 250, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  border-radius: var(--radius-input);
+  padding: 4px 12px;
+  color: #93c5fd;
+  font-family: var(--font-mono);
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
+  direction: ltr;
+  unicode-bidi: plaintext;
+}
+
+.fc-back-footer {
+  padding: 12px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
+}
+
+/* ── Rating Buttons (show after flip) ───────────────────────── */
+.fc-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fc-btn {
+  flex: 1;
+  min-width: 90px;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 10px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-card);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  text-align: center;
+}
+
+.fc-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.fc-btn:active {
+  transform: translateY(0);
+}
+
+.fc-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.fc-btn-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.fc-btn-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.fc-btn-sublabel {
+  font-size: 0.68rem;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* Again — red */
+.fc-btn-again {
+  background: var(--error-light);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #7f1d1d;
+}
+
+.fc-btn-again:hover {
+  background: #fca5a5;
+  border-color: var(--error);
+}
+
+/* Hard — amber */
+.fc-btn-hard {
+  background: var(--warning-light);
+  border-color: rgba(217, 119, 6, 0.3);
+  color: #78350f;
+}
+
+.fc-btn-hard:hover {
+  background: #fcd34d;
+  border-color: var(--warning);
+}
+
+/* Good — green */
+.fc-btn-good {
+  background: var(--success-light);
+  border-color: rgba(22, 163, 74, 0.3);
+  color: #14532d;
+}
+
+.fc-btn-good:hover {
+  background: #86efac;
+  border-color: var(--success);
+}
+
+/* Buttons hidden until card is flipped */
+.fc-buttons {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.fc-buttons.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ── Navigation controls ────────────────────────────────────── */
+.fc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+  margin: 20px auto 0;
+}
+
+.fc-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.fc-nav-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.fc-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Progress strip ─────────────────────────────────────────── */
+.fc-progress-strip {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: 640px;
+  margin: 16px auto 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fc-progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+}
+
+.fc-progress-dot.seen      { background: var(--text-light); }
+.fc-progress-dot.good      { background: var(--success); }
+.fc-progress-dot.hard      { background: var(--warning); }
+.fc-progress-dot.again     { background: var(--error); }
+.fc-progress-dot.current   { background: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+
+/* ── Empty / Done State ─────────────────────────────────────── */
+.fc-done-screen {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lg);
+  padding: 48px 32px;
+  text-align: center;
+  animation: fadeIn 0.4s ease both;
+}
+
+.fc-done-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: bounceIn 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.15); opacity: 1; }
+  75%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.fc-done-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--success);
+  margin-bottom: 8px;
+}
+
+.fc-done-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.fc-done-stats {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.fc-done-stat {
+  text-align: center;
+}
+
+.fc-done-stat-num {
+  font-size: 2rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.fc-done-stat-num.again  { color: var(--error); }
+.fc-done-stat-num.hard   { color: var(--warning); }
+.fc-done-stat-num.good   { color: var(--success); }
+
+.fc-done-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.fc-done-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Deck selector ──────────────────────────────────────────── */
+.fc-deck-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+@media (min-width: 480px) {
+  .fc-deck-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.fc-deck-item {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  color: var(--text);
+}
+
+.fc-deck-item:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.fc-deck-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.fc-deck-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.fc-deck-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.fc-deck-due {
+  display: inline-block;
+  margin-top: 8px;
+  background: var(--error-light);
+  color: #7f1d1d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.fc-deck-due.none {
+  background: var(--success-light);
+  color: #14532d;
+}
+
+/* ── Settings panel (speed, auto-flip etc.) ─────────────────── */
+.fc-settings {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.fc-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: var(--text);
+  flex-wrap: wrap;
+}
+
+.fc-settings-label {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Toggle switch */
+.fc-toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.fc-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.fc-toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--border-dark);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.fc-toggle input:checked + .fc-toggle-track {
+  background: var(--primary);
+}
+
+.fc-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: inset-inline-start var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.fc-toggle input:checked + .fc-toggle-track::after {
+  inset-inline-start: 21px;
+}
