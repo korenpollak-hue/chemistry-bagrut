@@ -160,6 +160,19 @@
       min-width: 32px;
       text-align: left;
     }
+
+    /* Onboarding steps */
+    .onboarding-steps { padding: 2rem 0; }
+    .onboarding-subtitle { color: var(--color-text-muted, #6b7280); margin-bottom: 1.5rem; font-size: 1.05rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .step-card { background: #fff; border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 2px solid transparent; transition: all 0.2s; position: relative; }
+    .step-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .step-1 { border-top: 4px solid #2563eb; } .step-2 { border-top: 4px solid #16a34a; } .step-3 { border-top: 4px solid #d97706; } .step-4 { border-top: 4px solid #9333ea; }
+    .step-number { position: absolute; top: -14px; right: 1rem; background: #1e293b; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+    .step-icon { font-size: 2rem; }
+    .step-card h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+    .step-card p { font-size: 0.9rem; color: var(--color-text-muted, #6b7280); margin: 0; flex: 1; }
+    .step-time { font-size: 0.8rem; color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 20px; align-self: flex-start; margin-top: 0.5rem; }
   </style>
 </head>
 <body data-page="home">
@@ -208,6 +221,42 @@
         <div class="stat-label">🃏 כרטיסיות להיום</div>
       </div>
     </div>
+
+    <!-- Onboarding Steps -->
+    <section class="onboarding-steps">
+      <h2>🚀 מאיפה מתחילים?</h2>
+      <p class="onboarding-subtitle">עידו, אתה מתחיל מאפס — זה בסדר גמור. עקוב אחרי השלבים האלה בסדר:</p>
+      <div class="steps-grid">
+        <a href="topics.html" class="step-card step-1">
+          <div class="step-number">1</div>
+          <div class="step-icon">📚</div>
+          <h3>קרא את הנושא</h3>
+          <p>בחר נושא מתוכנית השבוע, קרא את ההסבר עם המודלים הויזואליים</p>
+          <span class="step-time">⏱ 20–30 דקות</span>
+        </a>
+        <a href="quiz.html" class="step-card step-2">
+          <div class="step-number">2</div>
+          <div class="step-icon">❓</div>
+          <h3>בדוק את עצמך</h3>
+          <p>ענה על שאלות מהנושא. אם אתה טועה — חזור ולמד שוב. זו הדרך!</p>
+          <span class="step-time">⏱ 15–20 דקות</span>
+        </a>
+        <a href="flashcards.html" class="step-card step-3">
+          <div class="step-number">3</div>
+          <div class="step-icon">🃏</div>
+          <h3>כרטיסיות לחזרה</h3>
+          <p>עשה כרטיסיות כל יום — 10 דקות שמשמרות את מה שלמדת לאורך זמן</p>
+          <span class="step-time">⏱ 10 דקות ביום</span>
+        </a>
+        <a href="simulator.html" class="step-card step-4">
+          <div class="step-number">4</div>
+          <div class="step-icon">📝</div>
+          <h3>סימולטור מבחן</h3>
+          <p>בשבוע האחרון — מבחן שלם עם שעון. 2 שעות כמו הבגרות האמיתית</p>
+          <span class="step-time">⏱ 2 שעות (פעם בשבוע)</span>
+        </a>
+      </div>
+    </section>
 
     <!-- Today's Task -->
     <div class="today-card">
@@ -325,7 +374,9 @@
 
       // Progress chart
       if (typeof Progress !== 'undefined' && Progress.renderLineChart) {
-        Progress.renderLineChart('progress-chart-svg');
+        const quizHistory = (typeof Storage !== 'undefined' && Storage.getQuizHistory) ? Storage.getQuizHistory() : [];
+        const chartData = quizHistory.map(h => ({ date: h.date, score: h.score, label: h.topicId }));
+        Progress.renderLineChart('progress-chart-svg', chartData);
       }
     })();
   </script>

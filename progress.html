@@ -328,9 +328,19 @@
 
       // If Progress module is defined, delegate to it
       if (typeof Progress !== 'undefined') {
-        if (Progress.renderLineChart)      Progress.renderLineChart('score-history-svg');
-        if (Progress.renderTopicBars)      Progress.renderTopicBars('topic-mastery-chart');
-        if (Progress.renderStreakCalendar) Progress.renderStreakCalendar('streak-calendar');
+        if (Progress.renderLineChart) {
+          const quizHistory = (typeof Storage !== 'undefined' && Storage.getQuizHistory) ? Storage.getQuizHistory() : [];
+          const lineData = quizHistory.map(h => ({ date: h.date, score: h.score, label: h.topicId }));
+          Progress.renderLineChart('score-history-svg', lineData);
+        }
+        if (Progress.renderTopicBars) {
+          const prog = (typeof Storage !== 'undefined' && Storage.getProgress) ? Storage.getProgress() : {};
+          Progress.renderTopicBars('topic-mastery-chart', prog.topicProgress || {});
+        }
+        if (Progress.renderStreakCalendar) {
+          const quizHistory = (typeof Storage !== 'undefined' && Storage.getQuizHistory) ? Storage.getQuizHistory() : [];
+          Progress.renderStreakCalendar('streak-calendar', quizHistory);
+        }
       }
 
       // Populate stats from Storage

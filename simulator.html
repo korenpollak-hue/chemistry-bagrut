@@ -448,17 +448,13 @@
   <script src="js/app.js"></script>
   <script>
     // If BagrutSimulator is defined in simulator.js, delegate to it
-    if (typeof BagrutSimulator !== 'undefined' && BagrutSimulator.init) {
-      BagrutSimulator.init({
-        startBtnId:     'btn-start-exam',
-        preScreenId:    'pre-exam-screen',
-        simAreaId:      'simulator-area',
-        timerId:        'sim-timer',
-        navToggleId:    'sim-nav-toggle',
-        navGridId:      'sim-nav-grid',
-        questionId:     'sim-question',
-        submitBtnId:    'btn-submit-exam',
-        resultsId:      'sim-results'
+    if (typeof BagrutSimulator !== 'undefined' && BagrutSimulator.start) {
+      document.getElementById('btn-start-exam').addEventListener('click', () => {
+        const preScreen = document.getElementById('pre-exam-screen');
+        const simArea = document.getElementById('simulator-area');
+        if (preScreen) preScreen.style.display = 'none';
+        if (simArea) simArea.classList.add('visible');
+        BagrutSimulator.start();
       });
     } else {
       // Fallback self-contained simulator

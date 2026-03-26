@@ -98,6 +98,7 @@
   margin: 0 auto;
   /* Perspective must be on the parent scene element */
   perspective: 1200px;
+  transform-style: preserve-3d;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -163,6 +164,16 @@
   border: 2px solid var(--border);
   box-shadow: var(--shadow-md);
   transform: rotateY(0deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ── Back face — must be pre-rotated 180deg so that when parent
+       flips 180deg the back ends up at 360deg = readable        */
+.flashcard-back {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .fc-front-header {

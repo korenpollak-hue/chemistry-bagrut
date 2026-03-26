@@ -372,19 +372,25 @@
   <script src="js/app.js"></script>
   <script>
     (async function initFlashcards() {
+      // Track selected topic
+      let selectedTopic = null;
+
       // If FlashcardEngine exists, delegate to it
       if (typeof FlashcardEngine !== 'undefined' && FlashcardEngine.init) {
-        FlashcardEngine.init({
-          areaId:       'flashcard-area',
-          frontId:      'card-front-content',
-          backId:       'card-back-content',
-          cardEl:       'flashcard',
-          answersId:    'fc-answer-buttons',
-          progressId:   'fc-progress',
-          dueCountId:   'due-count-num',
-          topicBtnsId:  'fc-topic-buttons',
-          studyAllId:   'study-all-toggle'
-        });
+        // Wire topic buttons: update selectedTopic and re-init engine
+        const topicBtnsContainer = document.getElementById('fc-topic-buttons');
+        if (topicBtnsContainer) {
+          topicBtnsContainer.addEventListener('click', e => {
+            const btn = e.target.closest('.fc-topic-btn');
+            if (!btn) return;
+            topicBtnsContainer.querySelectorAll('.fc-topic-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            const topicId = btn.dataset.topic;
+            selectedTopic = (topicId === 'all') ? null : topicId;
+            FlashcardEngine.init(selectedTopic);
+          });
+        }
+        FlashcardEngine.init(selectedTopic || null);
         return;
       }
 
@@ -392,7 +398,7 @@
       let cards = [];
       let currentIndex = 0;
       let studyAll = false;
-      let selectedTopic = 'all';
+      selectedTopic = 'all';
       let reviewed = 0;
       let isFlipped = false;
 

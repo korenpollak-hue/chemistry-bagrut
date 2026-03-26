@@ -193,6 +193,22 @@
       color: var(--color-text-muted, #6b7280);
       margin: 0;
     }
+
+    /* Visual models */
+    .visual-model { margin: 1.5rem 0; background: #f8fafc; border-radius: 10px; padding: 1rem; border: 1px solid #e2e8f0; }
+    .model-title { font-weight: 600; color: #475569; margin-bottom: 0.75rem; font-size: 0.95rem; }
+    .energy-diagram, .balance-svg { width: 100%; max-width: 400px; display: block; margin: 0 auto; }
+    .chatelier-diagram { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .chatelier-box { background: white; border-radius: 8px; padding: 1rem; flex: 1; min-width: 150px; }
+    .chatelier-left { border: 2px solid #f59e0b; }
+    .chatelier-right { border: 2px solid #2563eb; }
+    .chatelier-label { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .chatelier-items { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.85rem; color: #475569; }
+    .chatelier-arrow { font-size: 1.5rem; text-align: center; color: #6b7280; }
+    .ph-scale { display: flex; border-radius: 8px; overflow: hidden; height: 40px; }
+    .ph-segment { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: rgba(0,0,0,0.6); cursor: default; }
+    .ph-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; }
+    .ph-examples { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.85rem; color: #64748b; }
   </style>
 </head>
 <body data-page="topics">
@@ -296,17 +312,134 @@
           `).join('');
       }
 
+      // Visual models map — keyed by topic ID
+      const visualModels = {
+        'thermochemistry': `
+          <div class="visual-model">
+            <div class="model-title">📊 דיאגרמת אנרגיה — תגובה אקסותרמית</div>
+            <svg viewBox="0 0 400 200" class="energy-diagram" xmlns="http://www.w3.org/2000/svg">
+              <line x1="50" y1="20" x2="50" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="50" y1="180" x2="370" y2="180" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="20" y="100" fill="#64748b" font-size="11" text-anchor="middle" transform="rotate(-90,20,100)">אנרגיה (kJ)</text>
+              <text x="210" y="198" fill="#64748b" font-size="11" text-anchor="middle">מהלך התגובה</text>
+              <line x1="60" y1="60" x2="130" y2="60" stroke="#3b82f6" stroke-width="3"/>
+              <text x="95" y="52" fill="#3b82f6" font-size="11" text-anchor="middle">מגיבים</text>
+              <path d="M130,60 Q210,20 290,120" stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-dasharray="5,3"/>
+              <line x1="290" y1="120" x2="360" y2="120" stroke="#16a34a" stroke-width="3"/>
+              <text x="325" y="112" fill="#16a34a" font-size="11" text-anchor="middle">תוצרים</text>
+              <line x1="170" y1="60" x2="170" y2="120" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-thermo)"/>
+              <text x="185" y="95" fill="#dc2626" font-size="13" font-weight="bold">ΔH &lt; 0</text>
+              <defs><marker id="arrow-thermo" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+            </svg>
+          </div>`,
+        'equilibrium': `
+          <div class="visual-model">
+            <div class="model-title">⚖️ שיווי משקל דינמי — שני כיווני התגובה שווים</div>
+            <svg viewBox="0 0 300 160" class="balance-svg" xmlns="http://www.w3.org/2000/svg">
+              <line x1="150" y1="20" x2="150" y2="100" stroke="#475569" stroke-width="3"/>
+              <circle cx="150" cy="20" r="5" fill="#475569"/>
+              <g id="balance-beam" style="transform-origin:150px 100px">
+                <line x1="50" y1="100" x2="250" y2="100" stroke="#334155" stroke-width="4"/>
+                <line x1="70" y1="100" x2="70" y2="125" stroke="#475569" stroke-width="2"/>
+                <line x1="50" y1="125" x2="90" y2="125" stroke="#2563eb" stroke-width="3"/>
+                <text x="70" y="142" fill="#2563eb" font-size="10" text-anchor="middle">A + B →</text>
+                <line x1="230" y1="100" x2="230" y2="125" stroke="#475569" stroke-width="2"/>
+                <line x1="210" y1="125" x2="250" y2="125" stroke="#16a34a" stroke-width="3"/>
+                <text x="230" y="142" fill="#16a34a" font-size="10" text-anchor="middle">← C + D</text>
+              </g>
+              <text x="150" y="158" fill="#64748b" font-size="10" text-anchor="middle">בשיווי משקל: קצב קדימה = קצב אחורה</text>
+              <style>
+                #balance-beam { animation: balance-rock 3s ease-in-out infinite alternate; }
+                @keyframes balance-rock { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+              </style>
+            </svg>
+          </div>`,
+        'le-chatelier': `
+          <div class="visual-model">
+            <div class="model-title">🔄 עקרון לה-שאטלייה — מערכת מגיבה לשינוי</div>
+            <div class="chatelier-diagram">
+              <div class="chatelier-box chatelier-left">
+                <div class="chatelier-label">שינוי חיצוני</div>
+                <div class="chatelier-items">
+                  <span>🌡️ עליית טמפרטורה</span>
+                  <span>🔵 הוספת מגיב</span>
+                  <span>⬆️ עליית לחץ</span>
+                </div>
+              </div>
+              <div class="chatelier-arrow">⟶<br><small>המערכת מגיבה</small></div>
+              <div class="chatelier-box chatelier-right">
+                <div class="chatelier-label">כיוון שיווי משקל</div>
+                <div class="chatelier-items">
+                  <span>→ כיוון אנדותרמי</span>
+                  <span>→ ייצור תוצרים</span>
+                  <span>→ צד פחות מולים</span>
+                </div>
+              </div>
+            </div>
+          </div>`,
+        'redox': `
+          <div class="visual-model">
+            <div class="model-title">⚡ מעבר אלקטרונים בחמצון-חיזור</div>
+            <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="70" cy="60" r="40" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+              <text x="70" y="55" fill="#1d4ed8" font-size="12" text-anchor="middle" font-weight="bold">מחזר</text>
+              <text x="70" y="72" fill="#1d4ed8" font-size="10" text-anchor="middle">נותן e⁻</text>
+              <circle cx="250" cy="60" r="40" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="250" y="55" fill="#92400e" font-size="12" text-anchor="middle" font-weight="bold">מחמצן</text>
+              <text x="250" y="72" fill="#92400e" font-size="10" text-anchor="middle">מקבל e⁻</text>
+              <path d="M115,50 Q160,20 205,50" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#earrow)"/>
+              <text x="160" y="30" fill="#7c3aed" font-size="12" text-anchor="middle" font-weight="bold">e⁻</text>
+              <defs><marker id="earrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker></defs>
+            </svg>
+          </div>`,
+        'ph-calculations': `
+          <div class="visual-model">
+            <div class="model-title">📏 סולם ה-pH</div>
+            <div class="ph-scale-container">
+              <div class="ph-scale">
+                <div class="ph-segment" style="background:#dc2626">0</div>
+                <div class="ph-segment" style="background:#ea580c">1</div>
+                <div class="ph-segment" style="background:#f97316">2</div>
+                <div class="ph-segment" style="background:#fb923c">3</div>
+                <div class="ph-segment" style="background:#fdba74">4</div>
+                <div class="ph-segment" style="background:#fde68a">5</div>
+                <div class="ph-segment" style="background:#fef08a">6</div>
+                <div class="ph-segment" style="background:#d9f99d">7</div>
+                <div class="ph-segment" style="background:#86efac">8</div>
+                <div class="ph-segment" style="background:#6ee7b7">9</div>
+                <div class="ph-segment" style="background:#5eead4">10</div>
+                <div class="ph-segment" style="background:#67e8f9">11</div>
+                <div class="ph-segment" style="background:#7dd3fc">12</div>
+                <div class="ph-segment" style="background:#60a5fa">13</div>
+                <div class="ph-segment" style="background:#3b82f6">14</div>
+              </div>
+              <div class="ph-labels">
+                <span style="color:#dc2626">חומצי חזק</span>
+                <span style="color:#16a34a">ניטרלי (7)</span>
+                <span style="color:#2563eb">בסיסי חזק</span>
+              </div>
+              <div class="ph-examples">
+                <span>🍋 לימון: 2</span>
+                <span>💧 מים: 7</span>
+                <span>🧼 סבון: 10</span>
+                <span>🔋 NaOH: 14</span>
+              </div>
+            </div>
+          </div>`
+      };
+
       // Render topics list
       const list = document.getElementById('topics-list');
       if (list) {
         list.innerHTML = topics.map(t => {
-          const formulas = (t.formulas || []).map(f =>
+          const formulas = (t.formulas || t.keyFormulas || []).map(f =>
             `<span class="formula">${f}</span>`
           ).join('');
           const tags = (t.keyTerms || t.terms || t.tags || []).map(tag =>
             `<span class="tag">${tag}</span>`
           ).join('');
           const weekAttr = t.week ? ` data-week="${t.week}"` : '';
+          const visualModel = visualModels[t.id] || '';
           return `
             <section class="topic-section" id="topic-${t.id}"${weekAttr}>
               <div class="topic-header">
@@ -314,6 +447,7 @@
                 <span class="difficulty-badge ${diffClass(t.difficulty)}">${diffLabel(t.difficulty)}</span>
               </div>
               <p class="topic-desc">${t.description || ''}</p>
+              ${visualModel}
               ${formulas ? `<div class="formulas-row">${formulas}</div>` : ''}
               ${tags ? `<div class="tags-row">${tags}</div>` : ''}
               <a href="quiz.html?topic=${t.id}" class="btn-practice">תרגל עכשיו ←</a>

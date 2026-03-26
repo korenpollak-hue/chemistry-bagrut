@@ -293,8 +293,8 @@
           if (selectedTopic !== 'all') opts.topicId = selectedTopic;
           if (selectedWeek) opts.week = selectedWeek;
 
-          if (typeof QuizEngine !== 'undefined' && QuizEngine.start) {
-            QuizEngine.start('quiz-container', opts);
+          if (typeof QuizEngine !== 'undefined' && QuizEngine.startWithFetch) {
+            QuizEngine.startWithFetch(opts, opts.topicId || null);
           } else if (typeof Quiz !== 'undefined' && Quiz.start) {
             Quiz.start('quiz-container', opts);
           } else {
