@@ -209,6 +209,16 @@
     .ph-segment { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: rgba(0,0,0,0.6); cursor: default; }
     .ph-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; }
     .ph-examples { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.85rem; color: #64748b; }
+
+    /* Worked examples */
+    .worked-example { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+    .we-title { font-weight: 700; color: #92400e; margin-bottom: 0.75rem; font-size: 0.95rem; }
+    .we-problem { background: white; border-radius: 6px; padding: 0.75rem; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.7; border: 1px solid #fde68a; }
+    .we-steps { display: flex; flex-direction: column; gap: 0.5rem; }
+    .we-step { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.9rem; padding: 0.5rem; background: white; border-radius: 4px; }
+    .step-num { background: #f59e0b; color: white; min-width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .we-step.step-answer { background: #f0fdf4; border: 1px solid #86efac; }
+    .we-step.step-answer .step-num { background: #16a34a; }
   </style>
 </head>
 <body data-page="topics">
@@ -428,6 +438,94 @@
           </div>`
       };
 
+      // Worked examples map — keyed by topic ID
+      const workedExamples = {
+        'thermochemistry': `
+          <div class="worked-example">
+            <div class="we-title">✏️ דוגמה פתורה: חוק הס</div>
+            <div class="we-problem">
+              <strong>שאלה:</strong> חשב את ΔH° לתגובה: <span class="formula" dir="ltr">C(s) + ½O₂(g) → CO(g)</span><br>
+              נתון: (1) <span class="formula" dir="ltr">C + O₂ → CO₂</span>, ΔH₁ = -393 kJ<br>
+              (2) <span class="formula" dir="ltr">CO + ½O₂ → CO₂</span>, ΔH₂ = -283 kJ
+            </div>
+            <div class="we-steps">
+              <div class="we-step"><span class="step-num">1</span> הפוך תגובה (2): <span class="formula" dir="ltr">CO₂ → CO + ½O₂</span>, ΔH = +283 kJ</div>
+              <div class="we-step"><span class="step-num">2</span> חבר עם תגובה (1): <span class="formula" dir="ltr">C + O₂ + CO₂ → CO₂ + CO + ½O₂</span></div>
+              <div class="we-step"><span class="step-num">3</span> פשט — ביטול CO₂ משני הצדדים: <span class="formula" dir="ltr">C + ½O₂ → CO</span></div>
+              <div class="we-step step-answer"><span class="step-num">✓</span> ΔH = -393 + 283 = <strong>-110 kJ</strong></div>
+            </div>
+          </div>`,
+        'equilibrium': `
+          <div class="worked-example">
+            <div class="we-title">✏️ דוגמה פתורה: חישוב Kc</div>
+            <div class="we-problem">
+              <strong>שאלה:</strong> לתגובה <span class="formula" dir="ltr">N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</span><br>
+              בשיווי משקל: [N₂]=0.5M, [H₂]=0.3M, [NH₃]=0.2M. חשב Kc.
+            </div>
+            <div class="we-steps">
+              <div class="we-step"><span class="step-num">1</span> כתוב את ביטוי Kc: <span class="formula" dir="ltr">Kc = [NH₃]² / ([N₂]·[H₂]³)</span></div>
+              <div class="we-step"><span class="step-num">2</span> הצב ערכים: <span class="formula" dir="ltr">Kc = (0.2)² / (0.5 · (0.3)³)</span></div>
+              <div class="we-step"><span class="step-num">3</span> חשב מכנה: <span class="formula" dir="ltr">0.5 × 0.027 = 0.0135</span></div>
+              <div class="we-step step-answer"><span class="step-num">✓</span> <span class="formula" dir="ltr">Kc = 0.04 / 0.0135 = <strong>2.96</strong></span></div>
+            </div>
+          </div>`,
+        'redox': `
+          <div class="worked-example">
+            <div class="we-title">✏️ דוגמה פתורה: איזון תגובת חמצון-חיזור</div>
+            <div class="we-problem">
+              <strong>שאלה:</strong> אזן: <span class="formula" dir="ltr">Cl₂ + 2HBr → Br₂ + 2HCl</span><br>
+              ומצא מי מחמצן ומי מחזר.
+            </div>
+            <div class="we-steps">
+              <div class="we-step"><span class="step-num">1</span> מספרי חמצון ב-Cl₂: Cl = 0; ב-HCl: Cl = -1<br>→ Cl <strong>קיבל</strong> אלקטרונים = <strong>חומצן (מחמצן)</strong></div>
+              <div class="we-step"><span class="step-num">2</span> מספרי חמצון ב-HBr: Br = -1; ב-Br₂: Br = 0<br>→ Br <strong>איבד</strong> אלקטרונים = <strong>מחזר</strong></div>
+              <div class="we-step step-answer"><span class="step-num">✓</span> התגובה מאוזנת. ΔH = <strong>-81 kJ</strong> (מאנרגיות קשר)</div>
+            </div>
+          </div>`,
+        'ph-calculations': `
+          <div class="worked-example">
+            <div class="we-title">✏️ דוגמה פתורה: חישוב pH</div>
+            <div class="we-problem">
+              <strong>שאלה:</strong> מצא את pH של תמיסת NH₃ בריכוז 0.1M.<br>
+              נתון: <span class="formula" dir="ltr">Kb(NH₃) = 1.8×10⁻⁵</span>
+            </div>
+            <div class="we-steps">
+              <div class="we-step"><span class="step-num">1</span> כתוב תגובת שיווי משקל: <span class="formula" dir="ltr">NH₃ + H₂O ⇌ NH₄⁺ + OH⁻</span></div>
+              <div class="we-step"><span class="step-num">2</span> <span class="formula" dir="ltr">Kb = x² / (0.1-x) ≈ x² / 0.1</span></div>
+              <div class="we-step"><span class="step-num">3</span> <span class="formula" dir="ltr">x² = 1.8×10⁻⁶ → x = [OH⁻] = 1.34×10⁻³</span></div>
+              <div class="we-step"><span class="step-num">4</span> <span class="formula" dir="ltr">pOH = -log(1.34×10⁻³) = 2.87</span></div>
+              <div class="we-step step-answer"><span class="step-num">✓</span> <span class="formula" dir="ltr">pH = 14 - 2.87 = <strong>11.13</strong></span></div>
+            </div>
+          </div>`,
+        'le-chatelier': `
+          <div class="worked-example">
+            <div class="we-title">✏️ דוגמה פתורה: עקרון לה-שאטלייה</div>
+            <div class="we-problem">
+              <strong>שאלה:</strong> לתגובה <span class="formula" dir="ltr">N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</span>, ΔH = -92 kJ<br>
+              לאיזה כיוון ינוע שיווי המשקל כאשר: (א) מוסיפים N₂ (ב) מעלים טמפ' (ג) מגדילים לחץ?
+            </div>
+            <div class="we-steps">
+              <div class="we-step"><span class="step-num">א</span> הוספת N₂ → ריכוז מגיב עולה → שיווי משקל ינוע <strong>ימינה</strong> (לייצור NH₃)</div>
+              <div class="we-step"><span class="step-num">ב</span> עלית טמפ' → מערכת מתנגדת → ינוע לכיוון <strong>אנדותרמי (שמאלה)</strong></div>
+              <div class="we-step step-answer"><span class="step-num">ג</span> עלית לחץ → ינוע לצד עם <strong>פחות מולים</strong> = ימינה (4 מולים → 2 מולים)</div>
+            </div>
+          </div>`,
+        'thermodynamics': `
+          <div class="worked-example">
+            <div class="we-title">✏️ דוגמה פתורה: חישוב ΔG וספונטניות</div>
+            <div class="we-problem">
+              <strong>שאלה:</strong> עבור תגובה: ΔH = -80 kJ, ΔS = -150 J/K<br>
+              האם התגובה ספונטנית ב-T=298K? ובאיזו טמפרטורה משתנה ספונטניות?
+            </div>
+            <div class="we-steps">
+              <div class="we-step"><span class="step-num">1</span> <span class="formula" dir="ltr">ΔG = ΔH - TΔS = -80,000 - (298)(-150)</span></div>
+              <div class="we-step"><span class="step-num">2</span> <span class="formula" dir="ltr">ΔG = -80,000 + 44,700 = -35,300 J = -35.3 kJ</span></div>
+              <div class="we-step"><span class="step-num">3</span> ΔG &lt; 0 → <strong>ספונטנית</strong> ב-298K</div>
+              <div class="we-step step-answer"><span class="step-num">4</span> נקודת מעבר: <span class="formula" dir="ltr">T = ΔH/ΔS = 80,000/150 = <strong>533 K</strong></span> (מעל זה — לא ספונטנית)</div>
+            </div>
+          </div>`
+      };
+
       // Render topics list
       const list = document.getElementById('topics-list');
       if (list) {
@@ -440,6 +538,7 @@
           ).join('');
           const weekAttr = t.week ? ` data-week="${t.week}"` : '';
           const visualModel = visualModels[t.id] || '';
+          const workedExample = workedExamples[t.id] || '';
           return `
             <section class="topic-section" id="topic-${t.id}"${weekAttr}>
               <div class="topic-header">
@@ -448,6 +547,7 @@
               </div>
               <p class="topic-desc">${t.description || ''}</p>
               ${visualModel}
+              ${workedExample}
               ${formulas ? `<div class="formulas-row">${formulas}</div>` : ''}
               ${tags ? `<div class="tags-row">${tags}</div>` : ''}
               <a href="quiz.html?topic=${t.id}" class="btn-practice">תרגל עכשיו ←</a>

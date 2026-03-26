@@ -96,9 +96,8 @@
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
-  /* Perspective must be on the parent scene element */
+  /* Perspective must be on the parent scene element only — NO transform-style here */
   perspective: 1200px;
-  transform-style: preserve-3d;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -153,7 +152,7 @@
   border-radius: var(--radius-card);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  overflow: hidden;
+  /* overflow: hidden intentionally removed — it breaks backface-visibility in all browsers */
   display: flex;
   flex-direction: column;
 }

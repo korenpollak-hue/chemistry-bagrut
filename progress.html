@@ -291,16 +291,14 @@
     </div>
 
     <!-- Streak calendar -->
-    <div class="chart-section">
-      <h2>📅 לוח פעילות</h2>
-      <div id="streak-calendar"></div>
-      <div class="cal-legend">
-        <span>פחות</span>
-        <div class="cal-legend-box" style="background:#e5e7eb"></div>
-        <div class="cal-legend-box" style="background:#bbf7d0"></div>
-        <div class="cal-legend-box" style="background:#4ade80"></div>
-        <div class="cal-legend-box" style="background:#16a34a"></div>
-        <span>יותר</span>
+    <div class="card" style="padding: 1.5rem;">
+      <h3 style="margin-bottom: 1rem;">🗓️ לוח פעילות — 8 שבועות אחרונים</h3>
+      <div id="streak-calendar" style="overflow-x: auto;"></div>
+      <div style="display:flex; gap:1rem; margin-top:0.75rem; font-size:0.8rem; color:#64748b; flex-wrap:wrap;">
+        <span><span style="display:inline-block;width:14px;height:14px;background:#e2e8f0;border-radius:2px;vertical-align:middle;margin-left:4px;"></span>לא למדתי</span>
+        <span><span style="display:inline-block;width:14px;height:14px;background:#bbf7d0;border-radius:2px;vertical-align:middle;margin-left:4px;"></span>קצת</span>
+        <span><span style="display:inline-block;width:14px;height:14px;background:#4ade80;border-radius:2px;vertical-align:middle;margin-left:4px;"></span>למדתי</span>
+        <span><span style="display:inline-block;width:14px;height:14px;background:#16a34a;border-radius:2px;vertical-align:middle;margin-left:4px;"></span>הרבה</span>
       </div>
     </div>
 
@@ -337,10 +335,7 @@
           const prog = (typeof Storage !== 'undefined' && Storage.getProgress) ? Storage.getProgress() : {};
           Progress.renderTopicBars('topic-mastery-chart', prog.topicProgress || {});
         }
-        if (Progress.renderStreakCalendar) {
-          const quizHistory = (typeof Storage !== 'undefined' && Storage.getQuizHistory) ? Storage.getQuizHistory() : [];
-          Progress.renderStreakCalendar('streak-calendar', quizHistory);
-        }
+        // renderStreakCalendar replaced by buildSimpleCalendar below (SVG version caused overlapping text)
       }
 
       // Populate stats from Storage
@@ -389,26 +384,32 @@
         }
       }
 
-      // Streak calendar fallback
-      if (!(typeof Progress !== 'undefined' && Progress.renderStreakCalendar)) {
-        const cal = document.getElementById('streak-calendar');
-        if (cal) {
-          // Render last 84 days (12 weeks)
-          const activityData = (typeof Storage !== 'undefined' && Storage.getActivityLog)
-            ? Storage.getActivityLog() : {};
-          const days = [];
-          const now = new Date();
-          for (let i = 83; i >= 0; i--) {
-            const d = new Date(now);
-            d.setDate(d.getDate() - i);
-            const key = d.toISOString().split('T')[0];
-            const level = activityData[key] ? Math.min(3, activityData[key]) : 0;
-            const label = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'short' });
-            days.push(`<div class="cal-day active-${level}" title="${label}"></div>`);
-          }
-          cal.innerHTML = days.join('');
+      // Build simple HTML streak calendar (replaces SVG-based renderStreakCalendar which caused overlapping text)
+      function buildSimpleCalendar(containerId, history) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        const today = new Date();
+        const days = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+        // Build 56-day grid (8 weeks)
+        let html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;min-width:280px;">';
+        // Day headers
+        days.forEach(d => { html += `<div style="text-align:center;font-size:0.7rem;color:#94a3b8;padding:2px;">${d}</div>`; });
+        // 56 days from oldest to today
+        for (let i = 55; i >= 0; i--) {
+          const d = new Date(today); d.setDate(today.getDate() - i);
+          const dateStr = d.toISOString().slice(0, 10);
+          const entry = (history || []).find(h => h.date && h.date.slice(0, 10) === dateStr);
+          const score = entry ? entry.score : 0;
+          const bg = score === 0 ? '#e2e8f0' : score < 50 ? '#bbf7d0' : score < 80 ? '#4ade80' : '#16a34a';
+          const isToday = i === 0;
+          html += `<div title="${dateStr}${score ? ': ' + score + '%' : ''}" style="aspect-ratio:1;background:${bg};border-radius:3px;${isToday ? 'outline:2px solid #2563eb;' : ''}"></div>`;
         }
+        html += '</div>';
+        el.innerHTML = html;
       }
+
+      const qh = (typeof Storage !== 'undefined' && Storage.getQuizHistory) ? Storage.getQuizHistory() : [];
+      buildSimpleCalendar('streak-calendar', qh);
 
       // Score history chart fallback
       if (!(typeof Progress !== 'undefined' && Progress.renderLineChart)) {
