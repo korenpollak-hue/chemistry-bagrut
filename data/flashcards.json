@@ -518,5 +518,549 @@
     "front": "מהי חגורת היציבות ומה קורה מחוצה לה?",
     "back": "חגורת היציבות = טווח N/Z שמאפשר גרעין יציב.\nלגרעינים קלים: N/Z ≈ 1\nלגרעינים כבדים: N/Z ≈ 1.5\nמחוץ לחגורה:\n• עודף נויטרונים → דעיכת β⁻\n• מחסור נויטרונים → דעיכת β⁺ או לכידת אלקטרון\n• גרעינים כבדים מדי (Z>83) → דעיכת α",
     "difficulty": "קשה"
+  },
+  {
+    "id": "fc-gl-1",
+    "topic": "gas-laws",
+    "week": 3,
+    "front": "מה חוק בויל? מה הנוסחה?",
+    "back": "בטמפרטורה קבועה: לחץ ונפח הפוכים זה לזה.\nP₁V₁ = P₂V₂\nגז בלחץ גבוה → נפח קטן.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-gl-2",
+    "topic": "gas-laws",
+    "week": 3,
+    "front": "מה חוק שארל? מה הנוסחה?",
+    "back": "בלחץ קבוע: נפח פרופורציונלי לטמפרטורה (בקלווין).\nV₁/T₁ = V₂/T₂\nחימום גז → נפחו גדל.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-gl-3",
+    "topic": "gas-laws",
+    "week": 3,
+    "front": "מה חוק הגז האידאלי?",
+    "back": "PV = nRT\nP = לחץ (atm), V = נפח (L), n = מולים\nR = 0.0821 L·atm/mol·K, T = קלווין",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-gl-4",
+    "topic": "gas-laws",
+    "week": 3,
+    "front": "מה הנפח המולרי ב-STP?",
+    "back": "22.4 L/mol\nב-STP (0°C, 1 atm) — כל גז אידאלי!\nב-25°C: כ-24.5 L/mol",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-gl-5",
+    "topic": "gas-laws",
+    "week": 3,
+    "front": "מהן ההנחות של גז אידאלי?",
+    "back": "1. אין כוחות בין-מולקולריים\n2. נפח המולקולות זניח\nגזים אמיתיים סוטים בלחץ גבוה / טמפרטורה נמוכה.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-gl-6",
+    "topic": "gas-laws",
+    "week": 3,
+    "front": "כיצד ממירים °C ל-K?",
+    "back": "T(K) = T(°C) + 273.15\nדוגמאות: 0°C = 273 K, 25°C = 298 K, 100°C = 373 K",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-ec-1",
+    "topic": "electrochemistry",
+    "week": 4,
+    "front": "מה ההבדל בין תא גלוואני לתא אלקטרוליטי?",
+    "back": "גלוואני: תגובה ספונטנית → מייצר חשמל (סוללה)\nאלקטרוליטי: זרם חיצוני → מניע תגובה לא-ספונטנית (ציפוי, אלקטרוליזה)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-ec-2",
+    "topic": "electrochemistry",
+    "week": 4,
+    "front": "מה קורה באנודה ובקתודה?",
+    "back": "אנודה = חמצון (אובדן e⁻)\nקתודה = חיזור (קבלת e⁻)\nזכור: RED CAT = Reduction at Cathode\nAN OX = ANodic OXidation",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-ec-3",
+    "topic": "electrochemistry",
+    "week": 4,
+    "front": "נוסחת E°תא?",
+    "back": "E°תא = E°קתודה - E°אנודה\nאם E°תא > 0 → תגובה ספונטנית (ΔG < 0)\nתא דניאל: Zn(-0.76V) | Cu(+0.34V) → E°=1.10V",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-ec-4",
+    "topic": "electrochemistry",
+    "week": 4,
+    "front": "חוק פאראדיי — כמה חומר מופקד?",
+    "back": "m = (M · I · t) / (n · F)\nM = מסה מולרית, I = זרם (A), t = זמן (s)\nn = מספר e⁻ בחצי-תגובה, F = 96500 C/mol",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-ec-5",
+    "topic": "electrochemistry",
+    "week": 4,
+    "front": "מה משוואת נרנסט?",
+    "back": "E = E° - (0.0592/n) · log(Q) ב-25°C\nQ גדל → E יורד (פחות ספונטני)\nבשיווי משקל: Q = Keq, E = 0",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-buf-1",
+    "topic": "buffers",
+    "week": 5,
+    "front": "מה תמיסת מאגר (בופר)?",
+    "back": "מורכב מ: חומצה חלשה + בסיס צמוד (מלחה)\nדוגמה: CH₃COOH + CH₃COO⁻\nמתנגדת לשינויי pH בהוספת חומצה או בסיס.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-buf-2",
+    "topic": "buffers",
+    "week": 5,
+    "front": "משוואת הנדרסון-האסלבך?",
+    "back": "pH = pKa + log([A⁻]/[HA])\nכאשר [A⁻]=[HA]: pH = pKa\nטווח בופר אפקטיבי: pH = pKa ± 1",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-buf-3",
+    "topic": "buffers",
+    "week": 5,
+    "front": "מה מאגר הביקרבונט בדם?",
+    "back": "H₂CO₃ / HCO₃⁻\nשומר על pH הדם ≈ 7.4\nהריאות מפקחות על [CO₂] ← H₂CO₃ ← HCO₃⁻",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-buf-4",
+    "topic": "buffers",
+    "week": 5,
+    "front": "מה קורה כאשר מוסיפים H⁺ למאגר? כאשר מוסיפים OH⁻?",
+    "back": "H⁺ נוסף → CH₃COO⁻ + H⁺ → CH₃COOH (pH יורד מעט)\nOH⁻ נוסף → CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O (pH עולה מעט)\nהמאגר מנטרל את שתיהן.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-buf-5",
+    "topic": "buffers",
+    "week": 5,
+    "front": "מה 'כושר מאגר' (buffer capacity)?",
+    "back": "כמות H⁺ או OH⁻ שניתן להוסיף לפני ש-pH משתנה ב-1 יחידה.\nגדל עם ריכוז המאגר (יותר חומר = יכולת ניטרול גדולה יותר).",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-sol-1",
+    "topic": "solubility",
+    "week": 5,
+    "front": "מה מכפלת מסיסות Ksp?",
+    "back": "Ksp = קבוע שיווי משקל של מסיסות\nAgCl(s) ⇌ Ag⁺ + Cl⁻ → Ksp = [Ag⁺][Cl⁻]\nKsp קטן → מסיסות נמוכה (תחשיב כמעט לא מסיס)",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-sol-2",
+    "topic": "solubility",
+    "week": 5,
+    "front": "מה אפקט היון המשותף (common ion effect)?",
+    "back": "הוספת יון שכבר קיים בתמיסה → שיווי משקל נסוג\nדוגמה: הוספת NaCl לתמיסת AgCl → [Cl⁻] עולה → AgCl שוקע יותר → מסיסות קטנה",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-sol-3",
+    "topic": "solubility",
+    "week": 5,
+    "front": "כיצד מחשבים מסיסות s מ-Ksp?",
+    "back": "AB ⇌ A⁺ + B⁻: Ksp = s² → s = √Ksp\nAB₂ ⇌ A²⁺ + 2B⁻: Ksp = 4s³ → s = (Ksp/4)^(1/3)\nA₂B ⇌ 2A⁺ + B²⁻: Ksp = 4s³",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-sol-4",
+    "topic": "solubility",
+    "week": 5,
+    "front": "Q vs Ksp — מה מנבא שקיעה?",
+    "back": "Q < Ksp → תמיסה לא-רוויה → ניתן להמיס עוד\nQ = Ksp → שיווי משקל (תמיסה רוויה)\nQ > Ksp → עם-רוויה → שקיעה עד Q = Ksp",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-sol-5",
+    "topic": "solubility",
+    "week": 5,
+    "front": "כללי מסיסות בסיסיים — מה תמיד מסיס?",
+    "back": "תמיד מסיסים: מלחי Na⁺, K⁺, NH₄⁺; ניטרטים (NO₃⁻); כלוריטים (ClO₄⁻)\nתמיד בלתי מסיסים: AgCl, BaSO₄, PbSO₄, CaCO₃ (רוב קרבונטים)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-coll-1",
+    "topic": "colligative-properties",
+    "week": 6,
+    "front": "מה תכונות קוליגטיביות? 4 הדוגמאות?",
+    "back": "תכונות התלויות במספר חלקיקי המומס בלבד, לא בזהותם:\n1. ירידת נקודת קפיאה (ΔTf)\n2. עליית נקודת רתיחה (ΔTb)\n3. לחץ אוסמוטי (π)\n4. ירידת לחץ אדים (חוק ראול)",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-coll-2",
+    "topic": "colligative-properties",
+    "week": 6,
+    "front": "נוסחת ירידת נקודת קפיאה ועליית נקודת רתיחה?",
+    "back": "ΔTf = Kf · m · i\nΔTb = Kb · m · i\nm = מולאליות (mol/kg), i = גורם ון't הוף\ni: NaCl=2, CaCl₂=3, גלוקוז=1\nKf(מים)=1.86, Kb(מים)=0.512",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-coll-3",
+    "topic": "colligative-properties",
+    "week": 6,
+    "front": "מה גורם ון't הוף (i)?",
+    "back": "i = מספר חלקיקים שנוצרים ממולקולה אחת:\nNaCl → Na⁺ + Cl⁻ → i=2\nCaCl₂ → Ca²⁺ + 2Cl⁻ → i=3\nגלוקוז, סוכרוז (לא מתנתקים) → i=1",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-coll-4",
+    "topic": "colligative-properties",
+    "week": 6,
+    "front": "מה לחץ אוסמוטי π? מתי משתמשים בו?",
+    "back": "π = MRTi\nM = מולריות, R=0.0821, T=K, i = ון't הוף\nחשוב ב: אוסמוזה בתאים, מי ים, ניקוי מים (RO), עירויי IV",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-coll-5",
+    "topic": "colligative-properties",
+    "week": 6,
+    "front": "מה אוסמוזה? מה לחץ אוסמוטי?",
+    "back": "אוסמוזה: מעבר מים דרך קרום חצי-חדיר מתמיסה מדוללת לרוויה.\nלחץ אוסמוטי = לחץ הדרוש לעצירת האוסמוזה.\nחשיבות: בתאים, כליות, ניקוי מי ים",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-or-1",
+    "topic": "organic-reactions",
+    "week": 7,
+    "front": "חמצון אלכוהול ראשוני vs שני — מה התוצרים?",
+    "back": "ראשוני + CuO → אלדהיד\nשני + CuO → קטון\nשלישוני — לא מחמצן עם CuO\n(חמצון נוסף של אלדהיד → חומצה קרבוקסילית)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-or-2",
+    "topic": "organic-reactions",
+    "week": 7,
+    "front": "מה הבדל בין דה-הידרציה לאסטריפיקציה?",
+    "back": "דה-הידרציה: אלכוהול + H₂SO₄ חם → אלקן + H₂O (כלומר: הוצאת מים)\nאסטריפיקציה: חומצה + אלכוהול → אסטר + H₂O\nשתיהן יוצרות מים, אבל תוצרים שונים!",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-or-3",
+    "topic": "organic-reactions",
+    "week": 7,
+    "front": "מה תגובת הידרציה? מה תוצרה?",
+    "back": "אלקן + H₂O → אלכוהול\nדוגמה: CH₂=CH₂ + H₂O → CH₃CH₂OH\nנדרש קטליזטור חומצי (H₂SO₄)\nהפוך: דה-הידרציה",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-or-4",
+    "topic": "organic-reactions",
+    "week": 7,
+    "front": "מה כלל מרקובניקוב?",
+    "back": "בהוספת HX לאלקן — H נקשר לפחמן עם יותר H כבר:\nCH₂=CH-CH₃ + HCl → CH₃-CHCl-CH₃ (2-כלורופרופן)\nהיונה נקשרת לפחמן הפחות מוחלף",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-or-5",
+    "topic": "organic-reactions",
+    "week": 7,
+    "front": "מה הקבוצות הפונקציונליות העיקריות?",
+    "back": "אלכוהול: -OH\nאלדהיד: -CHO\nקטון: C=O\nחומצה קרבוקסילית: -COOH\nאמין: -NH₂\nאסטר: -COO-\nאתר: -O-",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-bio-1",
+    "topic": "biochemistry",
+    "week": 8,
+    "front": "מה קשר פפטיד? כיצד נוצר?",
+    "back": "קשר -CO-NH- בין חומצות אמינו:\nCOOH + NH₂ → CO-NH + H₂O (פולימריזציה בעיבוי)\nהידרוליזה (+ H₂O) שוברת קשרי פפטיד לחומצות אמינו",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-bio-2",
+    "topic": "biochemistry",
+    "week": 8,
+    "front": "מה הבסיסים ב-DNA לעומת RNA?",
+    "back": "DNA: A (אדנין), T (תימין), G (גואנין), C (ציטוזין)\nRNA: A (אדנין), U (אורציל), G (גואנין), C (ציטוזין)\nהבדל מרכזי: T ב-DNA הפוך ל-U ב-RNA",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-bio-3",
+    "topic": "biochemistry",
+    "week": 8,
+    "front": "כיצד מתחברים הבסיסים ב-DNA?",
+    "back": "A – T (2 קשרי מימן)\nG – C (3 קשרי מימן)\nקשר A-T חלש יותר!\nגדילי DNA אנטי-מקביליים (5'→3' מול 3'→5')",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-bio-4",
+    "topic": "biochemistry",
+    "week": 8,
+    "front": "השלמת גדיל DNA→mRNA (שעתוק)?",
+    "back": "תבנית DNA (3'→5'): A→U, T→A, G→C, C→G\nכך: ATGCGT → mRNA: UACGCA\nRNA פולימראז בונה mRNA מקריאת גדיל התבנית",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-bio-5",
+    "topic": "biochemistry",
+    "week": 8,
+    "front": "מה ה-monomers של: DNA, חלבונים, פחמימות, שומנים?",
+    "back": "DNA/RNA: נוקלאוטידים (פוספט+סוכר+בסיס)\nחלבונים: חומצות אמינו\nפחמימות: מונוסכרידים (גלוקוז)\nשומנים: גליצרול + חומצות שומן",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-pt-1",
+    "topic": "periodic-table",
+    "week": 6,
+    "front": "מגמה: אנרגיית יינון לאורך מחזור ולאורך קבוצה?",
+    "back": "לאורך מחזור (שמאל→ימין): עולה (גרעין יותר חיובי, משיכה חזקה)\nלאורך קבוצה (למטה): יורדת (רדיוס גדל, ויתיר ממנו)\nלכן: F, Ne — אנרגיית יינון גבוהה ביותר",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-pt-2",
+    "topic": "periodic-table",
+    "week": 6,
+    "front": "מגמה: רדיוס אטומי לאורך מחזור ולאורך קבוצה?",
+    "back": "לאורך מחזור (שמאל→ימין): קטן (יותר פרוטונים, אלקטרונים משוכים חזק)\nלאורך קבוצה (למטה): גדל (שכבות אלקטרונים נוספות)\nLi קטן מ-Na קטן מ-K",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-pt-3",
+    "topic": "periodic-table",
+    "week": 6,
+    "front": "מה ההבדל בין Z (מספר אטומי) ל-A (מספר מסה)?",
+    "back": "Z = מספר פרוטונים (מזהה את היסוד)\nA = פרוטונים + נויטרונים\nנויטרונים = A - Z\nאיזוטופים: אותו Z, A שונה",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-pt-4",
+    "topic": "periodic-table",
+    "week": 6,
+    "front": "מה קרינת אלפא, בטא, גמא?",
+    "back": "α = ₂⁴He (2p + 2n) — כבדה, חדירות נמוכה\nβ = אלקטרון (⁻¹e) — נויטרון→פרוטון\nγ = קרינה אלקטרומגנטית — חדירות גבוהה, ללא שינוי Z,A",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-pt-5",
+    "topic": "periodic-table",
+    "week": 6,
+    "front": "מגמה: אלקטרושליליות לאורך הטבלה?",
+    "back": "עולה לאורך מחזור (שמאל→ימין)\nיורדת לאורך קבוצה (למטה)\nF = הכי אלקטרושלילי (3.98 בסקאלת פאולינג)\nCes/Fr = הכי פחות",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-eq-5",
+    "topic": "equilibrium",
+    "week": 2,
+    "front": "ICE table — מה זה ולמה משתמשים?",
+    "back": "Initial, Change, Equilibrium\nכלי לחישוב ריכוזים בשיווי משקל:\nI: ריכוזים התחלתיים\nC: שינוי (±x)\nE: ריכוזים בשיווי משקל → מציבים ב-Kc",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-eq-6",
+    "topic": "equilibrium",
+    "week": 2,
+    "front": "מה ההבדל בין Kc ל-Kp?",
+    "back": "Kc — מבוסס על ריכוזים (mol/L)\nKp — מבוסס על לחצים חלקיים (atm)\nKp = Kc · (RT)^Δn\nΔn = מולי מוצרים גזיים - מולי מגיבים גזיים",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-lc-5",
+    "topic": "le-chatelier",
+    "week": 2,
+    "front": "כיצד טמפרטורה משפיעה על שיווי משקל?",
+    "back": "תגובה אקסותרמית (ΔH<0): טמפרטורה עולה → שיווי משקל לאחור (K יורד)\nתגובה אנדותרמית (ΔH>0): טמפרטורה עולה → שיווי משקל קדימה (K עולה)\nשינוי T = שינוי K! (שלא כמו לחץ/ריכוז)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-lc-6",
+    "topic": "le-chatelier",
+    "week": 2,
+    "front": "האם קטליזטור משפיע על שיווי משקל?",
+    "back": "לא! קטליזטור מאיץ גם תגובה קדימה וגם הפוכה באותה מידה.\nמגיעים לשיווי משקל מהר יותר — אבל K לא משתנה.\nהוא לא משנה את ה-ΔG° של התגובה.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-ph-5",
+    "topic": "ph-calculations",
+    "week": 5,
+    "front": "משוואת הנדרסון-האסלבך (בהקשר pH)?",
+    "back": "pH = pKa + log([A⁻]/[HA])\nבנקודת מחצית-ניטרול: [A⁻]=[HA] → pH = pKa\nמשמשת לחישוב pH מאגרים וחומצות חלשות",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-ph-6",
+    "topic": "ph-calculations",
+    "week": 5,
+    "front": "pH בנקודת שקילות — חומצה חזקה+בסיס חזק vs חזקה+חלשה?",
+    "back": "חזקה + חזקה: pH=7 (מלח ניטרלי)\nחזקה + חלשה (כמו NaOH+CH₃COOH): pH>7 (CH₃COO⁻ בסיסי)\nחלשה + חזקה (כמו NH₃+HCl): pH<7 (NH₄⁺ חומצי)",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-im-4",
+    "topic": "intermolecular",
+    "week": 6,
+    "front": "מדוע H₂O בעל נקודת רתיחה גבוהה ביחס לגודלו?",
+    "back": "קשרי מימן! O-H···O\nH₂O (100°C) >> H₂S (-60°C) >> H₂Se (-41°C)\nכל מולקולת מים יכולה ליצור עד 4 קשרי מימן (2 נותנת, 2 מקבלת)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-im-5",
+    "topic": "intermolecular",
+    "week": 6,
+    "front": "כוחות לונדון (דיספרסיה) — מה גורם להם להיות חזקים יותר?",
+    "back": "גדלים עם: מסה מולרית גדולה יותר + קוטביות גדולה יותר\nI₂ > Cl₂ > F₂ (נקודת רתיחה)\nמסביר מדוע אלקנים גדולים יותר = נקודת רתיחה גבוהה יותר",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-org-5",
+    "topic": "organic",
+    "week": 7,
+    "front": "מה ההבדל בין פולימריזציה בתוספת לפולימריזציה בעיבוי?",
+    "back": "תוספת: מונומרים עם קשר כפול → שרשרת (ללא תוצר-לוואי)\nדוגמה: n·CH₂=CH₂ → (-CH₂CH₂-)ₙ (פוליאתילן)\nעיבוי: 2 קבוצות מגיבות + מים יוצאים\nדוגמה: COOH+NH₂ → CO-NH+H₂O (ניילון)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-tc-7",
+    "topic": "thermochemistry",
+    "week": 1,
+    "front": "מה חוק הס? כיצד משתמשים בו?",
+    "back": "ΔH תגובה אינה תלויה בנתיב, רק בנקודת התחלה/סוף.\nניתן לחבר / להפוך / להכפיל תגובות:\n• היפוך: ΔH הופך סימן\n• כפל ב-n: מכפיל ΔH",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-tc-8",
+    "topic": "thermochemistry",
+    "week": 1,
+    "front": "q = mcΔT — מה כל אות?",
+    "back": "q = חום (J)\nm = מסה (g)\nc = חום סגולי (J/g·°C)\nΔT = שינוי טמפרטורה\nמים: c = 4.18 J/g·°C",
+    "difficulty": "easy"
+  },
+  {
+    "id": "fc-kin-7",
+    "topic": "kinetics",
+    "week": 3,
+    "front": "משוואת ארניוס — מה היא מסבירה?",
+    "back": "k = A·e^(-Ea/RT)\nk = קבוע קצב, A = גורם תדירות, Ea = אנרגיית הפעלה\nטמפרטורה עולה → k גדל → קצב עולה\nlog(k₂/k₁) = (Ea/R)(1/T₁ - 1/T₂)",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-kin-8",
+    "topic": "kinetics",
+    "week": 3,
+    "front": "מה זמן מחצית חיים (t½) בתגובת סדר ראשון?",
+    "back": "t½ = 0.693/k = ln(2)/k\nעצמאי מריכוז התחלתי! (ייחודי לסדר ראשון)\n[A]t = [A]₀·e^(-kt)\nשימוש: בדיקת C-14 בארכאולוגיה",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-spec-5",
+    "topic": "spectroscopy",
+    "week": 7,
+    "front": "IR ספקטרוסקופיה — מה מזהה ואיך?",
+    "back": "מזהה קבוצות פונקציונליות:\n~3300 cm⁻¹: O-H (רחב), N-H\n~1700 cm⁻¹: C=O (קרבוניל)\n~2200 cm⁻¹: C≡C, C≡N\n2500-3300: O-H (חומצה)\nאזור 500-1500: טביעת אצבע",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-spec-6",
+    "topic": "spectroscopy",
+    "week": 7,
+    "front": "ספקטרומטריית מסה (MS) — עיקרון וכיצד קוראים?",
+    "back": "מולקולות מיוננות → מופרדות לפי m/z\nM⁺ = יון מולקולרי = מסה מולרית\nשברים = חלוקת המולקולה\nאיזוטופים: M+1, M+2 חשובים לזיהוי Cl, Br",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-ab-6",
+    "topic": "acids-bases",
+    "week": 5,
+    "front": "3 הגדרות חומצה: ארניוס, ברנסטד-לאורי, לואיס?",
+    "back": "ארניוס: חומצה = נותנת H⁺ בתמיסה מימית\nברנסטד-לאורי: חומצה = נותנת פרוטון (H⁺)\nלואיס: חומצה = מקבלת זוג אלקטרונים\nלואיס הרחב ביותר!",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-ab-7",
+    "topic": "acids-bases",
+    "week": 5,
+    "front": "חומצה חזקה vs חלשה — מה ההבדל?",
+    "back": "חזקה: מתנתקת 100% (HCl, H₂SO₄, HNO₃)\n[H⁺] = C_חומצה לחומצה חד-פרוטית\nחלשה: מתנתקת חלקית → Ka קטן\n[H⁺] = √(Ka·C)",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-red-6",
+    "topic": "redox",
+    "week": 4,
+    "front": "כיצד מאזנים תגובת Redox (שיטת חצי-תגובות)?",
+    "back": "1. פצל לחצי-תגובה חמצון + חצי-תגובה חיזור\n2. אזן אטומים (לא H,O)\n3. אזן O עם H₂O, H עם H⁺\n4. אזן מטען עם e⁻\n5. כפול כך שe⁻ שווים → חבר",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-red-7",
+    "topic": "redox",
+    "week": 4,
+    "front": "מה מספר חמצון? כיצד מחשבים?",
+    "back": "מספר חמצון = מטען היפותטי אם הקשרים יוניים מלאים\nכללים: O=-2, H=+1, יסוד טהור=0, סכום ביון = מטען\nזיהוי: חמצון = מספר עולה, חיזור = מספר יורד",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-mg-6",
+    "topic": "molecular-geometry",
+    "week": 6,
+    "front": "VSEPR — כיצד קובעים צורה?",
+    "back": "ספור זוגות e⁻ (קושרים + חופשיים) סביב מרכז\n2: ליניארי (180°)\n3: משולש שטוח (120°)\n4: טטראהדר (109.5°)\n5: טריגונלי דו-פירמידלי\n6: אוקטהדר",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-mg-7",
+    "topic": "molecular-geometry",
+    "week": 6,
+    "front": "מדוע H₂O זוויתי ולא ליניארי?",
+    "back": "O עם 4 זוגות (2 קושרים + 2 חופשיים) → בסיס טטראהדרלי\nזוגות חופשיים דוחים חזק יותר → זווית H-O-H = 104.5° (< 109.5°)\nזוגות חופשיים שומרים על הקוטביות ועל קשרי המימן",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-ste-6",
+    "topic": "stereoisomers",
+    "week": 8,
+    "front": "מה הבדל בין אנטיומרים לדיאסטריאומרים?",
+    "back": "אנטיומרים: תמונת ראי (R/S הפוך בכל מרכזי כיריות)\nדיאסטריאומרים: איזומרים מרחביים שאינם תמונות ראי\nדיאסטריאומרים: תכונות פיזיקליות שונות; אנטיומרים: רק סיבוב אור שונה",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-ste-7",
+    "topic": "stereoisomers",
+    "week": 8,
+    "front": "מה E/Z איזומריה?",
+    "back": "E (Entgegen = הפוך): קבוצות עדיפות גדולה בצדדים הפוכים\nZ (Zusammen = יחד): קבוצות עדיפות גדולה באותו צד\nדרושה: קשר C=C + 2 תחליפים שונים בכל פחמן כפול",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-nuc-6",
+    "topic": "nuclear",
+    "week": 4,
+    "front": "N(t) = N₀·(1/2)^(t/t½) — כיצד משתמשים?",
+    "back": "אחרי t½ אחד: נשאר 50%\nאחרי 2·t½: נשאר 25%\nאחרי 3·t½: נשאר 12.5%\nC-14 (t½=5730y): שימוש לתארוך ארכאולוגי",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-nuc-7",
+    "topic": "nuclear",
+    "week": 4,
+    "front": "מה פיצול גרעיני vs היתוך גרעיני?",
+    "back": "פיצול (fission): גרעין כבד (U-235) + n → 2 גרעינים + n + אנרגיה\nהיתוך (fusion): גרעינים קלים (H+H) → גרעין + אנרגיה\nשניהם: E = mc² — מסה קטנה → אנרגיה עצומה",
+    "difficulty": "medium"
+  },
+  {
+    "id": "fc-td-6",
+    "topic": "thermodynamics",
+    "week": 1,
+    "front": "ΔG = ΔH - TΔS — מה כל תנאי ספונטניות?",
+    "back": "ΔG < 0 → ספונטני (תמיד)\nΔH⁻ + ΔS⁺ → ספונטני בכל T\nΔH⁺ + ΔS⁻ → אינו ספונטני לעולם\nΔH⁻ + ΔS⁻ → ספונטני ב-T נמוכה\nΔH⁺ + ΔS⁺ → ספונטני ב-T גבוהה",
+    "difficulty": "hard"
+  },
+  {
+    "id": "fc-td-7",
+    "topic": "thermodynamics",
+    "week": 1,
+    "front": "מה הקשר ΔG°, Keq ו-E°?",
+    "back": "ΔG° = -RT·ln(Keq)\nΔG° = -nFE°\nKeq גדול → ΔG° שלילי גדול → E° חיובי גדול\nהקשר: E° = (RT/nF)·ln(Keq)",
+    "difficulty": "hard"
   }
 ]
