@@ -436,6 +436,220 @@
     }
     .teaser-check { color: #16a34a; font-weight: 700; }
 
+    /* ── Basics Filter Button ────────────────────────── */
+    .filter-btn--basics {
+      background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+      color: white !important;
+      border-color: transparent !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 10px rgba(37,99,235,0.3);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    .filter-btn--basics.active {
+      box-shadow: 0 4px 16px rgba(37,99,235,0.5);
+      color: white !important;
+    }
+
+    /* ── Basics Hero Strip ───────────────────────────── */
+    .basics-hero-strip {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb, #7c3aed);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .basics-xp-wrap {
+      background: rgba(255,255,255,0.2);
+      border-radius: 999px;
+      height: 8px;
+      margin: 0.75rem auto 0;
+      max-width: 320px;
+      overflow: hidden;
+    }
+    .basics-xp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #34d399, #22d3ee);
+      border-radius: 999px;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+
+    /* ── Lessons Grid ────────────────────────────────── */
+    .b-lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Lesson Card ─────────────────────────────────── */
+    .b-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      overflow: hidden;
+    }
+    .b-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,99,235,0.14); border-color: #bfdbfe; }
+    .b-card.b-done { border-color: #86efac; }
+    .b-card-head {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1rem 1rem 0.6rem;
+    }
+    .b-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; flex-shrink: 0;
+    }
+    .b-card h3 { font-size: 0.98rem; font-weight: 700; margin: 0 0 0.15rem; }
+    .b-card .b-card-head p { font-size: 0.78rem; color: #64748b; margin: 0; }
+    .b-text { padding: 0 1rem; font-size: 0.9rem; line-height: 1.65; color: #374151; margin-bottom: 0.75rem; }
+
+    /* ── Atom animation (basics) ─────────────────────── */
+    .b-atom-wrap {
+      position: relative; width: 130px; height: 130px;
+      margin: 0.5rem auto;
+    }
+    .b-nucleus {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 28px; height: 28px;
+      background: radial-gradient(circle at 35% 35%, #f97316, #dc2626);
+      border-radius: 50%;
+      box-shadow: 0 0 14px rgba(239,68,68,0.7);
+      animation: atomNucleus 2s ease-in-out infinite;
+      z-index: 2; display: flex; align-items: center; justify-content: center;
+      font-size: 0.55rem; color: white; font-weight: 700;
+    }
+    .b-orbit {
+      position: absolute; top: 50%; left: 50%;
+      border: 1.5px solid rgba(99,102,241,0.35);
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .b-o1 { width: 56px; height: 56px; animation: spin 2s linear infinite; }
+    .b-o2 { width: 90px; height: 90px; animation: spin 3.5s linear infinite reverse; }
+    .b-o3 { width: 126px; height: 126px; animation: spin 5s linear infinite; }
+    .b-electron {
+      position: absolute; width: 9px; height: 9px;
+      background: #3b82f6; border-radius: 50%;
+      top: -4.5px; left: calc(50% - 4.5px);
+      box-shadow: 0 0 7px #3b82f6;
+    }
+
+    /* ── Element grid ────────────────────────────────── */
+    .b-elem-grid {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      padding: 0 1rem; margin-bottom: 0.75rem;
+    }
+    .b-elem {
+      width: 46px; height: 52px; border-radius: 7px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 800; line-height: 1;
+      cursor: default; transition: transform 0.18s, box-shadow 0.18s;
+      gap: 1px;
+    }
+    .b-elem:hover { transform: scale(1.2) translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.18); z-index: 3; position: relative; }
+    .b-elem span { font-size: 0.55rem; opacity: 0.7; }
+    .b-elem small { font-size: 0.5rem; font-weight: 600; }
+
+    /* ── Bond demo ───────────────────────────────────── */
+    .b-bond-demo {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.2rem; margin: 0.5rem 0; padding: 0 1rem; flex-wrap: wrap;
+    }
+    .b-ba {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.88rem; color: white;
+      animation: pulse 2.5s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .b-bl { height: 3px; width: 18px; background: linear-gradient(90deg,#94a3b8,#64748b); border-radius: 2px; }
+
+    /* ── Reaction demo ───────────────────────────────── */
+    .b-reaction {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; flex-wrap: wrap; margin: 0.75rem 0; padding: 0 1rem;
+    }
+    .b-mol {
+      background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 8px;
+      padding: 0.3rem 0.6rem; font-family: monospace; font-weight: 700;
+      font-size: 0.9rem; color: #1d4ed8;
+    }
+    .b-mol.b-prod { background: #f0fdf4; border-color: #86efac; color: #166534; }
+    .b-plus { font-size: 1.1rem; color: #64748b; font-weight: 700; }
+    .b-arrow { font-size: 1.4rem; color: #2563eb; animation: pulse 1.5s ease-in-out infinite; }
+
+    /* ── States ──────────────────────────────────────── */
+    .b-states { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; margin: 0.5rem 0; padding: 0 1rem; }
+    .b-state-box { background: #f8fafc; border-radius: 8px; padding: 0.5rem 0.3rem; text-align: center; border: 1.5px solid #e2e8f0; }
+    .b-state-name { font-size: 0.75rem; font-weight: 700; margin-top: 0.4rem; color: #374151; }
+    .b-state-dots { position: relative; height: 52px; overflow: hidden; }
+    .b-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; }
+
+    /* ── pH bar ──────────────────────────────────────── */
+    .b-ph-bar { display: flex; border-radius: 8px; overflow: hidden; height: 32px; margin: 0.5rem 1rem; }
+
+    /* ── Chips ───────────────────────────────────────── */
+    .b-chip { background: #f1f5f9; border-radius: 999px; padding: 0.18rem 0.6rem; font-size: 0.76rem; color: #374151; border: 1px solid #e2e8f0; }
+
+    /* ── Fun fact ────────────────────────────────────── */
+    .b-fun {
+      margin: 0.5rem 1rem 0.75rem;
+      background: linear-gradient(135deg,#fef9c3,#fef3c7);
+      border: 1.5px solid #fde68a; border-radius: 10px;
+      padding: 0.65rem 0.85rem; font-size: 0.84rem; color: #451a03; line-height: 1.55;
+    }
+
+    /* ── Mini quiz ───────────────────────────────────── */
+    .b-quiz { background: #f8fafc; border-radius: 8px; padding: 0.85rem 1rem; margin: 0 1rem 0.75rem; border: 1px solid #e2e8f0; }
+    .b-q { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.6rem; color: #1e293b; }
+    .b-opts { display: flex; flex-direction: column; gap: 0.4rem; }
+    .b-opt {
+      padding: 0.45rem 0.8rem; border-radius: 7px;
+      border: 1.5px solid #e2e8f0; background: white;
+      cursor: pointer; font-size: 0.84rem; font-weight: 500;
+      text-align: right; transition: border-color 0.15s, background 0.15s;
+      font-family: inherit; color: #1e293b;
+    }
+    .b-opt:hover { border-color: #2563eb; background: #eff6ff; }
+    .b-opt.b-correct { border-color: #16a34a; background: #f0fdf4; color: #166534; }
+    .b-opt.b-wrong   { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+    .b-result { margin-top: 0.5rem; font-size: 0.82rem; font-weight: 700; min-height: 1.1em; }
+
+    /* ── Done button ─────────────────────────────────── */
+    .b-done-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin: 0 1rem 1rem;
+      padding: 0.55rem 1.1rem;
+      background: linear-gradient(135deg, #16a34a, #0891b2);
+      color: white; border: none; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 700; cursor: pointer;
+      font-family: inherit; transition: opacity 0.15s, transform 0.15s;
+    }
+    .b-done-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .b-done-btn.b-completed { background: #e2e8f0; color: #94a3b8; cursor: default; }
+    .b-done-btn.b-completed:hover { transform: none; }
+
+    /* ── XP Toast ────────────────────────────────────── */
+    .b-xp-toast {
+      position: fixed; top: 72px; left: 50%;
+      transform: translateX(-50%) translateY(-16px);
+      background: linear-gradient(135deg,#16a34a,#0891b2);
+      color: white; padding: 0.55rem 1.4rem; border-radius: 999px;
+      font-weight: 700; font-size: 0.95rem; pointer-events: none;
+      opacity: 0; transition: opacity 0.3s, transform 0.3s;
+      z-index: 9999; white-space: nowrap;
+    }
+    .b-xp-toast.b-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* ── Simple Explanation Banner ───────────────────── */
     .simple-explain {
       background: linear-gradient(135deg, #eff6ff, #f0fdf4);
@@ -539,6 +753,7 @@
 
         <!-- Filter row -->
         <div class="filter-row" id="filter-row">
+          <button class="filter-btn filter-btn--basics" data-filter="basics" onclick="showBasics(this)">🔬 יסודות — התחל כאן!</button>
           <button class="filter-btn active" data-filter="all">הכל</button>
           <button class="filter-btn" data-filter="1">שבוע 1</button>
           <button class="filter-btn" data-filter="2">שבוע 2</button>
@@ -550,6 +765,239 @@
           <button class="filter-btn" data-filter="8">שבוע 8</button>
         </div>
 
+        <!-- ══════════ BASICS PANEL ══════════ -->
+        <div id="basics-panel" style="display:none;">
+
+          <!-- Hero bar -->
+          <div class="basics-hero-strip">
+            <div style="position:relative;z-index:1;">
+              <div style="font-size:2rem;margin-bottom:0.4rem;animation:bounce 2s ease-in-out infinite;">⚗️</div>
+              <h2 style="color:white;margin:0 0 0.3rem;font-size:1.4rem;">יסודות הכימיה — מאפס!</h2>
+              <p style="color:rgba(255,255,255,0.88);margin:0;font-size:0.9rem;">עידו, כאן מתחילים. 7 שיעורים קצרים לפני הנושאים הגדולים.</p>
+              <div class="basics-xp-wrap"><div class="basics-xp-fill" id="b-xp-fill"></div></div>
+              <div id="b-xp-label" style="font-size:0.78rem;color:rgba(255,255,255,0.8);margin-top:0.3rem;text-align:center;">0 / 70 XP</div>
+            </div>
+          </div>
+
+          <div class="b-lessons-grid" id="b-lessons-grid">
+
+            <!-- ─ L1: Atom ─ -->
+            <div class="b-card" id="bc-atom">
+              <div class="b-card-head"><div class="b-icon" style="background:#eff6ff;">⚛️</div><div><h3>1 — מה זה אטום?</h3><p>הבניין הבסיסי של כל החומר</p></div></div>
+              <p class="b-text">הכל סביבך עשוי מ<strong>אטומים</strong> — חלקיקים קטנים כל כך שאי אפשר לראות אותם. בתוך כל אטום:</p>
+              <div class="b-atom-wrap">
+                <div class="b-nucleus">⚡</div>
+                <div class="b-orbit b-o1"><div class="b-electron"></div></div>
+                <div class="b-orbit b-o2"><div class="b-electron"></div></div>
+                <div class="b-orbit b-o3"><div class="b-electron"></div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.4rem;margin:0.5rem 0;font-size:0.88rem;">
+                <div><span style="display:inline-block;width:12px;height:12px;background:radial-gradient(circle,#f97316,#dc2626);border-radius:50%;vertical-align:middle;margin-left:6px;box-shadow:0 0 5px #f9731660;"></span><strong style="color:#dc2626">גרעין</strong> — פרוטונים (+) וניוטרונים — במרכז</div>
+                <div><span style="display:inline-block;width:10px;height:10px;background:#3b82f6;border-radius:50%;vertical-align:middle;margin-left:6px;box-shadow:0 0 5px #3b82f660;"></span><strong style="color:#2563eb">אלקטרונים</strong> (−) — מקיפים במסלולים</div>
+              </div>
+              <div class="b-fun">🤯 אם אטום היה גודל אצטדיון — הגרעין יהיה קטן כמו זבוב. רוב האטום = ריק!</div>
+              <div class="b-quiz" id="bq-atom">
+                <div class="b-q">❓ מה נמצא במרכז האטום?</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-atom',this,true)">הגרעין — פרוטונים וניוטרונים</button>
+                  <button class="b-opt" onclick="bQuiz('bq-atom',this,false)">האלקטרונים</button>
+                  <button class="b-opt" onclick="bQuiz('bq-atom',this,false)">חלל ריק</button>
+                </div>
+                <div class="b-result" id="br-atom"></div>
+              </div>
+              <button class="b-done-btn" id="bb-atom" onclick="bDone('atom',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+            <!-- ─ L2: Elements ─ -->
+            <div class="b-card" id="bc-elem">
+              <div class="b-card-head"><div class="b-icon" style="background:#fef3c7;">🏷️</div><div><h3>2 — מה זה יסוד?</h3><p>118 סוגים שונים של אטומים</p></div></div>
+              <p class="b-text">יש <strong>118 סוגי אטומים</strong> — לכל אחד שם וסמל קצר. למשל:</p>
+              <div class="b-elem-grid">
+                <div class="b-elem" style="background:#dbeafe;color:#1d4ed8;">H<span>1</span><small>מימן</small></div>
+                <div class="b-elem" style="background:#fee2e2;color:#991b1b;">O<span>8</span><small>חמצן</small></div>
+                <div class="b-elem" style="background:#1e293b;color:white;">C<span>6</span><small>פחמן</small></div>
+                <div class="b-elem" style="background:#fef3c7;color:#92400e;">Na<span>11</span><small>נתרן</small></div>
+                <div class="b-elem" style="background:#dcfce7;color:#166534;">Cl<span>17</span><small>כלור</small></div>
+                <div class="b-elem" style="background:#fde8d8;color:#c2410c;">Fe<span>26</span><small>ברזל</small></div>
+                <div class="b-elem" style="background:#dbeafe;color:#1d4ed8;">N<span>7</span><small>חנקן</small></div>
+                <div class="b-elem" style="background:#fde8d8;color:#c2410c;">Cu<span>29</span><small>נחושת</small></div>
+                <div class="b-elem" style="background:#fef3c7;color:#78350f;">Au<span>79</span><small>זהב</small></div>
+              </div>
+              <div class="b-fun">⭐ גופך עשוי מ-4 יסודות בלבד: O, C, H, N. 65% ממך = חמצן!</div>
+              <div class="b-quiz" id="bq-elem">
+                <div class="b-q">❓ מה הסמל של מים (H₂O)?</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-elem',this,true)">מימן (H) + חמצן (O)</button>
+                  <button class="b-opt" onclick="bQuiz('bq-elem',this,false)">ברזל + מימן</button>
+                  <button class="b-opt" onclick="bQuiz('bq-elem',this,false)">פחמן + חמצן</button>
+                </div>
+                <div class="b-result" id="br-elem"></div>
+              </div>
+              <button class="b-done-btn" id="bb-elem" onclick="bDone('elem',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+            <!-- ─ L3: Molecules ─ -->
+            <div class="b-card" id="bc-mol">
+              <div class="b-card-head"><div class="b-icon" style="background:#f0fdf4;">🔗</div><div><h3>3 — מה זה מולקולה?</h3><p>אטומים שמתחברים יחד</p></div></div>
+              <p class="b-text">כשאטומים <strong>מתחברים</strong> — נוצרת <strong>מולקולה</strong>. כמו לגו:</p>
+              <div class="b-bond-demo">
+                <div class="b-ba" style="background:radial-gradient(circle,#60a5fa,#2563eb);">H</div>
+                <div class="b-bl"></div>
+                <div class="b-ba" style="background:radial-gradient(circle,#f87171,#dc2626);width:46px;height:46px;font-size:1rem;">O</div>
+                <div class="b-bl"></div>
+                <div class="b-ba" style="background:radial-gradient(circle,#60a5fa,#2563eb);">H</div>
+              </div>
+              <div style="text-align:center;font-size:0.82rem;color:#64748b;margin:0.3rem 0 0.75rem;">H₂O = מים! שני מימן + חמצן</div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;font-size:0.88rem;">
+                <span style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;padding:0.25rem 0.6rem;font-family:monospace;font-weight:700;color:#1d4ed8;">CO₂</span><span style="color:#475569;display:flex;align-items:center;">= פחמן + 2 חמצן = גז פחמן דו-חמצני</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;font-size:0.88rem;">
+                <span style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;padding:0.25rem 0.6rem;font-family:monospace;font-weight:700;color:#1d4ed8;">NaCl</span><span style="color:#475569;display:flex;align-items:center;">= נתרן + כלור = <strong>מלח שולחן!</strong></span>
+              </div>
+              <div class="b-fun">🧂 נתרן לבד = מתכת שמתפוצצת במים. כלור לבד = גז רעיל. ביחד = מלח שאתה אוכל. השילוב משנה הכל!</div>
+              <div class="b-quiz" id="bq-mol">
+                <div class="b-q">❓ CO₂ =</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-mol',this,true)">פחמן + 2 חמצן = גז פחמן דו-חמצני</button>
+                  <button class="b-opt" onclick="bQuiz('bq-mol',this,false)">2 פחמן + חמצן</button>
+                  <button class="b-opt" onclick="bQuiz('bq-mol',this,false)">כלור + חמצן</button>
+                </div>
+                <div class="b-result" id="br-mol"></div>
+              </div>
+              <button class="b-done-btn" id="bb-mol" onclick="bDone('mol',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+            <!-- ─ L4: Reactions ─ -->
+            <div class="b-card" id="bc-react">
+              <div class="b-card-head"><div class="b-icon" style="background:#fef2f2;">💥</div><div><h3>4 — מה זה תגובה כימית?</h3><p>חומרים שהופכים לחומרים אחרים</p></div></div>
+              <p class="b-text"><strong>מגיבים</strong> נשברים ומסתדרים מחדש → <strong>תוצרים</strong> חדשים. האטומים לא נעלמים!</p>
+              <div class="b-reaction">
+                <div style="text-align:center;"><div class="b-mol">H₂</div><div style="font-size:0.68rem;color:#64748b;margin-top:2px;">מימן</div></div>
+                <span class="b-plus">+</span>
+                <div style="text-align:center;"><div class="b-mol">O₂</div><div style="font-size:0.68rem;color:#64748b;margin-top:2px;">חמצן</div></div>
+                <span class="b-arrow">→</span>
+                <div style="text-align:center;"><div class="b-mol b-prod">H₂O 💧</div><div style="font-size:0.68rem;color:#166534;margin-top:2px;">מים!</div></div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin:0.75rem 0;font-size:0.85rem;">
+                <div style="background:#fff7ed;border-radius:8px;padding:0.6rem;border:1.5px solid #fed7aa;text-align:center;">🔥 <strong style="color:#c2410c">אקסותרמי</strong><br><small>משחרר חום</small></div>
+                <div style="background:#eff6ff;border-radius:8px;padding:0.6rem;border:1.5px solid #bfdbfe;text-align:center;">❄️ <strong style="color:#1d4ed8">אנדותרמי</strong><br><small>בולע חום</small></div>
+              </div>
+              <div class="b-fun">🔥 כשאתה אוכל סוכר — תאי הגוף עושים תגובה כימית ומוציאים אנרגיה. אתה מיני מפעל כימי!</div>
+              <div class="b-quiz" id="bq-react">
+                <div class="b-q">❓ מה קורה לאטומים בתגובה כימית?</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-react',this,true)">הם מסתדרים מחדש — לא נעלמים</button>
+                  <button class="b-opt" onclick="bQuiz('bq-react',this,false)">הם נעלמים לגמרי</button>
+                  <button class="b-opt" onclick="bQuiz('bq-react',this,false)">הם מתקטנים</button>
+                </div>
+                <div class="b-result" id="br-react"></div>
+              </div>
+              <button class="b-done-btn" id="bb-react" onclick="bDone('react',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+            <!-- ─ L5: States ─ -->
+            <div class="b-card" id="bc-states">
+              <div class="b-card-head"><div class="b-icon" style="background:#f0fdf4;">🧊</div><div><h3>5 — מצבי צבירה</h3><p>מוצק, נוזל, גז</p></div></div>
+              <p class="b-text">אותו חומר יכול להיות בשלושה מצבים לפי טמפרטורה:</p>
+              <div class="b-states">
+                <div class="b-state-box">
+                  <div class="b-state-dots" id="bsd-solid"></div>
+                  <div class="b-state-name">🧊 מוצק</div><div style="font-size:0.7rem;color:#64748b">צפוף, קפוא</div>
+                </div>
+                <div class="b-state-box">
+                  <div class="b-state-dots" id="bsd-liquid"></div>
+                  <div class="b-state-name">💧 נוזל</div><div style="font-size:0.7rem;color:#64748b">זורם</div>
+                </div>
+                <div class="b-state-box">
+                  <div class="b-state-dots" id="bsd-gas"></div>
+                  <div class="b-state-name">💨 גז</div><div style="font-size:0.7rem;color:#64748b">מפוזר, מהיר</div>
+                </div>
+              </div>
+              <div class="b-fun">☁️ עננים = מים נוזליים (טיפות קטנות מאוד). גז מים = אדים = שקוף לגמרי!</div>
+              <div class="b-quiz" id="bq-states">
+                <div class="b-q">❓ מים רותחים הופכים ל...</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-states',this,true)">גז — אדים (חלקיקים מפוזרים)</button>
+                  <button class="b-opt" onclick="bQuiz('bq-states',this,false)">מוצק — קרח</button>
+                  <button class="b-opt" onclick="bQuiz('bq-states',this,false)">הם נעלמים</button>
+                </div>
+                <div class="b-result" id="br-states"></div>
+              </div>
+              <button class="b-done-btn" id="bb-states" onclick="bDone('states',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+            <!-- ─ L6: pH ─ -->
+            <div class="b-card" id="bc-ph">
+              <div class="b-card-head"><div class="b-icon" style="background:#fef9c3;">🍋</div><div><h3>6 — חומצות, בסיסים ו-pH</h3><p>לימון vs. סבון</p></div></div>
+              <p class="b-text"><strong>pH</strong> = מדד מ-0 עד 14 לכמה "חומצי" או "בסיסי" חומר הוא:</p>
+              <div class="b-ph-bar">
+                <div style="flex:1;background:#dc2626;"></div><div style="flex:1;background:#ea580c;"></div>
+                <div style="flex:1;background:#f59e0b;"></div><div style="flex:1;background:#eab308;"></div>
+                <div style="flex:1;background:#84cc16;"></div><div style="flex:1;background:#22c55e;"></div>
+                <div style="flex:1;background:#06b6d4;"></div><div style="flex:1;background:#3b82f6;"></div>
+                <div style="flex:1;background:#6366f1;"></div><div style="flex:1;background:#8b5cf6;"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:#64748b;margin-bottom:0.6rem;"><span>💥 חומצה</span><span>🟢 מים=7</span><span>🧼 בסיס</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.75rem;">
+                <span class="b-chip">🍋 לימון = 2</span><span class="b-chip">🥤 קולה = 2.5</span><span class="b-chip">☕ קפה = 5</span>
+                <span class="b-chip">💧 מים = 7</span><span class="b-chip">🧼 סבון = 10</span><span class="b-chip">🧹 אמוניה = 11</span>
+              </div>
+              <div class="b-fun">❤️ הדם שלך חייב pH 7.4 כדי שתחיה! שינוי של 0.3 = מסוכן. גופך שומר על זה כל הזמן.</div>
+              <div class="b-quiz" id="bq-ph">
+                <div class="b-q">❓ לימון pH=2 הוא...</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-ph',this,true)">חומצי — pH מתחת ל-7</button>
+                  <button class="b-opt" onclick="bQuiz('bq-ph',this,false)">בסיסי — pH מעל ל-7</button>
+                  <button class="b-opt" onclick="bQuiz('bq-ph',this,false)">ניטרלי — pH=7</button>
+                </div>
+                <div class="b-result" id="br-ph"></div>
+              </div>
+              <button class="b-done-btn" id="bb-ph" onclick="bDone('ph',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+            <!-- ─ L7: Energy ─ -->
+            <div class="b-card" id="bc-energy">
+              <div class="b-card-head"><div class="b-icon" style="background:#fff7ed;">⚡</div><div><h3>7 — אנרגיה בכימיה</h3><p>למה תגובות קורות?</p></div></div>
+              <p class="b-text">כל תגובה = שינוי אנרגיה. <strong>שבירת קשר</strong> = צורך אנרגיה. <strong>יצירת קשר</strong> = משחרר אנרגיה.</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin:0.75rem 0;">
+                <div style="background:linear-gradient(135deg,#fff7ed,#fef3c7);border:2px solid #fed7aa;border-radius:10px;padding:0.85rem;text-align:center;">
+                  <div style="font-size:1.8rem;margin-bottom:0.25rem;">🔥</div>
+                  <div style="font-weight:700;color:#c2410c;font-size:0.88rem;">אקסותרמי</div>
+                  <div style="font-size:0.78rem;color:#78350f;margin-top:0.3rem;">משחרר חום<br>ΔH &lt; 0</div>
+                  <div style="margin-top:0.4rem;font-size:0.72rem;color:#92400e;">שריפה, פיצוץ</div>
+                </div>
+                <div style="background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:2px solid #bfdbfe;border-radius:10px;padding:0.85rem;text-align:center;">
+                  <div style="font-size:1.8rem;margin-bottom:0.25rem;">❄️</div>
+                  <div style="font-weight:700;color:#1d4ed8;font-size:0.88rem;">אנדותרמי</div>
+                  <div style="font-size:0.78rem;color:#1e40af;margin-top:0.3rem;">בולע חום<br>ΔH &gt; 0</div>
+                  <div style="margin-top:0.4rem;font-size:0.72rem;color:#1d4ed8;">קרח שנמס, בישול</div>
+                </div>
+              </div>
+              <div class="b-fun">💡 הסוללה ברכב = תגובה כימית שמייצרת חשמל. הכימיה = כוח!</div>
+              <div class="b-quiz" id="bq-energy">
+                <div class="b-q">❓ שריפת עץ היא...</div>
+                <div class="b-opts">
+                  <button class="b-opt" onclick="bQuiz('bq-energy',this,true)">אקסותרמית — משחררת חום</button>
+                  <button class="b-opt" onclick="bQuiz('bq-energy',this,false)">אנדותרמית — בולעת חום</button>
+                  <button class="b-opt" onclick="bQuiz('bq-energy',this,false)">ניטרלית</button>
+                </div>
+                <div class="b-result" id="br-energy"></div>
+              </div>
+              <button class="b-done-btn" id="bb-energy" onclick="bDone('energy',this)">✅ הבנתי! +10 XP</button>
+            </div>
+
+          </div><!-- end b-lessons-grid -->
+
+          <!-- Done CTA -->
+          <div id="b-done-cta" style="display:none;background:linear-gradient(135deg,#1e3a8a,#7c3aed);border-radius:1rem;padding:1.75rem;text-align:center;color:white;margin-bottom:1.5rem;">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;animation:bounce 2s ease-in-out infinite;">🏆</div>
+            <h2 style="color:white;margin-bottom:0.4rem;">מצוין! סיימת את כל היסודות!</h2>
+            <p style="opacity:0.9;margin-bottom:1.25rem;">עכשיו אתה מוכן לנושאי הבגרות האמיתיים.</p>
+            <button onclick="showAllTopics()" style="background:white;color:#1d4ed8;padding:0.7rem 1.5rem;border-radius:8px;font-weight:700;cursor:pointer;border:none;font-family:inherit;font-size:0.95rem;">📚 המשך לנושאים →</button>
+          </div>
+
+        </div><!-- end basics-panel -->
+
         <!-- Topics list -->
         <div id="topics-list">
           <p style="color:var(--color-text-muted,#6b7280)">טוען נושאים...</p>
@@ -560,9 +1008,124 @@
 
   </main>
 
+  <!-- XP Toast -->
+  <div class="b-xp-toast" id="b-xp-toast">+10 XP 🎉</div>
+
   <script src="js/utils.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- ══ BASICS LOGIC ══ -->
+  <script>
+    // ── Show/hide basics panel ──────────────────────────────────
+    function showBasics(btn) {
+      document.getElementById('basics-panel').style.display = '';
+      document.getElementById('topics-list').style.display  = 'none';
+      document.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
+      bInitParticles();
+    }
+    function showAllTopics() {
+      document.getElementById('basics-panel').style.display = 'none';
+      document.getElementById('topics-list').style.display  = '';
+      var allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+      if (allBtn) { allBtn.classList.add('active'); }
+    }
+
+    // ── XP System ──────────────────────────────────────────────
+    var bCompleted = JSON.parse(localStorage.getItem('basics_done') || '[]');
+    var bXP = bCompleted.length * 10;
+
+    function bUpdateXP() {
+      var fill  = document.getElementById('b-xp-fill');
+      var label = document.getElementById('b-xp-label');
+      if (fill)  fill.style.width = Math.round((bXP / 70) * 100) + '%';
+      if (label) label.textContent = bXP + ' / 70 XP' + (bXP >= 70 ? ' — 🎉 סיימת!' : '');
+      if (bXP >= 70) {
+        var cta = document.getElementById('b-done-cta');
+        if (cta) cta.style.display = '';
+      }
+    }
+
+    function bDone(id, btn) {
+      if (bCompleted.includes(id)) return;
+      bCompleted.push(id);
+      localStorage.setItem('basics_done', JSON.stringify(bCompleted));
+      bXP += 10;
+      bUpdateXP();
+      btn.classList.add('b-completed');
+      btn.textContent = '✅ הושלם!';
+      var card = document.getElementById('bc-' + id);
+      if (card) card.classList.add('b-done');
+      var toast = document.getElementById('b-xp-toast');
+      if (toast) {
+        toast.classList.add('b-show');
+        setTimeout(function() { toast.classList.remove('b-show'); }, 2000);
+      }
+    }
+
+    (function bRestoreState() {
+      bCompleted.forEach(function(id) {
+        var btn = document.getElementById('bb-' + id);
+        if (btn) { btn.classList.add('b-completed'); btn.textContent = '✅ הושלם!'; }
+        var card = document.getElementById('bc-' + id);
+        if (card) card.classList.add('b-done');
+      });
+      bUpdateXP();
+    })();
+
+    // ── Mini Quiz ──────────────────────────────────────────────
+    function bQuiz(qId, btn, correct) {
+      var container = document.getElementById(qId);
+      if (!container || container.dataset.answered) return;
+      container.dataset.answered = '1';
+      var result = document.getElementById('br-' + qId.replace('bq-',''));
+      container.querySelectorAll('.b-opt').forEach(function(b) { b.disabled = true; });
+      if (correct) {
+        btn.classList.add('b-correct');
+        if (result) { result.textContent = '✅ נכון! כל הכבוד! 🎉'; result.style.color = '#16a34a'; }
+      } else {
+        btn.classList.add('b-wrong');
+        container.querySelectorAll('.b-opt').forEach(function(b) {
+          if ((b.getAttribute('onclick') || '').includes('true')) b.classList.add('b-correct');
+        });
+        if (result) { result.textContent = '❌ לא נכון — תראה את הירוק'; result.style.color = '#dc2626'; }
+      }
+    }
+
+    // ── Particle States ────────────────────────────────────────
+    function bMakeParticles(containerId, count, speed, maxShift) {
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = '';
+      var colors = ['#3b82f6','#60a5fa','#93c5fd'];
+      var cols = Math.ceil(Math.sqrt(count));
+      for (var i = 0; i < count; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'b-dot';
+        var col = i % cols, row = Math.floor(i / cols);
+        var x = 6 + col * (44 / cols);
+        var y = 6 + row * 14;
+        dot.style.cssText = 'left:' + x + 'px;top:' + y + 'px;background:' + colors[i%3] + ';animation:bPart' + containerId + i + ' ' + (speed + Math.random()*0.4) + 's ease-in-out infinite alternate;animation-delay:' + (Math.random()*0.8) + 's';
+        el.appendChild(dot);
+        var dx = (Math.random()-.5)*maxShift*2, dy = (Math.random()-.5)*maxShift*2;
+        var s = document.createElement('style');
+        s.textContent = '@keyframes bPart' + containerId + i + '{from{transform:translate(0,0)}to{transform:translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)}}';
+        document.head.appendChild(s);
+      }
+    }
+    var bParticlesDone = false;
+    function bInitParticles() {
+      if (bParticlesDone) return;
+      bParticlesDone = true;
+      bMakeParticles('bsd-solid',  9, 2.8, 5);
+      bMakeParticles('bsd-liquid', 7, 1.1, 14);
+      bMakeParticles('bsd-gas',    5, 0.45, 26);
+    }
+  </script>
+
   <script>
     (async function initTopics() {
       let topics = [];
@@ -1498,6 +2061,10 @@
         filterRow.addEventListener('click', e => {
           const btn = e.target.closest('.filter-btn');
           if (!btn) return;
+          if (btn.dataset.filter === 'basics') return; // handled by showBasics()
+          // hide basics panel when switching to topic filters
+          document.getElementById('basics-panel').style.display = 'none';
+          document.getElementById('topics-list').style.display = '';
           filterRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           const filter = btn.dataset.filter;
