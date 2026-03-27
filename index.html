@@ -55,8 +55,11 @@
     }
     .stat-box .stat-value {
       font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--color-primary, #2563eb);
+      font-weight: 800;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       display: block;
     }
     .stat-box .stat-label {
@@ -112,9 +115,10 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
     .quick-btn .btn-icon { font-size: 2rem; }
-    .quick-btn.btn-quiz { background: #dbeafe; color: #1d4ed8; }
-    .quick-btn.btn-flash { background: #fef3c7; color: #92400e; }
-    .quick-btn.btn-sim { background: #d1fae5; color: #065f46; }
+    .quick-btn.btn-quiz { background: linear-gradient(135deg, #dbeafe, #ede9fe); color: #1d4ed8; border: 2px solid rgba(37,99,235,0.15); }
+    .quick-btn.btn-flash { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; border: 2px solid rgba(217,119,6,0.2); }
+    .quick-btn.btn-sim { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #065f46; border: 2px solid rgba(22,163,74,0.2); }
+    .quick-btn:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 
     .section-card {
       background: var(--color-surface, #fff);
@@ -204,17 +208,26 @@
   <main class="page-container">
 
     <!-- Hero Banner -->
-    <div class="hero-banner">
-      <canvas id="hero-particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.6;"></canvas>
+    <div class="hero-banner" style="position:relative;overflow:hidden;">
+      <!-- Floating chemistry symbols -->
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.12;font-size:1.6rem;top:10%;left:5%;animation:chemFloat 7s ease-in-out infinite;animation-delay:0s;pointer-events:none;color:white;direction:ltr;">H₂O</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.1;font-size:1.2rem;top:20%;left:18%;animation:chemFloat 9s ease-in-out infinite;animation-delay:1s;pointer-events:none;color:white;direction:ltr;">CO₂</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.12;font-size:2rem;top:60%;left:3%;animation:chemFloat 8s ease-in-out infinite;animation-delay:2s;pointer-events:none;color:white;direction:ltr;">NaCl</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.1;font-size:1.4rem;top:70%;left:20%;animation:chemFloat 6s ease-in-out infinite;animation-delay:0.5s;pointer-events:none;color:white;direction:ltr;">pH</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.08;font-size:2.5rem;top:5%;right:8%;animation:chemFloat 10s ease-in-out infinite;animation-delay:3s;pointer-events:none;color:white;direction:ltr;">CH₄</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.12;font-size:1.3rem;top:40%;right:5%;animation:chemFloat 7s ease-in-out infinite;animation-delay:1.5s;pointer-events:none;color:white;direction:ltr;">Fe²⁺</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.1;font-size:1.8rem;top:75%;right:15%;animation:chemFloat 8s ease-in-out infinite;animation-delay:4s;pointer-events:none;color:white;direction:ltr;">OH⁻</span>
+      <span style="position:absolute;font-family:monospace;font-weight:700;opacity:0.09;font-size:1.1rem;top:50%;right:25%;animation:chemFloat 11s ease-in-out infinite;animation-delay:2.5s;pointer-events:none;color:white;direction:ltr;">C₆H₁₂O₆</span>
+      <canvas id="hero-particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.4;"></canvas>
       <div style="position:relative;z-index:1;" class="anim-fade-up">
-        <div style="font-size:3rem; margin-bottom:0.5rem; animation: bounce 2s ease-in-out infinite;">⚗️</div>
-        <h1>ברוך הבא, עידו! 👋</h1>
-        <p>המבחן עוד ~8 שבועות — כל יום קדימה!</p>
+        <div style="font-size:3.5rem; margin-bottom:0.75rem; animation: bounce 2.5s ease-in-out infinite; filter:drop-shadow(0 0 16px rgba(255,255,255,0.4));">⚗️</div>
+        <h1 style="font-size:2.2rem;text-shadow:0 2px 20px rgba(0,0,0,0.3);">ברוך הבא, עידו! 👋</h1>
+        <p style="font-size:1.15rem;opacity:0.92;text-shadow:0 1px 8px rgba(0,0,0,0.2);">המבחן עוד ~8 שבועות — כל יום קדימה!</p>
       </div>
     </div>
 
     <!-- Stats Row -->
-    <div class="stats-row">
+    <div class="stats-row stagger-fade">
       <div class="stat-box" id="stat-streak">
         <span class="stat-value">—</span>
         <div class="stat-label">🔥 ימי רצף</div>
@@ -237,7 +250,7 @@
     <section class="onboarding-steps">
       <h2>🚀 מאיפה מתחילים?</h2>
       <p class="onboarding-subtitle">עידו, אתה מתחיל מאפס — זה בסדר גמור. עקוב אחרי השלבים האלה בסדר:</p>
-      <div class="steps-grid">
+      <div class="steps-grid stagger-fade">
         <a href="topics.html" class="step-card step-1">
           <div class="step-number">1</div>
           <div class="step-icon">📚</div>
