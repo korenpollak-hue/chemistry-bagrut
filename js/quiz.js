@@ -116,12 +116,15 @@ const QuizEngine = {
     const options = q.options.map((opt, i) => ({ text: opt, index: i }));
     const shuffledOpts = shuffle(options);
 
-    return shuffledOpts.map(opt => `
-      <button class="quiz-option"
+    const letters = ['א','ב','ג','ד','ה'];
+    return shuffledOpts.map((opt, pos) => `
+      <button class="answer-option"
               data-index="${opt.index}"
               onclick="QuizEngine.submitAnswer(${opt.index})"
               aria-label="${sanitizeHTML(opt.text)}">
-        ${sanitizeHTML(opt.text)}
+        <span class="answer-letter">${letters[pos] || (pos+1)}</span>
+        <span class="answer-text">${sanitizeHTML(opt.text)}</span>
+        <span class="answer-status" aria-hidden="true"></span>
       </button>`
     ).join('');
   },
@@ -129,12 +132,20 @@ const QuizEngine = {
   // ─── רינדור: נכון/לא נכון ────────────────────────────────────────────────
   _renderTrueFalse(q) {
     return `
-      <button class="quiz-option quiz-option--tf"
+      <button class="answer-option answer-option--tf"
               data-index="0"
-              onclick="QuizEngine.submitAnswer(0)">נכון</button>
-      <button class="quiz-option quiz-option--tf"
+              onclick="QuizEngine.submitAnswer(0)">
+        <span class="answer-letter">✓</span>
+        <span class="answer-text">נכון</span>
+        <span class="answer-status" aria-hidden="true"></span>
+      </button>
+      <button class="answer-option answer-option--tf"
               data-index="1"
-              onclick="QuizEngine.submitAnswer(1)">לא נכון</button>`;
+              onclick="QuizEngine.submitAnswer(1)">
+        <span class="answer-letter">✗</span>
+        <span class="answer-text">לא נכון</span>
+        <span class="answer-status" aria-hidden="true"></span>
+      </button>`;
   },
 
   // ─── רינדור: קלט מספרי ───────────────────────────────────────────────────
@@ -179,16 +190,16 @@ const QuizEngine = {
       return;
     }
 
-    const q         = this.state.questions[this.state.current];
-    const correct   = parseFloat(q.correctAnswer);
-    const tolerance = q.tolerance !== undefined ? parseFloat(q.tolerance) : 0.01;
+    const q              = this.state.questions[this.state.current];
+    const correctVal     = parseFloat(q.correctAnswer ?? q.answer);
+    const tolerance      = q.tolerance !== undefined ? parseFloat(q.tolerance) : 0.01;
 
     // בדיקת קרבה (אחוזית או מוחלטת)
     let isCorrect;
     if (q.toleranceType === 'percent') {
-      isCorrect = Math.abs((val - correct) / correct) <= tolerance;
+      isCorrect = Math.abs((val - correctVal) / correctVal) <= tolerance;
     } else {
-      isCorrect = Math.abs(val - correct) <= tolerance;
+      isCorrect = Math.abs(val - correctVal) <= tolerance;
     }
 
     // מסמנים את השדה
@@ -197,7 +208,7 @@ const QuizEngine = {
     if (submitBtn) submitBtn.disabled = true;
 
     // מעבירים לפונקציה המרכזית עם אינדקס מיוחד
-    this._handleResult(isCorrect, isCorrect ? q.correctAnswer : null, q);
+    this._handleResult(isCorrect, isCorrect ? correctVal : null, q);
   },
 
   // ─── הגשת תשובה (multiple-choice / true-false) ───────────────────────────
@@ -206,20 +217,21 @@ const QuizEngine = {
     this.state.locked = true;
 
     const q         = this.state.questions[this.state.current];
-    const correct   = parseInt(q.correctAnswer, 10); // אינדקס תשובה נכונה
+    const correct   = parseInt(q.correctAnswer ?? q.answer, 10); // אינדקס תשובה נכונה — תמיכה בשני שמות שדה
     const isCorrect = selectedIndex === correct;
 
     // נעילת כל הכפתורים מיידית
-    const buttons = document.querySelectorAll('#quiz-options .quiz-option');
+    const buttons = document.querySelectorAll('#quiz-options .answer-option');
     buttons.forEach(btn => {
-      btn.style.pointerEvents = 'none'; // נעילה ויזואלית
+      btn.style.pointerEvents = 'none';
       btn.setAttribute('aria-disabled', 'true');
+      btn.classList.add('locked');
 
       const btnIndex = parseInt(btn.getAttribute('data-index'), 10);
       if (btnIndex === correct) {
-        btn.classList.add('quiz-option--correct');
+        btn.classList.add('correct');
       } else if (btnIndex === selectedIndex && !isCorrect) {
-        btn.classList.add('quiz-option--wrong');
+        btn.classList.add('wrong');
       }
     });
 
@@ -405,9 +417,10 @@ const QuizEngine = {
         let questions = Array.isArray(data) ? data : (data.questions || []);
 
         if (filter && filter.topicId) {
-          questions = questions.filter(q => q.topicId === filter.topicId);
+          // support both 'topic' and 'topicId' field names
+          questions = questions.filter(q => (q.topic || q.topicId) === filter.topicId);
         } else if (filter && filter.weekId) {
-          questions = questions.filter(q => q.weekId === filter.weekId);
+          questions = questions.filter(q => (q.week || q.weekId) == filter.weekId);
         }
 
         return questions;

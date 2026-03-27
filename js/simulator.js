@@ -378,7 +378,7 @@ const BagrutSimulator = {
       if (userAns === undefined) {
         isCorrect = false;
       } else if ((q.type || 'multiple-choice') === 'numeric') {
-        const correct   = parseFloat(q.correctAnswer);
+        const correct   = parseFloat(q.correctAnswer ?? q.answer);
         const tolerance = q.tolerance !== undefined ? parseFloat(q.tolerance) : 0.01;
         if (q.toleranceType === 'percent') {
           isCorrect = Math.abs((userAns - correct) / correct) <= tolerance;
@@ -386,7 +386,8 @@ const BagrutSimulator = {
           isCorrect = Math.abs(userAns - correct) <= tolerance;
         }
       } else {
-        isCorrect = parseInt(userAns, 10) === parseInt(q.correctAnswer, 10);
+        // support both 'answer' and 'correctAnswer' field names
+        isCorrect = parseInt(userAns, 10) === parseInt(q.correctAnswer ?? q.answer, 10);
       }
 
       return { q, userAns, isCorrect, section: q._section || 'general' };

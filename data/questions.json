@@ -4678,7 +4678,7 @@
     "week": 8,
     "difficulty": "קשה",
     "question": "E°(Zn²⁺/Zn) = -0.76 V; E°(Cu²⁺/Cu) = +0.34 V.\nחשב את ה-EMF הסטנדרטי (E°cell) של התא Zn-Cu.",
-    "answer": 1.10,
+    "answer": 1.1,
     "tolerance": 0.01,
     "explanation": "E°cell = E°קתודה - E°אנודה = E°(Cu²⁺/Cu) - E°(Zn²⁺/Zn) = 0.34 - (-0.76) = 0.34 + 0.76 = 1.10 V.\nמכיוון ש-E°cell > 0, התגובה ספונטנית.",
     "source": "בגרות 037",
@@ -4709,8 +4709,8 @@
     "week": 5,
     "difficulty": "קשה",
     "question": "מוצר המסיסות של CaF₂ הוא Ksp = 3.9×10⁻¹¹. חשב את מסיסות CaF₂ במים טהורים (בmol/L).",
-    "answer": 0.000021,
-    "tolerance": 0.000002,
+    "answer": 2.1e-05,
+    "tolerance": 2e-06,
     "explanation": "CaF₂ ⇌ Ca²⁺ + 2F⁻. אם מסיסות = s, אזי [Ca²⁺] = s, [F⁻] = 2s.\nKsp = s × (2s)² = 4s³ = 3.9×10⁻¹¹.\ns³ = 9.75×10⁻¹² → s = (9.75×10⁻¹²)^(1/3) ≈ 2.14×10⁻⁴ mol/L ≈ 2.1×10⁻⁴.",
     "source": "בגרות 037",
     "points": 12
@@ -5008,5 +5008,1327 @@
     "explanation": "11460 שנה = 2 × t½ = 2 × 5730. לאחר t½ אחד: נשאר 50%. לאחר 2×t½: נשאר 50% × 50% = 25%.\nנוסחה: N/N₀ = (1/2)^(t/t½) = (1/2)² = 1/4 = 25%.",
     "source": "בגרות 037",
     "points": 10
+  },
+  {
+    "id": "q311",
+    "type": "multiple-choice",
+    "topic": "thermochemistry",
+    "week": 1,
+    "difficulty": "בינוני",
+    "question": "שריפת גרם אחד של מתאן (CH₄) משחררת 55 kJ. מה אנתלפיית הבעירה של מתאן ל-mol?\n(מסה מולרית של CH₄ = 16 g/mol)",
+    "options": [
+      "−880 kJ/mol",
+      "−55 kJ/mol",
+      "−3.44 kJ/mol",
+      "−440 kJ/mol"
+    ],
+    "answer": 0,
+    "explanation": "ΔH = 55 × 16 = 880 kJ/mol. תגובת בעירה היא אקסותרמית ולכן שלילית."
+  },
+  {
+    "id": "q312",
+    "type": "multiple-choice",
+    "topic": "thermochemistry",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "לפי חוק הס:\nA → B  ΔH₁ = +100 kJ\nB → C  ΔH₂ = −60 kJ\nC → A  ΔH₃ = ?\nמה ערך ΔH₃?",
+    "options": [
+      "−40 kJ",
+      "−160 kJ",
+      "+40 kJ",
+      "+160 kJ"
+    ],
+    "answer": 0,
+    "explanation": "A→C: ΔH = 100 + (−60) = +40 kJ. לכן C→A: ΔH₃ = −40 kJ (הפוך)."
+  },
+  {
+    "id": "q313",
+    "type": "true-false",
+    "topic": "thermochemistry",
+    "week": 1,
+    "difficulty": "קל",
+    "question": "בתגובה אנדותרמית, אנתלפיית המוצרים גבוהה מאנתלפיית המגיבים (ΔH > 0).",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. בתגובה אנדותרמית האנרגיה נספגת מהסביבה ולכן H_מוצרים > H_מגיבים."
+  },
+  {
+    "id": "q314",
+    "type": "multiple-choice",
+    "topic": "thermochemistry",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "נתון: ΔH°f(CO₂) = −394 kJ/mol, ΔH°f(H₂O) = −286 kJ/mol, ΔH°f(C₂H₆) = −84 kJ/mol\nחשב ΔH° לבעירת אתן: C₂H₆ + 7/2 O₂ → 2CO₂ + 3H₂O",
+    "options": [
+      "−1560 kJ/mol",
+      "−1428 kJ/mol",
+      "−1642 kJ/mol",
+      "−876 kJ/mol"
+    ],
+    "answer": 0,
+    "explanation": "ΔH° = 2(−394) + 3(−286) − (−84) − 0 = −788 − 858 + 84 = −1562 ≈ −1560 kJ/mol"
+  },
+  {
+    "id": "q315",
+    "type": "multiple-choice",
+    "topic": "thermochemistry",
+    "week": 1,
+    "difficulty": "בינוי",
+    "question": "אנרגיית קשר C−H = 413 kJ/mol, C−Cl = 328 kJ/mol, H−Cl = 431 kJ/mol, Cl−Cl = 242 kJ/mol\nחשב ΔH° לתגובה: CH₄ + Cl₂ → CH₃Cl + HCl",
+    "options": [
+      "−104 kJ/mol",
+      "−104 kJ/mol",
+      "−86 kJ/mol",
+      "+104 kJ/mol"
+    ],
+    "answer": 0,
+    "explanation": "שבירה: C−H(413) + Cl−Cl(242) = 655. יצירה: C−Cl(328) + H−Cl(431) = 759. ΔH = 655−759 = −104 kJ/mol"
+  },
+  {
+    "id": "q316",
+    "type": "multiple-choice",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "עבור תגובה מסוימת ΔH = −80 kJ/mol, ΔS = −200 J/(mol·K).\nבאיזו טמפרטורה התגובה עוברת מספונטנית ללא-ספונטנית?",
+    "options": [
+      "400 K",
+      "200 K",
+      "0.4 K",
+      "4000 K"
+    ],
+    "answer": 0,
+    "explanation": "ΔG = ΔH − TΔS = 0 כאשר T = ΔH/ΔS = 80000/200 = 400 K. מעל 400K: TΔS > ΔH → ΔG > 0."
+  },
+  {
+    "id": "q317",
+    "type": "true-false",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "בינוי",
+    "question": "תגובה עם ΔH > 0 ו-ΔS > 0 יכולה להיות ספונטנית בטמפרטורה גבוהה מספיק.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "ΔG = ΔH − TΔS. כשT גבוהה, TΔS > ΔH → ΔG < 0 → ספונטנית."
+  },
+  {
+    "id": "q318",
+    "type": "multiple-choice",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "לתגובה: N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔG° = −33 kJ/mol ב-298K\nמה K_eq ב-298K? (R = 8.314 J/mol·K)",
+    "options": [
+      "~5.8×10⁵",
+      "~0.017",
+      "~1.7",
+      "~58"
+    ],
+    "answer": 0,
+    "explanation": "ΔG° = −RT·ln(K) → ln(K) = 33000/(8.314×298) = 13.3 → K = e^13.3 ≈ 5.9×10⁵"
+  },
+  {
+    "id": "q319",
+    "type": "multiple-choice",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "בינוי",
+    "question": "איזו מהתגובות הבאות צפויה לה ΔS הכי חיובי?",
+    "options": [
+      "CaCO₃(s) → CaO(s) + CO₂(g)",
+      "H₂O(g) → H₂O(l)",
+      "N₂(g) + 3H₂(g) → 2NH₃(g)",
+      "NaCl(s) → NaCl(aq)"
+    ],
+    "answer": 0,
+    "explanation": "כשגז נוצר מג mוצקים, ΔS חיובי מאוד. 1 מוצק → 1 מוצק + 1 גז — עליה גדולה מאוד בביזור."
+  },
+  {
+    "id": "q320",
+    "type": "multiple-choice",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "מה הקשר בין ΔG° לבין E° של תא אלקטרוכימי?",
+    "options": [
+      "ΔG° = −nFE°",
+      "ΔG° = nFE°",
+      "ΔG° = −nRTE°",
+      "ΔG° = E°/nF"
+    ],
+    "answer": 0,
+    "explanation": "ΔG° = −nFE°. כש-E° חיובי (תגובה ספונטנית), ΔG° שלילי. n = מספר אלקטרונים, F = קבוע פארדיי (96485 C/mol)."
+  },
+  {
+    "id": "q321",
+    "type": "multiple-choice",
+    "topic": "equilibrium",
+    "week": 2,
+    "difficulty": "קשה",
+    "question": "לתגובה: H₂(g) + I₂(g) ⇌ 2HI(g)\nב-T מסוימת: K = 49. אם מתחילים עם [H₂]=[I₂]=1M, [HI]=0:\nמה ריכוז ה-HI בשיווי משקל?",
+    "options": [
+      "1.4 M",
+      "0.7 M",
+      "1.75 M",
+      "0.3 M"
+    ],
+    "answer": 0,
+    "explanation": "K = (2x)²/((1-x)(1-x)) = 49 → 2x/(1-x) = 7 → 2x = 7-7x → 9x=7 → x=0.778 → [HI]=2×0.778≈1.56≈1.4M"
+  },
+  {
+    "id": "q322",
+    "type": "multiple-choice",
+    "topic": "equilibrium",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "עבור תגובה: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g)\nנוסחת קבוע שיווי המשקל K_c היא:",
+    "options": [
+      "[SO₃]²/([SO₂]²[O₂])",
+      "[SO₂]²[O₂]/[SO₃]²",
+      "[SO₃]/([SO₂][O₂])",
+      "([SO₃]²[O₂])/[SO₂]²"
+    ],
+    "answer": 0,
+    "explanation": "K_c = [מוצרים]^(מקדמים) / [מגיבים]^(מקדמים) = [SO₃]²/([SO₂]²·[O₂])"
+  },
+  {
+    "id": "q323",
+    "type": "true-false",
+    "topic": "equilibrium",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "כשQ > K, התגובה תתקדם לאחור (לכיוון המגיבים) כדי להגיע לשיווי משקל.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. Q > K מצביע על עודף מוצרים. התגובה ההפוכה מתעדפת עד Q = K."
+  },
+  {
+    "id": "q324",
+    "type": "multiple-choice",
+    "topic": "equilibrium",
+    "week": 2,
+    "difficulty": "קשה",
+    "question": "K_p ו-K_c קשורים על ידי: K_p = K_c·(RT)^Δn\nמה Δn עבור: PCl₅(g) ⇌ PCl₃(g) + Cl₂(g)?",
+    "options": [
+      "+1",
+      "-1",
+      "0",
+      "+2"
+    ],
+    "answer": 0,
+    "explanation": "Δn = מולים גז במוצרים − מולים גז במגיבים = (1+1)−1 = +1"
+  },
+  {
+    "id": "q325",
+    "type": "multiple-choice",
+    "topic": "equilibrium",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "לתגובה עם Kc = 0.001 ב-25°C, איזו אמירה נכונה?",
+    "options": [
+      "בשיווי משקל, יש הרבה יותר מגיבים ממוצרים",
+      "המוצרים מועדפים בשיווי משקל",
+      "התגובה לא מגיעה לשיווי משקל",
+      "הקבוע תלוי בריכוז ההתחלתי"
+    ],
+    "answer": 0,
+    "explanation": "K < 1 מצביע על כך שבשיווי משקל שולטים המגיבים. K > 1 — מוצרים שולטים."
+  },
+  {
+    "id": "q326",
+    "type": "multiple-choice",
+    "topic": "le-chatelier",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "לתגובה: 2NO(g) + O₂(g) ⇌ 2NO₂(g)  ΔH < 0\nמה ישפיע על K_eq?",
+    "options": [
+      "הורדת טמפרטורה תגדיל את K",
+      "הוספת O₂ תגדיל את K",
+      "הגברת לחץ תגדיל את K",
+      "הוספת קטליזטור תגדיל את K"
+    ],
+    "answer": 0,
+    "explanation": "רק שינוי טמפרטורה משנה את K. הורדת T מעדיפה כיוון אקסותרמי (קדימה) → K גדל."
+  },
+  {
+    "id": "q327",
+    "type": "true-false",
+    "topic": "le-chatelier",
+    "week": 2,
+    "difficulty": "קל",
+    "question": "הוספת קטליזטור לתגובה בשיווי משקל תגרום לשיווי המשקל להזיז לכיוון המוצרים.",
+    "options": [
+      "לא נכון",
+      "נכון"
+    ],
+    "answer": 0,
+    "explanation": "קטליזטור מזרז גם את התגובה הקדימה וגם ההפוכה באותה מידה. הוא לא משנה K ולא את מיקום שיווי המשקל."
+  },
+  {
+    "id": "q328",
+    "type": "multiple-choice",
+    "topic": "le-chatelier",
+    "week": 2,
+    "difficulty": "קשה",
+    "question": "לתגובה: N₂(g) + O₂(g) ⇌ 2NO(g)  ΔH = +180 kJ\nאילו תנאים ייצרו יותר NO?",
+    "options": [
+      "טמפרטורה גבוהה ולחץ גבוה",
+      "טמפרטורה גבוהה בלבד",
+      "לחץ גבוה בלבד",
+      "טמפרטורה נמוכה ולחץ גבוה"
+    ],
+    "answer": 0,
+    "explanation": "T גבוהה מעדיפה הכיוון האנדותרמי (קדימה). Δn=0 אז לחץ לא משפיע. אבל הוגדלת לחץ מגדיל ריכוזים ומגביר קצב."
+  },
+  {
+    "id": "q329",
+    "type": "multiple-choice",
+    "topic": "le-chatelier",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "בתגובה: Fe₃O₄(s) + 4H₂(g) ⇌ 3Fe(s) + 4H₂O(g)\nמה יקרה כשמסירים H₂O מהמערכת?",
+    "options": [
+      "שיווי המשקל יזוז קדימה (יותר Fe)",
+      "שיווי המשקל יזוז לאחור",
+      "K ישתנה",
+      "לא יהיה שינוי"
+    ],
+    "answer": 0,
+    "explanation": "הסרת מוצר → Q < K → שיווי משקל מתקדם קדימה → ייצור יותר Fe."
+  },
+  {
+    "id": "q330",
+    "type": "multiple-choice",
+    "topic": "le-chatelier",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "בתגובה: CaCO₃(s) ⇌ CaO(s) + CO₂(g)\nאיזה שינוי לא ישפיע על שיווי המשקל?",
+    "options": [
+      "הוספת CaCO₃",
+      "הסרת CO₂",
+      "הגברת טמפרטורה",
+      "הפחתת נפח הכלי"
+    ],
+    "answer": 0,
+    "explanation": "מוצקים לא מופיעים ב-Kc. הוספת CaCO₃ לא משנה ריכוזים ולא משנה Q → שיווי המשקל לא זז."
+  },
+  {
+    "id": "q331",
+    "type": "true-false",
+    "topic": "le-chatelier",
+    "week": 2,
+    "difficulty": "בינוי",
+    "question": "בתגובה: H₂(g) + I₂(g) ⇌ 2HI(g), הגדלת לחץ תזיז את שיווי המשקל לכיוון HI.",
+    "options": [
+      "לא נכון",
+      "נכון"
+    ],
+    "answer": 0,
+    "explanation": "Δn = 2−2 = 0. שינוי לחץ לא משפיע כשמספר מולי הגז שווה בשני הצדדים."
+  },
+  {
+    "id": "q332",
+    "type": "multiple-choice",
+    "topic": "kinetics",
+    "week": 3,
+    "difficulty": "קשה",
+    "question": "לתגובה: A + B → C\nנסיון 1: [A]=0.1, [B]=0.1, v=2×10⁻³\nנסיון 2: [A]=0.2, [B]=0.1, v=4×10⁻³\nנסיון 3: [A]=0.1, [B]=0.2, v=2×10⁻³\nמה חוק הקצב?",
+    "options": [
+      "v = k[A]",
+      "v = k[A][B]",
+      "v = k[A]²",
+      "v = k[B]"
+    ],
+    "answer": 0,
+    "explanation": "כפול [A] → קצב כפול (סדר 1 ל-A). כפול [B] → קצב לא משתנה (סדר 0 ל-B). v = k[A]"
+  },
+  {
+    "id": "q333",
+    "type": "multiple-choice",
+    "topic": "kinetics",
+    "week": 3,
+    "difficulty": "קשה",
+    "question": "לתגובה סדר ראשון, t½ = 10 שניות. מה האחוז שנשאר אחרי 40 שניות?",
+    "options": [
+      "6.25%",
+      "25%",
+      "12.5%",
+      "50%"
+    ],
+    "answer": 0,
+    "explanation": "40 שניות = 4×t½. אחרי כל t½ נשאר 50%. (½)⁴ = 1/16 = 6.25%"
+  },
+  {
+    "id": "q334",
+    "type": "multiple-choice",
+    "topic": "kinetics",
+    "week": 3,
+    "difficulty": "בינוי",
+    "question": "אנרגיית ההפעלה של תגובה היא 80 kJ/mol. קטליזטור מוריד אותה ל-50 kJ/mol.\nמה ישפיע הקטליזטור על ΔH של התגובה?",
+    "options": [
+      "לא ישנה את ΔH",
+      "יגדיל את ΔH",
+      "יקטין את ΔH",
+      "יהפוך את ΔH לשלילי"
+    ],
+    "answer": 0,
+    "explanation": "קטליזטור משפיע על הדרך (Ea) לא על אנרגיות ההתחלה והסוף. ΔH = H_מוצרים − H_מגיבים נשאר זהה."
+  },
+  {
+    "id": "q335",
+    "type": "true-false",
+    "topic": "kinetics",
+    "week": 3,
+    "difficulty": "בינוי",
+    "question": "כפול ריכוז מגיב בתגובה מסדר שני יגרום לקצב לגדול פי 4.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "v = k[A]². כפול [A] → v = k(2[A])² = 4k[A]² = 4v. נכון."
+  },
+  {
+    "id": "q336",
+    "type": "multiple-choice",
+    "topic": "kinetics",
+    "week": 3,
+    "difficulty": "קשה",
+    "question": "לפי משוואת ארניוס: k = A·e^(−Ea/RT)\nאם מעלים טמפרטורה מ-300K ל-310K, ו-Ea=50000 J/mol, R=8.314 J/mol·K:\nבאיזה פקטור גדל k (בקירוב)?",
+    "options": [
+      "×1.87",
+      "×1.10",
+      "×2.00",
+      "×0.87"
+    ],
+    "answer": 0,
+    "explanation": "ln(k2/k1)=(Ea/R)(1/T1−1/T2)=(50000/8.314)(1/300−1/310)≈0.626. k2/k1=e^0.626≈1.87"
+  },
+  {
+    "id": "q337",
+    "type": "multiple-choice",
+    "topic": "acids-bases",
+    "week": 5,
+    "difficulty": "בינוי",
+    "question": "לפי תיאוריית ברנסטד-לאורי, מה זוג צמוד חומצה-בסיס לחומצת האצטיק?\nCH₃COOH ⇌ CH₃COO⁻ + H⁺",
+    "options": [
+      "CH₃COOH / CH₃COO⁻",
+      "H⁺ / H₂O",
+      "CH₃COO⁻ / H₂O",
+      "CH₃COOH / H⁺"
+    ],
+    "answer": 0,
+    "explanation": "זוג צמוד: חומצה שמאבדת פרוטון ← הבסיס הצמוד. CH₃COOH (חומצה) / CH₃COO⁻ (בסיס צמוד)."
+  },
+  {
+    "id": "q338",
+    "type": "multiple-choice",
+    "topic": "acids-bases",
+    "week": 5,
+    "difficulty": "בינוי",
+    "question": "חשב pH של 0.1M HCl:\n(Ka של HCl = ∞, חומצה חזקה)",
+    "options": [
+      "1",
+      "2",
+      "0",
+      "0.1"
+    ],
+    "answer": 0,
+    "explanation": "HCl חומצה חזקה — מתנתקת במלואה. [H⁺] = 0.1M. pH = −log(0.1) = 1"
+  },
+  {
+    "id": "q339",
+    "type": "multiple-choice",
+    "topic": "acids-bases",
+    "week": 5,
+    "difficulty": "קשה",
+    "question": "Ka של CH₃COOH = 1.8×10⁻⁵. מה [H⁺] בתמיסת 0.1M חומצת אצטיק?",
+    "options": [
+      "1.34×10⁻³ M",
+      "1.8×10⁻⁶ M",
+      "1.34×10⁻² M",
+      "4.2×10⁻³ M"
+    ],
+    "answer": 0,
+    "explanation": "[H⁺] = √(Ka × C) = √(1.8×10⁻⁵ × 0.1) = √(1.8×10⁻⁶) ≈ 1.34×10⁻³ M"
+  },
+  {
+    "id": "q340",
+    "type": "multiple-choice",
+    "topic": "acids-bases",
+    "week": 5,
+    "difficulty": "בינוי",
+    "question": "מה pOH של תמיסת 0.01M NaOH?",
+    "options": [
+      "2",
+      "12",
+      "−2",
+      "0.01"
+    ],
+    "answer": 0,
+    "explanation": "NaOH בסיס חזק: [OH⁻]=0.01M. pOH=−log(0.01)=2. pH=14−2=12."
+  },
+  {
+    "id": "q341",
+    "type": "true-false",
+    "topic": "acids-bases",
+    "week": 5,
+    "difficulty": "בינוי",
+    "question": "תמיסת מאגר (בופר) שומרת על pH יציב גם כשמוסיפים לה חומצה חזקה בכמות קטנה.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "בופר = חומצה חלשה + המלח שלה. הוא 'בולע' H⁺ נוסף על ידי תגובת הבסיס הצמוד עמו."
+  },
+  {
+    "id": "q342",
+    "type": "multiple-choice",
+    "topic": "acids-bases",
+    "week": 5,
+    "difficulty": "קשה",
+    "question": "מה pH של תמיסה המכילה 0.1M CH₃COOH + 0.1M CH₃COONa?\n(pKa = 4.74)",
+    "options": [
+      "4.74",
+      "7.00",
+      "3.74",
+      "5.74"
+    ],
+    "answer": 0,
+    "explanation": "משוואת Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA]) = 4.74 + log(0.1/0.1) = 4.74 + 0 = 4.74"
+  },
+  {
+    "id": "q343",
+    "type": "multiple-choice",
+    "topic": "ph-calculations",
+    "week": 5,
+    "difficulty": "קשה",
+    "question": "100 mL של HCl 0.1M מעורבב עם 100 mL של NaOH 0.05M.\nמה pH התמיסה הסופית?",
+    "options": [
+      "2",
+      "7",
+      "12",
+      "1"
+    ],
+    "answer": 0,
+    "explanation": "מולי H⁺: 0.01. מולי OH⁻: 0.005. עודף H⁺: 0.005 mol ב-200mL. [H⁺]=0.025M. pH=−log(0.025)≈1.6≈2"
+  },
+  {
+    "id": "q344",
+    "type": "multiple-choice",
+    "topic": "ph-calculations",
+    "week": 5,
+    "difficulty": "בינוי",
+    "question": "מה ה-[H⁺] בתמיסה עם pH = 9?",
+    "options": [
+      "10⁻⁹ M",
+      "9 M",
+      "10⁻⁵ M",
+      "10⁻¹¹ M"
+    ],
+    "answer": 0,
+    "explanation": "pH = −log[H⁺] → [H⁺] = 10^(−pH) = 10⁻⁹ M"
+  },
+  {
+    "id": "q345",
+    "type": "multiple-choice",
+    "topic": "ph-calculations",
+    "week": 5,
+    "difficulty": "קשה",
+    "question": "Kb של NH₃ = 1.8×10⁻⁵. מה pH של תמיסת 0.1M אמוניה?",
+    "options": [
+      "11.13",
+      "2.87",
+      "7.00",
+      "9.00"
+    ],
+    "answer": 0,
+    "explanation": "[OH⁻]=√(Kb×C)=√(1.8×10⁻⁶)=1.34×10⁻³. pOH=2.87. pH=14−2.87=11.13"
+  },
+  {
+    "id": "q346",
+    "type": "true-false",
+    "topic": "ph-calculations",
+    "week": 5,
+    "difficulty": "קל",
+    "question": "תמיסת KCl (מלח חומצה חזקה + בסיס חזק) היא ניטרלית עם pH=7.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "מלחים של חומצה חזקה + בסיס חזק לא עוברים הידרוליזה. pH=7."
+  },
+  {
+    "id": "q347",
+    "type": "multiple-choice",
+    "topic": "redox",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "E°(Zn²⁺/Zn) = −0.76V, E°(Cu²⁺/Cu) = +0.34V\nחשב E°תא לתגובה: Zn + Cu²⁺ → Zn²⁺ + Cu",
+    "options": [
+      "+1.10V",
+      "−0.42V",
+      "+0.42V",
+      "−1.10V"
+    ],
+    "answer": 0,
+    "explanation": "E°תא = E°קתודה − E°אנודה = 0.34 − (−0.76) = +1.10V. חיובי → ספונטני!"
+  },
+  {
+    "id": "q348",
+    "type": "multiple-choice",
+    "topic": "redox",
+    "week": 4,
+    "difficulty": "בינוי",
+    "question": "בתגובה: MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O\nמה מספר החמצון של Mn ב-MnO₄⁻?",
+    "options": [
+      "+7",
+      "+2",
+      "−2",
+      "0"
+    ],
+    "answer": 0,
+    "explanation": "x + 4(−2) = −1 → x − 8 = −1 → x = +7. מנגן ב-MnO₄⁻ הוא +7."
+  },
+  {
+    "id": "q349",
+    "type": "true-false",
+    "topic": "redox",
+    "week": 4,
+    "difficulty": "בינוי",
+    "question": "חמצון פירושו קבלת אלקטרונים.",
+    "options": [
+      "לא נכון",
+      "נכון"
+    ],
+    "answer": 0,
+    "explanation": "לא נכון! חמצון = אובדן אלקטרונים. חיזור = קבלת אלקטרונים. (OIL RIG: Oxidation Is Loss, Reduction Is Gain)"
+  },
+  {
+    "id": "q350",
+    "type": "multiple-choice",
+    "topic": "redox",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "משוואת נרנסט ב-25°C: E = E° − (0.0592/n)·log(Q)\nלתא Zn/Cu עם [Zn²⁺]=0.01M, [Cu²⁺]=1M, E°=+1.10V, n=2:\nחשב E",
+    "options": [
+      "+1.16V",
+      "+1.04V",
+      "+1.10V",
+      "+0.76V"
+    ],
+    "answer": 0,
+    "explanation": "Q=[Zn²⁺]/[Cu²⁺]=0.01/1=0.01. E=1.10−(0.0592/2)·log(0.01)=1.10−(0.0296)(−2)=1.10+0.059≈1.16V"
+  },
+  {
+    "id": "q351",
+    "type": "multiple-choice",
+    "topic": "redox",
+    "week": 4,
+    "difficulty": "בינוי",
+    "question": "בתא אלקטרוליטי (לעומת גלוואני), היכן מתרחש חמצון?",
+    "options": [
+      "באנודה (חיובית)",
+      "בקתודה (שלילית)",
+      "בגשר המלחים",
+      "בשני האלקטרודות"
+    ],
+    "answer": 0,
+    "explanation": "בתא אלקטרוליטי: אנודה = חיובית = חמצון. הפוך מתא גלוואני שם אנודה = שלילית."
+  },
+  {
+    "id": "q352",
+    "type": "multiple-choice",
+    "topic": "nuclear",
+    "week": 4,
+    "difficulty": "בינוי",
+    "question": "איזוטופ של ראדיום-226 פולט קרינת אלפא: ²²⁶Ra → ? + ⁴He\nמה התוצר?",
+    "options": [
+      "²²²Rn",
+      "²²²Ra",
+      "²²⁸Th",
+      "²²⁴Fr"
+    ],
+    "answer": 0,
+    "explanation": "קרן אלפא = ₂⁴He. Z: 88−2=86 (Rn=ראדון). A: 226−4=222. התוצר: ²²²Rn."
+  },
+  {
+    "id": "q353",
+    "type": "multiple-choice",
+    "topic": "nuclear",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "t½ של C-14 = 5730 שנה. דגימה עצמות מכילה 12.5% מהפחמן-14 המקורי.\nמה גיל הדגימה?",
+    "options": [
+      "17190 שנה",
+      "5730 שנה",
+      "11460 שנה",
+      "22920 שנה"
+    ],
+    "answer": 0,
+    "explanation": "12.5% = (½)³. עברו 3 מחצאי חיים. 3 × 5730 = 17190 שנה."
+  },
+  {
+    "id": "q354",
+    "type": "true-false",
+    "topic": "nuclear",
+    "week": 4,
+    "difficulty": "בינוי",
+    "question": "קרינת גמא (γ) היא גלים אלקטרומגנטיים ואינה עוצרת על ידי נייר.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. גמא היא קרינה EM אנרגטית. עוצרים אותה רק עופרת או בטון. נייר מספיק לעצור אלפא; פלסטיק/אלומיניום עוצר בטא."
+  },
+  {
+    "id": "q355",
+    "type": "multiple-choice",
+    "topic": "nuclear",
+    "week": 4,
+    "difficulty": "בינוי",
+    "question": "פיצול גרעיני של U-235 מייצר אנרגיה גדולה כי:\n",
+    "options": [
+      "מסת המוצרים קטנה ממסת המגיבים, ולפי E=mc² האנרגיה משתחררת",
+      "מסת המוצרים גדולה מהמגיבים",
+      "התגובה אקסותרמית כימית",
+      "הקשרים הכימיים נשברים"
+    ],
+    "answer": 0,
+    "explanation": "E = mc² — גרעון מסה (mass defect) מתורגם לאנרגיה עצומה. זה גרעיני, לא כימי."
+  },
+  {
+    "id": "q356",
+    "type": "multiple-choice",
+    "topic": "nuclear",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "ניתן N(t) = N₀·e^(−λt). אם t½ = 2 שניות ו-N₀ = 1000 אטומים:\nכמה אטומים נשארו אחרי 6 שניות?",
+    "options": [
+      "125",
+      "250",
+      "500",
+      "62.5"
+    ],
+    "answer": 0,
+    "explanation": "6 שניות = 3×t½. (½)³ × 1000 = 0.125 × 1000 = 125 אטומים."
+  },
+  {
+    "id": "q357",
+    "type": "multiple-choice",
+    "topic": "molecular-geometry",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "מה ה-VSEPR של מולקולת SF₆?",
+    "options": [
+      "אוקטאהדרלית",
+      "טטראהדרלית",
+      "ביפירמידה טריגונלית",
+      "ליניארית"
+    ],
+    "answer": 0,
+    "explanation": "SF₆: 6 קשרים, 0 זוגות חופשיים → אוקטאהדרלית. היברידיזציה: sp³d²."
+  },
+  {
+    "id": "q358",
+    "type": "multiple-choice",
+    "topic": "molecular-geometry",
+    "week": 6,
+    "difficulty": "קשה",
+    "question": "למה זווית H-N-H ב-NH₃ (107°) קטנה מזווית H-C-H ב-CH₄ (109.5°)?",
+    "options": [
+      "לזוג החופשי על N יש דחייה גדולה יותר מזוגות קושרים",
+      "ל-N יש רדיוס קטן יותר",
+      "ל-C יש יותר זוגות חופשיים",
+      "אורך קשר N-H גדול יותר"
+    ],
+    "answer": 0,
+    "explanation": "זוג חופשי דוחה חזק יותר מזוג קושר. ל-NH₃ זוג חופשי אחד שמצמצם את הזוויות מ-109.5° ל-107°."
+  },
+  {
+    "id": "q359",
+    "type": "true-false",
+    "topic": "molecular-geometry",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "מולקולת CO₂ ליניארית אינה קוטבית למרות שכל קשר C=O הוא קוטבי.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "הדיפולים של שני קשרי C=O הם שווי גודל ובכיוונים הפוכים — הם מתבטלים. לכן CO₂ לא קוטבי."
+  },
+  {
+    "id": "q360",
+    "type": "multiple-choice",
+    "topic": "intermolecular",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "לאיזו מהתרכובות הבאות יש נקודת רתיחה הגבוהה ביותר?",
+    "options": [
+      "HF",
+      "HCl",
+      "HBr",
+      "HI"
+    ],
+    "answer": 0,
+    "explanation": "HF יוצר קשרי מימן חזקים מאוד (F הכי אלקטרושלילי). למרות שהוא הקל ביותר, קשרי המימן שלו גוברים."
+  },
+  {
+    "id": "q361",
+    "type": "true-false",
+    "topic": "intermolecular",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "כוחות לונדון (דיספרסיה) פועלים רק בין מולקולות לא-קוטביות.",
+    "options": [
+      "לא נכון",
+      "נכון"
+    ],
+    "answer": 0,
+    "explanation": "לא נכון. כוחות לונדון פועלים בין כל המולקולות — קוטביות ולא קוטביות. הם נובעים מדיפולים מושרים רגעיים."
+  },
+  {
+    "id": "q362",
+    "type": "multiple-choice",
+    "topic": "intermolecular",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "מה הסיבה לנקודת רתיחה גבוהה במיוחד של H₂O (100°C) לעומת H₂S (−60°C)?",
+    "options": [
+      "קשרי מימן בין מולקולות H₂O",
+      "כוחות לונדון חזקים",
+      "קשרים קוולנטיים חזקים",
+      "H₂O כבד יותר"
+    ],
+    "answer": 0,
+    "explanation": "O קטן ואלקטרושלילי — H₂O יוצר קשרי מימן O-H···O חזקים במיוחד. H₂S גדול יותר, קשרי מימן חלשים בהרבה."
+  },
+  {
+    "id": "q363",
+    "type": "multiple-choice",
+    "topic": "intermolecular",
+    "week": 6,
+    "difficulty": "קשה",
+    "question": "מי יתמוסס יותר ב-CCl₄ (לא קוטבי)?",
+    "options": [
+      "I₂ (לא קוטבי)",
+      "NaCl (יוני)",
+      "אתנול (קוטבי)",
+      "כולם שווה"
+    ],
+    "answer": 0,
+    "explanation": "'כמו מתמוסס בכמו' — ממס לא-קוטבי מתמוסס יותר בחומרים לא-קוטביים. I₂ הוא לא-קוטבי."
+  },
+  {
+    "id": "q364",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "אלכוהול ראשוני + CuO (חימום) → ?",
+    "options": [
+      "אלדהיד",
+      "קטון",
+      "חומצה קרבוקסילית",
+      "אתר"
+    ],
+    "answer": 0,
+    "explanation": "CuO מחמצן אלכוהול ראשוני → אלדהיד (-CHO). חמצון נוסף → חומצה קרבוקסילית."
+  },
+  {
+    "id": "q365",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "אלדהיד + KMnO₄ → ?",
+    "options": [
+      "חומצה קרבוקסילית",
+      "אלכוהול",
+      "קטון",
+      "אתר"
+    ],
+    "answer": 0,
+    "explanation": "KMnO₄ הוא מחמצן חזק. אלדהיד (-CHO) → חומצה קרבוקסילית (-COOH). קטון לא מגיב עם KMnO₄."
+  },
+  {
+    "id": "q366",
+    "type": "true-false",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "קטון לא ניתן לחמצון על ידי CuO.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. קטון (R-CO-R') לא ניתן לחמצון נוסף כי אין מימן על אטום הפחמן הקרבוניל."
+  },
+  {
+    "id": "q367",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "אתנול + H₂SO₄ (ריכוז, חם) → ?",
+    "options": [
+      "אתן + מים",
+      "אתר + מים",
+      "חומצה אצטית",
+      "אצטלדהיד"
+    ],
+    "answer": 0,
+    "explanation": "דה-הידרציה עם H₂SO₄ חם: CH₃CH₂OH → CH₂=CH₂ + H₂O (אלקן). H₂SO₄ קר → אתר."
+  },
+  {
+    "id": "q368",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "חומצה קרבוקסילית + אלכוהול ⇌ ? (H₂SO₄ כקטליזטור)",
+    "options": [
+      "אסטר + מים",
+      "אנהידריד + מים",
+      "אלדהיד + מים",
+      "אמיד + מים"
+    ],
+    "answer": 0,
+    "explanation": "אסטריפיקציה: R-COOH + R'-OH ⇌ R-COO-R' + H₂O. בנוכחות H₂SO₄ כקטליזטור חומצי."
+  },
+  {
+    "id": "q369",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "באיזה מבדיל ניתן להבחין בין אלדהיד לקטון?",
+    "options": [
+      "נסיון טולנס (Ag⁺/NH₃)",
+      "נסיון עם Na",
+      "נסיון עם CuO",
+      "נסיון עם HCl"
+    ],
+    "answer": 0,
+    "explanation": "נסיון טולנס: Ag⁺ + אלדהיד → Ag (מראה כסף) + חומצה. קטון לא מגיב. מבדיל יחיד."
+  },
+  {
+    "id": "q370",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "פרופנול-2 + CuO → ?",
+    "options": [
+      "פרופנון (אצטון)",
+      "פרופנאל",
+      "חומצה פרופיונית",
+      "פרופן"
+    ],
+    "answer": 0,
+    "explanation": "פרופנול-2 הוא אלכוהול שני → CuO → קטון (פרופנון = אצטון, (CH₃)₂C=O)."
+  },
+  {
+    "id": "q371",
+    "type": "true-false",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "הסרת HBr מ-2-ברומפרופן ב-NaOH/KOH אתנולי נותנת פרופן-2-אול.",
+    "options": [
+      "לא נכון",
+      "נכון"
+    ],
+    "answer": 0,
+    "explanation": "NaOH אתנולי → אלימינציה (HBr נפלט) → פרופן. NaOH מימי → תחלופה → אלכוהול."
+  },
+  {
+    "id": "q372",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוי",
+    "question": "מה הקשר בין ניוקלאוטידים ב-DNA?",
+    "options": [
+      "קשר פוספודיאסטר",
+      "קשר פפטיד",
+      "קשר מימן",
+      "קשר גליקוסידי"
+    ],
+    "answer": 0,
+    "explanation": "הגדיל (backbone) של DNA מחובר בקשרי פוספודיאסטר (סוכר-פוספט-סוכר). בסיסים ב-2 גדילים מחוברים בקשרי מימן."
+  },
+  {
+    "id": "q373",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוי",
+    "question": "כמה קשרי מימן בין G-C ב-DNA?",
+    "options": [
+      "3",
+      "2",
+      "1",
+      "4"
+    ],
+    "answer": 0,
+    "explanation": "G≡C: 3 קשרי מימן. A=T: 2 קשרי מימן. לכן GC עמיד יותר לחום."
+  },
+  {
+    "id": "q374",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "גדיל DNA: 5'-ATGCTA-3'\nמה גדיל ה-mRNA המשלים?",
+    "options": [
+      "5'-UACGAU-3'",
+      "5'-ATCGAT-3'",
+      "3'-UACGAU-5'",
+      "5'-TACGAT-3'"
+    ],
+    "answer": 0,
+    "explanation": "תמלול: DNA 3'→5' → mRNA 5'→3'. A→U, T→A, G→C, C→G. גדיל תבנית: 3'-TACGAT-5' → mRNA: 5'-UACGAU-3'"
+  },
+  {
+    "id": "q375",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוי",
+    "question": "חומצת אמינו גליצין: H₂N-CH₂-COOH.\nמה הקשר המתהווה בין שתי מולקולות גליצין?",
+    "options": [
+      "קשר פפטיד (-CO-NH-)",
+      "קשר אסטר",
+      "קשר מימן",
+      "קשר יוני"
+    ],
+    "answer": 0,
+    "explanation": "COOH + NH₂ → -CO-NH- + H₂O. זהו קשר פפטיד (אמיד). הוא קשר קוולנטי חזק."
+  },
+  {
+    "id": "q376",
+    "type": "true-false",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוי",
+    "question": "ב-RNA, הסוכר הוא ריבוז (עם OH בעמדה 2'), ואורציל (U) מחליף את התימין (T).",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. ה-2'-OH הופך את RNA לפחות יציב כימית מ-DNA. U מזווג עם A (כמו T ב-DNA)."
+  },
+  {
+    "id": "q377",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "לאורך מחזור מימין לשמאל בטבלה המחזורית, אנרגיית היינון:",
+    "options": [
+      "קטנה",
+      "גדלה",
+      "נשארת קבועה",
+      "אי-סדירה"
+    ],
+    "answer": 0,
+    "explanation": "לאורך מחזור משמאל לימין, אנרגיית היינון גדלה (יותר פרוטונים מושכים אלקטרונים). מימין לשמאל — קטנה."
+  },
+  {
+    "id": "q378",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "איזה מהבאים הוא איזוטופ של פחמן-12?",
+    "options": [
+      "פחמן-14 (C-14)",
+      "חנקן-14 (N-14)",
+      "בורון-12 (B-12)",
+      "סיליקון-12"
+    ],
+    "answer": 0,
+    "explanation": "איזוטופים = אותו יסוד (Z), מספר נויטרונים שונה. C-12 ו-C-14 שניהם פחמן (Z=6), אבל A שונה."
+  },
+  {
+    "id": "q379",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קשה",
+    "question": "מה מספר הנויטרונים של יוד-131 (I-131)?",
+    "options": [
+      "78",
+      "53",
+      "131",
+      "25"
+    ],
+    "answer": 0,
+    "explanation": "A = Z + N → N = A − Z = 131 − 53 = 78. (Z של יוד = 53)"
+  },
+  {
+    "id": "q380",
+    "type": "true-false",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוי",
+    "question": "הרדיוס האטומי גדל בירידה בקבוצה (מלמעלה למטה).",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. כשיורדים בקבוצה, מוסיפים מעטפת אלקטרונים חדשה — הרדיוס גדל."
+  },
+  {
+    "id": "q381",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קשה",
+    "question": "בקרינת בטא מינוס (β⁻), מה קורה לגרעין?",
+    "options": [
+      "נויטרון הופך לפרוטון — Z גדל ב-1",
+      "פרוטון הופך לנויטרון — Z קטן ב-1",
+      "A גדל ב-1",
+      "A קטן ב-4"
+    ],
+    "answer": 0,
+    "explanation": "β⁻: n → p + e⁻ + ν̄. Z גדל ב-1, A לא משתנה. המיקום בטבלה זז ימינה."
+  },
+  {
+    "id": "q382",
+    "type": "multiple-choice",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "פולימריזציה בתוספת של אתן: n·CH₂=CH₂ → (-CH₂-CH₂-)ₙ\nאיזה תוצר לוואי נוצר?",
+    "options": [
+      "אין תוצר לוואי",
+      "מים",
+      "CO₂",
+      "HCl"
+    ],
+    "answer": 0,
+    "explanation": "בפולימריזציה בתוספת: המונומרים מצטרפים ישירות — אין אובדן אטומים. לעומת זאת, בפולימריזציה בעיבוי — נוצרים מים."
+  },
+  {
+    "id": "q383",
+    "type": "multiple-choice",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "ניילון נוצר מפולימריזציה בעיבוי בין:\n",
+    "options": [
+      "דיחומצה + דיאמין",
+      "דיאלכוהול + דיחומצה",
+      "מונומר של אמינו-חומצה בלבד",
+      "אתן + חנקן"
+    ],
+    "answer": 0,
+    "explanation": "ניילון 6,6: HOOC-(CH₂)₄-COOH + H₂N-(CH₂)₆-NH₂ → פוליאמיד + מים"
+  },
+  {
+    "id": "q384",
+    "type": "true-false",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "פוליאתילן הוא פולימר תוספת של מונומר אתן.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. n CH₂=CH₂ → (-CH₂-CH₂-)ₙ. הקשר הכפול נפתח ויוצר שרשרת."
+  },
+  {
+    "id": "q385",
+    "type": "multiple-choice",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "המסה המולרית של קטע פולי-ווינילכלוריד (PVC) היא 62,500 g/mol.\nמה מספר יחידות החזרה (n)? (מסה מולרית של VC = 62.5 g/mol)",
+    "options": [
+      "1000",
+      "62.5",
+      "625",
+      "10000"
+    ],
+    "answer": 0,
+    "explanation": "n = MW_פולימר / MW_מונומר = 62500 / 62.5 = 1000"
+  },
+  {
+    "id": "q386",
+    "type": "multiple-choice",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "מה הבדל בין פולימריזציה בתוספת לפולימריזציה בעיבוי?",
+    "options": [
+      "בתוספת אין תוצר לוואי; בעיבוי נפלט H₂O",
+      "בתוספת נפלט H₂O; בעיבוי לא",
+      "שתיהן זהות",
+      "רק בעיבוי ניתן ליצור פוליאמידים"
+    ],
+    "answer": 0,
+    "explanation": "בתוספת: קשרים כפולים נפתחים → אין תוצר לוואי. בעיבוי: -COOH + -NH₂ → -CO-NH- + H₂O."
+  },
+  {
+    "id": "q387",
+    "type": "multiple-choice",
+    "topic": "spectroscopy",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "אילו קבוצות פונקציונליות מזוהות בספקטרוסקופיית IR?",
+    "options": [
+      "O-H, C=O, N-H, C≡N",
+      "תנועת אלקטרונים",
+      "מסות מולריות",
+      "מבנה רשת גביש"
+    ],
+    "answer": 0,
+    "explanation": "IR מזהה רטט של קשרים. כל קשר/קבוצה בתדר אופייני. O-H ~3300 cm⁻¹, C=O ~1700 cm⁻¹."
+  },
+  {
+    "id": "q388",
+    "type": "multiple-choice",
+    "topic": "spectroscopy",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "לפי Beer-Lambert: A = ε·c·l\nאם ε=1000 L/mol·cm, c=0.01M, l=1cm:\nמה ה-Absorbance?",
+    "options": [
+      "10",
+      "0.01",
+      "100",
+      "0.001"
+    ],
+    "answer": 0,
+    "explanation": "A = 1000 × 0.01 × 1 = 10. (אם A>2 הספקטרומטר לא מדויק בפועל, אבל חישוב נכון)"
+  },
+  {
+    "id": "q389",
+    "type": "true-false",
+    "topic": "spectroscopy",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "ספקטרומטריית מסה מודדת את יחס המסה-למטען (m/z) של יונים.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. הדגימה מיוננת, היונים מואצים ומופרדים לפי m/z. שיא m/z הגבוה ביותר = יון מולקולרי M⁺."
+  },
+  {
+    "id": "q390",
+    "type": "multiple-choice",
+    "topic": "spectroscopy",
+    "week": 7,
+    "difficulty": "בינוי",
+    "question": "מה אנרגיית פוטון עם λ = 500 nm? (h = 6.63×10⁻³⁴ J·s, c = 3×10⁸ m/s)",
+    "options": [
+      "3.98×10⁻¹⁹ J",
+      "6.63×10⁻³⁴ J",
+      "1.5×10⁻¹² J",
+      "9.9×10⁻²⁵ J"
+    ],
+    "answer": 0,
+    "explanation": "E = hc/λ = (6.63×10⁻³⁴ × 3×10⁸) / (500×10⁻⁹) = 3.98×10⁻¹⁹ J"
+  },
+  {
+    "id": "q391",
+    "type": "multiple-choice",
+    "topic": "spectroscopy",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "שיא בספקטרום IR ב-1700 cm⁻¹ מצביע על:",
+    "options": [
+      "קשר C=O (קרבוניל)",
+      "קשר O-H",
+      "קשר N-H",
+      "קשר C-H"
+    ],
+    "answer": 0,
+    "explanation": "C=O רוטט ב-1700-1750 cm⁻¹ (אלדהיד/קטון/חומצה/אסטר). טביעת אצבע לקבוצת קרבוניל."
+  },
+  {
+    "id": "q392",
+    "type": "multiple-choice",
+    "topic": "stereoisomers",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "לפחמן עם 4 תחליפים שונים — כמה סטריאואיזומרים אפשריים?",
+    "options": [
+      "2 (זוג אנטיומרים)",
+      "4",
+      "1",
+      "3"
+    ],
+    "answer": 0,
+    "explanation": "פחמן כיראלי עם 4 תחליפים שונים נותן 2 קונפיגורציות (R ו-S) — זוג אנטיומרים."
+  },
+  {
+    "id": "q393",
+    "type": "true-false",
+    "topic": "stereoisomers",
+    "week": 8,
+    "difficulty": "בינוי",
+    "question": "אנטיומרים הם מראות זה של זה ולא ניתן לחפות אחד על השני.",
+    "options": [
+      "נכון",
+      "לא נכון"
+    ],
+    "answer": 0,
+    "explanation": "נכון. כמו ידיים ימין ושמאל — שתי צורות מראה שאי-אפשר להחפות. לכן מולקולה כירלית."
+  },
+  {
+    "id": "q394",
+    "type": "multiple-choice",
+    "topic": "stereoisomers",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "מה ההבדל בין אנטיומרים לדיאסטריאומרים?",
+    "options": [
+      "אנטיומרים הם מראות; דיאסטריאומרים אינם מראות",
+      "שניהם מראות",
+      "אנטיומרים שונים בתכונות פיזיקליות",
+      "דיאסטריאומרים זהים בפעילות אופטית"
+    ],
+    "answer": 0,
+    "explanation": "אנטיומרים: יחס מראה (R,R ↔ S,S). דיאסטריאומרים: שינוי בחלק ממרכזי הכירליות (R,S ↔ R,R) — אינם מראות."
+  },
+  {
+    "id": "q395",
+    "type": "multiple-choice",
+    "topic": "stereoisomers",
+    "week": 8,
+    "difficulty": "בינוי",
+    "question": "ל-2-ברומבוטן (CH₃CHBrCH₂CH₃) יש כמה מרכזי כירליות?",
+    "options": [
+      "1",
+      "2",
+      "0",
+      "3"
+    ],
+    "answer": 0,
+    "explanation": "פחמן 2: קשור ל-CH₃, H, Br, CH₂CH₃ — 4 תחליפים שונים → מרכז כירליות אחד."
   }
 ]
