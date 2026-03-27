@@ -190,8 +190,8 @@
     .ql-lesson__body {
       padding: 1rem 1.25rem 1.1rem;
       border-top: 1px solid #bfdbfe;
-      transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
-      max-height: 500px;
+      transition: max-height 0.4s ease, padding 0.3s ease, opacity 0.3s ease;
+      max-height: 4000px;
       opacity: 1;
     }
     .ql-lesson__body--collapsed {
@@ -201,32 +201,130 @@
       opacity: 0;
       overflow: hidden;
     }
+    /* ─── Sections ──────────────────────────────────────────────── */
+    .ql-section {
+      margin-bottom: 0.85rem;
+    }
+    .ql-section__title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1e40af;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.45rem;
+    }
+    .ql-section__icon {
+      font-size: 1.1rem;
+      margin-left: 0.3rem;
+    }
+    .ql-section--intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.6);
+      border-radius: 0.5rem;
+      padding: 0.6rem 0.8rem;
+    }
+    .ql-section--life {
+      background: #f0fdf4;
+      border-radius: 0.6rem;
+      padding: 0.7rem 0.9rem;
+      border-right: 3px solid #4ade80;
+    }
+    .ql-section--analogy {
+      background: #f5f3ff;
+      border-radius: 0.6rem;
+      padding: 0.7rem 0.9rem;
+      border-right: 3px solid #a78bfa;
+    }
+    /* ─── Terms ─────────────────────────────────────────────────── */
+    .ql-terms {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .ql-term {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem;
+      align-items: baseline;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .ql-term__word {
+      font-weight: 700;
+      color: #1d4ed8;
+      white-space: nowrap;
+      background: #dbeafe;
+      border-radius: 0.3rem;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.85rem;
+    }
+    .ql-term__def {
+      color: #374151;
+    }
+    /* ─── Steps ─────────────────────────────────────────────────── */
+    .ql-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .ql-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .ql-step__num {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+    .ql-step__text {
+      color: #1f2937;
+    }
+    /* ─── Life / real-world ─────────────────────────────────────── */
+    .ql-life-text {
+      font-size: 0.92rem;
+      color: #166534;
+      margin: 0;
+      line-height: 1.6;
+    }
+    /* ─── Simple / analogy / keyword ───────────────────────────── */
     .ql-lesson__simple {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #1e3a8a;
-      margin: 0 0 0.65rem;
+      margin: 0;
       line-height: 1.5;
     }
     .ql-lesson__analogy {
-      background: #fff;
-      border-radius: 0.6rem;
-      padding: 0.65rem 0.9rem;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #374151;
-      margin-bottom: 0.65rem;
-      border-right: 3px solid #86efac;
+      margin: 0;
       line-height: 1.6;
     }
     .ql-lesson__keyword {
       background: #fef9c3;
       border-radius: 0.6rem;
       padding: 0.55rem 0.9rem;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: #713f12;
       font-family: monospace;
-      line-height: 1.6;
+      line-height: 1.7;
       border-right: 3px solid #fbbf24;
+      margin-top: 0.5rem;
+      word-break: break-word;
     }
 
     /* ─── Emoji Animations ─────────────────────────────────────────── */
