@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — סימולציות אינטרקטיביות</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .sim-hero {
+      background: linear-gradient(135deg, #0f172a, #1e1b4b, #1e3a8a, #312e81);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+      color: #fff;
+      padding: 3rem 2rem;
+      border-radius: 1.25rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .sim-hero h1 { font-size: 2.2rem; margin: 0 0 0.5rem; position: relative; z-index: 1; }
+    .sim-hero p  { opacity: 0.85; margin: 0; position: relative; z-index: 1; }
+    .atom-deco {
+      position: absolute;
+      opacity: 0.12;
+      font-size: 8rem;
+      animation: spin 20s linear infinite;
+    }
+
+    /* ── Sim Navigation Tabs ─────────────────────────────────── */
+    .sim-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .sim-tab {
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.6rem;
+      border: 2px solid #e5e7eb;
+      background: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .sim-tab:hover { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; }
+    .sim-tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+    /* ── Simulation Panels ──────────────────────────────────── */
+    .sim-panel { display: none; animation: fadeInUp 0.4s ease; }
+    .sim-panel.active { display: block; }
+
+    .sim-card {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .sim-card h2 {
+      font-size: 1.3rem;
+      margin: 0 0 0.5rem;
+      color: #1e293b;
+    }
+    .sim-card .sim-desc {
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* ── Controls ─────────────────────────────────────────────── */
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #374151;
+      min-width: 130px;
+      flex-shrink: 0;
+    }
+    .control-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #e5e7eb;
+      outline: none;
+      min-width: 160px;
+    }
+    .control-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #2563eb;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(37,99,235,0.4);
+      transition: transform 0.15s;
+    }
+    .control-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .control-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e293b;
+      min-width: 60px;
+      text-align: center;
+      background: #f1f5f9;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+
+    /* ══ 1. Le Chatelier ═══════════════════════════════════════ */
+    .lechat-container {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) {
+      .lechat-container { grid-template-columns: 1fr; }
+    }
+
+    .lechat-side {
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+    .lechat-side.reactants { background: #fef3c7; border-color: #fcd34d; }
+    .lechat-side.products  { background: #d1fae5; border-color: #6ee7b7; }
+    .lechat-side h4 { margin: 0 0 0.5rem; font-size: 0.9rem; color: #374151; }
+    .lechat-side .molecules {
+      font-size: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      min-height: 40px;
+      align-items: center;
+    }
+    .molecule-dot {
+      display: inline-block;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .lechat-arrow {
+      text-align: center;
+      font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .arrow-forward, .arrow-backward {
+      font-size: 1.2rem;
+      transition: all 0.4s ease;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .arrow-forward.dominant  { color: #059669; font-weight: 900; font-size: 1.6rem; }
+    .arrow-backward.dominant { color: #dc2626; font-weight: 900; font-size: 1.6rem; }
+
+    .lechat-status {
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: #374151;
+      margin-top: 0.75rem;
+      border-right: 4px solid #2563eb;
+      animation: fadeIn 0.3s ease;
+    }
+    .lechat-status.forward { border-right-color: #059669; background: #f0fdf4; }
+    .lechat-status.backward { border-right-color: #dc2626; background: #fef2f2; }
+
+    .lechat-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .lechat-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .lechat-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .lechat-btn.add-reactant   { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+    .lechat-btn.add-product    { background: #d1fae5; border-color: #6ee7b7; color: #065f46; }
+    .lechat-btn.increase-temp  { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+    .lechat-btn.increase-press { background: #ede9fe; border-color: #c4b5fd; color: #5b21b6; }
+    .lechat-btn.reset          { background: #f1f5f9; border-color: #e2e8f0; color: #475569; }
+
+    /* ══ 2. pH Calculator ═════════════════════════════════════ */
+    .ph-display {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .ph-value-big {
+      font-size: 4rem;
+      font-weight: 800;
+      transition: color 0.4s ease;
+      line-height: 1;
+      display: block;
+    }
+    .ph-label { font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem; }
+    .ph-type-badge {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      transition: all 0.4s ease;
+    }
+
+    .ph-bar-wrap { margin: 1.5rem 0 0.5rem; position: relative; }
+    .ph-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    .beaker {
+      width: 120px;
+      height: 140px;
+      margin: 0 auto 1rem;
+      position: relative;
+    }
+    .beaker svg { width: 100%; height: 100%; }
+
+    .formula-box {
+      background: #1e293b;
+      color: #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-family: monospace;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      line-height: 1.7;
+    }
+    .formula-box .highlight { color: #60a5fa; font-weight: 700; }
+
+    /* ══ 3. Nuclear Decay ════════════════════════════════════ */
+    #decay-canvas-wrap {
+      position: relative;
+      margin: 1.5rem 0;
+    }
+    #decay-canvas {
+      width: 100%;
+      max-height: 220px;
+      border-radius: 0.75rem;
+      background: #0f172a;
+      display: block;
+    }
+    .decay-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 500px) { .decay-stats { grid-template-columns: 1fr; } }
+    .decay-stat {
+      background: #f1f5f9;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .decay-stat .dv { font-size: 1.5rem; font-weight: 800; color: #1e293b; }
+    .decay-stat .dl { font-size: 0.78rem; color: #6b7280; margin-top: 0.15rem; }
+
+    .isotope-select {
+      padding: 0.5rem 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #fff;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    /* ══ 4. Electrochemical Cell ═════════════════════════════ */
+    #cell-canvas-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    #cell-canvas {
+      width: 100%;
+      border-radius: 0.75rem;
+      display: block;
+      background: #f8fafc;
+    }
+
+    .cell-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .half-cell-card {
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid;
+    }
+    .half-cell-card.anode {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+    .half-cell-card.cathode {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    .half-cell-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+    }
+    .half-cell-card .reaction {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #374151;
+      background: rgba(255,255,255,0.6);
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.3rem;
+      margin-top: 0.4rem;
+    }
+    .emf-display {
+      text-align: center;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: linear-gradient(135deg, #dbeafe, #ede9fe);
+      border-radius: 0.75rem;
+    }
+    .emf-value { font-size: 2.5rem; font-weight: 800; color: #1e293b; }
+    .emf-label { font-size: 0.85rem; color: #6b7280; }
+
+    /* ══ 5. Molecular Geometry ════════════════════════════════ */
+    #geometry-canvas {
+      width: 100%;
+      max-height: 280px;
+      border-radius: 0.75rem;
+      background: #0f172a;
+      display: block;
+      cursor: grab;
+    }
+    #geometry-canvas:active { cursor: grabbing; }
+
+    .molecule-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .mol-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+      font-weight: 600;
+    }
+    .mol-btn:hover { background: #eff6ff; border-color: #93c5fd; }
+    .mol-btn.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+    .geometry-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 500px) { .geometry-info { grid-template-columns: 1fr; } }
+    .geo-info-box {
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .geo-info-box .giv { font-size: 1.1rem; font-weight: 700; color: #1e293b; }
+    .geo-info-box .gil { font-size: 0.75rem; color: #6b7280; margin-top: 0.2rem; }
+
+    /* ── Explanation box ─────────────────────────────────────── */
+    .explanation-box {
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      border: 1px solid #bfdbfe;
+    }
+    .explanation-box h4 { margin: 0 0 0.5rem; color: #1e40af; font-size: 0.95rem; }
+    .explanation-box p  { color: #374151; font-size: 0.88rem; line-height: 1.6; margin: 0; }
+  </style>
+</head>
+<body data-page="simulations">
+
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="simulations.html" class="active">🔬 סימולציות</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="past-exams.html">📂 מבחני עבר</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <!-- Hero -->
+    <div class="sim-hero">
+      <div class="atom-deco" style="top:-20px; right:-20px;">⚛</div>
+      <div class="atom-deco" style="bottom:-20px; left:-20px; animation-direction:reverse; font-size:6rem;">🔬</div>
+      <h1 class="anim-fade-up">🔬 סימולציות אינטרקטיביות</h1>
+      <p class="anim-fade-up" style="animation-delay:0.1s">לראות את הכימיה — לא רק לקרוא אותה</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="sim-tabs" id="sim-tabs">
+      <button class="sim-tab active" onclick="switchTab('lechat')">⚖️ לה-שאטלייה</button>
+      <button class="sim-tab" onclick="switchTab('ph')">🧪 מחשבון pH</button>
+      <button class="sim-tab" onclick="switchTab('decay')">☢️ פירוק רדיואקטיבי</button>
+      <button class="sim-tab" onclick="switchTab('cell')">⚡ תא אלקטרוכימי</button>
+      <button class="sim-tab" onclick="switchTab('geometry')">🔷 גיאומטריה מולקולרית</button>
+    </div>
+
+    <!-- ══ Panel 1: Le Chatelier ════════════════════════════════ -->
+    <div class="sim-panel active" id="panel-lechat">
+      <div class="sim-card">
+        <h2>⚖️ עקרון לה-שאטלייה — סימולטור שיווי משקל</h2>
+        <p class="sim-desc">
+          הגדר תגובה: N₂ + 3H₂ ⇌ 2NH₃ (תהליך הבר) · לחץ על כפתור כדי להפריע לשיווי המשקל
+          ולראות לאן הוא יזוז
+        </p>
+
+        <div class="lechat-btns">
+          <button class="lechat-btn add-reactant"   onclick="lechat.disturb('add-reactant')">➕ הוסף N₂</button>
+          <button class="lechat-btn add-product"    onclick="lechat.disturb('add-product')">➕ הוסף NH₃</button>
+          <button class="lechat-btn increase-temp"  onclick="lechat.disturb('increase-temp')">🌡 הגבה טמפרטורה</button>
+          <button class="lechat-btn increase-press" onclick="lechat.disturb('increase-press')">💨 הגבה לחץ</button>
+          <button class="lechat-btn reset"          onclick="lechat.reset()">🔄 איפוס</button>
+        </div>
+
+        <div class="lechat-container">
+          <div class="lechat-side reactants" id="lc-reactants">
+            <h4>מגיבים</h4>
+            <div class="molecules" id="lc-mol-reactants"></div>
+            <div style="margin-top:0.5rem; font-size:0.8rem; color:#92400e;">N₂ + 3H₂</div>
+          </div>
+          <div class="lechat-arrow">
+            <span class="arrow-forward" id="lc-arrow-fwd">→</span>
+            <span style="font-size:0.7rem; color:#94a3b8;">⇌</span>
+            <span class="arrow-backward" id="lc-arrow-bwd">←</span>
+          </div>
+          <div class="lechat-side products" id="lc-products">
+            <h4>מוצרים</h4>
+            <div class="molecules" id="lc-mol-products"></div>
+            <div style="margin-top:0.5rem; font-size:0.8rem; color:#065f46;">2NH₃</div>
+          </div>
+        </div>
+
+        <div class="lechat-status" id="lc-status">
+          🟡 מערכת בשיווי משקל — לחץ על אחד הכפתורים כדי להפריע
+        </div>
+
+        <div class="explanation-box" id="lc-explanation" style="margin-top:1rem;">
+          <h4>📖 מה קורה?</h4>
+          <p id="lc-explain-text">
+            בשיווי משקל דינמי, קצב התגובה הקדימה = קצב התגובה ההפוכה.
+            כל שינוי (ריכוז / טמפרטורה / לחץ) יגרום למערכת לנוע בכיוון המנוגד לשינוי.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ Panel 2: pH ═════════════════════════════════════════ -->
+    <div class="sim-panel" id="panel-ph">
+      <div class="sim-card">
+        <h2>🧪 מחשבון pH אינטרקטיבי</h2>
+        <p class="sim-desc">הזז את המחוון לבחירת ריכוז ומין החומצה/בסיס — ראה את ה-pH מחושב בזמן אמת</p>
+
+        <div class="control-row">
+          <span class="control-label">סוג תמיסה:</span>
+          <select class="isotope-select" id="ph-type" onchange="phCalc.update()" style="flex:1; max-width:220px;">
+            <option value="strong-acid">חומצה חזקה (HCl)</option>
+            <option value="weak-acid">חומצה חלשה (CH₃COOH)</option>
+            <option value="strong-base">בסיס חזק (NaOH)</option>
+            <option value="weak-base">בסיס חלש (NH₃)</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <span class="control-label">ריכוז (mol/L):</span>
+          <input type="range" class="control-slider" id="ph-conc-slider"
+                 min="-4" max="0" step="0.1" value="-2" oninput="phCalc.update()">
+          <span class="control-value" id="ph-conc-val">0.01</span>
+        </div>
+
+        <div class="ph-display">
+          <div class="beaker">
+            <svg viewBox="0 0 100 120">
+              <!-- beaker outline -->
+              <path d="M20,10 L20,90 Q20,105 35,105 L65,105 Q80,105 80,90 L80,10 Z"
+                    fill="none" stroke="#94a3b8" stroke-width="3" stroke-linejoin="round"/>
+              <!-- liquid fill -->
+              <clipPath id="beaker-clip">
+                <path d="M20,10 L20,90 Q20,105 35,105 L65,105 Q80,105 80,90 L80,10 Z"/>
+              </clipPath>
+              <rect id="beaker-liquid" x="20" y="40" width="60" height="65"
+                    clip-path="url(#beaker-clip)" rx="0" style="transition: fill 0.5s ease;"/>
+              <!-- bubbles -->
+              <circle id="b1" cx="35" cy="90" r="3" fill="rgba(255,255,255,0.4)">
+                <animate attributeName="cy" from="90" to="45" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle id="b2" cx="55" cy="95" r="2" fill="rgba(255,255,255,0.4)">
+                <animate attributeName="cy" from="95" to="50" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from="0.5" to="0" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
+              </circle>
+              <circle id="b3" cx="65" cy="88" r="2.5" fill="rgba(255,255,255,0.4)">
+                <animate attributeName="cy" from="88" to="42" dur="1.8s" begin="1.4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" from="0.5" to="0" dur="1.8s" begin="1.4s" repeatCount="indefinite"/>
+              </circle>
+              <!-- scale lines -->
+              <line x1="22" y1="40" x2="30" y2="40" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="22" y1="55" x2="30" y2="55" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="22" y1="70" x2="30" y2="70" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="22" y1="85" x2="30" y2="85" stroke="#e2e8f0" stroke-width="1"/>
+            </svg>
+          </div>
+
+          <span class="ph-value-big" id="ph-value-big" style="color:#2563eb">7.00</span>
+          <div class="ph-label">pH</div>
+          <span class="ph-type-badge" id="ph-type-badge" style="background:#d1fae5; color:#065f46;">ניטרלי</span>
+        </div>
+
+        <div class="ph-bar-wrap">
+          <div class="ph-bar">
+            <div class="ph-indicator" id="ph-indicator" style="left:50%"></div>
+          </div>
+          <div class="ph-bar-labels">
+            <span>0 חומצי חזק</span>
+            <span>7 ניטרלי</span>
+            <span>14 בסיסי חזק</span>
+          </div>
+        </div>
+
+        <div class="formula-box" id="ph-formula">
+          <span class="highlight">pH = -log[H⁺]</span>
+          = -log(0.01) = <span class="highlight">2.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ Panel 3: Radioactive Decay ══════════════════════════ -->
+    <div class="sim-panel" id="panel-decay">
+      <div class="sim-card">
+        <h2>☢️ פירוק רדיואקטיבי — זמן מחצית חיים</h2>
+        <p class="sim-desc">בחר איזוטופ וראה את הפירוק הרדיואקטיבי בזמן אמת. כל נקודה = אטום אחד.</p>
+
+        <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+          <select class="isotope-select" id="isotope-select" onchange="decay.setIsotope()">
+            <option value="carbon14">פחמן-14 (C-14) · t½ = 5,730 שנה</option>
+            <option value="iodine131">יוד-131 (I-131) · t½ = 8 ימים</option>
+            <option value="uranium238">אורניום-238 (U-238) · t½ = 4.5 מיליארד שנה</option>
+            <option value="radon222">ראדון-222 (Rn-222) · t½ = 3.8 ימים</option>
+          </select>
+          <button class="lechat-btn add-reactant" onclick="decay.start()" style="margin:0">▶ התחל</button>
+          <button class="lechat-btn reset" onclick="decay.reset()" style="margin:0">🔄 איפוס</button>
+        </div>
+
+        <div id="decay-canvas-wrap">
+          <canvas id="decay-canvas" height="220"></canvas>
+        </div>
+
+        <div class="decay-stats">
+          <div class="decay-stat">
+            <div class="dv" id="decay-remaining" style="color:#2563eb">100</div>
+            <div class="dl">אטומים שנותרו %</div>
+          </div>
+          <div class="decay-stat">
+            <div class="dv" id="decay-halflives" style="color:#7c3aed">0</div>
+            <div class="dl">מחצאי חיים עברו</div>
+          </div>
+          <div class="decay-stat">
+            <div class="dv" id="decay-time" style="color:#059669">0</div>
+            <div class="dl">זמן שעבר</div>
+          </div>
+        </div>
+
+        <div class="explanation-box" style="margin-top:1rem;">
+          <h4>📐 הנוסחה</h4>
+          <p>
+            <strong>N(t) = N₀ · (½)^(t/t½)</strong><br>
+            כשעובר t½ אחד — נשאר 50% מהחומר.<br>
+            אחרי 2t½ — נשאר 25%. אחרי 3t½ — נשאר 12.5%.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ Panel 4: Electrochemical Cell ══════════════════════ -->
+    <div class="sim-panel" id="panel-cell">
+      <div class="sim-card">
+        <h2>⚡ תא גלוואני — אנימציה אינטרקטיבית</h2>
+        <p class="sim-desc">ראה כיצד זרם אלקטרונים ויוני מתכת נעים בתא אלקטרוכימי</p>
+
+        <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+          <select class="isotope-select" id="cell-select" onchange="cellSim.setCell()">
+            <option value="zncu">Zn/Cu — E° = +1.10V</option>
+            <option value="feau">Fe/Au — E° = +1.68V</option>
+            <option value="znfe">Zn/Fe — E° = +0.32V</option>
+          </select>
+          <button class="lechat-btn add-reactant" onclick="cellSim.toggle()" id="cell-btn" style="margin:0">▶ הפעל</button>
+        </div>
+
+        <canvas id="cell-canvas" height="260"></canvas>
+
+        <div class="emf-display">
+          <div class="emf-value" id="cell-emf">+1.10 V</div>
+          <div class="emf-label">כוח אלקטרומניע (E°תא)</div>
+        </div>
+
+        <div class="cell-info-grid">
+          <div class="half-cell-card anode">
+            <h4>⬆️ אנודה (חמצון)</h4>
+            <div class="reaction" id="cell-anode-rx">Zn → Zn²⁺ + 2e⁻</div>
+            <div style="font-size:0.8rem; color:#78350f; margin-top:0.4rem;">E°חמצון = +0.76V</div>
+          </div>
+          <div class="half-cell-card cathode">
+            <h4>⬇️ קתודה (חיזור)</h4>
+            <div class="reaction" id="cell-cathode-rx">Cu²⁺ + 2e⁻ → Cu</div>
+            <div style="font-size:0.8rem; color:#1e40af; margin-top:0.4rem;">E°חיזור = +0.34V</div>
+          </div>
+        </div>
+
+        <div class="explanation-box" style="margin-top:1rem;">
+          <h4>📐 הנוסחה</h4>
+          <p><strong>E°תא = E°קתודה − E°אנודה</strong><br>
+          אנודה = חמצון (מאבד אלקטרונים) · קתודה = חיזור (מקבל אלקטרונים)<br>
+          ΔG° = −nFE° — כשE° חיובי, התגובה ספונטנית (ΔG° שלילי)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ Panel 5: Molecular Geometry ═══════════════════════ -->
+    <div class="sim-panel" id="panel-geometry">
+      <div class="sim-card">
+        <h2>🔷 גיאומטריה מולקולרית — VSEPR</h2>
+        <p class="sim-desc">בחר מולקולה וראה את הצורה המרחבית שלה — גרור כדי לסובב</p>
+
+        <div class="molecule-selector">
+          <button class="mol-btn active" onclick="geoSim.set('H2O')">H₂O</button>
+          <button class="mol-btn" onclick="geoSim.set('CO2')">CO₂</button>
+          <button class="mol-btn" onclick="geoSim.set('NH3')">NH₃</button>
+          <button class="mol-btn" onclick="geoSim.set('CH4')">CH₄</button>
+          <button class="mol-btn" onclick="geoSim.set('BF3')">BF₃</button>
+          <button class="mol-btn" onclick="geoSim.set('PCl5')">PCl₅</button>
+        </div>
+
+        <canvas id="geometry-canvas" height="280"></canvas>
+
+        <div class="geometry-info" id="geo-info">
+          <div class="geo-info-box">
+            <div class="giv" id="geo-shape">זוויתית</div>
+            <div class="gil">צורה</div>
+          </div>
+          <div class="geo-info-box">
+            <div class="giv" id="geo-angle">104.5°</div>
+            <div class="gil">זווית קשר</div>
+          </div>
+          <div class="geo-info-box">
+            <div class="giv" id="geo-hybrid">sp³</div>
+            <div class="gil">היברידיזציה</div>
+          </div>
+        </div>
+
+        <div class="explanation-box" style="margin-top:0.75rem;">
+          <h4 id="geo-molecule-name">H₂O — מים</h4>
+          <p id="geo-explain">
+            מולקולת המים היא זוויתית בגלל 2 זוגות אלקטרונים חופשיים על האטום המרכזי (O).
+            הם דוחים את הקשרים O-H ומצמצמים את זווית הקשר מ-109.5° ל-104.5°.
+            המולקולה קוטבית — בסיס לקשרי מימן.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  'use strict';
+
+  // ── Tab switching ─────────────────────────────────────────────────
+  function switchTab(id) {
+    document.querySelectorAll('.sim-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    // Init canvas-based sims when first shown
+    if (id === 'decay') decay.initCanvas();
+    if (id === 'cell') cellSim.initCanvas();
+    if (id === 'geometry') geoSim.initCanvas();
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  //  1. LE CHATELIER
+  // ══════════════════════════════════════════════════════════════════
+  const lechat = {
+    reactants: 6,
+    products: 4,
+    direction: 'equilibrium',
+    timeout: null,
+
+    render() {
+      const reactEl = document.getElementById('lc-mol-reactants');
+      const prodEl  = document.getElementById('lc-mol-products');
+      const fwdEl   = document.getElementById('lc-arrow-fwd');
+      const bwdEl   = document.getElementById('lc-arrow-bwd');
+
+      reactEl.innerHTML = Array(Math.max(0, this.reactants)).fill(0)
+        .map((_, i) => `<span class="molecule-dot" style="animation-delay:${i*0.05}s; animation: scaleIn 0.3s ease both;">⚫</span>`).join('');
+      prodEl.innerHTML  = Array(Math.max(0, this.products)).fill(0)
+        .map((_, i) => `<span class="molecule-dot" style="animation-delay:${i*0.05}s; animation: scaleIn 0.3s ease both;">🟢</span>`).join('');
+
+      fwdEl.classList.toggle('dominant', this.direction === 'forward');
+      bwdEl.classList.toggle('dominant', this.direction === 'backward');
+    },
+
+    disturb(type) {
+      const statusEl  = document.getElementById('lc-status');
+      const explainEl = document.getElementById('lc-explain-text');
+      let msg = '', cls = '', explain = '';
+
+      switch (type) {
+        case 'add-reactant':
+          this.reactants += 3;
+          this.direction = 'forward';
+          msg     = '⬅ הוספת N₂ → שיווי המשקל מתקדם <strong>קדימה</strong> (לכיוון NH₃)';
+          cls     = 'forward';
+          explain = 'הוספת מגיב מגדילה את Q < K, לכן התגובה מתקדמת קדימה לייצור NH₃ עד ש-Q = K שוב.';
+          setTimeout(() => { this.reactants -= 2; this.products += 2; this.direction = 'equilibrium'; this.setEquilibrium(); }, 1500);
+          break;
+        case 'add-product':
+          this.products += 3;
+          this.direction = 'backward';
+          msg     = '➡ הוספת NH₃ → שיווי המשקל מתקדם <strong>לאחור</strong> (לכיוון N₂+H₂)';
+          cls     = 'backward';
+          explain = 'הוספת מוצר מגדילה את Q > K, לכן התגובה מתקדמת לאחור לפירוק NH₃ עד ש-Q = K שוב.';
+          setTimeout(() => { this.products -= 2; this.reactants += 2; this.direction = 'equilibrium'; this.setEquilibrium(); }, 1500);
+          break;
+        case 'increase-temp':
+          this.direction = 'backward';
+          this.reactants += 2;
+          this.products = Math.max(1, this.products - 2);
+          msg     = '🌡 עליית טמפרטורה → שיווי המשקל נע <strong>בכיוון האנדותרמי</strong> (לאחור)';
+          cls     = 'backward';
+          explain = 'תגובת הבר אקסותרמית (ΔH < 0). עליית טמפרטורה מעדיפה את הכיוון ההפוך (אנדותרמי) — פירוק NH₃.';
+          setTimeout(() => { this.direction = 'equilibrium'; this.setEquilibrium(); }, 2000);
+          break;
+        case 'increase-press':
+          this.direction = 'forward';
+          this.products += 2;
+          this.reactants = Math.max(2, this.reactants - 1);
+          msg     = '💨 עליית לחץ → שיווי המשקל נע לכיוון <strong>פחות מולים גז</strong> (קדימה)';
+          cls     = 'forward';
+          explain = 'בצד השמאלי: 1+3=4 מולים. בצד הימני: 2 מולים. עליית לחץ מעדיפה ייצור NH₃ (פחות מולים).';
+          setTimeout(() => { this.direction = 'equilibrium'; this.setEquilibrium(); }, 2000);
+          break;
+      }
+
+      statusEl.innerHTML = msg;
+      statusEl.className = `lechat-status ${cls}`;
+      if (explainEl) explainEl.textContent = explain;
+      this.render();
+    },
+
+    setEquilibrium() {
+      const statusEl = document.getElementById('lc-status');
+      statusEl.innerHTML = '🟡 מערכת חזרה לשיווי משקל';
+      statusEl.className = 'lechat-status';
+      this.direction = 'equilibrium';
+      this.render();
+    },
+
+    reset() {
+      this.reactants = 6; this.products = 4; this.direction = 'equilibrium';
+      const statusEl = document.getElementById('lc-status');
+      statusEl.innerHTML = '🟡 מערכת בשיווי משקל — לחץ על אחד הכפתורים כדי להפריע';
+      statusEl.className = 'lechat-status';
+      const explainEl = document.getElementById('lc-explain-text');
+      if (explainEl) explainEl.textContent = 'בשיווי משקל דינמי, קצב התגובה הקדימה = קצב התגובה ההפוכה. כל שינוי (ריכוז / טמפרטורה / לחץ) יגרום למערכת לנוע בכיוון המנוגד לשינוי.';
+      this.render();
+    }
+  };
+  lechat.render();
+
+  // ══════════════════════════════════════════════════════════════════
+  //  2. pH CALCULATOR
+  // ══════════════════════════════════════════════════════════════════
+  const phCalc = {
+    update() {
+      const type   = document.getElementById('ph-type').value;
+      const slider = document.getElementById('ph-conc-slider');
+      const exp    = parseFloat(slider.value);
+      const conc   = Math.pow(10, exp);
+
+      document.getElementById('ph-conc-val').textContent = conc.toExponential(2);
+
+      // Ka for acetic acid ~1.8e-5, Kb for NH3 ~1.8e-5
+      const Ka = 1.8e-5, Kb = 1.8e-5;
+      let pH, formula, hConc;
+
+      switch (type) {
+        case 'strong-acid':
+          hConc   = conc;
+          pH      = -Math.log10(hConc);
+          formula = `pH = -log[H⁺] = -log(${conc.toExponential(2)}) = <span class="highlight">${pH.toFixed(2)}</span>`;
+          break;
+        case 'weak-acid':
+          hConc   = Math.sqrt(Ka * conc);
+          pH      = -Math.log10(hConc);
+          formula = `[H⁺] = √(Ka·C) = √(${Ka.toExponential(1)} × ${conc.toExponential(2)})<br>pH = <span class="highlight">${pH.toFixed(2)}</span>`;
+          break;
+        case 'strong-base':
+          const ohConc = conc;
+          const pOH   = -Math.log10(ohConc);
+          pH           = 14 - pOH;
+          formula      = `pOH = -log[OH⁻] = ${pOH.toFixed(2)}<br>pH = 14 - pOH = <span class="highlight">${pH.toFixed(2)}</span>`;
+          break;
+        case 'weak-base':
+          const ohWeak = Math.sqrt(Kb * conc);
+          const pOHw   = -Math.log10(ohWeak);
+          pH            = 14 - pOHw;
+          formula       = `[OH⁻] = √(Kb·C) = √(${Kb.toExponential(1)} × ${conc.toExponential(2)})<br>pH = 14 - pOH = <span class="highlight">${pH.toFixed(2)}</span>`;
+          break;
+      }
+
+      pH = Math.max(0, Math.min(14, pH));
+
+      // Update pH number
+      document.getElementById('ph-value-big').textContent = pH.toFixed(2);
+      document.getElementById('ph-formula').innerHTML = formula;
+
+      // Color and badge
+      let color, badgeStyle, badgeText;
+      if (pH < 3)       { color = '#ef4444'; badgeStyle = 'background:#fee2e2; color:#991b1b'; badgeText = 'חומצי מאוד'; }
+      else if (pH < 6)  { color = '#f97316'; badgeStyle = 'background:#ffedd5; color:#9a3412'; badgeText = 'חומצי'; }
+      else if (pH < 6.5){ color = '#eab308'; badgeStyle = 'background:#fef9c3; color:#92400e'; badgeText = 'חלש חומצי'; }
+      else if (pH <= 7.5){ color = '#22c55e'; badgeStyle = 'background:#dcfce7; color:#166534'; badgeText = 'ניטרלי'; }
+      else if (pH < 9)  { color = '#06b6d4'; badgeStyle = 'background:#cffafe; color:#0e7490'; badgeText = 'בסיסי'; }
+      else              { color = '#8b5cf6'; badgeStyle = 'background:#ede9fe; color:#5b21b6'; badgeText = 'בסיסי מאוד'; }
+
+      document.getElementById('ph-value-big').style.color = color;
+      const badge = document.getElementById('ph-type-badge');
+      badge.style.cssText = badgeStyle;
+      badge.textContent = badgeText;
+      document.getElementById('ph-indicator').style.left = (pH / 14 * 100) + '%';
+
+      // Beaker color
+      const liq = document.getElementById('beaker-liquid');
+      liq.setAttribute('fill', color + '66');
+    }
+  };
+  phCalc.update();
+
+  // ══════════════════════════════════════════════════════════════════
+  //  3. RADIOACTIVE DECAY
+  // ══════════════════════════════════════════════════════════════════
+  const decay = {
+    canvas: null, ctx: null,
+    running: false, raf: null,
+    atoms: [], t: 0,
+    isotopes: {
+      carbon14:   { label: 'C-14',  halfLife: 5730,      unit: 'שנה',    color: '#3b82f6' },
+      iodine131:  { label: 'I-131', halfLife: 8,         unit: 'ימים',   color: '#f97316' },
+      uranium238: { label: 'U-238', halfLife: 4.5e9,     unit: 'מיליארד שנה', color: '#8b5cf6' },
+      radon222:   { label: 'Rn-222',halfLife: 3.82,      unit: 'ימים',   color: '#ef4444' }
+    },
+    current: 'carbon14',
+
+    initCanvas() {
+      if (this.canvas) return;
+      this.canvas = document.getElementById('decay-canvas');
+      this.ctx    = this.canvas.getContext('2d');
+      this.canvas.width  = this.canvas.offsetWidth;
+      this.canvas.height = 220;
+      this.buildAtoms();
+      this.drawFrame();
+    },
+
+    buildAtoms() {
+      this.atoms = [];
+      const n = 120;
+      for (let i = 0; i < n; i++) {
+        this.atoms.push({
+          x: 20 + Math.random() * (this.canvas.width - 40),
+          y: 20 + Math.random() * (this.canvas.height - 40),
+          alive: true,
+          r: 4 + Math.random() * 3
+        });
+      }
+      this.t = 0;
+      this.updateStats();
+    },
+
+    setIsotope() {
+      this.current = document.getElementById('isotope-select').value;
+      this.buildAtoms();
+      if (this.running) { this.running = false; }
+      document.getElementById('cell-btn') && (document.getElementById('cell-btn').textContent = '▶ הפעל');
+    },
+
+    start() {
+      if (!this.canvas) this.initCanvas();
+      this.buildAtoms();
+      this.running = true;
+      this.run();
+    },
+
+    reset() {
+      this.running = false;
+      if (this.raf) cancelAnimationFrame(this.raf);
+      this.buildAtoms();
+      if (this.ctx) this.drawFrame();
+    },
+
+    run() {
+      if (!this.running) return;
+      const iso = this.isotopes[this.current];
+      const lambda = Math.log(2) / iso.halfLife;
+      const dtPerFrame = iso.halfLife / 200; // simulate time
+
+      this.t += dtPerFrame;
+
+      // Decay probability per atom per frame
+      const prob = 1 - Math.exp(-lambda * dtPerFrame);
+      this.atoms.forEach(a => {
+        if (a.alive && Math.random() < prob) a.alive = false;
+      });
+
+      this.drawFrame();
+      this.updateStats();
+
+      const alive = this.atoms.filter(a => a.alive).length;
+      if (alive > 0) {
+        this.raf = requestAnimationFrame(() => this.run());
+      } else {
+        this.running = false;
+      }
+    },
+
+    drawFrame() {
+      if (!this.ctx) return;
+      const ctx = this.ctx;
+      const iso = this.isotopes[this.current];
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Background grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < this.canvas.width; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.canvas.height); ctx.stroke();
+      }
+      for (let y = 0; y < this.canvas.height; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.canvas.width, y); ctx.stroke();
+      }
+
+      this.atoms.forEach(a => {
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+        if (a.alive) {
+          ctx.fillStyle = iso.color;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = iso.color;
+        } else {
+          ctx.fillStyle = 'rgba(100,100,100,0.3)';
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+      });
+      ctx.shadowBlur = 0;
+    },
+
+    updateStats() {
+      const alive  = this.atoms.filter(a => a.alive).length;
+      const total  = this.atoms.length;
+      const pct    = Math.round(alive / total * 100);
+      const iso    = this.isotopes[this.current];
+      const hl     = Math.floor(this.t / iso.halfLife * 10) / 10;
+      const timeDisp = this.t < 1 ? this.t.toFixed(2) : this.t.toFixed(1);
+
+      document.getElementById('decay-remaining').textContent = pct + '%';
+      document.getElementById('decay-halflives').textContent = hl.toFixed(1);
+      document.getElementById('decay-time').textContent      = timeDisp + ' ' + iso.unit;
+    }
+  };
+
+  // ══════════════════════════════════════════════════════════════════
+  //  4. ELECTROCHEMICAL CELL
+  // ══════════════════════════════════════════════════════════════════
+  const cellSim = {
+    canvas: null, ctx: null,
+    running: false, raf: null,
+    electrons: [], ions: [],
+    cells: {
+      zncu: { anode: 'Zn', cathode: 'Cu', anodeRx: 'Zn → Zn²⁺ + 2e⁻', cathodeRx: 'Cu²⁺ + 2e⁻ → Cu', emf: '+1.10 V', anodeColor: '#6b7280', cathodeColor: '#b45309' },
+      feau: { anode: 'Fe', cathode: 'Au', anodeRx: 'Fe → Fe³⁺ + 3e⁻', cathodeRx: 'Au³⁺ + 3e⁻ → Au', emf: '+1.68 V', anodeColor: '#92400e', cathodeColor: '#d97706' },
+      znfe: { anode: 'Zn', cathode: 'Fe', anodeRx: 'Zn → Zn²⁺ + 2e⁻', cathodeRx: 'Fe²⁺ + 2e⁻ → Fe', emf: '+0.32 V', anodeColor: '#6b7280', cathodeColor: '#78350f' }
+    },
+    current: 'zncu',
+
+    initCanvas() {
+      if (this.canvas) return;
+      this.canvas = document.getElementById('cell-canvas');
+      this.ctx    = this.canvas.getContext('2d');
+      this.canvas.width  = this.canvas.offsetWidth;
+      this.canvas.height = 260;
+      this.buildParticles();
+      this.drawFrame();
+    },
+
+    buildParticles() {
+      this.electrons = [];
+      this.ions      = [];
+      const W = this.canvas.width, H = this.canvas.height;
+      for (let i = 0; i < 12; i++) {
+        const p = i / 12;
+        this.electrons.push({ progress: p, speed: 0.003 + Math.random()*0.002 });
+      }
+      for (let i = 0; i < 8; i++) {
+        this.ions.push({ x: W * 0.22 + Math.random() * W * 0.12, y: H * 0.4 + Math.random() * H * 0.35, vy: -0.3 - Math.random()*0.3 });
+      }
+    },
+
+    setCell() {
+      this.current = document.getElementById('cell-select').value;
+      const c = this.cells[this.current];
+      document.getElementById('cell-emf').textContent        = c.emf;
+      document.getElementById('cell-anode-rx').textContent   = c.anodeRx;
+      document.getElementById('cell-cathode-rx').textContent = c.cathodeRx;
+      this.buildParticles();
+      if (this.ctx) this.drawFrame();
+    },
+
+    toggle() {
+      const btn = document.getElementById('cell-btn');
+      if (!this.canvas) this.initCanvas();
+      this.running = !this.running;
+      btn.textContent = this.running ? '⏸ עצור' : '▶ הפעל';
+      if (this.running) this.run();
+    },
+
+    run() {
+      if (!this.running) return;
+      this.updateParticles();
+      this.drawFrame();
+      this.raf = requestAnimationFrame(() => this.run());
+    },
+
+    updateParticles() {
+      const H = this.canvas.height;
+      this.electrons.forEach(e => {
+        e.progress = (e.progress + e.speed) % 1;
+      });
+      this.ions.forEach(ion => {
+        ion.y += ion.vy;
+        if (ion.y < this.canvas.height * 0.25) {
+          ion.y = this.canvas.height * 0.75;
+          ion.x = this.canvas.width * 0.22 + Math.random() * this.canvas.width * 0.12;
+        }
+      });
+    },
+
+    drawFrame() {
+      if (!this.ctx) return;
+      const ctx = this.ctx, W = this.canvas.width, H = this.canvas.height;
+      const c = this.cells[this.current];
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(0, 0, W, H);
+
+      // ── Beakers ─────────────────────────────────────────────
+      const bw = W * 0.28, bh = H * 0.6, btop = H * 0.25;
+      const leftX = W * 0.08, rightX = W * 0.64;
+
+      // Left beaker (anode)
+      ctx.fillStyle = '#fef3c7';
+      ctx.beginPath(); ctx.roundRect(leftX, btop, bw, bh, 8); ctx.fill();
+      ctx.strokeStyle = '#fcd34d'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(leftX, btop, bw, bh, 8); ctx.stroke();
+
+      // Right beaker (cathode)
+      ctx.fillStyle = '#dbeafe';
+      ctx.beginPath(); ctx.roundRect(rightX, btop, bw, bh, 8); ctx.fill();
+      ctx.strokeStyle = '#93c5fd'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(rightX, btop, bw, bh, 8); ctx.stroke();
+
+      // ── Electrodes ──────────────────────────────────────────
+      const elW = 12, elH = bh * 0.7, elTop = btop + bh * 0.08;
+      // Anode (left)
+      ctx.fillStyle = c.anodeColor;
+      ctx.beginPath(); ctx.roundRect(leftX + bw/2 - elW/2, elTop, elW, elH, 4); ctx.fill();
+      // Cathode (right)
+      ctx.fillStyle = c.cathodeColor;
+      ctx.beginPath(); ctx.roundRect(rightX + bw/2 - elW/2, elTop, elW, elH, 4); ctx.fill();
+
+      // Labels
+      ctx.fillStyle = '#374151';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('אנודה (−)', leftX + bw/2, btop - 6);
+      ctx.fillText('קתודה (+)', rightX + bw/2, btop - 6);
+      ctx.fillText(c.anode, leftX + bw/2, btop + 14);
+      ctx.fillText(c.cathode, rightX + bw/2, btop + 14);
+
+      // ── Salt Bridge ──────────────────────────────────────────
+      const bridgeY = btop - 20;
+      ctx.fillStyle = '#e2e8f0';
+      ctx.beginPath();
+      ctx.roundRect(leftX + bw - 5, bridgeY - 14, (rightX + 5) - (leftX + bw - 5), 14, 6);
+      ctx.fill();
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '10px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('גשר מלחים', W / 2, bridgeY - 4);
+
+      // ── Wire ─────────────────────────────────────────────────
+      const wireY = btop - 40;
+      ctx.strokeStyle = '#374151'; ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(leftX + bw/2, elTop);
+      ctx.lineTo(leftX + bw/2, wireY);
+      ctx.lineTo(rightX + bw/2, wireY);
+      ctx.lineTo(rightX + bw/2, elTop);
+      ctx.stroke();
+
+      // Lightbulb icon
+      const bulbX = W / 2, bulbY = wireY;
+      ctx.fillStyle = this.running ? '#fbbf24' : '#d1d5db';
+      ctx.beginPath(); ctx.arc(bulbX, bulbY, 10, 0, Math.PI * 2); ctx.fill();
+      if (this.running) {
+        ctx.shadowBlur = 20; ctx.shadowColor = '#fbbf24';
+        ctx.beginPath(); ctx.arc(bulbX, bulbY, 10, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      ctx.fillStyle = '#374151'; ctx.font = '12px sans-serif';
+      ctx.fillText('💡', bulbX - 7, bulbY + 5);
+
+      // ── Electrons along wire ──────────────────────────────────
+      if (this.running) {
+        const path = [
+          [leftX + bw/2, elTop],
+          [leftX + bw/2, wireY],
+          [W/2 - 14,    wireY],
+          [W/2 + 14,    wireY],
+          [rightX + bw/2, wireY],
+          [rightX + bw/2, elTop]
+        ];
+        const totalLen = 2 * (bh * 0.08) + (rightX - leftX);
+
+        this.electrons.forEach(e => {
+          const t = e.progress;
+          // Interpolate along path
+          const segCount = path.length - 1;
+          const idx = Math.floor(t * segCount);
+          const frac = (t * segCount) - idx;
+          const p1 = path[Math.min(idx, segCount - 1)];
+          const p2 = path[Math.min(idx + 1, segCount)];
+          const x  = p1[0] + (p2[0] - p1[0]) * frac;
+          const y  = p1[1] + (p2[1] - p1[1]) * frac;
+
+          ctx.fillStyle = '#60a5fa';
+          ctx.shadowBlur = 8; ctx.shadowColor = '#60a5fa';
+          ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
+          ctx.shadowBlur = 0;
+
+          // label e-
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 7px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('e⁻', x, y + 2.5);
+        });
+
+        // Ions rising from anode
+        ctx.fillStyle = '#fbbf24';
+        this.ions.forEach(ion => {
+          ctx.beginPath(); ctx.arc(ion.x, ion.y, 5, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = '#374151';
+          ctx.font = '7px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(c.anode === 'Zn' ? 'Zn²⁺' : c.anode === 'Fe' ? 'Fe²⁺' : 'Fe²⁺', ion.x, ion.y + 2.5);
+          ctx.fillStyle = '#fbbf24';
+        });
+      }
+
+      ctx.textAlign = 'right'; // reset
+    }
+  };
+
+  // ══════════════════════════════════════════════════════════════════
+  //  5. MOLECULAR GEOMETRY
+  // ══════════════════════════════════════════════════════════════════
+  const geoSim = {
+    canvas: null, ctx: null,
+    raf: null, angle: 0, mouseX: null, lastMX: null,
+    current: 'H2O',
+
+    molecules: {
+      H2O: {
+        name: 'H₂O — מים',
+        shape: 'זוויתית', angle: '104.5°', hybrid: 'sp³',
+        explain: 'מולקולת המים היא זוויתית בגלל 2 זוגות אלקטרונים חופשיים על O. הם דוחים את הקשרים ומצמצמים את הזווית ל-104.5°. המולקולה קוטבית — בסיס לקשרי מימן.',
+        central: { symbol: 'O', color: '#ef4444', r: 18 },
+        ligands: [{ symbol: 'H', color: '#94a3b8', r: 12, theta: -0.9, phi: 0, dist: 80 },
+                  { symbol: 'H', color: '#94a3b8', r: 12, theta:  0.9, phi: 0, dist: 80 }],
+        lonePairs: [{ theta: Math.PI/2 + 0.4, phi: 0.5 }, { theta: Math.PI/2 - 0.4, phi: -0.5 }]
+      },
+      CO2: {
+        name: 'CO₂ — פחמן דו-חמצני',
+        shape: 'ליניארית', angle: '180°', hybrid: 'sp',
+        explain: 'CO₂ ליניארית כי אין זוגות חופשיים על C. שני קשרים כפולים C=O בזוויות הפוכות. המולקולה לא קוטבית למרות שכל קשר C=O הוא קוטבי — הם מבטלים זה את זה.',
+        central: { symbol: 'C', color: '#374151', r: 16 },
+        ligands: [{ symbol: 'O', color: '#ef4444', r: 14, theta: Math.PI, phi: 0, dist: 90 },
+                  { symbol: 'O', color: '#ef4444', r: 14, theta: 0,      phi: 0, dist: 90 }],
+        lonePairs: []
+      },
+      NH3: {
+        name: 'NH₃ — אמוניה',
+        shape: 'פירמידלית', angle: '107°', hybrid: 'sp³',
+        explain: 'NH₃ היא פירמידה טריגונלית בגלל זוג חופשי אחד על N. הוא דוחה את שלושת קשרי N-H ומצמצם הזווית ל-107°. NH₃ הוא בסיס — מקבל פרוטון.',
+        central: { symbol: 'N', color: '#3b82f6', r: 16 },
+        ligands: [{ symbol: 'H', color: '#94a3b8', r: 12, theta: -0.7, phi: 0.7, dist: 80 },
+                  { symbol: 'H', color: '#94a3b8', r: 12, theta:  0.7, phi: 0.7, dist: 80 },
+                  { symbol: 'H', color: '#94a3b8', r: 12, theta:  0,   phi: 0.7, dist: 80 }],
+        lonePairs: [{ theta: 0, phi: -0.8 }]
+      },
+      CH4: {
+        name: 'CH₄ — מתאן',
+        shape: 'טטראהדרלית', angle: '109.5°', hybrid: 'sp³',
+        explain: 'CH₄ הוא הטטראהדר המושלם — 4 קשרי C-H בזוויות שוות (109.5°). אין זוגות חופשיים. המולקולה לא קוטבית ולא מגיבה עם מים.',
+        central: { symbol: 'C', color: '#374151', r: 16 },
+        ligands: [
+          { symbol: 'H', color: '#94a3b8', r: 12, theta: -1.0, phi: 0.6, dist: 85 },
+          { symbol: 'H', color: '#94a3b8', r: 12, theta:  1.0, phi: 0.6, dist: 85 },
+          { symbol: 'H', color: '#94a3b8', r: 12, theta:  0,   phi: -0.8, dist: 85 },
+          { symbol: 'H', color: '#94a3b8', r: 12, theta:  0,   phi: 1.1, dist: 85 }
+        ],
+        lonePairs: []
+      },
+      BF3: {
+        name: 'BF₃ — בורון טריפלואוריד',
+        shape: 'משולשת שטוחה', angle: '120°', hybrid: 'sp²',
+        explain: 'BF₃ הוא שטוח (משולש) כי ל-B אין זוגות חופשיים ויש לו רק 6 אלקטרונים (חסר אוקטט). שלושת ה-B-F בזוויות 120° בדיוק.',
+        central: { symbol: 'B', color: '#f97316', r: 16 },
+        ligands: [
+          { symbol: 'F', color: '#22c55e', r: 14, theta: 0,               phi: 0, dist: 90 },
+          { symbol: 'F', color: '#22c55e', r: 14, theta: 2 * Math.PI / 3, phi: 0, dist: 90 },
+          { symbol: 'F', color: '#22c55e', r: 14, theta: 4 * Math.PI / 3, phi: 0, dist: 90 }
+        ],
+        lonePairs: []
+      },
+      PCl5: {
+        name: 'PCl₅ — פוספור פנטכלוריד',
+        shape: 'ביפירמידה טריגונלית', angle: '90°/120°', hybrid: 'sp³d',
+        explain: 'PCl₅ היא ביפירמידה טריגונלית עם 5 קשרים. שלושה Cl ב-120° (מישורי), ושניים לאורך הציר האנכי ב-90°. ל-P יש 10 אלקטרונים — חורג מכלל האוקטט.',
+        central: { symbol: 'P', color: '#a855f7', r: 18 },
+        ligands: [
+          { symbol: 'Cl', color: '#16a34a', r: 14, theta: 0,               phi: 0.05, dist: 90 },
+          { symbol: 'Cl', color: '#16a34a', r: 14, theta: 2 * Math.PI / 3, phi: 0.05, dist: 90 },
+          { symbol: 'Cl', color: '#16a34a', r: 14, theta: 4 * Math.PI / 3, phi: 0.05, dist: 90 },
+          { symbol: 'Cl', color: '#16a34a', r: 13, theta: 0, phi:  Math.PI / 2, dist: 95 },
+          { symbol: 'Cl', color: '#16a34a', r: 13, theta: 0, phi: -Math.PI / 2, dist: 95 }
+        ],
+        lonePairs: []
+      }
+    },
+
+    initCanvas() {
+      if (this.canvas) return;
+      this.canvas = document.getElementById('geometry-canvas');
+      this.ctx    = this.canvas.getContext('2d');
+      this.canvas.width  = this.canvas.offsetWidth;
+      this.canvas.height = 280;
+      this.bindDrag();
+      this.animate();
+    },
+
+    bindDrag() {
+      let dragging = false, lastX = 0;
+      this.canvas.addEventListener('mousedown', e => { dragging = true; lastX = e.clientX; });
+      this.canvas.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        this.manualAngle = (this.manualAngle || 0) + (e.clientX - lastX) * 0.01;
+        lastX = e.clientX;
+      });
+      this.canvas.addEventListener('mouseup',   () => { dragging = false; });
+      this.canvas.addEventListener('touchstart', e => { dragging = true; lastX = e.touches[0].clientX; });
+      this.canvas.addEventListener('touchmove',  e => {
+        if (!dragging) return;
+        this.manualAngle = (this.manualAngle || 0) + (e.touches[0].clientX - lastX) * 0.01;
+        lastX = e.touches[0].clientX;
+        e.preventDefault();
+      }, { passive: false });
+      this.canvas.addEventListener('touchend', () => { dragging = false; });
+    },
+
+    set(mol) {
+      this.current = mol;
+      document.querySelectorAll('.mol-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.replace(/[₀-₉]/g, s => '0123456789'['₀₁₂₃₄₅₆₇₈₉'.indexOf(s)]).replace('₂','2').replace('₃','3').replace('₄','4').replace('₅','5') === mol
+          || b.textContent === mol
+          || b.onclick.toString().includes(`'${mol}'`));
+      });
+      document.querySelectorAll('.mol-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('onclick') && b.getAttribute('onclick').includes(`'${mol}'`));
+      });
+      const info = this.molecules[mol];
+      document.getElementById('geo-shape').textContent   = info.shape;
+      document.getElementById('geo-angle').textContent   = info.angle;
+      document.getElementById('geo-hybrid').textContent  = info.hybrid;
+      document.getElementById('geo-molecule-name').textContent = info.name;
+      document.getElementById('geo-explain').textContent = info.explain;
+      if (!this.canvas) return;
+      this.manualAngle = 0;
+    },
+
+    project3D(x, y, z, rotY) {
+      // Simple Y-axis rotation + perspective
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      const rx = x * cosY - z * sinY;
+      const rz = x * sinY + z * cosY;
+      const fov = 400;
+      const scale = fov / (fov + rz + 100);
+      return { x: rx * scale, y: y * scale, z: rz, scale };
+    },
+
+    animate() {
+      const loop = () => {
+        const angle = (this.manualAngle || 0) + Date.now() * 0.0005;
+        this.drawMolecule(angle);
+        this.raf = requestAnimationFrame(loop);
+      };
+      loop();
+    },
+
+    drawMolecule(rotY) {
+      const ctx = this.ctx, W = this.canvas.width, H = this.canvas.height;
+      const cx = W / 2, cy = H / 2;
+      const mol = this.molecules[this.current];
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.6);
+      grad.addColorStop(0, '#1e293b');
+      grad.addColorStop(1, '#0f172a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Compute ligand positions
+      const positions = mol.ligands.map(l => {
+        const x = l.dist * Math.cos(l.theta) * Math.cos(l.phi);
+        const y = l.dist * Math.sin(l.phi);
+        const z = l.dist * Math.sin(l.theta) * Math.cos(l.phi);
+        return { ...l, ...this.project3D(x, y, z, rotY) };
+      });
+
+      // Sort by z for depth
+      positions.sort((a, b) => a.z - b.z);
+
+      // Draw bonds first
+      positions.forEach(p => {
+        const sx = cx + p.x, sy = cy + p.y;
+        ctx.strokeStyle = `rgba(148,163,184,${0.4 + 0.3 * p.scale})`;
+        ctx.lineWidth   = 3 * p.scale;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(sx, sy); ctx.stroke();
+      });
+
+      // Lone pairs
+      mol.lonePairs && mol.lonePairs.forEach(lp => {
+        const lpd = 55;
+        const lpx3 = lpd * Math.cos(lp.theta) * Math.cos(lp.phi);
+        const lpy3 = lpd * Math.sin(lp.phi);
+        const lpz3 = lpd * Math.sin(lp.theta) * Math.cos(lp.phi);
+        const pp = this.project3D(lpx3, lpy3, lpz3, rotY);
+        ctx.fillStyle = 'rgba(250,204,21,0.6)';
+        ctx.shadowBlur = 10; ctx.shadowColor = '#fbbf24';
+        ctx.beginPath(); ctx.arc(cx + pp.x, cy + pp.y, 6 * pp.scale, 0, Math.PI*2); ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // Draw ligand atoms
+      positions.forEach(p => {
+        const sx = cx + p.x, sy = cy + p.y, r = p.r * p.scale;
+        const g = ctx.createRadialGradient(sx - r*0.3, sy - r*0.3, r*0.1, sx, sy, r);
+        g.addColorStop(0, lightenColor(p.color, 60));
+        g.addColorStop(1, p.color);
+        ctx.fillStyle = g;
+        ctx.shadowBlur = 12 * p.scale; ctx.shadowColor = p.color;
+        ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI*2); ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#fff';
+        ctx.font = `bold ${10 * p.scale}px sans-serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(p.symbol, sx, sy);
+      });
+
+      // Draw central atom
+      const pr = mol.central.r;
+      const g2 = ctx.createRadialGradient(cx - pr*0.3, cy - pr*0.3, pr*0.1, cx, cy, pr);
+      g2.addColorStop(0, lightenColor(mol.central.color, 80));
+      g2.addColorStop(1, mol.central.color);
+      ctx.fillStyle = g2;
+      ctx.shadowBlur = 20; ctx.shadowColor = mol.central.color;
+      ctx.beginPath(); ctx.arc(cx, cy, pr, 0, Math.PI*2); ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#fff';
+      ctx.font = `bold 13px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(mol.central.symbol, cx, cy);
+
+      // Name label
+      ctx.fillStyle = 'rgba(226,232,240,0.8)';
+      ctx.font = '13px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      ctx.fillText(mol.name, cx, 10);
+    }
+  };
+
+  function lightenColor(hex, amount) {
+    const num = parseInt(hex.slice(1), 16);
+    const r = Math.min(255, (num >> 16) + amount);
+    const g = Math.min(255, ((num >> 8) & 0xff) + amount);
+    const b = Math.min(255, (num & 0xff) + amount);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // Init geo on load since it's in first visible tab... no, lechat is first
+  // Init canvas for first tab that needs it when clicked
+  </script>
+</body>
+</html>

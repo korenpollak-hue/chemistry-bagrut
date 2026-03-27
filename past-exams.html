@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — מבחנים אמיתיים</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .exams-hero {
+      background: linear-gradient(135deg, #1e3a8a, #1d4ed8, #4338ca);
+      background-size: 200% 200%;
+      animation: gradientShift 8s ease infinite;
+      color: #fff;
+      padding: 3rem 2rem;
+      border-radius: 1.25rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .exams-hero h1 { font-size: 2.2rem; margin: 0 0 0.5rem; }
+    .exams-hero p  { font-size: 1.05rem; opacity: 0.88; margin: 0; }
+    .hero-particles { position: absolute; inset: 0; pointer-events: none; }
+
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .exam-card {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .exam-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+    }
+
+    .exam-card-header {
+      padding: 1.25rem 1.5rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .exam-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+      animation: float 3s ease-in-out infinite;
+    }
+    .exam-card-title {
+      flex: 1;
+    }
+    .exam-card-title h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      color: #1e293b;
+    }
+    .exam-year-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+    .badge-green  { background: #d1fae5; color: #065f46; }
+    .badge-purple { background: #ede9fe; color: #5b21b6; }
+    .badge-orange { background: #ffedd5; color: #9a3412; }
+
+    .exam-files {
+      padding: 0 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .exam-file-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #374151;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      width: 100%;
+      text-align: right;
+    }
+    .exam-file-btn:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+      transform: translateX(-3px);
+    }
+    .exam-file-btn .file-icon { font-size: 1rem; }
+    .exam-file-btn .file-label { flex: 1; }
+    .exam-file-btn .file-action { font-size: 0.75rem; color: #6b7280; }
+    .exam-file-btn:hover .file-action { color: #1d4ed8; }
+
+    .exam-file-btn.primary {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+    .exam-file-btn.primary:hover {
+      background: #dbeafe;
+      border-color: #60a5fa;
+    }
+
+    /* PDF Viewer Modal */
+    .pdf-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s ease;
+    }
+    .pdf-modal-overlay.open { display: flex; }
+
+    .pdf-modal {
+      background: #fff;
+      border-radius: 1rem;
+      width: 90vw;
+      max-width: 900px;
+      height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: scaleIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .pdf-modal-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .pdf-modal-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .pdf-modal-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .pdf-modal-btn {
+      padding: 0.4rem 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
+      color: #374151;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+    }
+    .pdf-modal-btn:hover { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+    .pdf-modal-close {
+      padding: 0.4rem 0.7rem;
+      border-radius: 0.5rem;
+      border: none;
+      background: #fee2e2;
+      color: #dc2626;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .pdf-modal-close:hover { background: #fecaca; }
+
+    .pdf-embed-wrap {
+      flex: 1;
+      overflow: hidden;
+    }
+    .pdf-embed-wrap iframe,
+    .pdf-embed-wrap embed {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .pdf-fallback {
+      padding: 3rem;
+      text-align: center;
+      color: #6b7280;
+    }
+    .pdf-fallback a {
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    /* Tips section */
+    .tips-section {
+      background: linear-gradient(135deg, #fef9c3, #fef3c7);
+      border: 1px solid #fde68a;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .tips-section h2 { font-size: 1.1rem; margin: 0 0 1rem; color: #92400e; }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .tip-item {
+      background: rgba(255,255,255,0.7);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      font-size: 0.88rem;
+      color: #78350f;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+      animation: fadeInUp 0.5s ease both;
+    }
+    .tip-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* Stats row */
+    .exam-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 600px) {
+      .exam-stats { grid-template-columns: repeat(2, 1fr); }
+      .exam-grid  { grid-template-columns: 1fr; }
+    }
+    .exam-stat-box {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      animation: fadeInUp 0.5s ease both;
+    }
+    .exam-stat-box .sv {
+      font-size: 2rem;
+      font-weight: 800;
+      display: block;
+      line-height: 1.1;
+    }
+    .exam-stat-box .sl {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .filter-tab:hover { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+    .filter-tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+    /* Progress ring */
+    .progress-ring { animation: scaleIn 0.6s ease both; }
+  </style>
+</head>
+<body data-page="past-exams">
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="simulations.html">🔬 סימולציות</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="past-exams.html" class="active">📂 מבחני עבר</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <!-- Hero -->
+    <div class="exams-hero particle-bg">
+      <canvas class="hero-particles" id="hero-canvas"></canvas>
+      <div style="position:relative; z-index:1;">
+        <h1 class="anim-fade-up">📂 מבחני בגרות אמיתיים</h1>
+        <p class="anim-fade-up" style="animation-delay:0.1s">3 מבחנים מלאים · בדיוק כמו הבחינה האמיתית · עם פתרונות</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="exam-stats stagger">
+      <div class="exam-stat-box">
+        <span class="sv" style="color:#2563eb">3</span>
+        <div class="sl">📝 מבחנים מלאים</div>
+      </div>
+      <div class="exam-stat-box">
+        <span class="sv" style="color:#059669">14+</span>
+        <div class="sl">📄 קבצי PDF</div>
+      </div>
+      <div class="exam-stat-box">
+        <span class="sv" style="color:#7c3aed">✓</span>
+        <div class="sl">📋 עם פתרונות</div>
+      </div>
+      <div class="exam-stat-box">
+        <span class="sv" style="color:#d97706">2h</span>
+        <div class="sl">⏱ כמו הבגרות</div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips-section">
+      <h2>💡 איך להשתמש במבחנים האלה?</h2>
+      <div class="tips-grid">
+        <div class="tip-item" style="animation-delay:0s">
+          <span class="tip-icon">1️⃣</span>
+          <span>בשבוע שלפני הבגרות — פתח מבחן, הגדר טיימר ל-2 שעות, ענה בלי לצפות בפתרון</span>
+        </div>
+        <div class="tip-item" style="animation-delay:0.1s">
+          <span class="tip-icon">2️⃣</span>
+          <span>אחרי שגמרת — השווה לפתרון ורשום אילו נושאים היו קשים</span>
+        </div>
+        <div class="tip-item" style="animation-delay:0.2s">
+          <span class="tip-icon">3️⃣</span>
+          <span>חזור לנושאים החלשים — שתמש בקוויז ובכרטיסיות לחיזוק</span>
+        </div>
+        <div class="tip-item" style="animation-delay:0.3s">
+          <span class="tip-icon">4️⃣</span>
+          <span>עשה לפחות 2 מבחנים מלאים לפני הבגרות האמיתית!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterExams('all', this)">הכל</button>
+      <button class="filter-tab" onclick="filterExams('exam', this)">מבחן בלבד</button>
+      <button class="filter-tab" onclick="filterExams('answers', this)">פתרונות</button>
+    </div>
+
+    <!-- Exam Grid -->
+    <div class="exam-grid" id="exam-grid">
+
+      <!-- 37282 -->
+      <div class="exam-card anim-fade-up" data-type="all" style="animation-delay:0s">
+        <div class="exam-card-header">
+          <div class="exam-icon">📝</div>
+          <div class="exam-card-title">
+            <h3>בגרות כימיה — מספר 37282</h3>
+            <span class="exam-year-badge badge-blue">סדרה א</span>
+          </div>
+        </div>
+        <div class="exam-files">
+          <a class="exam-file-btn primary" onclick="openPDF('data/exams/bagrut-37282.pdf', 'מבחן 37282')" href="#">
+            <span class="file-icon">📄</span>
+            <span class="file-label">מבחן מלא — 37282</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37282-answers1.pdf', 'פתרון 37282 — חלק א')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 1</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37282-answers2.pdf', 'פתרון 37282 — חלק ב')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 2</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37282-answers3.pdf', 'פתרון 37282 — חלק ג')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 3</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37282-answers4.pdf', 'פתרון 37282 — חלק ד')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 4</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 37381 -->
+      <div class="exam-card anim-fade-up" data-type="all" style="animation-delay:0.1s">
+        <div class="exam-card-header">
+          <div class="exam-icon">🔬</div>
+          <div class="exam-card-title">
+            <h3>בגרות כימיה — מספר 37381</h3>
+            <span class="exam-year-badge badge-green">סדרה ב</span>
+          </div>
+        </div>
+        <div class="exam-files">
+          <a class="exam-file-btn primary" onclick="openPDF('data/exams/bagrut-37381.pdf', 'מבחן 37381')" href="#">
+            <span class="file-icon">📄</span>
+            <span class="file-label">מבחן מלא — 37381</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37381-answers1.pdf', 'פתרון 37381 — חלק א')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 1</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37381-answers2.pdf', 'פתרון 37381 — חלק ב')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 2</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37381-answers3.pdf', 'פתרון 37381 — חלק ג')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 3</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" style="border-color:#ddd6fe; background:#f5f3ff; color:#5b21b6"
+             onclick="openPDF('data/exams/bagrut-2017-37381.pdf', 'בגרות 2017 — 37381')" href="#">
+            <span class="file-icon">⭐</span>
+            <span class="file-label">בגרות 2017 — מבחן מלא</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 37382 -->
+      <div class="exam-card anim-fade-up" data-type="all" style="animation-delay:0.2s">
+        <div class="exam-card-header">
+          <div class="exam-icon">⚗️</div>
+          <div class="exam-card-title">
+            <h3>בגרות כימיה — מספר 37382</h3>
+            <span class="exam-year-badge badge-purple">סדרה ג</span>
+          </div>
+        </div>
+        <div class="exam-files">
+          <a class="exam-file-btn primary" onclick="openPDF('data/exams/bagrut-37382.pdf', 'מבחן 37382')" href="#">
+            <span class="file-icon">📄</span>
+            <span class="file-label">מבחן מלא — 37382</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37382-answers1.pdf', 'פתרון 37382 — חלק א')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 1</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37382-answers2.pdf', 'פתרון 37382 — חלק ב')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 2</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37382-answers3.pdf', 'פתרון 37382 — חלק ג')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 3</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <a class="exam-file-btn" onclick="openPDF('data/exams/bagrut-37382-answers4.pdf', 'פתרון 37382 — חלק ד')" href="#">
+            <span class="file-icon">✅</span>
+            <span class="file-label">פתרון — חלק 4</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="exam-card anim-fade-up" data-type="all" style="animation-delay:0.3s">
+        <div class="exam-card-header">
+          <div class="exam-icon">📖</div>
+          <div class="exam-card-title">
+            <h3>סיכום כימיה</h3>
+            <span class="exam-year-badge badge-orange">חומר עזר</span>
+          </div>
+        </div>
+        <div class="exam-files">
+          <a class="exam-file-btn primary" onclick="openPDF('data/exams/chimia-summary.pdf', 'סיכום כימיה')" href="#">
+            <span class="file-icon">📚</span>
+            <span class="file-label">סיכום כימיה — כל הנושאים</span>
+            <span class="file-action">פתח ←</span>
+          </a>
+          <p style="font-size:0.85rem; color:#6b7280; margin: 0.5rem 0 0; padding: 0 0.25rem;">
+            השתמש בסיכום לחזרה מהירה לפני הבגרות
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Motivational Banner -->
+    <div style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 1rem; padding: 1.5rem; text-align: center; animation: fadeInUp 0.6s ease 0.4s both;">
+      <p style="font-size: 1.1rem; font-weight: 700; color: #065f46; margin: 0 0 0.5rem;">
+        💪 המבחן עוד כמה שבועות — אתה יכול!
+      </p>
+      <p style="color: #047857; margin: 0 0 1rem; font-size: 0.95rem;">
+        כל מבחן שתפתור עכשיו שווה 10 נקודות ביטחון ביום הבגרות
+      </p>
+      <a href="simulator.html" style="
+        display: inline-block;
+        padding: 0.65rem 1.75rem;
+        background: #059669;
+        color: #fff;
+        border-radius: 0.6rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s;
+      " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        📝 סימולטור אונליין ←
+      </a>
+    </div>
+
+  </main>
+
+  <!-- PDF Modal -->
+  <div class="pdf-modal-overlay" id="pdf-modal" onclick="closePDF(event)">
+    <div class="pdf-modal">
+      <div class="pdf-modal-header">
+        <span class="pdf-modal-title" id="pdf-modal-title">—</span>
+        <div class="pdf-modal-actions">
+          <a class="pdf-modal-btn" id="pdf-download-btn" href="#" download>
+            ⬇️ הורד
+          </a>
+          <button class="pdf-modal-close" onclick="closePDFModal()">✕</button>
+        </div>
+      </div>
+      <div class="pdf-embed-wrap" id="pdf-embed-wrap">
+        <div class="pdf-fallback">
+          <div class="spinner" style="margin: 0 auto 1rem;"></div>
+          <p>טוען...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // ─── Particle Background ─────────────────────────────────────
+    (function initParticles() {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const symbols = ['⚗', 'H₂O', 'CO₂', 'NaCl', 'pH', 'Ka', '△H', '⚖', 'e⁻', 'NH₃'];
+      for (let i = 0; i < 18; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: -Math.random() * 0.5 - 0.2,
+          alpha: Math.random() * 0.5 + 0.2,
+          size: Math.random() * 10 + 10,
+          symbol: symbols[Math.floor(Math.random() * symbols.length)]
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = '#fff';
+          ctx.font = `${p.size}px sans-serif`;
+          ctx.fillText(p.symbol, p.x, p.y);
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.y < -30) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+          if (p.x < -30) p.x = canvas.width;
+          if (p.x > canvas.width + 30) p.x = 0;
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ─── PDF Viewer ───────────────────────────────────────────────
+    function openPDF(path, title) {
+      event.preventDefault();
+      const modal = document.getElementById('pdf-modal');
+      const titleEl = document.getElementById('pdf-modal-title');
+      const embedWrap = document.getElementById('pdf-embed-wrap');
+      const downloadBtn = document.getElementById('pdf-download-btn');
+
+      titleEl.textContent = title;
+      downloadBtn.href = path;
+      downloadBtn.download = path.split('/').pop();
+
+      embedWrap.innerHTML = `
+        <iframe
+          src="${path}#toolbar=1&navpanes=0&scrollbar=1&view=FitH"
+          title="${title}"
+          loading="lazy">
+        </iframe>
+      `;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePDFModal() {
+      const modal = document.getElementById('pdf-modal');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      document.getElementById('pdf-embed-wrap').innerHTML = '';
+    }
+
+    function closePDF(e) {
+      if (e.target === document.getElementById('pdf-modal')) closePDFModal();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePDFModal();
+    });
+
+    // ─── Filter ───────────────────────────────────────────────────
+    function filterExams(type, btn) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      // All cards are type "all" so filter is cosmetic for now
+      document.querySelectorAll('.exam-card').forEach(card => {
+        card.style.display = '';
+      });
+    }
+  </script>
+</body>
+</html>

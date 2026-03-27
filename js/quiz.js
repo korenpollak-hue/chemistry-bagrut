@@ -245,13 +245,16 @@ const QuizEngine = {
     });
 
     // משוב — הסבר רק על תשובה שגויה (הגנה מהטיית אישור)
+    // Confetti on correct
+    if (isCorrect && typeof launchConfetti === 'function') launchConfetti();
+
     const feedbackEl = document.getElementById('quiz-feedback');
     if (feedbackEl) {
       if (isCorrect) {
         feedbackEl.innerHTML = `
-          <div class="quiz-feedback--correct" role="status">
+          <div class="quiz-feedback--correct" role="status" style="animation: scaleIn 0.3s cubic-bezier(0.34,1.56,0.64,1)">
             <span class="quiz-feedback__icon" aria-hidden="true">✓</span>
-            <span>נכון!</span>
+            <span>נכון! 🎉</span>
           </div>`;
       } else {
         // הסבר מוצג רק על שגיאה

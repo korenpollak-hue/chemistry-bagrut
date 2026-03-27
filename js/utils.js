@@ -218,3 +218,25 @@ window.generateId     = generateId;
 window.average        = average;
 window.truncate       = truncate;
 window.showToast      = showToast;
+
+// ─── Confetti Animation ──────────────────────────────────────────────────────
+function launchConfetti(count) {
+  count = count || 40;
+  const colors = ['#2563eb','#7c3aed','#059669','#d97706','#dc2626','#0ea5e9','#f59e0b'];
+  const shapes = ['square','circle','ribbon'];
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece ' + shapes[Math.floor(Math.random() * shapes.length)];
+    el.style.cssText = [
+      'left:' + (10 + Math.random() * 80) + 'vw',
+      'background:' + colors[Math.floor(Math.random() * colors.length)],
+      '--fall-dur:' + (2 + Math.random() * 2) + 's',
+      '--fall-delay:' + (Math.random() * 0.5) + 's',
+      'transform:rotate(' + (Math.random()*360) + 'deg)'
+    ].join(';');
+    document.body.appendChild(el);
+    const dur = (parseFloat(el.style.getPropertyValue('--fall-dur') || 3) + 0.5) * 1000;
+    setTimeout(() => el.remove(), dur + 600);
+  }
+}
+window.launchConfetti = launchConfetti;

@@ -7,12 +7,17 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
   <style>
     .hero-banner {
-      background: linear-gradient(135deg, var(--color-primary, #2563eb), var(--color-secondary, #7c3aed));
+      background: linear-gradient(135deg, #1e3a8a, #2563eb, #7c3aed, #4f46e5);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
       color: #fff;
-      padding: 2.5rem 2rem;
-      border-radius: 1rem;
+      padding: 3rem 2rem;
+      border-radius: 1.25rem;
+      position: relative;
+      overflow: hidden;
       margin-bottom: 2rem;
       text-align: center;
     }
@@ -185,9 +190,11 @@
         <li><a href="index.html" class="active">🏠 בית</a></li>
         <li><a href="study-plan.html">📅 תוכנית</a></li>
         <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="simulations.html">🔬 סימולציות</a></li>
         <li><a href="quiz.html">❓ קוויז</a></li>
         <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
         <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="past-exams.html">📂 מבחני עבר</a></li>
         <li><a href="progress.html">📊 התקדמות</a></li>
       </ul>
       <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
@@ -198,8 +205,12 @@
 
     <!-- Hero Banner -->
     <div class="hero-banner">
-      <h1>ברוך הבא, עידו! 👋</h1>
-      <p>המבחן עוד ~8 שבועות — כל יום קדימה!</p>
+      <canvas id="hero-particles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.6;"></canvas>
+      <div style="position:relative;z-index:1;" class="anim-fade-up">
+        <div style="font-size:3rem; margin-bottom:0.5rem; animation: bounce 2s ease-in-out infinite;">⚗️</div>
+        <h1>ברוך הבא, עידו! 👋</h1>
+        <p>המבחן עוד ~8 שבועות — כל יום קדימה!</p>
+      </div>
     </div>
 
     <!-- Stats Row -->
@@ -267,18 +278,26 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="quick-actions">
-      <a href="quiz.html" class="quick-btn btn-quiz">
+    <div class="quick-actions" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+      <a href="quiz.html" class="quick-btn btn-quiz card-hover-subtle">
         <span class="btn-icon">❓</span>
         <span>התחל קוויז</span>
       </a>
-      <a href="flashcards.html" class="quick-btn btn-flash">
+      <a href="flashcards.html" class="quick-btn btn-flash card-hover-subtle">
         <span class="btn-icon">🃏</span>
         <span>כרטיסיות</span>
       </a>
-      <a href="simulator.html" class="quick-btn btn-sim">
+      <a href="simulator.html" class="quick-btn btn-sim card-hover-subtle">
         <span class="btn-icon">📝</span>
         <span>מבחן מלא</span>
+      </a>
+      <a href="simulations.html" class="quick-btn card-hover-subtle" style="background:#ede9fe; color:#5b21b6;">
+        <span class="btn-icon">🔬</span>
+        <span>סימולציות</span>
+      </a>
+      <a href="past-exams.html" class="quick-btn card-hover-subtle" style="background:#fce7f3; color:#9d174d;">
+        <span class="btn-icon">📂</span>
+        <span>מבחני עבר</span>
       </a>
     </div>
 
@@ -304,6 +323,48 @@
   <script src="js/storage.js"></script>
   <script src="js/progress.js"></script>
   <script src="js/app.js"></script>
+  <script>
+  // ── Hero Particle Animation ──────────────────────────────────────
+  (function() {
+    const canvas = document.getElementById('hero-particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const symbols = ['H₂O','CO₂','pH','Ka','ΔH','⚖','e⁻','NH₃','Kc','ΔG','sp³','NaCl','α','β','γ'];
+    let particles = [];
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      particles = Array.from({length: 20}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: -Math.random() * 0.4 - 0.1,
+        alpha: Math.random() * 0.6 + 0.2,
+        size: Math.random() * 10 + 9,
+        sym: symbols[Math.floor(Math.random() * symbols.length)]
+      }));
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    (function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = '#fff';
+        ctx.font = `${p.size}px sans-serif`;
+        ctx.fillText(p.sym, p.x, p.y);
+        p.x += p.vx; p.y += p.vy;
+        if (p.y < -20) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+        if (p.x < -30) p.x = canvas.width;
+        if (p.x > canvas.width + 30) p.x = 0;
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    })();
+  })();
+  </script>
   <script>
     // Page init — populate stats and topic grid from storage/data
     (async function initHome() {
