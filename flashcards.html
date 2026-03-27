@@ -274,6 +274,129 @@
       white-space: nowrap;
     }
 
+    /* ── Enhanced card animations ───────────────────────── */
+    .flashcard {
+      animation: cardEntrance 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes cardEntrance {
+      0%   { opacity:0; transform:scale(0.92) translateY(10px); }
+      100% { opacity:1; transform:scale(1) translateY(0); }
+    }
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+    /* Shimmer on front face */
+    .flashcard-front::after {
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:1rem;
+      background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.18) 50%,transparent 70%);
+      background-size:200% 100%;
+      animation:shimmer 2.5s infinite;
+      pointer-events:none;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    /* Glow when flipped to reveal answer */
+    .flashcard.flipped .flashcard-back {
+      animation: answerReveal 0.3s ease 0.3s both;
+    }
+    @keyframes answerReveal {
+      0%   { box-shadow: 0 0 0 rgba(37,99,235,0); }
+      50%  { box-shadow: 0 0 30px rgba(37,99,235,0.35); }
+      100% { box-shadow: 0 0 12px rgba(37,99,235,0.15); }
+    }
+    /* Exit animations for rating */
+    .flashcard.exit--again { animation: exitSlideLeft 0.3s ease both; }
+    .flashcard.exit--hard  { animation: exitFadeDown 0.3s ease both; }
+    .flashcard.exit--easy  { animation: exitSlideRight 0.3s ease both; }
+    @keyframes exitSlideLeft  { to { opacity:0; transform:rotateY(180deg) translateX(-60px); } }
+    @keyframes exitSlideRight { to { opacity:0; transform:rotateY(180deg) translateX(60px); } }
+    @keyframes exitFadeDown   { to { opacity:0; transform:rotateY(180deg) translateY(20px); } }
+
+    /* ── Leitfaden / Guide ──────────────────────────────── */
+    .fc-guide {
+      background:var(--color-surface,#fff);
+      border:1px solid var(--color-border,#e5e7eb);
+      border-radius:0.875rem;
+      margin-bottom:1.5rem;
+      overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    }
+    .fc-guide__toggle {
+      list-style:none;
+      display:flex;
+      align-items:center;
+      gap:0.6rem;
+      padding:1rem 1.25rem;
+      cursor:pointer;
+      font-size:0.95rem;
+      user-select:none;
+    }
+    .fc-guide__toggle::-webkit-details-marker { display:none; }
+    .fc-guide__toggle:hover { background:#f9fafb; }
+    .fc-guide__arrow { margin-right:auto; font-size:0.75rem; color:#9ca3af; transition:transform 0.2s; }
+    details[open] .fc-guide__arrow { transform:rotate(180deg); }
+    .fc-guide__body { padding:0 1.25rem 1.25rem; }
+    .fc-guide__intro { font-size:0.85rem; color:#6b7280; margin:0 0 1rem; }
+    .fc-guide__track { display:flex; flex-direction:column; gap:0.5rem; }
+    .fc-guide__arrow-down { text-align:center; font-size:1.25rem; color:#d1d5db; line-height:1; }
+    .fc-guide__step {
+      border:1px solid #e5e7eb;
+      border-radius:0.75rem;
+      padding:0.875rem 1rem;
+      display:flex;
+      gap:0.875rem;
+      align-items:flex-start;
+      background:#fafafa;
+    }
+    .fc-guide__step--start { border-color:#86efac; background:#f0fdf4; }
+    .fc-guide__step--hard  { border-color:#fca5a5; background:#fff7f7; }
+    .fc-guide__step-num {
+      width:28px; height:28px;
+      border-radius:50%;
+      background:var(--color-primary,#2563eb);
+      color:#fff;
+      font-weight:700;
+      font-size:0.85rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+      margin-top:2px;
+    }
+    .fc-guide__step--start .fc-guide__step-num { background:#16a34a; }
+    .fc-guide__step--hard  .fc-guide__step-num { background:#dc2626; }
+    .fc-guide__step-content { flex:1; }
+    .fc-guide__step-content strong { display:block; font-size:0.9rem; margin-bottom:0.5rem; }
+    .fc-guide__chips { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.5rem; }
+    .fc-guide__chip {
+      padding:0.3rem 0.65rem;
+      border-radius:999px;
+      border:1px solid;
+      font-size:0.78rem;
+      font-family:inherit;
+      cursor:pointer;
+      font-weight:600;
+      transition:transform 0.1s, box-shadow 0.1s;
+    }
+    .fc-guide__chip:hover { transform:translateY(-1px); box-shadow:0 2px 6px rgba(0,0,0,0.12); }
+    .fc-guide__chip--easy { background:#d1fae5; border-color:#6ee7b7; color:#065f46; }
+    .fc-guide__chip--med  { background:#fef3c7; border-color:#fcd34d; color:#78350f; }
+    .fc-guide__chip--hard { background:#fee2e2; border-color:#fca5a5; color:#7f1d1d; }
+    .fc-guide__tag {
+      display:inline-block;
+      font-size:0.7rem;
+      font-weight:700;
+      padding:2px 8px;
+      border-radius:999px;
+      letter-spacing:0.04em;
+    }
+    .fc-guide__tag--easy { background:#d1fae5; color:#065f46; }
+    .fc-guide__tag--med  { background:#fef3c7; color:#78350f; }
+    .fc-guide__tag--hard { background:#fee2e2; color:#7f1d1d; }
+
     /* Empty / done state */
     .fc-empty-state {
       text-align: center;
@@ -316,6 +439,69 @@
     <div class="due-header">
       <span id="due-count">🃏 <span id="due-count-num">—</span> כרטיסיות לחזרה היום</span>
     </div>
+
+    <!-- Leitfaden / Learning Guide -->
+    <details class="fc-guide" id="fc-guide">
+      <summary class="fc-guide__toggle">
+        🗺️ <strong>מסלול למידה מומלץ — מאיפה להתחיל?</strong>
+        <span class="fc-guide__arrow">▼</span>
+      </summary>
+      <div class="fc-guide__body">
+        <p class="fc-guide__intro">לחץ על נושא כדי להתחיל ישירות בכרטיסיות שלו. הסדר מומלץ לפי קושי ותלות:</p>
+        <div class="fc-guide__track">
+          <div class="fc-guide__step fc-guide__step--start">
+            <div class="fc-guide__step-num">1</div>
+            <div class="fc-guide__step-content">
+              <strong>התחל כאן</strong>
+              <div class="fc-guide__chips">
+                <button class="fc-guide__chip fc-guide__chip--easy" onclick="selectGuideTopic('thermochemistry')">🔥 תרמוכימיה</button>
+                <button class="fc-guide__chip fc-guide__chip--easy" onclick="selectGuideTopic('periodic-table')">📊 טבלה מחזורית</button>
+                <button class="fc-guide__chip fc-guide__chip--easy" onclick="selectGuideTopic('gas-laws')">💨 חוקי גזים</button>
+                <button class="fc-guide__chip fc-guide__chip--easy" onclick="selectGuideTopic('molecular-geometry')">🔷 גיאומטריה</button>
+              </div>
+              <span class="fc-guide__tag fc-guide__tag--easy">קל — בסיס</span>
+            </div>
+          </div>
+          <div class="fc-guide__arrow-down">↓</div>
+          <div class="fc-guide__step">
+            <div class="fc-guide__step-num">2</div>
+            <div class="fc-guide__step-content">
+              <strong>שלב ביניים</strong>
+              <div class="fc-guide__chips">
+                <button class="fc-guide__chip fc-guide__chip--med" onclick="selectGuideTopic('thermodynamics')">⚡ תרמודינמיקה</button>
+                <button class="fc-guide__chip fc-guide__chip--med" onclick="selectGuideTopic('intermolecular')">🔗 כוחות בין-מולקולריים</button>
+                <button class="fc-guide__chip fc-guide__chip--med" onclick="selectGuideTopic('nuclear')">☢️ גרעינית</button>
+                <button class="fc-guide__chip fc-guide__chip--med" onclick="selectGuideTopic('le-chatelier')">🔄 לה-שאטלייה</button>
+                <button class="fc-guide__chip fc-guide__chip--med" onclick="selectGuideTopic('acids-bases')">🧪 חומצות ובסיסים</button>
+                <button class="fc-guide__chip fc-guide__chip--med" onclick="selectGuideTopic('colligative-properties')">🧊 קוליגטיביות</button>
+              </div>
+              <span class="fc-guide__tag fc-guide__tag--med">בינוני</span>
+            </div>
+          </div>
+          <div class="fc-guide__arrow-down">↓</div>
+          <div class="fc-guide__step fc-guide__step--hard">
+            <div class="fc-guide__step-num">3</div>
+            <div class="fc-guide__step-content">
+              <strong>חומר מתקדם — לפני הבגרות</strong>
+              <div class="fc-guide__chips">
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('equilibrium')">⚖️ שיווי משקל</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('kinetics')">⏱️ קינטיקה</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('redox')">⚡ חמצון-חיזור</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('electrochemistry')">🔋 אלקטרוכימיה</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('ph-calculations')">📊 חישובי pH</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('buffers')">🛡️ מאגרים</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('solubility')">🌊 מסיסות</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('stereoisomers')">🔀 סטריאואיזומריה</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('spectroscopy')">🔬 ספקטרוסקופיה</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('organic-reactions')">🔗 תגובות אורגניות</button>
+                <button class="fc-guide__chip fc-guide__chip--hard" onclick="selectGuideTopic('biochemistry')">🧬 ביוכימיה</button>
+              </div>
+              <span class="fc-guide__tag fc-guide__tag--hard">קשה — לפני הבגרות</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
 
     <!-- Topic selector -->
     <div class="fc-topic-selector">
@@ -393,6 +579,20 @@
             FlashcardEngine.init(selectedTopic);
           });
         }
+        // Expose guide selection helper for primary engine path
+        window.selectGuideTopic = function(topicId) {
+          selectedTopic = topicId;
+          if (topicBtnsContainer) {
+            topicBtnsContainer.querySelectorAll('.fc-topic-btn').forEach(b => {
+              b.classList.toggle('selected', b.dataset.topic === topicId);
+            });
+          }
+          FlashcardEngine.init(topicId);
+          const area = document.getElementById('flashcard-area');
+          if (area) area.scrollIntoView({ behavior:'smooth', block:'start' });
+          const guide = document.getElementById('fc-guide');
+          if (guide) guide.removeAttribute('open');
+        };
         FlashcardEngine.init(selectedTopic || null);
         return;
       }
@@ -455,7 +655,7 @@
 
       function getFilteredCards() {
         return cards.filter(c => {
-          if (selectedTopic !== 'all' && String(c.topicId) !== String(selectedTopic)) return false;
+          if (selectedTopic !== 'all' && String(c.topic || c.topicId) !== String(selectedTopic)) return false;
           return true;
         });
       }
@@ -536,6 +736,28 @@
           renderCard();
         });
       }
+
+      // Expose topic selection for the guide buttons
+      window.selectGuideTopic = function(topicId) {
+        selectedTopic = topicId;
+        currentIndex = 0;
+        reviewed = 0;
+        isFlipped = false;
+        // Update topic button UI
+        const topicBtnsEl = document.getElementById('fc-topic-buttons');
+        if (topicBtnsEl) {
+          topicBtnsEl.querySelectorAll('.fc-topic-btn').forEach(b => {
+            b.classList.toggle('selected', b.dataset.topic === topicId);
+          });
+        }
+        renderCard();
+        // Scroll to card
+        const area = document.getElementById('flashcard-area');
+        if (area) area.scrollIntoView({ behavior:'smooth', block:'start' });
+        // Close guide
+        const guide = document.getElementById('fc-guide');
+        if (guide) guide.removeAttribute('open');
+      };
 
       // Initial render
       renderCard();

@@ -57,7 +57,7 @@ const FlashcardEngine = {
 
         // פילטר לפי נושא
         if (topicId) {
-          all = all.filter(c => c.topicId === topicId);
+          all = all.filter(c => (c.topic || c.topicId) === topicId);
         }
 
         this.state.cards   = all;
@@ -97,75 +97,58 @@ const FlashcardEngine = {
       <div class="fc-session">
 
         <!-- כותרת סשן ומונה -->
-        <div class="fc-header">
-          <span class="fc-counter" aria-live="polite">
+        <div class="fc-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+          <span class="fc-counter" aria-live="polite" style="font-weight:700;color:#6b7280;font-size:0.95rem;">
             ${this.state.reviewed + 1} / ${total}
           </span>
           <div class="fc-progress" role="progressbar"
+               style="flex:1;height:6px;background:#e5e7eb;border-radius:999px;overflow:hidden;"
                aria-valuenow="${this.state.reviewed}"
-               aria-valuemin="0" aria-valuemax="${total}"
-               aria-label="${this.state.reviewed} מתוך ${total} כרטיסיות עברו">
-            <div class="fc-progress__bar" style="width:${pct}%"></div>
+               aria-valuemin="0" aria-valuemax="${total}">
+            <div style="width:${pct}%;height:100%;background:var(--color-primary,#2563eb);border-radius:999px;transition:width 0.3s;"></div>
           </div>
         </div>
 
-        <!-- הכרטיסיה עצמה — לחיצה/מקש להפיכה -->
-        <div class="flashcard" id="flashcard-card" tabindex="0"
-             role="button"
-             aria-label="כרטיסיה: ${sanitizeHTML(card.front)} — לחץ להצגת התשובה"
-             onclick="FlashcardEngine.flip()"
-             onkeydown="if(event.key==='Enter'||event.key===' ') FlashcardEngine.flip()">
+        <!-- הכרטיסיה עצמה — perspective wrapper חייב להיות ישיר מעל הכרטיסיה -->
+        <div style="perspective:1000px;max-width:540px;margin:0 auto 1.5rem;">
+          <div class="flashcard" id="flashcard-card" tabindex="0"
+               role="button"
+               aria-label="כרטיסיה: ${sanitizeHTML(card.front)} — לחץ להצגת התשובה"
+               onclick="FlashcardEngine.flip()"
+               onkeydown="if(event.key==='Enter'||event.key===' ') FlashcardEngine.flip()">
 
-          <!-- פנים -->
-          <div class="flashcard__face flashcard__front">
-            <div class="flashcard__label" aria-hidden="true">שאלה</div>
-            <div class="flashcard__content">${sanitizeHTML(card.front)}</div>
-            ${card.hint
-              ? `<div class="flashcard__hint">
-                   <span aria-hidden="true">💡</span>
-                   רמז: ${sanitizeHTML(card.hint)}
-                 </div>`
-              : ''}
-            <div class="flashcard__flip-prompt" aria-hidden="true">
-              לחץ להצגת התשובה
+            <!-- פנים -->
+            <div class="flashcard-front">
+              <div class="card-label">שאלה</div>
+              <div class="card-content">${sanitizeHTML(card.front).replace(/\n/g,'<br>')}</div>
+              ${card.hint
+                ? `<div class="flip-hint" style="margin-top:0.5rem;font-size:0.8rem;color:#9ca3af;">💡 ${sanitizeHTML(card.hint)}</div>`
+                : ''}
+              <div class="flip-hint">לחץ להצגת התשובה ↓</div>
             </div>
-          </div>
 
-          <!-- גב (נסתר עד הפיכה) -->
-          <div class="flashcard__face flashcard__back" aria-hidden="true">
-            <div class="flashcard__label" aria-hidden="true">תשובה</div>
-            <div class="flashcard__content">${sanitizeHTML(card.back)}</div>
+            <!-- גב (נסתר עד הפיכה) -->
+            <div class="flashcard-back">
+              <div class="card-label">תשובה</div>
+              <div class="card-content" style="white-space:pre-line;">${sanitizeHTML(card.back)}</div>
+            </div>
           </div>
         </div>
 
         <!-- כפתורי דירוג — נסתרים עד הפיכה -->
-        <div class="fc-ratings" id="fc-ratings" aria-label="דרג את הכרטיסיה">
-          <button class="fc-rate-btn fc-rate--again"
+        <div class="fc-answer-buttons" id="fc-answer-buttons" aria-label="דרג את הכרטיסיה">
+          <button class="btn-again"
                   onclick="FlashcardEngine.rate(0)"
-                  aria-label="לא זכרתי — אחרי שוב">
-            <span class="fc-rate-btn__icon" aria-hidden="true">↩</span>
-            <span class="fc-rate-btn__label">שוב</span>
-            <span class="fc-rate-btn__sub" aria-hidden="true">&lt; 1 יום</span>
-          </button>
-          <button class="fc-rate-btn fc-rate--hard"
+                  aria-label="לא זכרתי">↩ שוב</button>
+          <button class="btn-hard"
                   onclick="FlashcardEngine.rate(3)"
-                  aria-label="זכרתי בקושי — קשה">
-            <span class="fc-rate-btn__icon" aria-hidden="true">😓</span>
-            <span class="fc-rate-btn__label">קשה</span>
-          </button>
-          <button class="fc-rate-btn fc-rate--easy"
+                  aria-label="זכרתי בקושי">😓 קשה</button>
+          <button class="btn-easy"
                   onclick="FlashcardEngine.rate(5)"
-                  aria-label="זכרתי בקלות — קל">
-            <span class="fc-rate-btn__icon" aria-hidden="true">😊</span>
-            <span class="fc-rate-btn__label">קל</span>
-          </button>
+                  aria-label="זכרתי בקלות">😊 קל</button>
         </div>
 
       </div>`;
-
-    // הסתרת כפתורי דירוג עד הפיכה
-    const ratings = document.getElementById('fc-ratings');
-    if (ratings) ratings.style.visibility = 'hidden';
 
     // פוקוס לכרטיסיה לנגישות
     requestAnimationFrame(() => {
@@ -181,11 +164,10 @@ const FlashcardEngine = {
     this.state.flipped = true;
 
     const cardEl  = document.getElementById('flashcard-card');
-    const ratings = document.getElementById('fc-ratings');
+    const buttons = document.getElementById('fc-answer-buttons');
 
     if (cardEl) {
       cardEl.classList.add('flipped');
-      // עדכון aria לאחר הפיכה
       const card = this.state.due[this.state.current];
       cardEl.setAttribute('aria-label',
         'תשובה: ' + sanitizeHTML(card.back) + ' — בחר דירוג');
@@ -193,12 +175,11 @@ const FlashcardEngine = {
     }
 
     // הצגת כפתורי דירוג עם אנימציה
-    if (ratings) {
-      ratings.style.visibility = 'visible';
-      ratings.style.animation  = 'fadeInUp 0.3s ease';
-      // פוקוס לכפתור "קשה" (אמצעי) כברירת מחדל
-      const hardBtn = ratings.querySelector('.fc-rate--hard');
-      if (hardBtn) hardBtn.focus();
+    if (buttons) {
+      buttons.classList.add('visible');
+      buttons.style.animation = 'fadeInUp 0.35s ease';
+      const hardBtn = buttons.querySelector('.btn-hard');
+      if (hardBtn) setTimeout(() => hardBtn.focus(), 400);
     }
   },
 
