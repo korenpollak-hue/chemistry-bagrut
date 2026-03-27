@@ -503,6 +503,247 @@ const TOPIC_LESSONS = {
   }
 };
 
+// ─── גרפיקה חזותית לכל נושא — מודלים ודיאגרמות ─────────────────────────────
+const TOPIC_VISUALS = {
+  'thermochemistry': `
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'>🔥 <b>אקסותרמי</b><br>ΔH &lt; 0<br>חום יוצא → חם!</div>
+      <div class='vis-box vis-blue'>❄️ <b>אנדותרמי</b><br>ΔH &gt; 0<br>חום נכנס → קר!</div>
+    </div>
+    <div class='vis-dark'>ΔH = Σ(אנרגיית שבירת קשרים) − Σ(אנרגיית יצירת קשרים)</div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-red'>מדורה: ΔH&lt;0 🔥</span>
+      <span class='vis-badge vis-blue'>חבילת קרח: ΔH&gt;0 ❄️</span>
+    </div>`,
+
+  'thermodynamics': `
+    <table class='vis-tbl'>
+      <tr><th>ΔH</th><th>ΔS</th><th>ספונטני?</th><th>מתי?</th></tr>
+      <tr style='background:#dcfce7'><td>−</td><td>+</td><td>✅ תמיד!</td><td>כל T</td></tr>
+      <tr style='background:#fee2e2'><td>+</td><td>−</td><td>❌ אף פעם</td><td>—</td></tr>
+      <tr style='background:#fef9c3'><td>−</td><td>−</td><td>❓ T נמוכה</td><td>קר</td></tr>
+      <tr style='background:#fef9c3'><td>+</td><td>+</td><td>❓ T גבוהה</td><td>חם</td></tr>
+    </table>
+    <div class='vis-dark'>ΔG = ΔH − T·ΔS | ΔG &lt; 0 → ספונטני</div>`,
+
+  'equilibrium': `
+    <div class='vis-flow'>
+      <div class='vis-flow-box vis-red'>מגיבים<br>A + B</div>
+      <span class='vis-arrow'>⇌</span>
+      <div class='vis-flow-box vis-green'>תוצרים<br>C + D</div>
+    </div>
+    <div class='vis-dark'>Kc = [C]ᶜ[D]ᵈ / [A]ᵃ[B]ᵇ</div>
+    <div class='vis-2col'>
+      <div class='vis-box vis-green'>Kc &gt;&gt; 1<br>✅ תוצרים שולטים<br>תגובה "הולכת עד הסוף"</div>
+      <div class='vis-box vis-red'>Kc &lt;&lt; 1<br>❌ מגיבים שולטים<br>תגובה "כמעט לא מתרחשת"</div>
+    </div>`,
+
+  'le-chatelier': `
+    <table class='vis-tbl'>
+      <tr><th>השינוי</th><th>המערכת מגיבה →</th></tr>
+      <tr style='background:#dcfce7'><td>➕ הוסף מגיב</td><td>→ לכיוון תוצרים</td></tr>
+      <tr style='background:#fee2e2'><td>➕ הוסף תוצר</td><td>← לכיוון מגיבים</td></tr>
+      <tr style='background:#dbeafe'><td>⬆️ לחץ גבוה</td><td>→ פחות מולי גז</td></tr>
+      <tr style='background:#fef9c3'><td>⬆️ T (אנדו)</td><td>→ לכיוון תוצרים</td></tr>
+      <tr style='background:#fef9c3'><td>⬆️ T (אקסו)</td><td>← לכיוון מגיבים</td></tr>
+    </table>
+    <div class='vis-dark'>עיקרון: המע' תמיד "נלחמת" נגד השינוי!</div>`,
+
+  'kinetics': `
+    <div class='vis-dark'>Rate = k·[A]ⁿ·[B]ᵐ | Ea = אנרגיית הפעלה = "ההר" שצריך לטפס</div>
+    <div class='vis-3col'>
+      <div class='vis-box vis-red'>🌡️ T גבוה<br>⬆️ מהיר יותר<br>יותר אנרגיה</div>
+      <div class='vis-box vis-yellow'>🧪 ריכוז גבוה<br>⬆️ מהיר יותר<br>יותר התנגשויות</div>
+      <div class='vis-box vis-green'>⚗️ קטליזטור<br>⬇️ מוריד Ea<br>לא מתכלה!</div>
+    </div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-gray'>סדר 0: Rate=k</span>
+      <span class='vis-badge vis-blue'>סדר 1: Rate=k[A]</span>
+      <span class='vis-badge vis-red'>סדר 2: Rate=k[A]²</span>
+    </div>`,
+
+  'redox': `
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'>🔴 <b>חמצון</b><br><b>O</b>xidation = <b>I</b>s <b>L</b>oss<br>מאבד אלקטרונים e⁻<br>מספר חמצון ⬆️ עולה</div>
+      <div class='vis-box vis-blue'>🔵 <b>חיזור</b><br><b>R</b>eduction = <b>I</s><b>s</b> <b>G</b>ain<br>מקבל אלקטרונים e⁻<br>מספר חמצון ⬇️ יורד</div>
+    </div>
+    <div class='vis-dark'>OIL RIG 🛢️ — זכור לתמיד!</div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-red'>מחמצן = מקבל e⁻ (הוא עצמו מצטמצם)</span>
+      <span class='vis-badge vis-blue'>מחזר = נותן e⁻ (הוא עצמו מתחמצן)</span>
+    </div>`,
+
+  'nuclear': `
+    <table class='vis-tbl'>
+      <tr><th>קרינה</th><th>סימול</th><th>מה נפלט?</th><th>שינוי בגרעין</th></tr>
+      <tr><td>אלפא α</td><td>⁴₂He</td><td>גרעין הליום</td><td>מסה −4, פרוטונים −2</td></tr>
+      <tr><td>בטא β</td><td>⁰₋₁e</td><td>אלקטרון</td><td>נייטרון→פרוטון, Z+1</td></tr>
+      <tr><td>גמא γ</td><td>γ</td><td>פוטון (אנרגיה)</td><td>אין שינוי מסה!</td></tr>
+    </table>
+    <div class='vis-dark'>t½ = זמן חצי חיים | כל t½ → הכמות מתחלקת ב-2</div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-yellow'>1 t½ → 50%</span>
+      <span class='vis-badge vis-yellow'>2 t½ → 25%</span>
+      <span class='vis-badge vis-yellow'>3 t½ → 12.5%</span>
+    </div>`,
+
+  'acids-bases': `
+    <div class='vis-ph'></div>
+    <div class='vis-ph-marks'>
+      <span>0<br>HCl</span><span>3<br>לימון 🍋</span><span>7<br>מים 💧</span><span>10<br>סבון 🧼</span><span>14<br>NaOH</span>
+    </div>
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'>חומצה 🍋<br>[H⁺] &gt; [OH⁻]<br>pH &lt; 7<br>טעם חמוץ</div>
+      <div class='vis-box vis-blue'>בסיס 🧼<br>[OH⁻] &gt; [H⁺]<br>pH &gt; 7<br>תחושה חלקלקה</div>
+    </div>`,
+
+  'ph-calculations': `
+    <div class='vis-dark'>pH = −log[H⁺] | pOH = −log[OH⁻] | pH + pOH = 14 | Kw = 10⁻¹⁴</div>
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'><b>חומצה חזקה</b><br>HCl 0.1M<br>pH = −log(0.1) = <b>1</b><br>מתפרקת 100%!</div>
+      <div class='vis-box vis-blue'><b>בסיס חזק</b><br>NaOH 0.1M<br>pOH=1 → pH=<b>13</b><br>מתפרק 100%!</div>
+    </div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-yellow'>חומצה חלשה: pH = ½(pKa − logC)</span>
+    </div>`,
+
+  'molecular-geometry': `
+    <table class='vis-tbl'>
+      <tr><th>קשרים</th><th>זוגות בודדים</th><th>צורה</th><th>זוית</th><th>דוגמה</th></tr>
+      <tr><td>2</td><td>0</td><td>לינארי ─</td><td>180°</td><td>CO₂</td></tr>
+      <tr><td>3</td><td>0</td><td>משולש שטוח ▽</td><td>120°</td><td>BF₃</td></tr>
+      <tr><td>4</td><td>0</td><td>טטראידר 💎</td><td>109.5°</td><td>CH₄</td></tr>
+      <tr><td>3</td><td>1</td><td>פירמידה משולשת</td><td>107°</td><td>NH₃</td></tr>
+      <tr><td>2</td><td>2</td><td>כפוף 🦆</td><td>104.5°</td><td>H₂O</td></tr>
+    </table>
+    <div class='vis-dark'>זוגות בודדים דוחים יותר! → מקטינים זוית מ-109.5°</div>`,
+
+  'intermolecular': `
+    <div class='vis-3col'>
+      <div class='vis-box vis-gray'>כוחות גב"ל<br>⭐ הכי חלש<br>כל מולקולה!<br>ממסה נמוכה</div>
+      <div class='vis-box vis-yellow'>דיפול-דיפול<br>⭐⭐ בינוני<br>מולקולות קוטביות<br>(δ+ ↔ δ−)</div>
+      <div class='vis-box vis-blue'>קשר מימן<br>⭐⭐⭐ חזק!<br>N-H, O-H, F-H<br>→ רתיחה גבוהה</div>
+    </div>
+    <div class='vis-dark'>חוזק: גב"ל &lt; דיפול-דיפול &lt; קשר מימן | H₂O רותחת ב-100°C בגלל קשרי מימן!</div>`,
+
+  'organic': `
+    <div class='vis-3col'>
+      <div class='vis-box vis-gray'>אלקאן<br>C−C בלבד<br>סיומת: <b>-ane</b><br>מתאן, אתאן...</div>
+      <div class='vis-box vis-yellow'>אלקן<br>C=C קשר כפול<br>סיומת: <b>-ene</b><br>אתן, פרופן...</div>
+      <div class='vis-box vis-red'>אלקין<br>C≡C משולש<br>סיומת: <b>-yne</b><br>אצטילן...</div>
+    </div>
+    <table class='vis-tbl'>
+      <tr><th>קבוצה</th><th>שם</th><th>דוגמה</th></tr>
+      <tr><td>−OH</td><td>אלכוהול</td><td>אתנול</td></tr>
+      <tr><td>−COOH</td><td>חומצה קרבוקסילית</td><td>חומץ</td></tr>
+      <tr><td>−CHO</td><td>אלדהיד</td><td>פורמלין</td></tr>
+      <tr><td>−NH₂</td><td>אמין</td><td>חומצות אמינו</td></tr>
+    </table>`,
+
+  'spectroscopy': `
+    <table class='vis-tbl'>
+      <tr><th>שיטה</th><th>מה מזהה?</th><th>סימן אופייני</th></tr>
+      <tr style='background:#fee2e2'><td><b>IR</b></td><td>קבוצות פונקציונליות</td><td>O−H: ~3300 | C=O: ~1700 cm⁻¹</td></tr>
+      <tr style='background:#dbeafe'><td><b>MS</b></td><td>מסה מולקולרית</td><td>M⁺ = משקל מולקולה שלמה</td></tr>
+      <tr style='background:#dcfce7'><td><b>NMR</b></td><td>סביבות H שונות</td><td>כל שיא = H במיקום שונה</td></tr>
+    </table>
+    <div class='vis-dark'>IR + MS + NMR ביחד → מזהים מולקולה לחלוטין! 🔍</div>`,
+
+  'stereoisomers': `
+    <div class='vis-2col'>
+      <div class='vis-box vis-blue'>🪞 <b>אנאנטיומרים</b><br>תמונות מראה<br>אינן ניתנות לכפה<br>R/S קונפיגורציה<br>סובבות אור מקוטב</div>
+      <div class='vis-box vis-green'>🔄 <b>דיאסטריאומרים</b><br>לא תמונות מראה<br>תכונות פיזיקליות שונות<br>כולל cis/trans</div>
+    </div>
+    <div class='vis-dark'>פחמן כירלי (C*) = 4 קבוצות שונות לחלוטין!</div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-purple'>R: CW לפי עדיפות</span>
+      <span class='vis-badge vis-red'>S: CCW לפי עדיפות</span>
+    </div>`,
+
+  'organic-reactions': `
+    <table class='vis-tbl'>
+      <tr><th>תגובה</th><th>מה קורה?</th><th>דוגמה</th></tr>
+      <tr style='background:#dcfce7'><td>הוספה (Addition)</td><td>שובר C=C + מוסיף</td><td>CH₂=CH₂ + Br₂</td></tr>
+      <tr style='background:#dbeafe'><td>החלפה (Substitution)</td><td>מחליף אטום</td><td>CH₄ + Cl₂ + UV</td></tr>
+      <tr style='background:#fef9c3'><td>חיסור (Elimination)</td><td>מסיר → יוצר C=C</td><td>אלכוהול + H₂SO₄ חם</td></tr>
+      <tr style='background:#f3e8ff'><td>אסטריפיקציה</td><td>חומצה + אלכוהול → אסטר + מים</td><td>RCOOH + ROH</td></tr>
+    </table>`,
+
+  'biochemistry': `
+    <div class='vis-3col'>
+      <div class='vis-box vis-yellow'>🍞 <b>פחמימות</b><br>CₙH₂ₙOₙ<br>גלוקוז, עמילן<br>אנרגיה מיידית</div>
+      <div class='vis-box vis-red'>🥩 <b>חלבונים</b><br>חומצות אמינו<br>אנזימים, שרירים<br>קשר פפטידי</div>
+      <div class='vis-box vis-blue'>🥑 <b>שומנים</b><br>גליצרול + 3 חומצות<br>ממברנות, אנרגיה<br>לטווח ארוך</div>
+    </div>
+    <div class='vis-dark'>DNA: A−T (2 קשרים) | G−C (3 קשרים) | דנטורציה = שבירת מבנה בחום</div>`,
+
+  'periodic-table': `
+    <table class='vis-tbl'>
+      <tr><th>תכונה</th><th>← בשורה (שמאל לימין)</th><th>↓ בטור (למטה)</th></tr>
+      <tr><td>רדיוס אטומי</td><td>⬇️ קטן</td><td>⬆️ גדל</td></tr>
+      <tr><td>אלקטרושליליות</td><td>⬆️ גדל (F הכי גבוה!)</td><td>⬇️ קטן</td></tr>
+      <tr><td>אנרגיית יינון</td><td>⬆️ גדל</td><td>⬇️ קטן</td></tr>
+      <tr><td>מתכתיות</td><td>⬇️ פחות מתכתי</td><td>⬆️ יותר מתכתי</td></tr>
+    </table>
+    <div class='vis-row'>
+      <span class='vis-badge vis-red'>מתכות: שמאל 🔩</span>
+      <span class='vis-badge vis-blue'>לא-מתכות: ימין ⚡</span>
+      <span class='vis-badge vis-yellow'>אצילים: עמודה 18 😴</span>
+    </div>`,
+
+  'gas-laws': `
+    <table class='vis-tbl'>
+      <tr><th>חוק</th><th>נוסחה</th><th>מה קבוע?</th></tr>
+      <tr><td>בויל</td><td>P₁V₁ = P₂V₂</td><td>T, n</td></tr>
+      <tr><td>שארל</td><td>V₁/T₁ = V₂/T₂</td><td>P, n</td></tr>
+      <tr><td>גיי-לוסאק</td><td>P₁/T₁ = P₂/T₂</td><td>V, n</td></tr>
+      <tr style='background:#dcfce7'><td><b>גז אידאלי</b></td><td><b>PV = nRT</b></td><td>—</td></tr>
+    </table>
+    <div class='vis-dark'>R = 8.314 J/(mol·K) | T חייב להיות בקלווין! K = °C + 273.15</div>`,
+
+  'electrochemistry': `
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'>⚡ <b>אנודה (−)</b><br>חמצון מתרחש<br>מתכת מתמוסס<br>Zn → Zn²⁺ + 2e⁻</div>
+      <div class='vis-box vis-blue'>⚡ <b>קתודה (+)</b><br>חיזור מתרחש<br>מתכת מצופה<br>Cu²⁺ + 2e⁻ → Cu</div>
+    </div>
+    <div class='vis-dark'>E°cell = E°קתודה − E°אנודה | E° &gt; 0 → ספונטני ✅</div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-yellow'>אנודה: AN OX (anode=oxidation)</span>
+      <span class='vis-badge vis-purple'>קתודה: RED CAT (reduction=cathode)</span>
+    </div>`,
+
+  'buffers': `
+    <div class='vis-flow'>
+      <div class='vis-flow-box vis-yellow'>מערכת חוצץ<br>חומצה חלשה (HA)<br>+ המלח שלה (A⁻)</div>
+    </div>
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'>הוסף H⁺<br>A⁻ + H⁺ → HA<br>pH כמעט לא משתנה!</div>
+      <div class='vis-box vis-blue'>הוסף OH⁻<br>HA + OH⁻ → A⁻ + H₂O<br>pH כמעט לא משתנה!</div>
+    </div>
+    <div class='vis-dark'>Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA])</div>`,
+
+  'solubility': `
+    <div class='vis-dark'>Ksp = [Aⁿ⁺]ᵃ·[Bⁿ⁻]ᵇ | Q &lt; Ksp → מומס עוד | Q &gt; Ksp → משקע!</div>
+    <div class='vis-2col'>
+      <div class='vis-box vis-red'>⬇️ מוריד מסיסות<br>יון משותף בתמיסה<br>(אפקט יון משותף)</div>
+      <div class='vis-box vis-green'>⬆️ מעלה מסיסות<br>T גבוה (רוב מלחים)<br>הוספת חומצה</div>
+    </div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-blue'>AgCl: Ksp=[Ag⁺][Cl⁻]=1.8×10⁻¹⁰</span>
+    </div>`,
+
+  'colligative-properties': `
+    <div class='vis-2col'>
+      <div class='vis-box vis-blue'>⬆️ נקודת רתיחה<br>ΔTb = Kb·m·i<br>מלח בפסטה 🍝<br>(עולה מעט)</div>
+      <div class='vis-box vis-green'>⬇️ נקודת קיפאון<br>ΔTf = Kf·m·i<br>אנטיפריז 🚗<br>(−37°C!)</div>
+    </div>
+    <div class='vis-dark'>i = מקדם ואן הוף | NaCl → i=2 | CaCl₂ → i=3 | גלוקוז → i=1</div>
+    <div class='vis-row'>
+      <span class='vis-badge vis-yellow'>לחץ אוסמוטי: π = MRT</span>
+      <span class='vis-badge vis-blue'>לחץ אדים יורד עם ריכוז המומס</span>
+    </div>`
+};
+
 const QuizEngine = {
 
   // ─── מצב פנימי ─────────────────────────────────────────────────────────
@@ -637,6 +878,12 @@ const QuizEngine = {
             <span class="ql-section__icon">💬</span>
             <p class="ql-lesson__simple">${sanitizeHTML(lesson.simple)}</p>
           </div>
+
+          ${TOPIC_VISUALS[topicKey] ? `
+          <div class="ql-section ql-section--visual">
+            <div class="ql-section__title">🖼️ מודל ויזואלי — ראה את הרעיון:</div>
+            <div class="ql-visual">${TOPIC_VISUALS[topicKey]}</div>
+          </div>` : ''}
 
           ${termsHTML ? `
           <div class="ql-section">
