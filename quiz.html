@@ -129,6 +129,137 @@
       cursor: not-allowed;
     }
 
+    /* ─── Lesson Card — פשוט כמו לילד ─────────────────────────────── */
+    .ql-lesson {
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+      border: 2px solid #93c5fd;
+      border-radius: 1rem;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.1);
+    }
+    .ql-lesson__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.1rem;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255,255,255,0.6);
+    }
+    .ql-lesson__header:hover { background: rgba(255,255,255,0.85); }
+    .ql-lesson__emoji {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+    }
+    .ql-lesson__head-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .ql-lesson__label {
+      display: block;
+      font-size: 0.78rem;
+      color: #3b82f6;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.15rem;
+    }
+    .ql-lesson__title {
+      font-size: 1.05rem;
+      color: #1e3a8a;
+      display: block;
+    }
+    .ql-lesson__toggle {
+      background: none;
+      border: 1px solid #93c5fd;
+      border-radius: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.8rem;
+      color: #3b82f6;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ql-lesson__body {
+      padding: 1rem 1.25rem 1.1rem;
+      border-top: 1px solid #bfdbfe;
+      transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+      max-height: 500px;
+      opacity: 1;
+    }
+    .ql-lesson__body--collapsed {
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    .ql-lesson__simple {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin: 0 0 0.65rem;
+      line-height: 1.5;
+    }
+    .ql-lesson__analogy {
+      background: #fff;
+      border-radius: 0.6rem;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.95rem;
+      color: #374151;
+      margin-bottom: 0.65rem;
+      border-right: 3px solid #86efac;
+      line-height: 1.6;
+    }
+    .ql-lesson__keyword {
+      background: #fef9c3;
+      border-radius: 0.6rem;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.85rem;
+      color: #713f12;
+      font-family: monospace;
+      line-height: 1.6;
+      border-right: 3px solid #fbbf24;
+    }
+
+    /* ─── Emoji Animations ─────────────────────────────────────────── */
+    @keyframes ql-fire { 0%,100%{transform:scale(1) rotate(-5deg)} 50%{transform:scale(1.2) rotate(5deg)} }
+    @keyframes ql-spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+    @keyframes ql-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes ql-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+    @keyframes ql-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+    @keyframes ql-swing { 0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(10deg)} }
+    @keyframes ql-float { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-6px) scale(1.05)} }
+
+    .ql-anim-lesson-fire    { animation: ql-fire 1.4s ease-in-out infinite; }
+    .ql-anim-lesson-chaos   { animation: ql-bounce 1.2s ease-in-out infinite; }
+    .ql-anim-lesson-balance { animation: ql-swing 2s ease-in-out infinite; }
+    .ql-anim-lesson-push    { animation: ql-shake 1.5s ease-in-out infinite; }
+    .ql-anim-lesson-speed   { animation: ql-spin 1.2s linear infinite; }
+    .ql-anim-lesson-electron{ animation: ql-pulse 1s ease-in-out infinite; }
+    .ql-anim-lesson-nuclear { animation: ql-pulse 0.8s ease-in-out infinite; }
+    .ql-anim-lesson-ph      { animation: ql-float 2s ease-in-out infinite; }
+    .ql-anim-lesson-shape   { animation: ql-spin 3s linear infinite; }
+    .ql-anim-lesson-bond    { animation: ql-shake 2s ease-in-out infinite; }
+    .ql-anim-lesson-chain   { animation: ql-bounce 1.8s ease-in-out infinite; }
+    .ql-anim-lesson-light   { animation: ql-pulse 1.5s ease-in-out infinite; }
+    .ql-anim-lesson-mirror  { animation: ql-swing 2.5s ease-in-out infinite; }
+    .ql-anim-lesson-react   { animation: ql-fire 1.6s ease-in-out infinite; }
+    .ql-anim-lesson-dna     { animation: ql-spin 2s linear infinite; }
+    .ql-anim-lesson-table   { animation: ql-float 2.5s ease-in-out infinite; }
+    .ql-anim-lesson-gas     { animation: ql-bounce 1s ease-in-out infinite; }
+    .ql-anim-lesson-battery { animation: ql-pulse 1.2s ease-in-out infinite; }
+    .ql-anim-lesson-buffer  { animation: ql-swing 2s ease-in-out infinite; }
+    .ql-anim-lesson-dissolve{ animation: ql-float 1.8s ease-in-out infinite; }
+    .ql-anim-lesson-boil    { animation: ql-bounce 0.9s ease-in-out infinite; }
+
     /* Quiz container (managed by QuizEngine) */
     #quiz-container {
       display: none;
