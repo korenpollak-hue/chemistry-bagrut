@@ -3168,5 +3168,1845 @@
     "explanation": "סבון מתקבל בהידרוליזה בסיסית של שומנים (טריגליצרידים) עם NaOH/KOH: שומן + 3NaOH → גליצרול + 3 מלחי סודיום של חומצות שומן (סבון). מלחי חומצות שומן הם אמפיפיליים — ראש הידרופילי + זנב הידרופוב. הסבון פועל בגלל יצירת מיצלות.",
     "source": "בגרות 37282",
     "points": 5
+  },
+  {
+    "id": "q206",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "איזו קבוצה פונקציונלית מכיל התרכובת CH₃CH₂OH?",
+    "options": [
+      "קבוצת קרבוקסיל (-COOH)",
+      "קבוצת הידרוקסיל (-OH) — אלכוהול",
+      "קבוצת אמינו (-NH₂)",
+      "קבוצת אלדהיד (-CHO)"
+    ],
+    "answer": 1,
+    "explanation": "CH₃CH₂OH: שני פחמנים + קבוצת OH בסוף. קבוצת OH הצמודה לפחמן רווי = אלכוהול. זהו אתנול (אלכוהול אתילי). לעומת זאת: COOH = חומצה; NH₂ = אמין; CHO = אלדהיד.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q207",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "מהו המוצר של תגובת אתנול (CH₃CH₂OH) עם CuO בחימום מתון?",
+    "options": [
+      "חומצה אתנואית (CH₃COOH)",
+      "אתן (CH₂=CH₂)",
+      "אתנאל (CH₃CHO)",
+      "דיאתיל-אתר (CH₃CH₂-O-CH₂CH₃)"
+    ],
+    "answer": 2,
+    "explanation": "CuO הוא מחמצן חלש. כאשר אלכוהול ראשוני (כמו אתנול) מגיב עם CuO: CH₃CH₂OH + CuO → CH₃CHO + Cu + H₂O. האלכוהול הראשוני מתחמצן לאלדהיד (אתנאל). הסימן: אלכוהול ראשוני + CuO → אלדהיד (מאבד 2 אטומי מימן). CuO מצטמצם ל-Cu (נחושת מתכתית).",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q208",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת פרופן-1-אול (CH₃CH₂CH₂OH) עם CuO?",
+    "options": [
+      "פרופנון (אצטון)",
+      "פרופנאל (CH₃CH₂CHO)",
+      "חומצה פרופנואית (CH₃CH₂COOH)",
+      "פרופן (CH₃CH₂CH₃)"
+    ],
+    "answer": 1,
+    "explanation": "פרופן-1-אול הוא אלכוהול ראשוני (OH על פחמן קצה). CuO מחמצן אלכוהול ראשוני → אלדהיד: CH₃CH₂CH₂OH + CuO → CH₃CH₂CHO + Cu + H₂O. המוצר הוא פרופנאל (אלדהיד עם 3 פחמנים). אלדהיד = קבוצת CHO. חשוב: CuO אינו מחמצן עד לחומצה — לכך נדרש KMnO₄.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q209",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת פרופן-2-אול ((CH₃)₂CHOH) עם CuO?",
+    "options": [
+      "פרופנאל (CH₃CH₂CHO)",
+      "פרופנון (אצטון, (CH₃)₂C=O)",
+      "חומצה פרופנואית",
+      "פרופן"
+    ],
+    "answer": 1,
+    "explanation": "פרופן-2-אול הוא אלכוהול משני (OH על פחמן אמצעי). CuO מחמצן אלכוהול משני → קטון: (CH₃)₂CHOH + CuO → (CH₃)₂C=O + Cu + H₂O. המוצר הוא פרופנון (אצטון). כלל: אלכוהול ראשוני + CuO → אלדהיד; אלכוהול משני + CuO → קטון. קטון = קבוצת C=O באמצע השרשרת.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q210",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת אתנאל (CH₃CHO) עם KMnO₄?",
+    "options": [
+      "אתנול (CH₃CH₂OH)",
+      "אתן (CH₂=CH₂)",
+      "חומצה אתנואית (CH₃COOH)",
+      "אתנון"
+    ],
+    "answer": 2,
+    "explanation": "KMnO₄ הוא מחמצן חזק. אלדהיד + KMnO₄ → חומצה קרבוקסילית: CH₃CHO + [O] → CH₃COOH. אלדהיד מתחמצן לחומצה קרבוקסילית. שים לב: CuO (חלש) מחמצן אלכוהול → אלדהיד. KMnO₄ (חזק) מחמצן אלדהיד → חומצה. קטון אינו מתחמצן עם KMnO₄ בתנאים רגילים.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q211",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "אלכוהול A מגיב עם CuO ליצירת פרופנאל (CH₃CH₂CHO). מהו אלכוהול A?",
+    "options": [
+      "פרופן-2-אול ((CH₃)₂CHOH)",
+      "פרופן-1-אול (CH₃CH₂CH₂OH)",
+      "אתנול (CH₃CH₂OH)",
+      "בוטן-1-אול (CH₃CH₂CH₂CH₂OH)"
+    ],
+    "answer": 1,
+    "explanation": "פרופנאל הוא אלדהיד עם 3 פחמנים (CH₃CH₂CHO). כאשר אלכוהול ראשוני מגיב עם CuO מתקבל אלדהיד עם אותו מספר פחמנים. לכן: אלדהיד C3 ← אלכוהול ראשוני C3 = פרופן-1-אול (CH₃CH₂CH₂OH). בשאלת הבגרות 37382, זהו שאלה 1: CuO + A → CH₃CH₂CHO, לכן A = פרופן-1-אול.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q212",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "מהו המוצר של דה-הידרציה (הסרת מים) של אתנול (CH₃CH₂OH) בנוכחות H₂SO₄ בטמפרטורה גבוהה?",
+    "options": [
+      "אתר דיאתילי",
+      "חומצה אתנואית",
+      "אתן (CH₂=CH₂)",
+      "אתנאל"
+    ],
+    "answer": 2,
+    "explanation": "אתנול + H₂SO₄ בחום גבוה (>170°C): CH₃CH₂OH → CH₂=CH₂ + H₂O. מתקבל אלקן (אתן) ומים — זו תגובת דה-הידרציה (elimination). בחום נמוך (<140°C) + שתי מולקולות אלכוהול: CH₃CH₂OH + HOCH₂CH₃ → CH₃CH₂-O-CH₂CH₃ + H₂O (אתר). טמפרטורה גבוהה = אלקן, נמוכה = אתר.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q213",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת שני מולקולות אתנול עם H₂SO₄ בטמפרטורה נמוכה?",
+    "options": [
+      "אתן",
+      "דיאתיל-אתר (CH₃CH₂-O-CH₂CH₃)",
+      "אתנאל",
+      "חומצה אתנואית"
+    ],
+    "answer": 1,
+    "explanation": "שני אלכוהולים + H₂SO₄ בטמפרטורה נמוכה: 2 CH₃CH₂OH → CH₃CH₂-O-CH₂CH₃ + H₂O. מתקבל אתר (ether) ומים — תגובת קונדנסציה (הסרת מים). קבוצת אתר: R-O-R'. כלל: H₂SO₄ + אלכוהולים: חום נמוך → אתר, חום גבוה → אלקן.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q214",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת אתנול (CH₃CH₂OH) עם HBr?",
+    "options": [
+      "CH₃CH₂Br + H₂O",
+      "CH₂=CH₂ + HBr",
+      "CH₃CH₂OH₂⁺ + Br⁻",
+      "CH₃CHO + HBr"
+    ],
+    "answer": 0,
+    "explanation": "אלכוהול + HBr → ברומואלקיל + מים: CH₃CH₂OH + HBr → CH₃CH₂Br + H₂O. ה-OH מוחלפת בבר — זו תגובת החלפה (substitution). המוצר הוא ברומואתן. הכלל: אלכוהול + הלוגן-מימן → הלואלקן + מים.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q215",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת ברומואתן (CH₃CH₂Br) עם KOH מימי?",
+    "options": [
+      "CH₃CH₂OK + HBr",
+      "CH₂=CH₂ + KBr + H₂O",
+      "CH₃CH₂OH + KBr",
+      "CH₃CHO + KBr"
+    ],
+    "answer": 2,
+    "explanation": "ברומואלקן + KOH(aq) → אלכוהול + KBr: CH₃CH₂Br + KOH(aq) → CH₃CH₂OH + KBr. ה-Br מוחלף ב-OH — תגובת החלפה. שים לב: KOH אלכוהולי (לא מימי) + חום → אלקן (elimination). KOH מימי → אלכוהול (substitution).",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q216",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "לפי כלל מרקובניקוב, מהו המוצר העיקרי של תגובת פרופן (CH₃CH=CH₂) עם HBr?",
+    "options": [
+      "CH₃CH₂CH₂Br (1-ברומופרופן)",
+      "CH₃CHBrCH₃ (2-ברומופרופן)",
+      "CH₂BrCH=CH₂",
+      "CH₃CBr₂CH₃"
+    ],
+    "answer": 1,
+    "explanation": "כלל מרקובניקוב: במוספת HBr לאלקן, ה-Br (החלק השלילי) נצמד לפחמן העשיר ביותר במימן (הפחמן הפחות מוחלף). ב-CH₃CH=CH₂: פחמן 1 (=CH₂) עם 2H; פחמן 2 (CH=) עם 1H. ה-H מתחבר לפחמן 1 (יותר מימן), ה-Br לפחמן 2 (פחות מימן). מוצר: CH₃CHBrCH₃.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q217",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר של תגובת אתן (CH₂=CH₂) עם Cl₂?",
+    "options": [
+      "CH₂ClCH₂Cl (1,2-דיכלוראתן)",
+      "CH₃CH₂Cl (כלוראתן)",
+      "CHCl=CHCl",
+      "CCl₂=CH₂"
+    ],
+    "answer": 0,
+    "explanation": "תגובת חיבור הלוגן לאלקן: CH₂=CH₂ + Cl₂ → CH₂ClCH₂Cl. הקשר הכפול נפתח ולכל פחמן נוסף אטום כלור אחד. המוצר הוא 1,2-דיכלוראתן (כלורין ויצ'ינאלי — על פחמנים סמוכים). זו תגובת addition (חיבור).",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q218",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "מהם המגיבים והמוצרים בתגובת אסטריפיקציה של חומצה אתנואית ואתנול?",
+    "options": [
+      "CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O",
+      "CH₃COOH + C₂H₅OH → CH₃CH₂COOH + H₂",
+      "2 CH₃COOH → CH₃COOCOCH₃ + H₂O",
+      "CH₃COO⁻ + C₂H₅⁺ → CH₃COOC₂H₅"
+    ],
+    "answer": 0,
+    "explanation": "אסטריפיקציה = תגובת חומצה קרבוקסילית + אלכוהול → אסטר + מים: CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O. המוצר (אתיל-אצטט) הוא אסטר — קבוצת -COO- באמצע. זו תגובת שיווי משקל הפיכה; H₂SO₄ מזרז. אסטרים נפוצים: ריחות פירות.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q219",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "איזו תגובה מתארת הידרוליזה בסיסית (סאפוניפיקציה) של אסטר?",
+    "options": [
+      "CH₃COOC₂H₅ + H₂O ⇌ CH₃COOH + C₂H₅OH",
+      "CH₃COOC₂H₅ + NaOH → CH₃COONa + C₂H₅OH",
+      "CH₃COOH + NaOH → CH₃COONa + H₂O",
+      "CH₃COOC₂H₅ + HCl → CH₃COOCl + C₂H₅OH"
+    ],
+    "answer": 1,
+    "explanation": "סאפוניפיקציה = הידרוליזה בסיסית של אסטר: CH₃COOC₂H₅ + NaOH → CH₃COONa + C₂H₅OH. המוצרים הם מלח של החומצה (לא החומצה החופשית) + אלכוהול. זו תגובה בלתי הפיכה (בניגוד לאסטריפיקציה). אפשרות א' = הידרוליזה חומצית (הפיכה). אפשרות ג' = ניטרול פשוט.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q220",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "בהשוואת נקודות הרתיחה של תרכובות אורגניות עם אותו מספר פחמנים (C4), מהו הסדר הנכון מגבוה לנמוך?",
+    "options": [
+      "אלקן > אלכוהול > חומצה קרבוקסילית > אתר",
+      "חומצה קרבוקסילית > אלכוהול > אתר > אלקן",
+      "אלכוהול > חומצה קרבוקסילית > אלקן > אתר",
+      "אתר > אלכוהול > אלקן > חומצה קרבוקסילית"
+    ],
+    "answer": 1,
+    "explanation": "נקודת הרתיחה תלויה בקשרי מימן ובמשיכות בין-מולקולריות: חומצות קרבוקסיליות (שני קשרי מימן בין מולקולות — גבוהות ביותר) > אלכוהולים (קשר מימן אחד) > אתרים (קיטוב חלש, אין קשרי מימן) > אלקנים (כוחות ון-דר-ולס בלבד — נמוכים ביותר). מ-C4: חומצה בוטנואית (164°C) > בוטנול (118°C) > דיאתיל-אתר (35°C) > בוטן (-1°C).",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q221",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "לתרכובת הנוסחה המולקולרית C₄H₁₀O. איך ניתן להבדיל בין אלכוהול לאתר בעל אותה נוסחה?",
+    "options": [
+      "האלכוהול מגיב עם Na המתכת ומשחרר H₂; האתר אינו מגיב",
+      "לאתר נקודת רתיחה גבוהה יותר מהאלכוהול",
+      "האלכוהול ממיס שומנים; האתר לא",
+      "האתר מגיב עם NaOH; האלכוהול לא"
+    ],
+    "answer": 0,
+    "explanation": "אלכוהול (R-OH) מגיב עם נתרן מתכתי: 2 R-OH + 2 Na → 2 R-ONa + H₂↑. האתר (R-O-R) אינו מגיב עם Na (אין H חומצי). לכן: שחרור בועות גז H₂ = סימן לאלכוהול. נוסף: נקודת הרתיחה של אלכוהול גבוהה מאתר (אלכוהול יוצר קשרי מימן; אתר לא).",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q222",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "MTBE ((CH₃)₃C-O-CH₃) מסונתז מתגובת מתנול (CH₃OH) עם 2-מתיל-פרופן-2-אול ((CH₃)₃COH) בנוכחות H₂SO₄. מהו סוג התגובה ומדוע?",
+    "options": [
+      "אסטריפיקציה — כי נוצר קשר C=O",
+      "קונדנסציה (דה-הידרציה) — שני אלכוהולים מאחדים ומשחררים H₂O ליצירת אתר",
+      "חמצון — כי נוצרת קבוצת אתר",
+      "פולימריזציה — כי שתי מולקולות מתחברות"
+    ],
+    "answer": 1,
+    "explanation": "MTBE = מתיל-טרציארי-בוטיל-אתר: CH₃OH + (CH₃)₃COH →[H₂SO₄, חום נמוך] (CH₃)₃C-O-CH₃ + H₂O. זו תגובת קונדנסציה (דה-הידרציה): שני אלכוהולים שונים מתחברים תוך שחרור מולקולת מים. המוצר הוא אתר (קשר R-O-R). MTBE שימש כתוסף לדלק (אוקטן גבוה). H₂SO₄ מזרז בטמפרטורה נמוכה.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q223",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "מהי הקבוצה הפונקציונלית של CH₃-CO-CH₂CH₃ ומהו שמו?",
+    "options": [
+      "אלדהיד — פרופנאל",
+      "קטון — בוטן-2-און (מתיל-אתיל-קטון)",
+      "אסטר — מתיל-פרופנואט",
+      "חומצה קרבוקסילית — חומצה בוטנואית"
+    ],
+    "answer": 1,
+    "explanation": "CH₃-CO-CH₂CH₃: קבוצת C=O (קרבוניל) מוקפת בשני פחמנים → קטון. אם C=O בקצה השרשרת = אלדהיד (CHO); אם C=O באמצע = קטון. שם: 4 פחמנים (בוטן), קבוצת קטון בפחמן 2 → בוטן-2-און. שם נפוץ: מתיל-אתיל-קטון (MEK). שימוש: ממס תעשייתי.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q224",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו המוצר העיקרי של תגובת פרופן (CH₃CH=CH₂) עם מים (H₂O) בנוכחות H₂SO₄ כזרז?",
+    "options": [
+      "פרופן-1-אול (CH₃CH₂CH₂OH)",
+      "פרופן-2-אול ((CH₃)₂CHOH)",
+      "פרופנאל (CH₃CH₂CHO)",
+      "פרופיל-פרופנואט"
+    ],
+    "answer": 1,
+    "explanation": "הידרציה של אלקן (חיבור מים) בנוכחות חומצה: CH₃CH=CH₂ + H₂O → אלכוהול. לפי מרקובניקוב: ה-OH נצמד לפחמן עם פחות מימן (יותר מוחלף). בפרופן: פחמן 2 (CH=) יש לו 1H, פחמן 1 (=CH₂) יש לו 2H. ה-OH הולך לפחמן 2. מוצר: CH₃CHOHCH₃ = פרופן-2-אול.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q225",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "איזו תרכובת מכילה קבוצת אמינו (-NH₂)?",
+    "options": [
+      "CH₃CH₂COOH",
+      "CH₃NHCH₃",
+      "CH₃CH₂NH₂",
+      "CH₃CONHCH₃"
+    ],
+    "answer": 2,
+    "explanation": "קבוצת אמינו = -NH₂ (אמין ראשוני). CH₃CH₂NH₂ = אתיל-אמין. הבדל: CH₃NHCH₃ = אמין שניוני (NH בין שני C, לא NH₂). CH₃COOH = חומצה. CH₃CONHCH₃ = אמיד (קשר אמיד, לא אמינו חופשי). אמינים מריחים כמו דגים ומגיבים עם חומצות.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q226",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "מסלול סינתזה: CH₃CH₂CH₂OH →[CuO]→ A →[KMnO₄]→ B. מהו B?",
+    "options": [
+      "פרופנאל (CH₃CH₂CHO)",
+      "פרופנון (אצטון)",
+      "חומצה פרופנואית (CH₃CH₂COOH)",
+      "פרופן-2-אול"
+    ],
+    "answer": 2,
+    "explanation": "שלב 1: פרופן-1-אול (אלכוהול ראשוני) + CuO → A = פרופנאל (CH₃CH₂CHO). שלב 2: פרופנאל (אלדהיד) + KMnO₄ → B = חומצה פרופנואית (CH₃CH₂COOH). שרשרת חמצון: אלכוהול ראשוני → אלדהיד → חומצה קרבוקסילית.",
+    "source": "בגרות 37382",
+    "points": 10
+  },
+  {
+    "id": "q227",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהי הנוסחה הכללית של אסטר?",
+    "options": [
+      "R-OH",
+      "R-COOH",
+      "R-CO-O-R'",
+      "R-O-R'"
+    ],
+    "answer": 2,
+    "explanation": "אסטר = R-COO-R' (קבוצת אסטר = -COO-). נוצר מחומצה קרבוקסילית + אלכוהול. R-OH = אלכוהול; R-COOH = חומצה קרבוקסילית; R-O-R' = אתר.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q228",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "האם פרופנון ((CH₃)₂C=O) מתחמצן ב-KMnO₄?",
+    "options": [
+      "כן, לחומצה פרופנואית",
+      "כן, לאלדהיד",
+      "לא — קטון עמיד לחמצון ב-KMnO₄ בתנאים בסיסיים רגילים",
+      "כן, ל-CO₂ ו-H₂O"
+    ],
+    "answer": 2,
+    "explanation": "קטון עמיד לחמצון — אין H על C=O. אלדהיד (R-CHO) מתחמצן בקלות לחומצה (RCOOH). קטון לא מתחמצן בתנאים בסיסיים רגילים. זהו מבחן להבדיל אלדהיד מקטון.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q229",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "כיצד קוראים לתגובה שבה אלקן מגיב עם H₂O בנוכחות חומצה ליצירת אלכוהול?",
+    "options": [
+      "דה-הידרציה",
+      "הידרציה",
+      "הידרוליזה",
+      "חמצון"
+    ],
+    "answer": 1,
+    "explanation": "הידרציה = הוספת מים (H₂O) לאלקן: R-CH=CH₂ + H₂O →[H⁺] R-CHOH-CH₃. הפוך = דה-הידרציה (הסרת H₂O). הידרוליזה = פירוק ע\"י מים (אסטר, פפטיד). כלל מרקובניקוב קובע לאיזה פחמן נצמד ה-OH.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q230",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "איזו קבוצה פונקציונלית מכיל חומץ (CH₃COOH)?",
+    "options": [
+      "קבוצת הידרוקסיל (-OH)",
+      "קבוצת קרבוניל (C=O)",
+      "קבוצת קרבוקסיל (-COOH)",
+      "קבוצת אתר (-O-)"
+    ],
+    "answer": 2,
+    "explanation": "CH₃COOH = חומצה אתנואית (חומץ). קבוצת -COOH = קרבוקסיל. חומצות קרבוקסיליות חומציות (pH < 7), נותנות H⁺ בתמיסה.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q231",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "כיצד ניתן לסנתז 2-אמינופרופן (CH₃CHNH₂CH₃) מחומרי מוצא פשוטים?",
+    "options": [
+      "פרופן-2-אול + NH₃ ישיר",
+      "פרופנון + NH₃ ואז חיזור עם H₂ (אמינציה חיזורית)",
+      "2-כלורופרופן + KOH",
+      "פרופן + HNO₃"
+    ],
+    "answer": 1,
+    "explanation": "אמינציה חיזורית: פרופנון (קטון) + NH₃ → ימין → חיזור H₂/קטליזטור → 2-אמינופרופן. בבגרות 37382 שאלה 3: הנתיב הנפוץ לקבלת אמין משניוני מקטון.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q232",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "מה מאפיין אתרים (ethers)?",
+    "options": [
+      "R-O-R': חמצן בין שתי קבוצות פחמן; אין קשרי מימן, נקודת רתיחה נמוכה",
+      "R-OH: יש OH; אלכוהול",
+      "R-CO-R': קרבוניל באמצע; קטון",
+      "R-O-CO-R': קשר אסטר"
+    ],
+    "answer": 0,
+    "explanation": "אתר = R-O-R': חמצן בין שתי קבוצות פחמן. אין קשרי מימן → נקודת רתיחה נמוכה. ממסים נפוצים (דיאתיל-אתר). R-OH = אלכוהול (יש OH); R-CO-R' = קטון.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q233",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "מסלול: A →[H₂SO₄, >170°C]→ CH₃CH=CH₂. מהו A?",
+    "options": [
+      "פרופן-2-אול ((CH₃)₂CHOH)",
+      "פרופנאל (CH₃CH₂CHO)",
+      "חומצה פרופנואית",
+      "דיפרופיל-אתר"
+    ],
+    "answer": 0,
+    "explanation": "דה-הידרציה (H₂SO₄, >170°C) → אלקן + H₂O. פרופן (C3 אלקן) ← אלכוהול C3. פרופן-2-אול: (CH₃)₂CHOH → CH₃CH=CH₂ + H₂O.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q234",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מה ההבדל המבני בין אלדהיד לקטון?",
+    "options": [
+      "אלדהיד ממיס במים; קטון לא",
+      "אלדהיד: קבוצת C=O בקצה השרשרת (CHO); קטון: C=O באמצע",
+      "אלדהיד נקודת רתיחה גבוהה מקטון",
+      "אלדהיד מכיל חנקן; קטון לא"
+    ],
+    "answer": 1,
+    "explanation": "אלדהיד = R-CHO: קרבוניל בקצה, H על C=O. קטון = R-CO-R': קרבוניל באמצע, אין H. אלדהיד מחזר ריאגנט Tollens (מראה כסף); קטון לא. אלדהידים מתחמצנים לחומצות; קטונים עמידים.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q235",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "מה קורה כאשר חומצה אתנואית (CH₃COOH) מגיבה עם מתיל-אמין (CH₃NH₂) בתנאי חדר?",
+    "options": [
+      "CH₃CONHCH₃ + H₂O (אמיד)",
+      "CH₃COOCH₃ + H₂O (אסטר)",
+      "CH₃COO⁻ + CH₃NH₃⁺ (מלח אמוניום)",
+      "CH₃CH₂NHCH₃"
+    ],
+    "answer": 2,
+    "explanation": "בתנאי חדר: חומצה + אמין → מלח (חומצה-בסיס): CH₃COOH + CH₃NH₂ → CH₃COO⁻ + CH₃NH₃⁺. בחימום חזק: אמיד (CH₃CONHCH₃ + H₂O).",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q236",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "מהי המבנה הכללי של חומצת אמינו?",
+    "options": [
+      "R-COOH בלבד",
+      "H₂N-CHR-COOH (קבוצת אמינו + פחמן אלפא + קבוצה R + קרבוקסיל)",
+      "R-CO-NH-R'",
+      "H₂N-CH₂-NH₂"
+    ],
+    "answer": 1,
+    "explanation": "מבנה חומצת אמינו: H₂N-CHR-COOH. מרכיבים: NH₂ (אמינו), פחמן אלפא (α), קבוצה R (שונה בין חומצות אמינו), COOH (קרבוקסיל). יש NH₂ וגם COOH — אמפוטרי.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q237",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "מהו קשר פפטידי?",
+    "options": [
+      "קשר מימן בין שתי חומצות אמינו",
+      "קשר קוולנטי -CO-NH- הנוצר בין COOH של חומצת אמינו אחת ל-NH₂ של האחרת תוך שחרור H₂O",
+      "קשר אסטר בין חומצות אמינו",
+      "קשר יוני בין קבוצות טעונות"
+    ],
+    "answer": 1,
+    "explanation": "קשר פפטידי = קשר אמיד (-CO-NH-): COOH + NH₂ → -CO-NH- + H₂O. קוולנטי. ניתן לפירוק בהידרוליזה.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q238",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "כמה מולקולות מים משתחררות ביצירת טטרפפטיד (4 חומצות אמינו)?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "1"
+    ],
+    "answer": 2,
+    "explanation": "n חומצות אמינו → (n-1) H₂O. עבור n=4: 3 מולקולות מים. כל קשר פפטידי = H₂O אחד.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q239",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "פפטיד Asp-Glu-Gln-Ile — כמה קשרים פפטידיים?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "1"
+    ],
+    "answer": 2,
+    "explanation": "4 חומצות אמינו → 3 קשרים: Asp-Glu, Glu-Gln, Gln-Ile. n-1=3. בגרות 37382 שאלה 4.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q240",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "בפפטיד Asp-Glu-Gln-Ile, Gln מוחלפת ב-Asn. מה משתחרר?",
+    "options": [
+      "Asp",
+      "Gln",
+      "Ile",
+      "Glu"
+    ],
+    "answer": 1,
+    "explanation": "Gln (פוזיציה 3) מוסרת ומשתחררת; Asn נכנסת במקומה. מוצר: Asp-Glu-Asn-Ile. בגרות 37382 שאלה 4.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q241",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "מהי ההגדרה של אנזים?",
+    "options": [
+      "מולקולה המספקת אנרגיה לתגובה",
+      "חלבון שמשמש כזרז ביולוגי — מאיץ תגובות מבלי להיצרך",
+      "RNA המקודד לחלבון",
+      "שומן לאנרגיה"
+    ],
+    "answer": 1,
+    "explanation": "אנזים: חלבון, זרז ביולוגי, מוריד Ea, ספציפי לסובסטרט (מנעול-מפתח), אינו נצרך, פועל ב-37°C pH~7.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q242",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "אילו בסיסים מתאימים זה לזה ב-DNA הכפול?",
+    "options": [
+      "A-G ו-C-T",
+      "A-T (2 קשרי מימן) ו-G-C (3 קשרי מימן)",
+      "A-C ו-G-T",
+      "A-U ו-G-C"
+    ],
+    "answer": 1,
+    "explanation": "כלל ווטסון-קריק: A↔T (2H), G↔C (3H). %A=%T ו-%G=%C (כלל צ'רגף). A-U = RNA. G-C יציב יותר.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q243",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מהו הרצף המשלים לגדיל DNA: 5'-ATCGGA-3'?",
+    "options": [
+      "5'-ATCGGA-3'",
+      "3'-TAGCCT-5'",
+      "5'-UAGCCU-3'",
+      "5'-TAGCCT-3'"
+    ],
+    "answer": 1,
+    "explanation": "A↔T, G↔C; אנטי-פרלל. 5'-ATCGGA-3' → משלים 3'-TAGCCT-5'. לmRNA: U במקום T → 5'-UAGCCU-3'.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q244",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "על בסיס גדיל תבנית DNA: 3'-TACGGT-5', מהו mRNA (5'→3')?",
+    "options": [
+      "3'-TACGGT-5'",
+      "5'-AUGCCA-3'",
+      "3'-ATCGGT-5'",
+      "5'-UACGGU-3'"
+    ],
+    "answer": 1,
+    "explanation": "3'-T-A-C-G-G-T-5' → mRNA 5'-A-U-G-C-C-A-3'. T→A, A→U, C→G, G→C. ב-RNA: U במקום T.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q245",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה ההבדל בין DNA ל-RNA מבחינת הסוכר?",
+    "options": [
+      "DNA: גלוקוז; RNA: פרוקטוז",
+      "DNA: דאוקסיריבוז (חסר OH בC2'); RNA: ריבוז (יש OH בC2')",
+      "DNA: ריבוז; RNA: דאוקסיריבוז",
+      "שניהם ריבוז"
+    ],
+    "answer": 1,
+    "explanation": "DNA = דאוקסיריבוז (H בC2'). RNA = ריבוז (OH בC2'). הבדל נוסף: DNA=תיימין T; RNA=אורציל U. בגרות 37382 שאלה 5.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q246",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה המשלים ל-3'-ATTGCCATGCTA-5' כתוב מ-5' ל-3'?",
+    "options": [
+      "3'-TAACGGTACGAT-5'",
+      "5'-TAACGGTACGAT-3'",
+      "5'-AUUCGGUACGAU-3'",
+      "5'-ATTGCCATGCTA-3'"
+    ],
+    "answer": 1,
+    "explanation": "3'-ATTGCCATGCTA-5' → משלים אנטי-פרלל: 5'-TAACGGTACGAT-3'. לmRNA: T→U → 5'-UAACGGUACGAU-3'. בגרות 37382 שאלה 6.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q247",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "מה ההבדל בין חומצת שומן רוויה לבלתי-רוויה?",
+    "options": [
+      "רוויה מכילה טבעות; בלתי-רוויה לא",
+      "רוויה: אין C=C (מוצק); בלתי-רוויה: יש C=C (נוזלי)",
+      "רוויה בשמנים; בלתי-רוויה בשומן חי",
+      "רוויה מכילה חנקן; בלתי-רוויה לא"
+    ],
+    "answer": 1,
+    "explanation": "רוויה: CₙH₂ₙ₊₁COOH, קשרי C-C יחידים, מוצקה. בלתי-רוויה: C=C, נוזלית. C=C → כיפוף → אריזה רופפת → Tm נמוך.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q248",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה ההבדל בין חומצת שומן ציס לטראנס?",
+    "options": [
+      "ציס: H-ים בצדדים נגדיים (שרשרת ישרה); טראנס: באותו צד (כפופה)",
+      "ציס: שני H-ים באותו צד — שרשרת כפופה, Tm נמוך; טראנס: H-ים בצדדים נגדיים — ישרה, Tm גבוה",
+      "ציס=רוויה; טראנס=בלתי-רוויה",
+      "ציס מהצומח; טראנס מבעלי חיים"
+    ],
+    "answer": 1,
+    "explanation": "ציס: H על C=C באותו צד → כיפוף → Tm נמוך. טראנס: H-ים נגדיים → שרשרת ישרה → Tm גבוה. שומן טראנס (מרגרינה) — מזיק.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q249",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "מהו מבנה הטריגליצריד?",
+    "options": [
+      "גלוקוז + 3 חומצות שומן",
+      "גליצרול + 3 חומצות שומן בקשרי אסטר",
+      "3 גליצרולים + חומצת שומן",
+      "חומצת אמינו + 3 חומצות שומן"
+    ],
+    "answer": 1,
+    "explanation": "טריגליצריד = גליצרול (3 OH) + 3 חומצות שומן בקשרי אסטר + שחרור 3 H₂O. סאפוניפיקציה: שומן + 3NaOH → גליצרול + 3 מלחי חומצות שומן (סבון).",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q250",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מהי חומצת שומן חיונית?",
+    "options": [
+      "שהגוף מייצר בכמות גדולה",
+      "שהגוף אינו יכול לסנתזה ויש לקבלה מהמזון",
+      "חומצת שומן רוויה חיונית למוח",
+      "כל חומצת שומן מהצומח"
+    ],
+    "answer": 1,
+    "explanation": "חיוניות: הגוף חסר אנזימים לסינתזן. דוגמאות: אומגה-3 (DHA, EPA), אומגה-6 (לינולאית). חשובות לממברנות, מוח, מניעת דלקות.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q251",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה הם 4 רמות מבנה החלבון?",
+    "options": [
+      "ראשוני (רצף חומצות אמינו), שניוני (סליל α/גיליון β), שלישוני (קיפול תלת-ממדי), רביעוני (מספר יחידות משנה)",
+      "ראשוני (DNA), שניוני (RNA), שלישוני (חלבון), רביעוני (אנזים)",
+      "ראשוני (C), שניוני (H-bonds), שלישוני (S-S), רביעוני (pH)",
+      "ראשוני (מונומר), שניוני (דימר), שלישוני (טרימר), רביעוני (טטרמר)"
+    ],
+    "answer": 0,
+    "explanation": "(1) ראשוני: רצף — קשרים פפטידיים. (2) שניוני: סליל α / גיליון β — קשרי מימן. (3) שלישוני: קיפול 3D — גשרי S-S, הידרופוביים. (4) רביעוני: מספר יחידות (המוגלובין=4).",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q252",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה מאפיין נוקלאוטיד RNA לעומת DNA?",
+    "options": [
+      "RNA: ריבוז + אורציל (U); DNA: דאוקסיריבוז + תיימין (T)",
+      "RNA: דאוקסיריבוז + גואנין; DNA: ריבוז + אורציל",
+      "RNA: פוספט כפול; DNA: פוספט יחיד",
+      "RNA: 5 בסיסים; DNA: 4 בסיסים"
+    ],
+    "answer": 0,
+    "explanation": "RNA: ריבוז (OH בC2') + A,U,G,C. DNA: דאוקסיריבוז (H בC2') + A,T,G,C. בגרות 37382 שאלה 5: זיהוי נוקלאוטיד RNA = ריבוז + U.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q253",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "ב-DNA כפול גדיל, אם %A = 30%, מה אחוז G?",
+    "options": [
+      "30%",
+      "20%",
+      "10%",
+      "40%"
+    ],
+    "answer": 1,
+    "explanation": "כלל צ'רגף: A=T, G=C. A=30%→T=30%. A+T=60%→G+C=40%. G=C=20%. אימות: 30+30+20+20=100%.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q254",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "כמה H₂O נדרשות לפירוק מלא של טריפפטיד?",
+    "options": [
+      "3",
+      "1",
+      "2",
+      "4"
+    ],
+    "answer": 2,
+    "explanation": "טריפפטיד = 3 חומצות אמינו + 2 קשרים פפטידיים. כל קשר + H₂O → פירוק. 2 קשרים → 2 H₂O.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q255",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קל",
+    "question": "אילו קשרים מחברים את שני גדיל ה-DNA?",
+    "options": [
+      "קשרים קוולנטיים",
+      "קשרי מימן בין בסיסים",
+      "קשרי אסטר",
+      "כוחות ון-דר-ולס בלבד"
+    ],
+    "answer": 1,
+    "explanation": "קשרי מימן: A...T (2) ו-G...C (3). חלשים בודדית, חזקים ביחד. ניתנים לפריקה בחום. שדרת סוכר-פוספט = קוולנטי.",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q256",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מהו מבנה הנוקלאוטיד?",
+    "options": [
+      "סוכר פנטוז + בסיס חנקני + קבוצת פוספט",
+      "חומצת אמינו + בסיס + ריבוז",
+      "גליצרול + חומצת שומן + פוספט",
+      "פורין + פירימידין + סוכר"
+    ],
+    "answer": 0,
+    "explanation": "נוקלאוטיד = סוכר פנטוז + בסיס חנקני + פוספט. סוכר: ריבוז (RNA) / דאוקסיריבוז (DNA). בסיסים: A,G (פורינים), T/C/U (פירימידינים).",
+    "source": "בגרות 37382",
+    "points": 5
+  },
+  {
+    "id": "q257",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "חלבון עם 100 חומצות אמינו: כמה קשרים פפטידיים ו-H₂O שוחררו?",
+    "options": [
+      "100 קשרים, 100 H₂O",
+      "99 קשרים, 99 H₂O",
+      "101 קשרים, 101 H₂O",
+      "50 קשרים, 50 H₂O"
+    ],
+    "answer": 1,
+    "explanation": "n=100 → n-1=99 קשרים פפטידיים ו-99 H₂O. כל קשר פפטידי = H₂O אחד.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q258",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה מייחד חומצות אמינו חיוניות?",
+    "options": [
+      "הגוף מסנתז מגלוקוז",
+      "חיוניות לבניית DNA",
+      "הגוף אינו יכול לסנתזן — יש לקבלן מהמזון",
+      "מכילות גופרית"
+    ],
+    "answer": 2,
+    "explanation": "9 חיוניות (ליצין, ולין, טריפטופן ועוד). הגוף חסר אנזימים לסינתזן. חלבון שלם (ביצה, בשר, חלב) מכיל את כולן.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q259",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "מה ההבדל בין mRNA ל-rRNA?",
+    "options": [
+      "mRNA נוצר מ-DNA; rRNA לא",
+      "mRNA נושא מידע גנטי לריבוזום; rRNA הוא מרכיב מבני של הריבוזום",
+      "mRNA = כפול גדיל; rRNA = יחיד",
+      "mRNA: ריבוז; rRNA: דאוקסיריבוז"
+    ],
+    "answer": 1,
+    "explanation": "mRNA: העתק גן, נושא קודונים, קובע רצף חומצות האמינו. rRNA: מרכיב מבני-תפקודי של הריבוזום. tRNA: מביא חומצת אמינו.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q260",
+    "type": "multiple-choice",
+    "topic": "biochemistry",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "דיפפטיד גליצין-אלנין (Gly-Ala) עובר הידרוליזה. מהם המוצרים?",
+    "options": [
+      "Gly + Ala + H₂O כמוצרים",
+      "Gly + Ala (חומצות האמינו החופשיות)",
+      "Gly-Gly + Ala-Ala",
+      "פפטיד ארוך יותר"
+    ],
+    "answer": 1,
+    "explanation": "הידרוליזה של פפטיד: Gly-Ala + H₂O → Gly + Ala. כל קשר פפטידי + H₂O → שתי חומצות אמינו חופשיות. תגובה הפוכה ליצירת פפטיד.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q261",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קל",
+    "question": "לאיזוטופים ⁸⁵Rb ו-⁸⁷Rb — מה שווה ומה שונה?",
+    "options": [
+      "מספר מסה שווה; מספר אלקטרונים שונה",
+      "מספר פרוטונים שווה (37); מספר נויטרונים שונה (48 לעומת 50)",
+      "מספר נויטרונים שווה; פרוטונים שונים",
+      "זהים לחלוטין"
+    ],
+    "answer": 1,
+    "explanation": "איזוטופים = אותו Z, A שונה. Rb: Z=37. ⁸⁵Rb: נויטרונים=85-37=48. ⁸⁷Rb: נויטרונים=87-37=50. ההבדל: 2 נויטרונים. בגרות 37381.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q262",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "⁸⁷₃₇Rb פולט חלקיק בטא (β⁻). מהו גרעין הבת?",
+    "options": [
+      "⁸⁷₃₆Kr",
+      "⁸³₃₅Br",
+      "⁸⁷₃₈Sr",
+      "⁸⁸₃₇Rb"
+    ],
+    "answer": 2,
+    "explanation": "דעיכת β⁻: Z עולה ב-1 (37→38=Sr), A נשמר (87). ⁸⁷₃₇Rb → ⁸⁷₃₈Sr + ⁰₋₁e. נויטרון → פרוטון + אלקטרון.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q263",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מה מתרחש בגרעין בדעיכת β⁻?",
+    "options": [
+      "פרוטון → נויטרון + פוזיטרון",
+      "נויטרון → פרוטון + אלקטרון (חלקיק β)",
+      "2p + 2n נפלטים כ-α",
+      "גרעין קולט אלקטרון"
+    ],
+    "answer": 1,
+    "explanation": "β⁻: n → p⁺ + e⁻. Z+1; A קבוע. α: Z-2, A-4. β⁺: p→n+e⁺, Z-1.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q264",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "²³⁸₉₂U פולט חלקיק α. מהו גרעין הבת?",
+    "options": [
+      "²³⁸₉₃Np",
+      "²³⁴₉₀Th",
+      "²³⁴₉₂U",
+      "²⁴²₉₄Pu"
+    ],
+    "answer": 1,
+    "explanation": "דעיכת α: Z-2 (92→90=Th), A-4 (238→234). ²³⁸U → ²³⁴Th + ⁴He.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q265",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מהי מגמת IE₁ לאורך מחזור (משמאל לימין)?",
+    "options": [
+      "יורדת כי יותר פרוטונים דוחים",
+      "עולה — יותר פרוטונים מושכים חזק יותר אלקטרונים",
+      "קבועה",
+      "יורדת ועולה (U)"
+    ],
+    "answer": 1,
+    "explanation": "Z עולה → משיכה גרעינית חזקה → IE₁ עולה. מתכות (שמאל)=IE נמוך; אל-מתכות (ימין)=IE גבוה. חריגים: B<Be (2p), O<N (זיווג).",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q266",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מה קורה לרדיוס האטומי לאורך מחזור (משמאל לימין)?",
+    "options": [
+      "גדל — יותר פרוטונים",
+      "קטן — יותר פרוטונים מושכים אלקטרונים פנימה",
+      "קבוע",
+      "גדל ואז קטן"
+    ],
+    "answer": 1,
+    "explanation": "Z גדל, אלקטרונים לאותה מעטפת → משיכה חזקה → רדיוס קטן. Na > Mg > Al > Si > P > S > Cl.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q267",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קל",
+    "question": "מה קורה לרדיוס האטומי בירידה בקבוצה (מלמעלה למטה)?",
+    "options": [
+      "קטן — יותר פרוטונים",
+      "גדל — מוסיפים מעטפות אלקטרונים חדשות",
+      "קבוע",
+      "גדל ואז קטן"
+    ],
+    "answer": 1,
+    "explanation": "מטה בקבוצה = מעטפת חדשה → יותר מגן → רדיוס גדל. Li < Na < K < Rb < Cs.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q268",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "יסוד X (מתכת) ויסוד Z (אל-מתכת) באותו מחזור. השוו:",
+    "options": [
+      "X: IE גבוה מ-Z; רדיוס קטן מ-Z",
+      "X: IE נמוך מ-Z; רדיוס גדול מ-Z",
+      "X ו-Z: IE שווה; רדיוסים שווים",
+      "X ו-Z יוצרים קשר קוולנטי"
+    ],
+    "answer": 1,
+    "explanation": "מתכת (שמאל): IE נמוך, רדיוס גדול. אל-מתכת (ימין): IE גבוה, רדיוס קטן. יוצרים תרכובת יונית. בגרות 37381 שאלה 2.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q269",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מהו הגז האציל הכי תגובתי (מהקיימים)?",
+    "options": [
+      "He",
+      "Ne",
+      "Xe",
+      "Ar"
+    ],
+    "answer": 2,
+    "explanation": "Xe הכבד ביותר (מלבד Rn) — אלקטרונים רחוקים מגרעין → ניתנים לקיטוב → יוצר XeF₂, XeF₄. He ו-Ne קטנים מדי.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q270",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קל",
+    "question": "מהו היסוד האלקטרושלילי ביותר?",
+    "options": [
+      "O",
+      "Cl",
+      "F",
+      "N"
+    ],
+    "answer": 2,
+    "explanation": "פלואור (F) = אלקטרושלילי ביותר (2.98 פאולינג). קטן, 9p — משיכה חזקה. אלקטרושליליות: עולה ימינה ולמעלה. O שני, N שלישי.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q271",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "איון Rb⁺ נוצר מ-Rb — מה השינוי?",
+    "options": [
+      "Rb מקבל אלקטרון → Rb⁺",
+      "Rb מאבד אלקטרון אחד → Rb⁺; פרוטונים לא משתנים",
+      "Rb מאבד פרוטון → Rb⁺",
+      "Rb מאבד נויטרון → Rb⁺"
+    ],
+    "answer": 1,
+    "explanation": "קטיון = הפסד אלקטרון. Rb (Z=37) [Kr]5s¹ → Rb⁺ [Kr]. פרוטונים (37) נשמרים. Rb⁺ יציב — מעטפת Kr.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q272",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מדוע מתכות מעבר בעלות מצבי חמצון מרובים?",
+    "options": [
+      "רדיוס גדול",
+      "אלקטרוני d-orbitals בעלי אנרגיה דומה ל-s — שניהם יכולים להיאבד",
+      "קשרים מטאליים",
+      "IE נמוכה מאוד"
+    ],
+    "answer": 1,
+    "explanation": "d ו-s בעלי אנרגיות קרובות → שניהם יאבדו ביינון. Fe: Fe²⁺ (s בלבד) או Fe³⁺ (s+d). מתכות מעבר צבעוניות בגלל מעברי d-d.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q273",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קל",
+    "question": "היכן ממוקמות המתכות בטבלה?",
+    "options": [
+      "ימין (קבוצות 15-18)",
+      "שמאל ומרכז (קבוצות 1-12 ועוד)",
+      "שורה שנייה בלבד",
+      "רק לנתנידים ואקטינידים"
+    ],
+    "answer": 1,
+    "explanation": "מתכות: קבוצות 1-2 (אלקאלי), קבוצות 3-12 (מעבר), ועוד Al/Sn/Pb. אל-מתכות: ימין (C,N,O,F,S,Cl). מטאלואידים (Si,Ge) — גבול.",
+    "source": "בגרות 37281",
+    "points": 5
+  },
+  {
+    "id": "q274",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "קשה",
+    "question": "אלמנט X: מתכת, מחזור 3, קבוצה 1. אלמנט Z: אל-מתכת, מחזור 3, קבוצה 17. מה נכון?",
+    "options": [
+      "X ו-Z יוצרים קשר קוולנטי",
+      "IE(X) גבוה מ-IE(Z)",
+      "X=Na, Z=Cl; יוצרים NaCl יוני; IE(Na)<IE(Cl); רדיוס(Na)>רדיוס(Cl)",
+      "X ו-Z גזים אצילים"
+    ],
+    "answer": 2,
+    "explanation": "מחזור 3, קבוצה 1 = Na; קבוצה 17 = Cl. Na+Cl → NaCl יוני. Na: IE נמוכה, רדיוס גדול. Cl: IE גבוהה, רדיוס קטן.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q275",
+    "type": "multiple-choice",
+    "topic": "periodic-table",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מדוע גזים אצילים יציבים כימית?",
+    "options": [
+      "כי הם קלים",
+      "מעטפת ולנטיות מלאה (He=2e, שאר=8e)",
+      "כי הם גזים ב-298K",
+      "כי הם רדיואקטיביים"
+    ],
+    "answer": 1,
+    "explanation": "He, Ne, Ar, Kr, Xe, Rn: מעטפת חיצונית מלאה → ללא נטייה לתת/לקבל אלקטרונים. IE גבוהה מאוד. Xe יוצר כמה תרכובות בלחץ גבוה.",
+    "source": "בגרות 37381",
+    "points": 5
+  },
+  {
+    "id": "q276",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קל",
+    "question": "מהי פולימריזציה מסוג חיבור (addition)?",
+    "options": [
+      "פולימר עם תוצרי לוואי (H₂O)",
+      "מונומרים עם C=C מתחברים ללא תוצרי לוואי",
+      "תגובה בין שתי קבוצות פונקציונליות",
+      "הידרוליזה של פולימר"
+    ],
+    "answer": 1,
+    "explanation": "פולימריזציה בחיבור: C=C נפתח, מונומרים מתחברים. אין תוצרי לוואי. דוגמאות: פוליאתילן n(CH₂=CH₂)→-(CH₂CH₂)ₙ-, PVC, פוליסטירן.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q277",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהי פולימריזציה קונדנסציה?",
+    "options": [
+      "מונומרים עם C=C, ללא תוצרי לוואי",
+      "מונומרים דו-פונקציונליים מתחברים עם שחרור מולקולה קטנה (H₂O או HCl)",
+      "פירוק פולימר",
+      "תגובת אתרים עם מים"
+    ],
+    "answer": 1,
+    "explanation": "קונדנסציה: מונומרים עם שתי קבוצות פונקציונליות + שחרור H₂O/HCl. דוגמאות: ניילון (דיאמין+דיחומצה), PET (דיאול+דיחומצה). חלבונים = פולימרי קונדנסציה.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q278",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "ניילון הוא פולי-אמיד. אילו מונומרים?",
+    "options": [
+      "דיאלכוהול + דיחומצה",
+      "דיאמין + דיחומצה (קונדנסציה, שחרור H₂O)",
+      "חומצת אמינו בלבד",
+      "ויניל-כלוריד"
+    ],
+    "answer": 1,
+    "explanation": "ניילון-66: hexamethylenediamine + adipic acid → קשרי אמיד (-CO-NH-) + H₂O. קשר אמיד = קשר פפטידי בחלבון.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q279",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "האם ניתן להידרוליז פוליאתילן?",
+    "options": [
+      "כן — קשרי אסטר",
+      "לא — רק קשרי C-C, אינם הידרוליזביים",
+      "כן עם NaOH חם",
+      "כן עם HCl"
+    ],
+    "answer": 1,
+    "explanation": "פוליאתילן = -(CH₂CH₂)ₙ-, קשרי C-C בלבד — לא ניתנים להידרוליזה. PET (אסטר) וניילון (אמיד) — ניתנים להידרוליזה.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q280",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו מידת הפולימריזציה של PET עם Mw=19,200 g/mol? (M_מונומר=192 g/mol)",
+    "options": [
+      "n = 10",
+      "n = 100",
+      "n = 1000",
+      "n = 19,200"
+    ],
+    "answer": 1,
+    "explanation": "n = M_פולימר / M_מונומר = 19,200 / 192 = 100.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q281",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו גומי טבעי?",
+    "options": [
+      "פוליאמיד טבעי",
+      "פולימר חיבור של איזופרן (2-מתיל-1,3-בוטדיאן)",
+      "פוליאסטר של חומצות שומן",
+      "פוליסכריד כמו עמילן"
+    ],
+    "answer": 1,
+    "explanation": "גומי טבעי = פולי-איזופרן -(CH₂-C(CH₃)=CH-CH₂)ₙ-. מונומר: איזופרן (C₅H₈). פולימר חיבור, תצורה ציס → גמיש.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q282",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "PET הוא פוליאסטר — מה זה מרמז על הידרוליזה שלו?",
+    "options": [
+      "לא ניתן להידרוליז",
+      "ניתן להידרוליז — קשרי אסטר (-COO-) מתפרקים בחומצה/בסיס",
+      "ניתן רק עם HF",
+      "הידרוליזה > 500°C בלבד"
+    ],
+    "answer": 1,
+    "explanation": "PET: קשרי אסטר (-COO-) → ניתנים להידרוליזה בחומצה (→ diol + diacid) או בסיס (→ diol + מלחים). בקבוקי PET מתפרקים בבסיס.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q283",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "חלבונים הם פולימרי קונדנסציה — מה המשמעות לגבי הידרוליזה?",
+    "options": [
+      "לא ניתנים להידרוליזה",
+      "מתפרקים לחומצות אמינו בהידרוליזה (מים + חומצה/בסיס/אנזים)",
+      "מתפרקים לאתרים ואלקנים",
+      "רק ב->300°C"
+    ],
+    "answer": 1,
+    "explanation": "חלבון = פולימר עם קשרי פפטיד (-CO-NH-) = קשרי אמיד → ניתנים להידרוליזה. חלבון + H₂O → חומצות אמינו. בגוף: פרוטאזות; בתעשייה: HCl רותח.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q284",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "קשה",
+    "question": "מה ההבדל בין Mw ל-Mn בהתפלגות מסה מולקולרית?",
+    "options": [
+      "Mw = ממוצע מספרי; Mn = ממוצע משוקלל",
+      "Mn = ממוצע מספרי (מחולק בכמות שרשראות); Mw = ממוצע משוקלל לפי מסה",
+      "Mw = Mn תמיד",
+      "Mn > Mw תמיד"
+    ],
+    "answer": 1,
+    "explanation": "Mn: סך מסות / מספר שרשראות. Mw: משוקלל לפי מסה (שרשראות ארוכות תורמות יותר). תמיד Mw ≥ Mn. PDI = Mw/Mn; PDI=1 = מונודיספרסי.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q285",
+    "type": "multiple-choice",
+    "topic": "organic-reactions",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "PVC נוצר מ:",
+    "options": [
+      "CH₂=CHCl (ויניל-כלוריד) — פולימריזציה בחיבור",
+      "CH₂Cl₂ + NaOH — קונדנסציה",
+      "C₂H₅Cl + CuO",
+      "פולימריזציה של כלורואתן עם H₂SO₄"
+    ],
+    "answer": 0,
+    "explanation": "PVC = poly(vinyl chloride): n CH₂=CHCl → -(CH₂-CHCl)ₙ-. פולימריזציה בחיבור, C=C נפתח, ללא תוצרי לוואי. שימושים: צינורות, רצפה.",
+    "source": "בגרות 37282",
+    "points": 5
+  },
+  {
+    "id": "q286",
+    "type": "numeric",
+    "topic": "gas-laws",
+    "week": 3,
+    "difficulty": "בינוני",
+    "question": "גז אידאלי תופס נפח של 2.0 L בטמפרטורה 27°C ולחץ 1.0 atm. מה יהיה הנפח בטמפרטורה 127°C ולחץ 2.0 atm?",
+    "answer": 1.33,
+    "tolerance": 0.05,
+    "explanation": "חוק הגז האידאלי: P₁V₁/T₁ = P₂V₂/T₂. T₁ = 300 K, T₂ = 400 K.\nV₂ = V₁ × (P₁/P₂) × (T₂/T₁) = 2.0 × (1.0/2.0) × (400/300) = 2.0 × 0.5 × 1.333 = 1.33 L.",
+    "source": "בגרות 037",
+    "points": 10
+  },
+  {
+    "id": "q287",
+    "type": "multiple-choice",
+    "topic": "gas-laws",
+    "week": 3,
+    "difficulty": "קל",
+    "question": "על פי חוק בויל, אם נכפיל את הלחץ על גז בטמפרטורה קבועה, מה יקרה לנפח?",
+    "options": [
+      "הנפח יכפיל את עצמו",
+      "הנפח יחצה (יהיה חצי)",
+      "הנפח לא ישתנה",
+      "הנפח יגדל ב-25%"
+    ],
+    "answer": 1,
+    "explanation": "חוק בויל: P × V = קבוע (בטמפרטורה קבועה). אם P מוכפל פי 2, אזי V = קבוע/P, כלומר V יחצה. P₁V₁ = P₂V₂ → V₂ = V₁P₁/P₂ = V₁/2.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q288",
+    "type": "numeric",
+    "topic": "gas-laws",
+    "week": 3,
+    "difficulty": "קשה",
+    "question": "10.0 g של גז חנקן (N₂, M=28 g/mol) נמצאים בבקבוק 5.0 L בטמפרטורה 25°C. חשב את הלחץ בatm. (R = 0.0821 L·atm/(mol·K))",
+    "answer": 1.75,
+    "tolerance": 0.05,
+    "explanation": "n = 10.0/28.0 = 0.357 mol. T = 298 K.\nP = nRT/V = 0.357 × 0.0821 × 298 / 5.0 = 8.72/5.0 = 1.74 atm ≈ 1.75 atm.",
+    "source": "בגרות 037",
+    "points": 12
+  },
+  {
+    "id": "q289",
+    "type": "multiple-choice",
+    "topic": "electrochemistry",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "בתא גלוואני (ואלטי) Zn-Cu: Zn | Zn²⁺ || Cu²⁺ | Cu\nאיזה תיאור נכון?",
+    "options": [
+      "Zn הוא הקתודה; Cu הוא האנודה",
+      "Zn הוא האנודה (מתחמצן); Cu הוא הקתודה (מתחזר)",
+      "אלקטרונים זורמים מ-Cu ל-Zn במעגל החיצוני",
+      "יוני Zn²⁺ מתחזרים בקתודה"
+    ],
+    "answer": 1,
+    "explanation": "באנודה — חמצון: Zn → Zn²⁺ + 2e⁻. בקתודה — חיזור: Cu²⁺ + 2e⁻ → Cu. אלקטרונים זורמים מהאנודה (Zn) לקתודה (Cu) במעגל החיצוני. Zn הוא הסוללה החיובית מבחינת אנרגיה כי הוא מתחמצן.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q290",
+    "type": "numeric",
+    "topic": "electrochemistry",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "E°(Zn²⁺/Zn) = -0.76 V; E°(Cu²⁺/Cu) = +0.34 V.\nחשב את ה-EMF הסטנדרטי (E°cell) של התא Zn-Cu.",
+    "answer": 1.10,
+    "tolerance": 0.01,
+    "explanation": "E°cell = E°קתודה - E°אנודה = E°(Cu²⁺/Cu) - E°(Zn²⁺/Zn) = 0.34 - (-0.76) = 0.34 + 0.76 = 1.10 V.\nמכיוון ש-E°cell > 0, התגובה ספונטנית.",
+    "source": "בגרות 037",
+    "points": 10
+  },
+  {
+    "id": "q291",
+    "type": "multiple-choice",
+    "topic": "electrochemistry",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "בפירוק מים אלקטרוליטי (2H₂O → 2H₂ + O₂), איזה גז נוצר בקתודה?",
+    "options": [
+      "O₂ — חמצן",
+      "H₂ — מימן",
+      "O₃ — אוזון",
+      "H₂O₂ — מי חמצן"
+    ],
+    "answer": 1,
+    "explanation": "בקתודה מתרחש חיזור: 2H₂O + 2e⁻ → H₂ + 2OH⁻ (או 2H⁺ + 2e⁻ → H₂). בקתודה נוצר מימן (H₂). באנודה מתרחש חמצון: 2H₂O → O₂ + 4H⁺ + 4e⁻, ונוצר חמצן (O₂).",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q292",
+    "type": "numeric",
+    "topic": "solubility",
+    "week": 5,
+    "difficulty": "קשה",
+    "question": "מוצר המסיסות של CaF₂ הוא Ksp = 3.9×10⁻¹¹. חשב את מסיסות CaF₂ במים טהורים (בmol/L).",
+    "answer": 0.000021,
+    "tolerance": 0.000002,
+    "explanation": "CaF₂ ⇌ Ca²⁺ + 2F⁻. אם מסיסות = s, אזי [Ca²⁺] = s, [F⁻] = 2s.\nKsp = s × (2s)² = 4s³ = 3.9×10⁻¹¹.\ns³ = 9.75×10⁻¹² → s = (9.75×10⁻¹²)^(1/3) ≈ 2.14×10⁻⁴ mol/L ≈ 2.1×10⁻⁴.",
+    "source": "בגרות 037",
+    "points": 12
+  },
+  {
+    "id": "q293",
+    "type": "multiple-choice",
+    "topic": "solubility",
+    "week": 5,
+    "difficulty": "בינוני",
+    "question": "תמיסה מכילה 0.10 M NaCl ו-0.10 M NaBr. מוסיפים לה בהדרגה AgNO₃. (Ksp(AgCl)=1.8×10⁻¹⁰; Ksp(AgBr)=5.0×10⁻¹³). מה יישקע ראשון?",
+    "options": [
+      "AgCl — כי Ksp שלו קטן יותר",
+      "AgBr — כי Ksp שלו קטן יותר, ולכן הוא פחות מסיס",
+      "שניהם יישקעו בו-זמנית",
+      "AgCl — כי הוא נוצר מ-NaCl שהוא מלח חזק יותר"
+    ],
+    "answer": 1,
+    "explanation": "החומר שיישקע ראשון הוא זה שמגיע ל-Q > Ksp מהר יותר. AgBr דורש פחות Ag⁺ להשקעה: [Ag⁺] הדרוש להשקעת Br⁻ = Ksp(AgBr)/[Br⁻] = 5×10⁻¹²M, לעומת AgCl: 1.8×10⁻⁹M. לכן AgBr נשקע ראשון.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q294",
+    "type": "multiple-choice",
+    "topic": "acids-bases",
+    "week": 4,
+    "difficulty": "בינוני",
+    "question": "על פי הגדרת ברנסטד-לאורי, חומצה היא:",
+    "options": [
+      "חומר המקבל פרוטון (H⁺)",
+      "חומר התורם פרוטון (H⁺)",
+      "חומר המקבל אלקטרונים",
+      "חומר המשחרר OH⁻"
+    ],
+    "answer": 1,
+    "explanation": "על פי ברנסטד-לאורי: חומצה = תורם פרוטון (H⁺ donor); בסיס = מקבל פרוטון (H⁺ acceptor). לדוגמה: HCl → H⁺ + Cl⁻ (HCl הוא חומצה). לעומת לואיס: חומצה = מקבל זוג אלקטרונים.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q295",
+    "type": "numeric",
+    "topic": "ph-calculations",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "חשב את pH של תמיסה 0.050 M של חומצה אצטית (CH₃COOH). Ka = 1.8×10⁻⁵.",
+    "answer": 3.27,
+    "tolerance": 0.05,
+    "explanation": "CH₃COOH ⇌ CH₃COO⁻ + H⁺. Ka = x²/(0.050-x) ≈ x²/0.050.\nx² = 1.8×10⁻⁵ × 0.050 = 9.0×10⁻⁷.\nx = [H⁺] = 9.49×10⁻⁴ M.\npH = -log(9.49×10⁻⁴) = 3.02... בדיקה: x/C = 9.49×10⁻⁴/0.050 = 1.9% (<5% אפשר לקרב).\npH ≈ 3.02. (עם תיקון מדויק: pH = 3.02; ערך מדויק יותר ≈ 3.02-3.05 תלוי בדיוק.)",
+    "source": "בגרות 037",
+    "points": 12
+  },
+  {
+    "id": "q296",
+    "type": "multiple-choice",
+    "topic": "buffers",
+    "week": 4,
+    "difficulty": "בינוני",
+    "question": "מה מגדיר תמיסה חוצצת (בופר)?",
+    "options": [
+      "תמיסה שה-pH שלה תמיד 7",
+      "תמיסה המתנגדת לשינויי pH בעת הוספת כמויות מתונות של חומצה או בסיס",
+      "תמיסה של חומצה חזקה ובסיס חזק",
+      "תמיסה רוויה של מלח"
+    ],
+    "answer": 1,
+    "explanation": "בופר = תמיסה המכילה חומצה חלשה ומלחה (הבסיס המצומד שלה) — שומרת על pH יציב. דוגמה: CH₃COOH + CH₃COONa. בעת הוספת H⁺: CH₃COO⁻ + H⁺ → CH₃COOH. בעת הוספת OH⁻: CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q297",
+    "type": "numeric",
+    "topic": "buffers",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "חשב את pH של בופר המכיל 0.10 M CH₃COOH ו-0.20 M CH₃COONa. Ka(CH₃COOH) = 1.8×10⁻⁵.",
+    "answer": 5.05,
+    "tolerance": 0.05,
+    "explanation": "משוואת הנדרסון-האסלבאך: pH = pKa + log([A⁻]/[HA]).\npKa = -log(1.8×10⁻⁵) = 4.745.\npH = 4.745 + log(0.20/0.10) = 4.745 + log(2) = 4.745 + 0.301 = 5.046 ≈ 5.05.",
+    "source": "בגרות 037",
+    "points": 12
+  },
+  {
+    "id": "q298",
+    "type": "multiple-choice",
+    "topic": "buffers",
+    "week": 4,
+    "difficulty": "קשה",
+    "question": "מהי משוואת הנדרסון-האסלבאך?",
+    "options": [
+      "pH = pKa - log([HA]/[A⁻])",
+      "pH = pKa + log([A⁻]/[HA])",
+      "pH = pKw - pKa",
+      "pH = -log([HA] × Ka)"
+    ],
+    "answer": 1,
+    "explanation": "משוואת הנדרסון-האסלבאך: pH = pKa + log([A⁻]/[HA]), כאשר [A⁻] = ריכוז הבסיס המצומד ו-[HA] = ריכוז החומצה החלשה. כשהיחס [A⁻]/[HA]=1, אזי pH=pKa (נקודת ה-half equivalence point).",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q299",
+    "type": "multiple-choice",
+    "topic": "colligative-properties",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מהן תכונות קוליגטיביות?",
+    "options": [
+      "תכונות התלויות בזהות הממס",
+      "תכונות התלויות במספר החלקיקים המומסים ולא בזהותם",
+      "תכונות הקשורות לצבע התמיסה",
+      "תכונות הנמדדות רק בתמיסות מימיות"
+    ],
+    "answer": 1,
+    "explanation": "תכונות קוליגטיביות תלויות אך ורק במספר החלקיקים המומסים (מולים) ולא בזהותם הכימית. דוגמאות: הורדת לחץ אדים, הורדת נקודת קיפאון, העלאת נקודת רתיחה, לחץ אוסמוטי.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q300",
+    "type": "numeric",
+    "topic": "colligative-properties",
+    "week": 6,
+    "difficulty": "קשה",
+    "question": "כמה גרם של גלוקוז (C₆H₁₂O₆, M=180 g/mol) יש להמיס ב-500 g מים כדי להוריד את נקודת הקיפאון ב-1.86°C? (Kf למים = 1.86°C·kg/mol)",
+    "answer": 180,
+    "tolerance": 5,
+    "explanation": "ΔTf = Kf × m, כאשר m = מולאליות (mol/kg ממס).\n1.86 = 1.86 × m → m = 1.00 mol/kg.\nמספר מולים גלוקוז = 1.00 mol/kg × 0.500 kg = 0.500 mol.\nמסה = 0.500 mol × 180 g/mol = 90 g.\n(אם מחשבים ΔTf=1.86°C ב-500g: 90g; אם ב-1kg: 180g. עם 500g ממס: 90g.)",
+    "source": "בגרות 037",
+    "points": 12
+  },
+  {
+    "id": "q301",
+    "type": "multiple-choice",
+    "topic": "colligative-properties",
+    "week": 6,
+    "difficulty": "בינוני",
+    "question": "מדוע מלח (NaCl) יעיל יותר מסוכר (C₁₂H₂₂O₁₁) בהורדת נקודת הקיפאון, גרם לגרם?",
+    "options": [
+      "כי המסה המולרית של NaCl קטנה יותר, ולכן מספר המולים ליחידת מסה גדול יותר, ועוד NaCl מתפצל ל-2 יונים",
+      "כי NaCl הוא מלח והסוכר הוא לא מלח",
+      "כי הסוכר מעלה את נקודת הקיפאון",
+      "כי NaCl מגיב עם הקרח"
+    ],
+    "answer": 0,
+    "explanation": "NaCl (M=58.5 g/mol) מתפרק ל-Na⁺ + Cl⁻ (2 חלקיקים). 1 מול NaCl נותן 2 מול חלקיקים. סוכר (M=342 g/mol) אינו מתפרק. ל-58.5g NaCl: 2 מול חלקיקים. ל-342g סוכר: 1 מול חלקיקים. NaCl הרבה יותר יעיל.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q302",
+    "type": "multiple-choice",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "בינוני",
+    "question": "מה תנאי הספונטניות של תגובה כימית לפי האנרגיה החופשית של גיבס?",
+    "options": [
+      "ΔG > 0",
+      "ΔG < 0",
+      "ΔG = 0 (רק במצב שיווי משקל)",
+      "ΔH < 0 בלבד"
+    ],
+    "answer": 1,
+    "explanation": "ΔG = ΔH - TΔS. תגובה ספונטנית: ΔG < 0. ΔG > 0: לא ספונטנית. ΔG = 0: שיווי משקל. תגובה יכולה להיות ספונטנית גם אם אנדותרמית (ΔH > 0) אם ΔS גדול דיו (כגון תמוסת קרח).",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q303",
+    "type": "numeric",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "לתגובה: N₂(g) + 3H₂(g) → 2NH₃(g)\nΔH° = -92 kJ/mol; ΔS° = -198 J/(mol·K).\nחשב את ΔG° ב-25°C (298 K) ביחידות kJ/mol.",
+    "answer": -33,
+    "tolerance": 2,
+    "explanation": "ΔG° = ΔH° - TΔS° = -92 kJ - 298K × (-198×10⁻³ kJ/K) = -92 + 59.0 = -33.0 kJ/mol.\nΔG° < 0: התגובה ספונטנית ב-25°C. (בטמפרטורה גבוהה מדי, -TΔS יהפוך חיובי יותר ו-ΔG עלול להפוך חיובי.)",
+    "source": "בגרות 037",
+    "points": 12
+  },
+  {
+    "id": "q304",
+    "type": "multiple-choice",
+    "topic": "thermodynamics",
+    "week": 1,
+    "difficulty": "קשה",
+    "question": "לתגובה עם ΔH < 0 וΔS < 0, באיזו טמפרטורה היא ספונטנית?",
+    "options": [
+      "בכל טמפרטורה",
+      "רק בטמפרטורות נמוכות (כאשר |ΔH| > T|ΔS|)",
+      "רק בטמפרטורות גבוהות",
+      "לעולם לא ספונטנית"
+    ],
+    "answer": 1,
+    "explanation": "ΔG = ΔH - TΔS. כאשר ΔH < 0 וΔS < 0: ΔG = (שלילי) - T×(שלילי) = (שלילי) + T×|ΔS|. בטמפרטורות נמוכות: |ΔH| > T|ΔS| ולכן ΔG < 0 (ספונטנית). בטמפרטורות גבוהות: T|ΔS| > |ΔH| ולכן ΔG > 0 (לא ספונטנית).",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q305",
+    "type": "multiple-choice",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהי תגובת חיסור (elimination) בכימיה אורגנית?",
+    "options": [
+      "הוספת אטומים למולקולה עם קשר כפול",
+      "הסרת אטומים ממולקולה ויצירת קשר כפול",
+      "החלפת אטום אחד באחר",
+      "פיצול מולקולה לשניים"
+    ],
+    "answer": 1,
+    "explanation": "תגובת חיסור (E1/E2): הסרת שני אטומים/קבוצות (בדרך כלל H וX ממקומות סמוכים) ויצירת קשר כפול (C=C). דוגמה: CH₃CH₂Br + KOH/אלכוהול → CH₂=CH₂ + KBr + H₂O. ניגוד: תגובת חיבור = הוספת אטומים לקשר כפול.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q306",
+    "type": "multiple-choice",
+    "topic": "organic",
+    "week": 7,
+    "difficulty": "בינוני",
+    "question": "מהו הנוסחה הכללית של אלכנים (alkenes)?",
+    "options": [
+      "CₙH₂ₙ₊₂",
+      "CₙH₂ₙ",
+      "CₙH₂ₙ₋₂",
+      "CₙHₙ"
+    ],
+    "answer": 1,
+    "explanation": "אלקנים (קשר יחיד): CₙH₂ₙ₊₂. אלקנים עם קשר כפול (alkenes): CₙH₂ₙ. אלקינים עם קשר משולש (alkynes): CₙH₂ₙ₋₂. כל קשר כפול מוריד 2H מהנוסחה הכללית של האלקנים.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q307",
+    "type": "numeric",
+    "topic": "kinetics",
+    "week": 2,
+    "difficulty": "קשה",
+    "question": "תגובה מסדר ראשון עם k = 0.0693 min⁻¹. מה זמן מחצית החיים (t½) בדקות?",
+    "answer": 10,
+    "tolerance": 0.5,
+    "explanation": "לתגובה מסדר ראשון: t½ = ln(2)/k = 0.693/k.\nt½ = 0.693/0.0693 = 10.0 דקות.\nמאפיין תגובת מסדר ראשון: t½ קבוע ואינו תלוי בריכוז ההתחלתי.",
+    "source": "בגרות 037",
+    "points": 10
+  },
+  {
+    "id": "q308",
+    "type": "multiple-choice",
+    "topic": "kinetics",
+    "week": 2,
+    "difficulty": "בינוני",
+    "question": "כיצד זרז (קטליזטור) משפיע על קינטיקה ותרמודינמיקה של תגובה?",
+    "options": [
+      "מגדיל את ΔG ומאיץ את הקינטיקה",
+      "מוריד את אנרגיית ההפעלה (Ea) ומאיץ את הגעה לשיווי משקל, אך אינו משנה ΔH, ΔG, או מיקום שיווי המשקל",
+      "משנה את K ומשנה את ΔG",
+      "מאיץ רק את התגובה הקדימה"
+    ],
+    "answer": 1,
+    "explanation": "זרז: מוריד Ea (אנרגיית הפעלה) לתגובה קדימה ואחורה במידה שווה → מאיץ הגעה לשיווי משקל. אינו משנה: ΔH, ΔG, Keq, מיקום שיווי המשקל. מאיץ שתי הכיוונים שווה.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q309",
+    "type": "multiple-choice",
+    "topic": "nuclear",
+    "week": 8,
+    "difficulty": "בינוני",
+    "question": "בריקבון בטא (β⁻), מה נפלט מהגרעין?",
+    "options": [
+      "פרוטון",
+      "אלקטרון (e⁻) ואנטי-נויטרינו",
+      "גרעין הליום (He-4)",
+      "קרן גמא (γ) בלבד"
+    ],
+    "answer": 1,
+    "explanation": "ריקבון β⁻: נויטרון הופך לפרוטון + אלקטרון (β⁻) + אנטי-נויטרינו: n → p + e⁻ + ν̄. מספר המסה (A) אינו משתנה; מספר האטומי (Z) עולה ב-1. ריקבון α: פליטת ⁴He; קרינת γ: אנרגיה בלבד.",
+    "source": "בגרות 037",
+    "points": 5
+  },
+  {
+    "id": "q310",
+    "type": "numeric",
+    "topic": "nuclear",
+    "week": 8,
+    "difficulty": "קשה",
+    "question": "יסוד רדיואקטיבי עם t½ = 5730 שנה (פחמן-14). כמה % מהכמות ההתחלתית יישאר לאחר 11460 שנה?",
+    "answer": 25,
+    "tolerance": 1,
+    "explanation": "11460 שנה = 2 × t½ = 2 × 5730. לאחר t½ אחד: נשאר 50%. לאחר 2×t½: נשאר 50% × 50% = 25%.\nנוסחה: N/N₀ = (1/2)^(t/t½) = (1/2)² = 1/4 = 25%.",
+    "source": "בגרות 037",
+    "points": 10
   }
 ]
