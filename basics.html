@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כימיה בגרות — יסודות</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    /* ── Page Layout ───────────────────────── */
+    .basics-hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb, #7c3aed);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+      color: white;
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+      border-radius: 1.25rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .basics-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; color: white; }
+    .basics-hero p  { font-size: 1.1rem; opacity: 0.92; margin: 0; }
+
+    /* floating symbols in hero */
+    .hero-sym {
+      position: absolute;
+      font-family: monospace;
+      font-weight: 700;
+      color: rgba(255,255,255,0.12);
+      pointer-events: none;
+      animation: chemFloat 8s ease-in-out infinite;
+    }
+
+    /* ── Progress Bar ─────────────────────── */
+    .xp-bar-wrap {
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
+      height: 10px;
+      margin: 1.25rem auto 0;
+      max-width: 380px;
+      overflow: hidden;
+    }
+    .xp-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #34d399, #22d3ee);
+      border-radius: 999px;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+    .xp-label {
+      font-size: 0.82rem;
+      opacity: 0.85;
+      margin-top: 0.4rem;
+      text-align: center;
+    }
+
+    /* ── Lesson Cards ─────────────────────── */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .lesson-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .lesson-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 10px 32px rgba(37,99,235,0.18);
+      border-color: #2563eb;
+    }
+    .lesson-card.done { border-color: #16a34a; }
+
+    .lesson-card-header {
+      padding: 1.25rem 1.25rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .lesson-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
+    .lesson-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 0.2rem; }
+    .lesson-card .lesson-sub { font-size: 0.82rem; color: #64748b; margin: 0; }
+    .lesson-card-body { padding: 0 1.25rem 1.25rem; }
+
+    /* ── Atom Animation ───────────────────── */
+    .atom-demo {
+      position: relative;
+      width: 160px; height: 160px;
+      margin: 1rem auto;
+    }
+    .nucleus {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 36px; height: 36px;
+      background: radial-gradient(circle at 35% 35%, #f97316, #dc2626);
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(239,68,68,0.7);
+      animation: atomNucleus 2s ease-in-out infinite;
+      z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; color: white; font-weight: 700;
+    }
+    .orbit {
+      position: absolute;
+      top: 50%; left: 50%;
+      border: 1.5px solid rgba(99,102,241,0.4);
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .orbit-1 { width: 70px; height: 70px; animation: spin 2s linear infinite; }
+    .orbit-2 { width: 110px; height: 110px; animation: spin 3.5s linear infinite reverse; }
+    .orbit-3 { width: 150px; height: 150px; animation: spin 5s linear infinite; }
+    .electron {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: #3b82f6;
+      border-radius: 50%;
+      top: -5px; left: calc(50% - 5px);
+      box-shadow: 0 0 8px #3b82f6;
+    }
+
+    /* ── Particle States ──────────────────── */
+    .states-demo {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .state-box {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      border: 2px solid #e2e8f0;
+      transition: border-color 0.2s;
+    }
+    .state-box:hover { border-color: #2563eb; }
+    .state-box .state-name { font-size: 0.82rem; font-weight: 700; margin-top: 0.5rem; color: #374151; }
+    .state-particles {
+      position: relative;
+      height: 64px;
+      overflow: hidden;
+    }
+    .particle-dot {
+      position: absolute;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #3b82f6;
+    }
+
+    /* ── Reaction Animation ───────────────── */
+    .reaction-demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      font-size: 1.5rem;
+    }
+    .react-arrow {
+      font-size: 1.75rem;
+      color: #2563eb;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .mol-bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #eff6ff;
+      border: 2px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 0.4rem 0.75rem;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1d4ed8;
+      transition: transform 0.2s;
+    }
+    .mol-bubble:hover { transform: scale(1.1); }
+    .mol-bubble.product {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #166534;
+    }
+    .mol-plus { font-size: 1.3rem; color: #64748b; font-weight: 700; }
+
+    /* ── pH Scale ─────────────────────────── */
+    .ph-scale-simple {
+      display: flex;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 40px;
+      margin: 0.75rem 0;
+    }
+    .ph-segment {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .ph-segment:hover { transform: scaleY(1.15); }
+    .ph-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .ph-chip {
+      background: #f1f5f9;
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.78rem;
+      color: #374151;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ── Periodic Elements Preview ────────── */
+    .elements-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+    .elem-tile {
+      width: 52px; height: 58px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid transparent;
+      gap: 1px;
+    }
+    .elem-tile:hover {
+      transform: scale(1.18) translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      z-index: 5;
+    }
+    .elem-symbol { font-size: 1.2rem; font-weight: 800; line-height: 1; }
+    .elem-num { font-size: 0.6rem; opacity: 0.7; }
+    .elem-name { font-size: 0.55rem; font-weight: 600; }
+
+    /* ── Bond Demo ────────────────────────── */
+    .bond-demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      margin: 0.75rem 0;
+      flex-wrap: wrap;
+    }
+    .bond-atom {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem;
+      color: white;
+      animation: anim-pulse 2.5s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+    .bond-line {
+      height: 4px; width: 20px;
+      background: linear-gradient(90deg, #94a3b8, #64748b);
+      border-radius: 2px;
+    }
+    .bond-double { display: flex; flex-direction: column; gap: 3px; width: 20px; }
+    .bond-double .bond-line { width: 20px; }
+
+    /* ── Fun Fact Box ─────────────────────── */
+    .fun-fact {
+      background: linear-gradient(135deg, #fef9c3, #fef3c7);
+      border: 2px solid #fde68a;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0.75rem 0;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .fun-fact-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .fun-fact-text { color: #451a03; }
+
+    /* ── Done button / XP reward ──────────── */
+    .done-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, #16a34a, #0891b2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+      font-family: inherit;
+    }
+    .done-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .done-btn.completed {
+      background: #e2e8f0;
+      color: #94a3b8;
+      cursor: default;
+    }
+    .done-btn.completed:hover { transform: none; }
+
+    /* ── XP Toast ─────────────────────────── */
+    .xp-toast {
+      position: fixed;
+      top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px);
+      background: linear-gradient(135deg, #16a34a, #0891b2);
+      color: white;
+      padding: 0.65rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 9999;
+      white-space: nowrap;
+    }
+    .xp-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Section header ───────────────────── */
+    .basics-section-label {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .basics-section-label::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 1.2em;
+      background: linear-gradient(180deg, #2563eb, #7c3aed);
+      border-radius: 2px;
+    }
+
+    /* ── Quiz mini ────────────────────────── */
+    .mini-quiz {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 0.75rem;
+      border: 1px solid #e2e8f0;
+    }
+    .mini-quiz-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.75rem; color: #1e293b; }
+    .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .quiz-opt {
+      padding: 0.55rem 0.9rem;
+      border-radius: 8px;
+      border: 2px solid #e2e8f0;
+      background: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: right;
+      transition: border-color 0.15s, background 0.15s;
+      font-family: inherit;
+      color: #1e293b;
+    }
+    .quiz-opt:hover { border-color: #2563eb; background: #eff6ff; }
+    .quiz-opt.correct { border-color: #16a34a; background: #f0fdf4; color: #166534; }
+    .quiz-opt.wrong   { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+    .quiz-result { margin-top: 0.6rem; font-size: 0.88rem; font-weight: 700; min-height: 1.2em; }
+
+    @keyframes chemFloat {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      40%      { transform: translateY(-18px) rotate(5deg); }
+      70%      { transform: translateY(-8px) rotate(-3deg); }
+    }
+  </style>
+</head>
+<body data-page="basics">
+
+  <!-- XP Toast -->
+  <div class="xp-toast" id="xp-toast">+10 XP 🎉</div>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">⚗️ כימיה בגרות</a>
+      <ul class="nav-links">
+        <li><a href="index.html">🏠 בית</a></li>
+        <li><a href="basics.html" class="active">🔬 יסודות</a></li>
+        <li><a href="study-plan.html">📅 תוכנית</a></li>
+        <li><a href="topics.html">📚 נושאים</a></li>
+        <li><a href="quiz.html">❓ קוויז</a></li>
+        <li><a href="flashcards.html">🃏 כרטיסיות</a></li>
+        <li><a href="simulator.html">📝 מבחן</a></li>
+        <li><a href="past-exams.html">📂 מבחני עבר</a></li>
+        <li><a href="progress.html">📊 התקדמות</a></li>
+      </ul>
+      <button class="nav-burger" aria-label="תפריט" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <!-- Hero -->
+    <div class="basics-hero">
+      <span class="hero-sym" style="top:8%;left:4%;font-size:1.8rem;animation-delay:0s;">⚛️</span>
+      <span class="hero-sym" style="top:15%;left:22%;font-size:1.2rem;animation-delay:1s;">H₂O</span>
+      <span class="hero-sym" style="top:55%;left:2%;font-size:2rem;animation-delay:2s;">🧪</span>
+      <span class="hero-sym" style="top:70%;left:18%;font-size:1.1rem;animation-delay:0.5s;">Na</span>
+      <span class="hero-sym" style="top:10%;right:5%;font-size:1.5rem;animation-delay:3s;">CO₂</span>
+      <span class="hero-sym" style="top:45%;right:3%;font-size:1.8rem;animation-delay:1.5s;">🔬</span>
+      <span class="hero-sym" style="top:72%;right:15%;font-size:1rem;animation-delay:2.5s;">Fe</span>
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:3rem;margin-bottom:0.5rem;animation:bounce 2s ease-in-out infinite;">🧬</div>
+        <h1>יסודות הכימיה — מאפס! 🚀</h1>
+        <p>עידו, אין בעיה שלא ידעת כלום. מתחילים ביחד מהסוף!</p>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar-fill" id="xp-fill"></div>
+        </div>
+        <div class="xp-label" id="xp-label">0 / 70 XP — השלם שיעורים לצבור נקודות!</div>
+      </div>
+    </div>
+
+    <!-- Section label -->
+    <p class="basics-section-label">🎯 שיעורי יסוד — לפי הסדר</p>
+
+    <div class="lessons-grid" id="lessons-grid">
+
+      <!-- ───── Lesson 1: Atom ───── -->
+      <div class="lesson-card" id="lesson-atom">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#eff6ff;">⚛️</div>
+          <div>
+            <h3>1 — מה זה אטום?</h3>
+            <p class="lesson-sub">הבניין הבסיסי של כל החומר</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            הכל סביבך — האוויר, המים, האדמה, אתה עצמך — עשוי מ<strong>אטומים</strong>.
+            אטום הוא חלקיק קטן <em>כל כך</em> שאי אפשר לראות אותו אפילו במיקרוסקופ רגיל.
+            בתוך כל אטום יש:
+          </p>
+
+          <!-- Atom visual -->
+          <div class="atom-demo" id="atom-demo">
+            <div class="nucleus">⚡</div>
+            <div class="orbit orbit-1"><div class="electron"></div></div>
+            <div class="orbit orbit-2"><div class="electron"></div></div>
+            <div class="orbit orbit-3"><div class="electron"></div></div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin:0.5rem 0 0.75rem;font-size:0.9rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+              <span style="width:14px;height:14px;background:radial-gradient(circle,#f97316,#dc2626);border-radius:50%;display:inline-block;flex-shrink:0;box-shadow:0 0 6px #f9731680;"></span>
+              <strong style="color:#dc2626">גרעין</strong> — פרוטונים (+) וניוטרונים (ניטרלי) — במרכז
+            </div>
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+              <span style="width:12px;height:12px;background:#3b82f6;border-radius:50%;display:inline-block;flex-shrink:0;box-shadow:0 0 6px #3b82f680;"></span>
+              <strong style="color:#2563eb">אלקטרונים</strong> (−) — מקיפים את הגרעין במסלולים
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <span class="fun-fact-icon">🤯</span>
+            <span class="fun-fact-text">אם אטום היה גודל של כדורגל — הגרעין שלו היה קטן כמו זבוב! רוב האטום הוא... ריק!</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-atom">
+            <div class="mini-quiz-q">❓ מה נמצא במרכז האטום?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-atom',this,true)">הגרעין — פרוטונים וניוטרונים</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-atom',this,false)">האלקטרונים</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-atom',this,false)">חלל ריק</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-atom"></div>
+          </div>
+
+          <button class="done-btn" id="btn-atom" onclick="markDone('atom',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+      <!-- ───── Lesson 2: Elements ───── -->
+      <div class="lesson-card" id="lesson-elem">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#fef3c7;">🏷️</div>
+          <div>
+            <h3>2 — מה זה יסוד?</h3>
+            <p class="lesson-sub">כל הסוגים השונים של האטומים</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            כל האטומים <em>לא</em> זהים — יש <strong>118 סוגים שונים</strong> של אטומים, ואנחנו קוראים לכל סוג <strong>יסוד</strong>.
+            לכל יסוד יש סמל קצר (H = מימן, O = חמצן, Fe = ברזל).
+          </p>
+
+          <div class="elements-grid" id="elements-grid">
+            <!-- filled by JS -->
+          </div>
+
+          <div class="fun-fact">
+            <span class="fun-fact-icon">⭐</span>
+            <span class="fun-fact-text">רוב הגוף שלך עשוי מ-4 יסודות בלבד: חמצן, פחמן, מימן וחנקן. הגוף האנושי = 65% חמצן!</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-elem">
+            <div class="mini-quiz-q">❓ מה הסמל של מים (H₂O) מורכב ממנו?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-elem',this,true)">מימן (H) + חמצן (O)</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-elem',this,false)">ברזל (Fe) + מימן (H)</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-elem',this,false)">פחמן (C) + חמצן (O)</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-elem"></div>
+          </div>
+
+          <button class="done-btn" id="btn-elem" onclick="markDone('elem',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+      <!-- ───── Lesson 3: Molecules ───── -->
+      <div class="lesson-card" id="lesson-mol">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#f0fdf4;">🔗</div>
+          <div>
+            <h3>3 — מה זה מולקולה?</h3>
+            <p class="lesson-sub">אטומים שמתחברים יחד</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            כשאטומים <strong>מתחברים יחד</strong> — הם יוצרים <strong>מולקולה</strong>.
+            מים = 2 אטומי מימן + 1 אטום חמצן (H₂O). כך נכתב זה:
+          </p>
+
+          <!-- Bond demo -->
+          <div class="bond-demo">
+            <div class="bond-atom" style="background:radial-gradient(circle,#60a5fa,#2563eb);font-size:0.85rem;">H</div>
+            <div class="bond-line"></div>
+            <div class="bond-atom" style="background:radial-gradient(circle,#f87171,#dc2626);width:54px;height:54px;font-size:0.95rem;">O</div>
+            <div class="bond-line"></div>
+            <div class="bond-atom" style="background:radial-gradient(circle,#60a5fa,#2563eb);font-size:0.85rem;">H</div>
+          </div>
+          <div style="text-align:center;font-size:0.85rem;color:#64748b;margin-bottom:0.75rem;">H₂O — מים! שני מימן + חמצן אחד</div>
+
+          <p style="font-size:0.88rem;color:#475569;line-height:1.6;">דוגמאות נוספות:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.75rem;">
+            <span style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;padding:0.3rem 0.65rem;font-family:monospace;font-size:0.9rem;color:#1d4ed8;font-weight:700;">CO₂</span>
+            <span style="font-size:0.82rem;color:#475569;display:flex;align-items:center;">= פחמן + 2 חמצן = גז פחמן דו-חמצני</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.75rem;">
+            <span style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;padding:0.3rem 0.65rem;font-family:monospace;font-size:0.9rem;color:#1d4ed8;font-weight:700;">NaCl</span>
+            <span style="font-size:0.82rem;color:#475569;display:flex;align-items:center;">= נתרן + כלור = מלח שולחן!</span>
+          </div>
+
+          <div class="fun-fact">
+            <span class="fun-fact-icon">🧂</span>
+            <span class="fun-fact-text">מלח שולחן = NaCl. נתרן לבד = מתכת שמתפוצצת במים. כלור לבד = גז רעיל. ביחד? מלח! השילוב משנה הכל.</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-mol">
+            <div class="mini-quiz-q">❓ מה זה CO₂?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-mol',this,true)">פחמן + 2 חמצן = גז פחמן דו-חמצני</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-mol',this,false)">כלור + חמצן</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-mol',this,false)">2 פחמן + חמצן</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-mol"></div>
+          </div>
+
+          <button class="done-btn" id="btn-mol" onclick="markDone('mol',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+      <!-- ───── Lesson 4: Reactions ───── -->
+      <div class="lesson-card" id="lesson-react">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#fef2f2;">💥</div>
+          <div>
+            <h3>4 — מה זה תגובה כימית?</h3>
+            <p class="lesson-sub">כשחומרים משתנים לחומרים אחרים</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            תגובה כימית = כשחומרים (<strong>מגיבים</strong>) נשברים ומתחברים מחדש ויוצרים חומרים חדשים (<strong>תוצרים</strong>).
+          </p>
+
+          <!-- Reaction demo -->
+          <div class="reaction-demo">
+            <div style="text-align:center;">
+              <div class="mol-bubble">H₂</div>
+              <div style="font-size:0.7rem;color:#64748b;margin-top:2px;">מימן</div>
+            </div>
+            <div class="mol-plus">+</div>
+            <div style="text-align:center;">
+              <div class="mol-bubble">O₂</div>
+              <div style="font-size:0.7rem;color:#64748b;margin-top:2px;">חמצן</div>
+            </div>
+            <div class="react-arrow">→</div>
+            <div style="text-align:center;">
+              <div class="mol-bubble product">H₂O 💧</div>
+              <div style="font-size:0.7rem;color:#166534;margin-top:2px;">מים!</div>
+            </div>
+          </div>
+
+          <p style="font-size:0.88rem;color:#475569;line-height:1.6;margin-top:0.5rem;">
+            חשוב לזכור: <strong>האטומים לא נעלמים</strong> — הם רק מסתדרים מחדש. כמו לגו!
+          </p>
+
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin:0.75rem 0;font-size:0.88rem;">
+            <div style="background:#fff7ed;border-radius:8px;padding:0.6rem 0.8rem;border:1.5px solid #fed7aa;">
+              🔥 <strong style="color:#c2410c">אקסותרמי</strong> = משחרר חום (שריפה, נשיפה)
+            </div>
+            <div style="background:#eff6ff;border-radius:8px;padding:0.6rem 0.8rem;border:1.5px solid #bfdbfe;">
+              ❄️ <strong style="color:#1d4ed8">אנדותרמי</strong> = בולע חום (קרח שנמס, בישול)
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <span class="fun-fact-icon">🔥</span>
+            <span class="fun-fact-text">כשאתה אוכל סוכר — תאי הגוף שלך עושים תגובה כימית שמוציאה אנרגיה. אתה פשוט מיני מפעל כימי!</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-react">
+            <div class="mini-quiz-q">❓ בתגובה כימית — מה קורה לאטומים?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-react',this,true)">הם מסתדרים מחדש — לא נעלמים</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-react',this,false)">הם נעלמים לגמרי</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-react',this,false)">הם מתקטנים</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-react"></div>
+          </div>
+
+          <button class="done-btn" id="btn-react" onclick="markDone('react',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+      <!-- ───── Lesson 5: States of Matter ───── -->
+      <div class="lesson-card" id="lesson-states">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#f0fdf4;">🧊</div>
+          <div>
+            <h3>5 — מצבי צבירה</h3>
+            <p class="lesson-sub">מוצק, נוזל, גז</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            אותו חומר יכול להיות במצבים שונים בהתאם לטמפרטורה. מים = קרח → מים → אדים.
+          </p>
+
+          <div class="states-demo">
+            <div class="state-box">
+              <div class="state-particles" id="particles-solid"></div>
+              <div class="state-name">🧊 מוצק</div>
+              <div style="font-size:0.72rem;color:#64748b;margin-top:0.25rem;">חלקיקים צפופים, קפואים</div>
+            </div>
+            <div class="state-box">
+              <div class="state-particles" id="particles-liquid"></div>
+              <div class="state-name">💧 נוזל</div>
+              <div style="font-size:0.72rem;color:#64748b;margin-top:0.25rem;">חלקיקים זורמים</div>
+            </div>
+            <div class="state-box">
+              <div class="state-particles" id="particles-gas"></div>
+              <div class="state-name">💨 גז</div>
+              <div style="font-size:0.72rem;color:#64748b;margin-top:0.25rem;">חלקיקים מהירים, מפוזרים</div>
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <span class="fun-fact-icon">☁️</span>
+            <span class="fun-fact-text">עננים = מים בצבירת נוזל (טיפות קטנות מאוד). כשהם כבדים מספיק — יורד גשם. גז מים = אדים = שקוף!</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-states">
+            <div class="mini-quiz-q">❓ מה קורה לחלקיקים כשמים הופכים לאדים?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-states',this,true)">הם מתפזרים ונעים מהר יותר</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-states',this,false)">הם מתכווצים</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-states',this,false)">הם נעלמים</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-states"></div>
+          </div>
+
+          <button class="done-btn" id="btn-states" onclick="markDone('states',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+      <!-- ───── Lesson 6: pH / Acids ───── -->
+      <div class="lesson-card" id="lesson-ph">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#fef9c3;">🍋</div>
+          <div>
+            <h3>6 — חומצות, בסיסים ו-pH</h3>
+            <p class="lesson-sub">לימון vs. סבון</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            <strong>pH</strong> = מדד שבודק כמה "חומצי" או "בסיסי" חומר הוא. סקאלה מ-0 עד 14.
+          </p>
+
+          <!-- pH scale -->
+          <div class="ph-scale-simple">
+            <div class="ph-segment" style="background:#dc2626;" title="pH 0-2">0</div>
+            <div class="ph-segment" style="background:#ea580c;" title="pH 2-4">2</div>
+            <div class="ph-segment" style="background:#f59e0b;" title="pH 4-5">4</div>
+            <div class="ph-segment" style="background:#eab308;" title="pH 5-6">5</div>
+            <div class="ph-segment" style="background:#84cc16;" title="pH 6-7">6</div>
+            <div class="ph-segment" style="background:#22c55e;" title="pH 7">7</div>
+            <div class="ph-segment" style="background:#06b6d4;" title="pH 8-10">8</div>
+            <div class="ph-segment" style="background:#3b82f6;" title="pH 10-12">10</div>
+            <div class="ph-segment" style="background:#6366f1;" title="pH 12-14">12</div>
+            <div class="ph-segment" style="background:#8b5cf6;" title="pH 14">14</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:#64748b;margin-bottom:0.5rem;">
+            <span>💥 חומצה חזקה</span><span>🟢 ניטרלי (מים)</span><span>🧼 בסיס חזק</span>
+          </div>
+
+          <div class="ph-examples">
+            <span class="ph-chip">🍋 לימון = pH 2</span>
+            <span class="ph-chip">🥤 קולה = pH 2.5</span>
+            <span class="ph-chip">☕ קפה = pH 5</span>
+            <span class="ph-chip">💧 מים = pH 7</span>
+            <span class="ph-chip">🥛 חלב = pH 6.8</span>
+            <span class="ph-chip">🧼 סבון = pH 10</span>
+            <span class="ph-chip">🧹 אמוניה = pH 11</span>
+          </div>
+
+          <div class="fun-fact" style="margin-top:0.75rem;">
+            <span class="fun-fact-icon">❤️</span>
+            <span class="fun-fact-text">הדם שלך חייב להישאר pH 7.4 כדי שתחיה! שינוי של 0.3 לכיוון מסוכן. הגוף שלך עובד כל הזמן כדי לשמור על זה.</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-ph">
+            <div class="mini-quiz-q">❓ לימון (pH 2) הוא...</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-ph',this,true)">חומצי — pH מתחת ל-7</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-ph',this,false)">בסיסי — pH מעל ל-7</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-ph',this,false)">ניטרלי — pH 7</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-ph"></div>
+          </div>
+
+          <button class="done-btn" id="btn-ph" onclick="markDone('ph',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+      <!-- ───── Lesson 7: Energy ───── -->
+      <div class="lesson-card" id="lesson-energy">
+        <div class="lesson-card-header">
+          <div class="lesson-icon" style="background:#fff7ed;">⚡</div>
+          <div>
+            <h3>7 — אנרגיה בכימיה</h3>
+            <p class="lesson-sub">למה תגובות קורות?</p>
+          </div>
+        </div>
+        <div class="lesson-card-body">
+
+          <p style="font-size:0.95rem;line-height:1.7;color:#374151;">
+            כל תגובה כימית כרוכה בשינוי אנרגיה. קשרים כימיים בין אטומים = מאגרי אנרגיה.
+            <strong>שבירת קשר</strong> = צורך אנרגיה. <strong>יצירת קשר</strong> = משחרר אנרגיה.
+          </p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.75rem 0;">
+            <div style="background:linear-gradient(135deg,#fff7ed,#fef3c7);border:2px solid #fed7aa;border-radius:10px;padding:0.85rem;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:0.3rem;">🔥</div>
+              <div style="font-weight:700;color:#c2410c;font-size:0.9rem;">אקסותרמי</div>
+              <div style="font-size:0.8rem;color:#78350f;margin-top:0.3rem;">משחרר חום<br>ΔH שלילי (&lt;0)</div>
+              <div style="margin-top:0.5rem;font-size:0.75rem;color:#92400e;">שריפה, נשיפה, פיצוץ</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:2px solid #bfdbfe;border-radius:10px;padding:0.85rem;text-align:center;">
+              <div style="font-size:2rem;margin-bottom:0.3rem;">❄️</div>
+              <div style="font-weight:700;color:#1d4ed8;font-size:0.9rem;">אנדותרמי</div>
+              <div style="font-size:0.8rem;color:#1e40af;margin-top:0.3rem;">בולע חום<br>ΔH חיובי (&gt;0)</div>
+              <div style="margin-top:0.5rem;font-size:0.75rem;color:#1d4ed8;">קרח שנמס, בישול</div>
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <span class="fun-fact-icon">💡</span>
+            <span class="fun-fact-text">נורת לד עובדת על תגובה כימית-חשמלית. הסוללה ברכב עובדת על תגובה כימית. כימיה = חשמל!</span>
+          </div>
+
+          <div class="mini-quiz" id="quiz-energy">
+            <div class="mini-quiz-q">❓ שריפת עץ היא תגובה...</div>
+            <div class="quiz-options">
+              <button class="quiz-opt" onclick="checkQuiz('quiz-energy',this,true)">אקסותרמית — משחררת חום</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-energy',this,false)">אנדותרמית — בולעת חום</button>
+              <button class="quiz-opt" onclick="checkQuiz('quiz-energy',this,false)">ניטרלית — אין שינוי אנרגיה</button>
+            </div>
+            <div class="quiz-result" id="result-quiz-energy"></div>
+          </div>
+
+          <button class="done-btn" id="btn-energy" onclick="markDone('energy',this)">✅ הבנתי! +10 XP</button>
+        </div>
+      </div>
+
+    </div><!-- end lessons-grid -->
+
+    <!-- Final CTA -->
+    <div style="background:linear-gradient(135deg,#1e3a8a,#7c3aed);border-radius:1rem;padding:2rem;text-align:center;color:white;margin-bottom:2rem;" id="final-cta" style="display:none;">
+      <div style="font-size:2.5rem;margin-bottom:0.75rem;animation:bounce 2s ease-in-out infinite;">🏆</div>
+      <h2 style="color:white;margin-bottom:0.5rem;">מצוין! סיימת את היסודות!</h2>
+      <p style="opacity:0.9;margin-bottom:1.5rem;">עכשיו אתה מוכן להמשיך לנושאי הבגרות האמיתיים.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="topics.html" style="background:white;color:#1d4ed8;padding:0.75rem 1.5rem;border-radius:8px;font-weight:700;text-decoration:none;">📚 המשך לנושאים</a>
+        <a href="quiz.html" style="background:rgba(255,255,255,0.15);color:white;padding:0.75rem 1.5rem;border-radius:8px;font-weight:700;text-decoration:none;border:2px solid rgba(255,255,255,0.3);">❓ בדוק את עצמך</a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script>
+    // ── XP System ─────────────────────────────────────────────
+    var completed = JSON.parse(localStorage.getItem('basics_done') || '[]');
+    var totalXP    = 70;
+    var earnedXP   = completed.length * 10;
+
+    function updateXP() {
+      var fill  = document.getElementById('xp-fill');
+      var label = document.getElementById('xp-label');
+      if (fill)  fill.style.width  = Math.round((earnedXP / totalXP) * 100) + '%';
+      if (label) label.textContent = earnedXP + ' / ' + totalXP + ' XP' +
+        (earnedXP >= totalXP ? ' — 🎉 סיימת הכל!' : ' — השלם שיעורים לצבור נקודות!');
+
+      if (earnedXP >= totalXP) {
+        var cta = document.getElementById('final-cta');
+        if (cta) { cta.style.display = ''; cta.classList.add('anim-fade-up'); }
+      }
+    }
+
+    function markDone(id, btn) {
+      if (completed.includes(id)) return;
+      completed.push(id);
+      localStorage.setItem('basics_done', JSON.stringify(completed));
+      earnedXP += 10;
+      updateXP();
+
+      btn.classList.add('completed');
+      btn.textContent = '✅ הושלם!';
+
+      var card = document.getElementById('lesson-' + id);
+      if (card) card.classList.add('done');
+
+      // XP toast
+      var toast = document.getElementById('xp-toast');
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 2000);
+      }
+    }
+
+    // Restore completed state on load
+    (function restoreState() {
+      completed.forEach(function(id) {
+        var btn = document.getElementById('btn-' + id);
+        if (btn) { btn.classList.add('completed'); btn.textContent = '✅ הושלם!'; }
+        var card = document.getElementById('lesson-' + id);
+        if (card) card.classList.add('done');
+      });
+      updateXP();
+    })();
+
+    // ── Mini Quiz ──────────────────────────────────────────────
+    function checkQuiz(quizId, btn, isCorrect) {
+      var container = document.getElementById(quizId);
+      if (!container) return;
+      if (container.dataset.answered) return;
+      container.dataset.answered = '1';
+
+      var resultEl = document.getElementById('result-' + quizId);
+      var allBtns  = container.querySelectorAll('.quiz-opt');
+
+      allBtns.forEach(function(b) { b.disabled = true; });
+
+      if (isCorrect) {
+        btn.classList.add('correct');
+        if (resultEl) { resultEl.textContent = '✅ נכון! כל הכבוד! 🎉'; resultEl.style.color = '#16a34a'; }
+      } else {
+        btn.classList.add('wrong');
+        // highlight correct
+        allBtns.forEach(function(b) {
+          if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) b.classList.add('correct');
+        });
+        if (resultEl) { resultEl.textContent = '❌ לא נכון. תסתכל על התשובה הירוקה ↑'; resultEl.style.color = '#dc2626'; }
+      }
+    }
+
+    // ── Elements Grid ──────────────────────────────────────────
+    var commonElements = [
+      { sym:'H',  num:1,  name:'מימן',   bg:'#dbeafe', txt:'#1d4ed8' },
+      { sym:'He', num:2,  name:'הליום',  bg:'#fef3c7', txt:'#92400e' },
+      { sym:'C',  num:6,  name:'פחמן',   bg:'#1e293b', txt:'white'   },
+      { sym:'N',  num:7,  name:'חנקן',   bg:'#dbeafe', txt:'#1d4ed8' },
+      { sym:'O',  num:8,  name:'חמצן',   bg:'#fee2e2', txt:'#991b1b' },
+      { sym:'Na', num:11, name:'נתרן',   bg:'#fef3c7', txt:'#92400e' },
+      { sym:'Mg', num:12, name:'מגנזיום',bg:'#dcfce7', txt:'#166534' },
+      { sym:'Al', num:13, name:'אלומין', bg:'#e2e8f0', txt:'#334155' },
+      { sym:'Cl', num:17, name:'כלור',   bg:'#dcfce7', txt:'#166534' },
+      { sym:'Fe', num:26, name:'ברזל',   bg:'#fde8d8', txt:'#c2410c' },
+      { sym:'Cu', num:29, name:'נחושת',  bg:'#fde8d8', txt:'#c2410c' },
+      { sym:'Au', num:79, name:'זהב',    bg:'#fef3c7', txt:'#78350f' },
+    ];
+    var grid = document.getElementById('elements-grid');
+    if (grid) {
+      grid.innerHTML = commonElements.map(function(e) {
+        return '<div class="elem-tile" style="background:' + e.bg + ';border-color:' + e.bg + ';" title="' + e.name + ' — מספר אטומי ' + e.num + '">'
+          + '<div class="elem-symbol" style="color:' + e.txt + '">' + e.sym + '</div>'
+          + '<div class="elem-num" style="color:' + e.txt + '">' + e.num + '</div>'
+          + '<div class="elem-name" style="color:' + e.txt + '">' + e.name + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
+    // ── Particle State Animations ──────────────────────────────
+    function createParticles(containerId, count, speed, spread) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+
+      var colors = ['#3b82f6','#60a5fa','#93c5fd','#2563eb'];
+
+      for (var i = 0; i < count; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'particle-dot';
+        var x = 8 + (i % Math.ceil(Math.sqrt(count))) * spread;
+        var y = 10 + Math.floor(i / Math.ceil(Math.sqrt(count))) * spread;
+
+        dot.style.cssText = [
+          'left:' + Math.min(x, 52) + 'px',
+          'top:'  + Math.min(y, 52) + 'px',
+          'background:' + colors[i % colors.length],
+          'animation: particleMove' + containerId + i + ' ' + (speed + Math.random()*0.5) + 's ease-in-out infinite alternate',
+          'animation-delay:' + (Math.random()*0.8) + 's'
+        ].join(';');
+        container.appendChild(dot);
+
+        // inject keyframe
+        var dx = (Math.random()-0.5) * (spread * 2.5);
+        var dy = (Math.random()-0.5) * (spread * 2.5);
+        var style = document.createElement('style');
+        style.textContent = '@keyframes particleMove' + containerId + i + '{from{transform:translate(0,0)}to{transform:translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)}}';
+        document.head.appendChild(style);
+      }
+    }
+
+    createParticles('particles-solid',  9, 3.0, 14); // slow, tight
+    createParticles('particles-liquid', 7, 1.2, 18); // medium
+    createParticles('particles-gas',    5, 0.5, 28); // fast, spread
+  </script>
+
+</body>
+</html>
